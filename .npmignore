@@ -1,0 +1,10 @@
+.github/
+.idea/
+packages/**/src/**/__tests__/
+.editorconfig
+.eslintignore
+.eslintrc
+.huskyrc
+.lintstagedrc
+jest.config.cjs
+lerna.json
