@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/publikum-collection",
-  "version": "3.12.0",
+  "version": "1.0.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -21,11 +21,12 @@
     "build": "yarn clean && concurrently \"npm:build:*\"",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "clean": "rimraf dist && rimraf coverage",
-    "test": "jest test",
-    "update": "yarn update:upgrade && yarn update:install",
-    "update:install": "yarn install",
-    "update:upgrade": "ncu --upgrade --timeout 600000"
+    "clean": "concurrently \"npm:clean:*\"",
+    "clean:coverage": "rimraf coverage",
+    "clean:dist": "rimraf dist",
+    "update": "yarn update:upgrade && yarn update:install && yarn setup",
+    "update:install": "yarn install && yarn upgrade",
+    "update:upgrade": "ncu --upgrade"
   },
   "dependencies": {
     "@jamashita/anden-object": "1.2.0",
@@ -41,8 +42,6 @@
   },
   "engineStrict": true,
   "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "gitHead": "6d4296d84b72c900dcceef3378c7ce20fd82b70e"
+    "access": "public"
+  }
 }
