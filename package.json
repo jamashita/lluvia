@@ -1,0 +1,70 @@
+{
+  "name": "@jamashita/lluvia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "jamashita <jamashita@arachnid.xyz>",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jamashita/lluvia.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "lerna run --parallel build",
+    "clean": "rimraf coverage && lerna run --parallel clean",
+    "commit": "git cz",
+    "format": "eslint --fix 'packages/*/src/**/*.{ts,tsx}'",
+    "release": "lerna exec --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo",
+    "setup": "lerna bootstrap && lerna link",
+    "test": "jest test",
+    "update": "yarn update:upgrade && yarn update:install",
+    "update:install": "yarn install && yarn upgrade && lerna run --parallel update:install",
+    "update:upgrade": "ncu --upgrade --timeout 600000 && lerna run --parallel update:upgrade"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "12.0.1",
+    "@commitlint/config-conventional": "12.0.1",
+    "@jamashita/eslint-config": "1.31.0",
+    "@semantic-release/changelog": "5.0.1",
+    "@semantic-release/commit-analyzer": "8.0.1",
+    "@semantic-release/git": "9.0.0",
+    "@semantic-release/github": "7.2.0",
+    "@semantic-release/npm": "7.0.10",
+    "@semantic-release/release-notes-generator": "9.0.1",
+    "@types/jest": "26.0.20",
+    "@types/sinon": "9.0.10",
+    "@typescript-eslint/eslint-plugin": "4.16.1",
+    "@typescript-eslint/parser": "4.16.1",
+    "@typescript-eslint/typescript-estree": "4.16.1",
+    "concurrently": "6.0.0",
+    "eslint": "7.21.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.1.7",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-node": "11.1.0",
+    "git-cz": "4.7.6",
+    "husky": "5.1.3",
+    "jest": "26.6.3",
+    "lerna": "4.0.0",
+    "lint-staged": "10.5.4",
+    "npm-check-updates": "11.1.10",
+    "rimraf": "3.0.2",
+    "semantic-release": "17.4.1",
+    "semantic-release-monorepo": "7.0.4",
+    "sinon": "9.2.4",
+    "sort-package-json": "1.49.0",
+    "ts-jest": "26.5.3",
+    "typescript": "4.2.3"
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": "npm is not supported"
+  },
+  "engineStrict": true,
+  "publishConfig": {
+    "access": "public"
+  }
+}
