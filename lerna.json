@@ -1,0 +1,27 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "command": {
+    "init": {
+      "exact": true
+    },
+    "publish": {
+      "ignoreChanges": [
+        "**/coverage/**",
+        "**/node_modules/**",
+        "**/__tests__/**",
+        "**/CHANGELOG.md",
+        "**/README.md"
+      ],
+      "conventionalCommits": true,
+      "message": "chore(release): publish %s"
+    },
+    "version": {
+      "push": false
+    }
+  },
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "independent"
+}
