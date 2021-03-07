@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="com.steve.plugins.autoscroll" min-version="2.0.0" />
+    <plugin id="mobi.hsz.idea.gitignore" min-version="4.0.0" />
+  </component>
+</project>
