@@ -1,0 +1,48 @@
+{
+  "name": "@jamashita/publikum-collection",
+  "version": "3.12.0",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jamashita/publikum.git",
+    "directory": "packages/collection"
+  },
+  "license": "MIT",
+  "author": "jamashita <jamashita@arachnid.xyz>",
+  "sideEffects": false,
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "yarn clean && concurrently \"npm:build:*\"",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "clean": "rimraf dist && rimraf coverage",
+    "test": "jest test",
+    "update": "yarn update:upgrade && yarn update:install",
+    "update:install": "yarn install",
+    "update:upgrade": "ncu --upgrade --timeout 600000"
+  },
+  "dependencies": {
+    "@jamashita/anden-object": "1.2.0",
+    "@jamashita/anden-type": "1.2.0"
+  },
+  "devDependencies": {
+    "@jamashita/anden-error": "1.2.0",
+    "sinon": "9.2.4"
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": "npm is not supported"
+  },
+  "engineStrict": true,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "gitHead": "6d4296d84b72c900dcceef3378c7ce20fd82b70e"
+}
