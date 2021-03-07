@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@jamashita/anden-object": "1.2.0",
-    "@jamashita/anden-type": "1.2.0"
+    "@jamashita/anden-type": "1.3.0"
   },
   "devDependencies": {
     "@jamashita/anden-error": "1.2.0",
