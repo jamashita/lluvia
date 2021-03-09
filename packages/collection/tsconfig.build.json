@@ -1,17 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "composite": true,
-    "paths": {
-      "@jamashita/lluvia-*": [
-        "node_modules/@jamashita/lluvia-*/src"
-      ]
-    }
+    "rootDir": "./src",
+    "composite": true
   },
-  "include": [
-    "src"
-  ],
   "exclude": [
     "node_modules",
     "dist",

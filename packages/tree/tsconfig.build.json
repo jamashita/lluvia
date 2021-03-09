@@ -1,16 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "paths": {
-      "@jamashita/publikum-*": [
-        "node_modules/@jamashita/lluvia-*/src"
-      ]
-    }
+    "rootDir": "./src"
   },
-  "include": [
-    "src"
-  ],
   "exclude": [
     "node_modules",
     "dist",
