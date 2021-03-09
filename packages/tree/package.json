@@ -18,14 +18,14 @@
   ],
   "scripts": {
     "build": "yarn clean && concurrently \"npm:build:*\"",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -b tsconfig.cjs.json",
+    "build:esm": "tsc -b tsconfig.esm.json",
     "clean": "concurrently \"npm:clean:*\"",
     "clean:coverage": "rimraf coverage",
     "clean:dist": "rimraf dist",
-    "update": "yarn update:upgrade && yarn update:install && yarn setup",
+    "update": "yarn update:upgrade && yarn update:install",
     "update:install": "yarn install && yarn upgrade",
-    "update:upgrade": "ncu --upgrade"
+    "update:upgrade": "ncu --upgrade --timeout 600000"
   },
   "dependencies": {
     "@jamashita/lluvia-collection": "1.0.0",

@@ -20,9 +20,9 @@
     "release": "lerna exec --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo",
     "setup": "lerna bootstrap && lerna link",
     "test": "jest test",
-    "update": "yarn update:upgrade && yarn update:install",
-    "update:install": "yarn install && yarn upgrade && lerna run --parallel update:install",
-    "update:upgrade": "ncu --upgrade --timeout 600000 && lerna run --parallel update:upgrade"
+    "update": "yarn setup && yarn update:upgrade && yarn update:install",
+    "update:install": "yarn install && yarn upgrade",
+    "update:upgrade": "ncu --upgrade --timeout 600000"
   },
   "devDependencies": {
     "@commitlint/cli": "12.0.1",
@@ -38,12 +38,10 @@
     "@types/sinon": "9.0.11",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
-    "@typescript-eslint/typescript-estree": "4.16.1",
     "concurrently": "6.0.0",
     "eslint": "7.21.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jest": "24.1.7",
-    "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-node": "11.1.0",
     "git-cz": "4.7.6",
     "husky": "5.1.3",
