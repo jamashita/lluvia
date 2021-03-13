@@ -35,7 +35,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
 
   public abstract duplicate(): Project<K, V, N>;
 
-  public iterator(): Iterator<[K, V]> {
+  public iterator(): IterableIterator<[K, V]> {
     return this.project.values();
   }
 
