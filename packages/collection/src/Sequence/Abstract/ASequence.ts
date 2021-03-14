@@ -34,7 +34,7 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
 
   public abstract duplicate(): Sequence<V, N>;
 
-  public iterator(): Iterator<[number, V]> {
+  public iterator(): IterableIterator<[number, V]> {
     return this.sequence.map<[number, V]>((e: V, index: number) => {
       return [index, e];
     }).values();

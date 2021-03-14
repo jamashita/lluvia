@@ -9,4 +9,6 @@ export interface Project<K, V, N extends string = string> extends ReadonlyProjec
   map<W>(mapper: Mapper<V, W>): Project<K, W>;
 
   filter(predicate: BinaryPredicate<V, K>): Project<K, V>;
+
+  iterator(): IterableIterator<[K, V]>;
 }
