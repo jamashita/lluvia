@@ -1,0 +1,19 @@
+name: 'Copy'
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  release:
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 15
+    steps:
+      - name: 'Check out repository'
+        uses: 'actions/checkout@v2'
+        with:
+          fetch-depth: 0
+      - name: 'Copy'
+        uses: 'pixta-dev/repository-mirroring-action@v1'
+        with:
+          target_repo_url: 'git@gitlab.com:jamashita/lluvia.git'
+          ssh_private_key: '${{ secrets.GITLAB_KEY }}'
