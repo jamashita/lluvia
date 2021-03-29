@@ -521,11 +521,6 @@
   dependencies:
     reflect-metadata "0.1.13"
 
-"@jamashita/eslint-config@1.35.0":
-  version "1.35.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/eslint-config/-/eslint-config-1.35.0.tgz#ee94ade36134ee05cfdf42bafec6b7031748f9e5"
-  integrity sha512-yx5IjFVU2u5XOKpi3iD3l2sKI7dvc+p85Ymidd/ybuZkLT3pBg/UTr8Oh2vhyti3lBmNibVIOTsI2XlBW1HGrQ==
-
 "@jamashita/eslint-plugin@1.38.1":
   version "1.38.1"
   resolved "https://registry.yarnpkg.com/@jamashita/eslint-plugin/-/eslint-plugin-1.38.1.tgz#6f5c49dddfd9d4a855a1316bd246985b447d634b"
