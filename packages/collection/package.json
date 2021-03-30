@@ -22,18 +22,15 @@
     "build:esm": "tsc -b tsconfig.esm.json",
     "clean": "concurrently \"npm:clean:*\"",
     "clean:coverage": "rimraf coverage",
-    "clean:dist": "rimraf dist",
-    "update": "yarn update:upgrade && yarn update:install",
-    "update:install": "yarn install && yarn upgrade",
-    "update:upgrade": "ncu --upgrade --timeout 600000"
+    "clean:dist": "rimraf dist"
   },
   "dependencies": {
-    "@jamashita/anden-object": "1.3.0",
-    "@jamashita/anden-type": "1.4.0"
+    "@jamashita/anden-object": "1.5.0",
+    "@jamashita/anden-type": "1.5.0"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "1.3.0",
-    "sinon": "9.2.4"
+    "@jamashita/anden-error": "1.5.0",
+    "sinon": "10.0.0"
   },
   "engines": {
     "node": ">= 12.0.0",
