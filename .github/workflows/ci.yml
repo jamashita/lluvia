@@ -3,13 +3,16 @@ on:
   push:
     branches:
       - 'feature/**'
-      - 'hotfix/**'
-  pull_request:
+  pull_request_target:
     branches:
       - 'main'
       - 'develop'
+      - 'release'
     types:
-      - 'closed'
+      - 'assigned'
+      - 'opened'
+      - 'synchronize'
+      - 'reopened'
 jobs:
   ci:
     runs-on: 'ubuntu-latest'

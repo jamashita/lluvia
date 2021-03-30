@@ -9,4 +9,6 @@ export interface ReadonlySequence<V, N extends string = string> extends Collecti
   sort(comparator: BinaryFunction<V, V, number>): ReadonlySequence<V>;
 
   toArray(): Array<V>;
+
+  iterator(): IterableIterator<[number, V]>;
 }
