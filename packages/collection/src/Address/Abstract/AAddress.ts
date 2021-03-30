@@ -21,7 +21,7 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
 
   public abstract duplicate(): Address<V, N>;
 
-  public iterator(): Iterator<[void, V]> {
+  public iterator(): IterableIterator<[void, V]> {
     const iterator: IterableIterator<V> = this.address.values();
     const iterable: Array<[void, V]> = [];
 
