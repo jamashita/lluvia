@@ -1,8 +1,5 @@
 name: 'CI'
 on:
-  push:
-    branches:
-      - 'feature/**'
   pull_request_target:
     branches:
       - 'main'
