@@ -21,13 +21,13 @@
     "setup": "lerna bootstrap && lerna link",
     "test": "jest test",
     "update": "yarn setup && yarn update:upgrade && yarn update:install",
-    "update:install": "yarn install && yarn upgrade",
+    "update:install": "yarn install && yarn upgrade && yarn audit fix --force",
     "update:upgrade": "ncu --packageManager yarn --deep --upgrade --timeout 600000"
   },
   "devDependencies": {
     "@commitlint/cli": "12.1.1",
     "@commitlint/config-conventional": "12.1.1",
-    "@jamashita/eslint-plugin": "1.38.3",
+    "@jamashita/eslint-plugin": "1.39.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/commit-analyzer": "8.0.1",
     "@semantic-release/git": "9.0.0",
