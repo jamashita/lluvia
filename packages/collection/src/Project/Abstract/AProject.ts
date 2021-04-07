@@ -3,7 +3,8 @@ import { Ambiguous, BinaryPredicate, Enumerator, isNominative, Kind, Mapper, Nul
 import { Quantity } from '../../Quantity';
 import { Project } from '../Interface/Project';
 
-export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N> implements Project<K, V, N> {
+export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N>
+  implements Project<K, V, N> {
   protected readonly project: Map<K | string, [K, V]>;
 
   protected constructor(project: Map<K | string, [K, V]>) {
