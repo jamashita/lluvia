@@ -487,7 +487,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jamashita/anden-error@1.5.0", "@jamashita/anden-error@^1.3.0":
+"@jamashita/anden-error@1.5.0", "@jamashita/anden-error@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-1.5.0.tgz#e939d6a778f1c8492ff6c702d08da325095575a5"
   integrity sha512-tL/bBVY46hf0ZuMAuFMGhw0ptu6ye3zMRJGwND7vh08ecoqRS1i0QiCPRmnFLHp1L9+H8RhkGQ9+S78HLtM6DA==
@@ -495,12 +495,12 @@
     "@jamashita/anden-type" "^1.5.0"
     make-error-cause "2.3.0"
 
-"@jamashita/anden-object@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-1.5.0.tgz#ea32e28bb97a303b21c59797f1061939eabb588b"
-  integrity sha512-zJkrZvakWq+YLYVFOE9Zb+RBdTT9iUowKA338XrXZKoQhC0EtKRVwWk4HJF3Rf33Rzc7jR8il6m1pPVsb3/xQw==
+"@jamashita/anden-object@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-1.6.0.tgz#5d86be3baf9147068686a2afda7a9369e77eca70"
+  integrity sha512-WxBAuusCvyJzkuQT12D88O/oCQdoALqoaKdoS/mf4GJZfLB8jvljR6v7NXOLXYp3bKHoJWircO5JJ5bZEdtC3g==
   dependencies:
-    "@jamashita/anden-error" "^1.3.0"
+    "@jamashita/anden-error" "^1.5.0"
     "@jamashita/anden-type" "^1.5.0"
     object-hash "2.1.1"
 
@@ -5106,9 +5106,9 @@ is-plain-object@^5.0.0:
   integrity sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==
 
 is-potential-custom-element-name@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.0.tgz#0c52e54bcca391bb2c494b21e8626d7336c6e397"
-  integrity sha1-DFLlS8yjkbssSUsh6GJtczbG45c=
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.1.tgz#171ed6f19e3ac554394edf78caa05784a45bebb5"
+  integrity sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==
 
 is-regex@^1.1.2:
   version "1.1.2"

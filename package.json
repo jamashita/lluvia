@@ -17,7 +17,7 @@
     "clean": "rimraf coverage && lerna run --parallel clean",
     "commit": "git cz",
     "format": "eslint --fix 'packages/*/src/**/*.{ts,tsx}'",
-    "release": "lerna exec --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo",
+    "release": "lerna exec --concurrency 1 -- semantic-release -e semantic-release-monorepo",
     "setup": "lerna bootstrap && lerna link",
     "test": "jest test",
     "update": "yarn setup && yarn update:upgrade && yarn update:install",
