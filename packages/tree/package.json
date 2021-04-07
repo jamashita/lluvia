@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/lluvia-tree",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "@jamashita/anden-error": "1.5.0",
     "@jamashita/anden-object": "1.6.0",
     "@jamashita/anden-type": "1.5.0",
-    "@jamashita/lluvia-collection": "1.1.0"
+    "@jamashita/lluvia-collection": "1.2.0"
   },
   "devDependencies": {
     "sinon": "10.0.0"
