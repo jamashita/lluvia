@@ -3,7 +3,8 @@ import { BinaryPredicate, Enumerator, Mapper, Nullable } from '@jamashita/anden-
 import { Quantity } from '../../Quantity';
 import { Address } from '../Interface/Address';
 
-export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = string> extends Quantity<void, V, N> implements Address<V, N> {
+export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = string> extends Quantity<void, V, N>
+  implements Address<V, N> {
   protected readonly address: Map<V | string, V>;
 
   protected constructor(address: Map<V | string, V>) {
