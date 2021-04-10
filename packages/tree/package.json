@@ -31,7 +31,7 @@
     "@jamashita/lluvia-collection": "1.2.0"
   },
   "devDependencies": {
-    "sinon": "10.0.0"
+    "sinon": "10.0.1"
   },
   "engines": {
     "node": ">= 12.0.0",
