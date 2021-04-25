@@ -15,7 +15,7 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest'
   },
   moduleNameMapper: {
-    '^@jamashita/lluvia-(.*)$': '<rootDir>/node_modules/@jamashita/lluvia-$1/src/index'
+    '^@jamashita/lluvia-(.*)$': '<rootDir>/../$1/src/index'
   },
   moduleFileExtensions: [
     'js',
