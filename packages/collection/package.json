@@ -20,16 +20,17 @@
     "build": "yarn clean && concurrently \"npm:build:*\"",
     "build:cjs": "tsc -b tsconfig.cjs.json",
     "build:esm": "tsc -b tsconfig.esm.json",
+    "test": "jest test",
     "clean": "concurrently \"npm:clean:*\"",
     "clean:coverage": "rimraf coverage",
     "clean:dist": "rimraf dist"
   },
   "dependencies": {
-    "@jamashita/anden-object": "1.6.0",
-    "@jamashita/anden-type": "1.5.0"
+    "@jamashita/anden-object": "1.7.0",
+    "@jamashita/anden-type": "1.9.0"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "1.5.0",
+    "@jamashita/anden-error": "1.6.0",
     "sinon": "10.0.1"
   },
   "engines": {
