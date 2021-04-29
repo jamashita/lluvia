@@ -30,7 +30,7 @@
     "@jamashita/anden-type": "1.9.0"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "1.6.0",
+    "@jamashita/anden-error": "1.7.0",
     "sinon": "10.0.1"
   },
   "engines": {

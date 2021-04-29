@@ -46,6 +46,10 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
   }
 
   protected forge(self: Map<V | string, V>): ImmutableAddress<V> {
+    if (self.size === 0) {
+      return ImmutableAddress.empty<V>();
+    }
+
     return ImmutableAddress.ofInternal<V>(self);
   }
 
