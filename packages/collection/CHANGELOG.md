@@ -1,3 +1,11 @@
+# [@jamashita/lluvia-collection-v1.3.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.2.0...@jamashita/lluvia-collection-v1.3.0) (2021-04-26)
+
+
+### Features
+
+* 🎸 update ([6a291d5](https://github.com/jamashita/lluvia/commit/6a291d5fc225f16bf97e3d8960080cbb0ae8824a))
+* 🎸 update ([eded0f5](https://github.com/jamashita/lluvia/commit/eded0f5a530e5d87157f0d26e0c732eee3c47deb))
+
 # [@jamashita/lluvia-collection-v1.2.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.1.0...@jamashita/lluvia-collection-v1.2.0) (2021-04-07)
 
 
