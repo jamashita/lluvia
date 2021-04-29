@@ -46,6 +46,10 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
   }
 
   protected forge(self: Map<K | string, [K, V]>): ImmutableProject<K, V> {
+    if (self.size === 0) {
+      return ImmutableProject.empty<K, V>();
+    }
+
     return ImmutableProject.ofInternal<K, V>(self);
   }
 
