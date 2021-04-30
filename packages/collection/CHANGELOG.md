@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-collection-v1.5.1](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.5.0...@jamashita/lluvia-collection-v1.5.1) (2021-04-30)
+
+
+### Bug Fixes
+
+* 🐛 super -> this ([f0dcb8e](https://github.com/jamashita/lluvia/commit/f0dcb8ebbf6cac814d4505667a43b9a31b7ade84))
+
 # [@jamashita/lluvia-collection-v1.5.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.4.0...@jamashita/lluvia-collection-v1.5.0) (2021-04-30)
 
 
