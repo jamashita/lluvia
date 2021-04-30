@@ -512,10 +512,10 @@
     "@jamashita/anden-type" "^1.9.0"
     object-hash "2.1.1"
 
-"@jamashita/anden-type@1.10.0", "@jamashita/anden-type@^1.8.0", "@jamashita/anden-type@^1.9.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-1.10.0.tgz#20a2939362af0a1b67178072386425dae094bb1b"
-  integrity sha512-GZ/T02nW7nS07y+pe3jumh3g5ay3btQnYEiHaXXDz5p7DYVDgxStvUzO/m2X0zsz5/Tb2w/MJeYrqfb7y0RpbQ==
+"@jamashita/anden-type@1.10.1", "@jamashita/anden-type@^1.8.0", "@jamashita/anden-type@^1.9.0":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-1.10.1.tgz#3b3b203c54ba54b7569caded767e3259d996a991"
+  integrity sha512-JjzoXA/GDZbwUZiXqMWhYb5TXDUbTSQEj/J3mIFM6IOKZTynmfqewzBC8Ag+kQhK0NdPjMS4QZItF0q4ZtKOBA==
   dependencies:
     reflect-metadata "0.1.13"
 
