@@ -27,7 +27,7 @@ export class MutableSequence<V> extends ASequence<V, 'MutableSequence'> {
 
   public set(key: number, value: V): MutableSequence<V> {
     try {
-      this.sequence = super.setInternal(key, value);
+      this.sequence = this.setInternal(key, value);
 
       return this;
     }
@@ -42,7 +42,7 @@ export class MutableSequence<V> extends ASequence<V, 'MutableSequence'> {
 
   public remove(key: number): MutableSequence<V> {
     try {
-      this.sequence = super.removeInternal(key);
+      this.sequence = this.removeInternal(key);
 
       return this;
     }

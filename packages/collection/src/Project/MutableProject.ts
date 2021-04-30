@@ -63,11 +63,11 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
   }
 
   public map<W>(mapper: Mapper<V, W>): MutableProject<K, W> {
-    return MutableProject.ofInternal<K, W>(super.mapInternal<W>(mapper));
+    return MutableProject.ofInternal<K, W>(this.mapInternal<W>(mapper));
   }
 
   public filter(predicate: BinaryPredicate<V, K>): MutableProject<K, V> {
-    return MutableProject.ofInternal<K, V>(super.filterInternal(predicate));
+    return MutableProject.ofInternal<K, V>(this.filterInternal(predicate));
   }
 
   public duplicate(): MutableProject<K, V> {
