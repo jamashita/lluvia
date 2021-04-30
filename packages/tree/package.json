@@ -29,7 +29,7 @@
     "@jamashita/anden-error": "1.7.0",
     "@jamashita/anden-object": "1.7.0",
     "@jamashita/anden-type": "1.9.0",
-    "@jamashita/lluvia-collection": "1.3.0"
+    "@jamashita/lluvia-collection": "1.5.1"
   },
   "devDependencies": {
     "sinon": "10.0.1"
