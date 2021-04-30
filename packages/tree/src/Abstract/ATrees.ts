@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { BinaryPredicate, Enumerator, Kind, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Catalogue, Kind, Nullable } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { Trees } from '../Interface/Trees';
 import { ATreeNode } from '../TreeNode/Abstract/ATreeNode';
@@ -54,10 +54,10 @@ export abstract class ATrees<K, V, T extends ATreeNode<V, T>, E extends ATree<V,
     return null;
   }
 
-  public forEach(enumerator: Enumerator<K, V>): void {
+  public forEach(catalogue: Catalogue<K, V>): void {
     this.trees.forEach((tree: E, key: K) => {
       tree.forEach((value: V) => {
-        enumerator(value, key);
+        catalogue(value, key);
       });
     });
   }

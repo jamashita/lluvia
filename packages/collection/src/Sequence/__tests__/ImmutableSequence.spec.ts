@@ -289,7 +289,7 @@ describe('ImmutableSequence', () => {
       expect(sequence2.get(1)).toBe(value2);
     });
 
-    it('returns itself when give key is greater than sequence length', () => {
+    it('returns itself when given key is greater than sequence length', () => {
       expect.assertions(1);
 
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
@@ -306,7 +306,7 @@ describe('ImmutableSequence', () => {
       expect(sequence1).toBe(sequence2);
     });
 
-    it('returns itself when give key is less than 0', () => {
+    it('returns itself when given key is less than 0', () => {
       expect.assertions(1);
 
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
@@ -323,7 +323,7 @@ describe('ImmutableSequence', () => {
       expect(sequence1).toBe(sequence2);
     });
 
-    it('returns itself when give key is not integer', () => {
+    it('returns itself when given key is not integer', () => {
       expect.assertions(1);
 
       const value1: MockValueObject<number> = new MockValueObject<number>(1);

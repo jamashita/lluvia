@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { Enumerator, Nullable, Predicate } from '@jamashita/anden-type';
+import { Catalogue, Nullable, Predicate } from '@jamashita/anden-type';
 import { Tree } from '../Interface/Tree';
 import { ATreeNode } from '../TreeNode/Abstract/ATreeNode';
 
@@ -9,6 +9,10 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
   protected constructor(root: T) {
     super();
     this.root = root;
+  }
+
+  public contains(value: V): boolean {
+    return this.root.contains(value);
   }
 
   public equals(other: unknown): boolean {
@@ -22,43 +26,39 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
     return this.root.equals(other.root);
   }
 
-  public serialize(): string {
-    return this.root.toString();
-  }
-
-  public getRoot(): T {
-    return this.root;
-  }
-
-  public contains(value: V): boolean {
-    return this.root.contains(value);
+  public every(predicate: Predicate<V>): boolean {
+    return this.everyInternal(this.root, predicate);
   }
 
   public find(predicate: Predicate<V>): Nullable<T> {
     return this.root.find(predicate);
   }
 
+  // TODO VISITOR PATTERN!
+  public forEach(catalogue: Catalogue<unknown, V>): void {
+    for (const value of this.values()) {
+      catalogue(value, null);
+    }
+  }
+
+  public getRoot(): T {
+    return this.root;
+  }
+
+  public serialize(): string {
+    return this.root.toString();
+  }
+
   public size(): number {
     return this.root.size();
-  }
-
-  public values(): Iterable<V> {
-    return this.root.values();
-  }
-
-  public every(predicate: Predicate<V>): boolean {
-    return this.everyInternal(this.root, predicate);
   }
 
   public some(predicate: Predicate<V>): boolean {
     return this.someInternal(this.root, predicate);
   }
 
-  // TODO VISITOR PATTERN!
-  public forEach(enumerator: Enumerator<unknown, V>): void {
-    for (const value of this.values()) {
-      enumerator(value, null);
-    }
+  public values(): Iterable<V> {
+    return this.root.values();
   }
 
   private everyInternal(node: T, predicate: Predicate<V>): boolean {

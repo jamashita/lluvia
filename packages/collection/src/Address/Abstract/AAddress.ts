@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { BinaryPredicate, Enumerator, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '../../Quantity';
 import { Address } from '../Interface/Address';
 
@@ -11,15 +11,61 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     this.address = address;
   }
 
-  public abstract add(value: V): Address<V, N>;
+  public abstract add(value: V): T;
 
-  public abstract remove(value: V): Address<V, N>;
+  public contains(value: V): boolean {
+    return this.address.has(this.hashor<V>(value));
+  }
 
-  public abstract map<W>(mapper: Mapper<V, W>): Address<W>;
+  public abstract duplicate(): T;
 
-  public abstract filter(predicate: BinaryPredicate<V, void>): Address<V>;
+  public equals(other: unknown): boolean {
+    if (this === other) {
+      return true;
+    }
+    if (!(other instanceof AAddress)) {
+      return false;
+    }
+    if (this.size() !== other.size()) {
+      return false;
+    }
 
-  public abstract duplicate(): Address<V, N>;
+    return this.every((value: V) => {
+      return other.contains(value);
+    });
+  }
+
+  public every(predicate: BinaryPredicate<V, void>): boolean {
+    for (const [, v] of this.address) {
+      if (!predicate(v)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public abstract filter(predicate: BinaryPredicate<V, void>): T;
+
+  public find(predicate: BinaryPredicate<V, void>): Nullable<V> {
+    for (const [, v] of this.address) {
+      if (predicate(v)) {
+        return v;
+      }
+    }
+
+    return null;
+  }
+
+  public forEach(catalogue: Catalogue<void, V>): void {
+    this.address.forEach((v: V) => {
+      catalogue(v);
+    });
+  }
+
+  public get(): Nullable<V> {
+    return null;
+  }
 
   public iterator(): IterableIterator<[void, V]> {
     const iterator: IterableIterator<V> = this.address.values();
@@ -36,48 +82,22 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return iterable.values();
   }
 
-  public get(): Nullable<V> {
-    return null;
-  }
+  public abstract map<W>(mapper: Mapper<V, W>): Address<W>;
 
-  public contains(value: V): boolean {
-    const v: V | string = this.hashor<V>(value);
+  public abstract remove(value: V): T;
 
-    return this.address.has(v);
+  public serialize(): string {
+    const props: Array<string> = [];
+
+    this.forEach((element: V) => {
+      props.push(Objet.identify(element));
+    });
+
+    return props.join(', ');
   }
 
   public size(): number {
     return this.address.size;
-  }
-
-  public isEmpty(): boolean {
-    return this.size() === 0;
-  }
-
-  public forEach(enumerator: Enumerator<void, V>): void {
-    this.address.forEach((v: V) => {
-      enumerator(v, undefined);
-    });
-  }
-
-  public find(predicate: BinaryPredicate<V, void>): Nullable<V> {
-    for (const [, v] of this.address) {
-      if (predicate(v)) {
-        return v;
-      }
-    }
-
-    return null;
-  }
-
-  public every(predicate: BinaryPredicate<V, void>): boolean {
-    for (const [, v] of this.address) {
-      if (!predicate(v)) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   public some(predicate: BinaryPredicate<V, void>): boolean {
@@ -107,32 +127,6 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     }
 
     return iterable;
-  }
-
-  public equals(other: unknown): boolean {
-    if (this === other) {
-      return true;
-    }
-    if (!(other instanceof AAddress)) {
-      return false;
-    }
-    if (this.size() !== other.size()) {
-      return false;
-    }
-
-    return this.every((value: V) => {
-      return other.contains(value);
-    });
-  }
-
-  public serialize(): string {
-    const properties: Array<string> = [];
-
-    this.forEach((element: V) => {
-      properties.push(Objet.identify(element));
-    });
-
-    return properties.join(', ');
   }
 
   protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | string, V> {

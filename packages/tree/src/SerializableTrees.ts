@@ -9,16 +9,16 @@ export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<
   implements JSONable<ReadonlyArray<TreeNodeJSON>> {
   public readonly noun: 'SerializableTrees' = 'SerializableTrees';
 
+  public static empty<VT extends SerializableTreeObject>(): SerializableTrees<VT> {
+    return SerializableTrees.ofAddress<VT>(ImmutableAddress.empty<SerializableTree<VT>>());
+  }
+
   public static of<VT extends SerializableTreeObject>(trees: SerializableTrees<VT>): SerializableTrees<VT> {
     return SerializableTrees.ofAddress<VT>(trees.trees);
   }
 
   public static ofAddress<VT extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<VT>>): SerializableTrees<VT> {
     return SerializableTrees.ofInternal<VT>(address);
-  }
-
-  public static empty<VT extends SerializableTreeObject>(): SerializableTrees<VT> {
-    return SerializableTrees.ofAddress<VT>(ImmutableAddress.empty<SerializableTree<VT>>());
   }
 
   private static ofInternal<VT extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<VT>>): SerializableTrees<VT> {

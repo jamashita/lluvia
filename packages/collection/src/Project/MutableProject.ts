@@ -5,10 +5,18 @@ import { AProject } from './Abstract/AProject';
 export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, 'MutableProject'> {
   public readonly noun: 'MutableProject' = 'MutableProject';
 
+  public static empty<KT, VT>(): MutableProject<KT, VT> {
+    return MutableProject.ofInternal<KT, VT>(new Map<KT | string, [KT, VT]>());
+  }
+
   public static of<KT, VT>(collection: Collection<KT, VT>): MutableProject<KT, VT> {
     const map: Map<KT, VT> = new Map<KT, VT>(collection);
 
     return MutableProject.ofMap<KT, VT>(map);
+  }
+
+  private static ofInternal<KT, VT>(project: Map<KT | string, [KT, VT]>): MutableProject<KT, VT> {
+    return new MutableProject<KT, VT>(project);
   }
 
   public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): MutableProject<KT, VT> {
@@ -27,24 +35,20 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
     return MutableProject.ofInternal<KT, VT>(m);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | string, [KT, VT]>): MutableProject<KT, VT> {
-    return new MutableProject<KT, VT>(project);
-  }
-
-  public static empty<KT, VT>(): MutableProject<KT, VT> {
-    return new MutableProject<KT, VT>(new Map<KT | string, [KT, VT]>());
-  }
-
   protected constructor(project: Map<K | string, [K, V]>) {
     super(project);
   }
 
-  public set(key: K, value: V): MutableProject<K, V> {
-    const k: K | string = this.hashor<K>(key);
+  public duplicate(): MutableProject<K, V> {
+    return MutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
+  }
 
-    this.project.set(k, [key, value]);
+  public filter(predicate: BinaryPredicate<V, K>): MutableProject<K, V> {
+    return MutableProject.ofInternal<K, V>(this.filterInternal(predicate));
+  }
 
-    return this;
+  public map<W>(mapper: Mapper<V, W>): MutableProject<K, W> {
+    return MutableProject.ofInternal<K, W>(this.mapInternal<W>(mapper));
   }
 
   public remove(key: K): MutableProject<K, V> {
@@ -62,15 +66,11 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
     return this;
   }
 
-  public map<W>(mapper: Mapper<V, W>): MutableProject<K, W> {
-    return MutableProject.ofInternal<K, W>(this.mapInternal<W>(mapper));
-  }
+  public set(key: K, value: V): MutableProject<K, V> {
+    const k: K | string = this.hashor<K>(key);
 
-  public filter(predicate: BinaryPredicate<V, K>): MutableProject<K, V> {
-    return MutableProject.ofInternal<K, V>(this.filterInternal(predicate));
-  }
+    this.project.set(k, [key, value]);
 
-  public duplicate(): MutableProject<K, V> {
-    return MutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
+    return this;
   }
 }
