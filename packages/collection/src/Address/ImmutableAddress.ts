@@ -89,7 +89,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
   }
 
   public filter(predicate: BinaryPredicate<V, void>): ImmutableAddress<V> {
-    return ImmutableAddress.ofInternal<V>(super.filterInternal(predicate));
+    return ImmutableAddress.ofInternal<V>(this.filterInternal(predicate));
   }
 
   public duplicate(): ImmutableAddress<V> {
@@ -100,13 +100,5 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     const m: Map<V | string, V> = new Map<V | string, V>(this.address);
 
     return ImmutableAddress.ofInternal<V>(m);
-  }
-
-  protected forge(self: Map<V | string, V>): ImmutableAddress<V> {
-    if (self.size === 0) {
-      return ImmutableAddress.empty<V>();
-    }
-
-    return ImmutableAddress.ofInternal<V>(self);
   }
 }

@@ -33,7 +33,7 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
 
   public set(key: number, value: V): ImmutableSequence<V> {
     try {
-      const array: Array<V> = super.setInternal(key, value);
+      const array: Array<V> = this.setInternal(key, value);
 
       return ImmutableSequence.ofArray<V>(array);
     }
@@ -48,7 +48,7 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
 
   public remove(key: number): ImmutableSequence<V> {
     try {
-      const array: Array<V> = super.removeInternal(key);
+      const array: Array<V> = this.removeInternal(key);
 
       return ImmutableSequence.ofArray<V>(array);
     }
