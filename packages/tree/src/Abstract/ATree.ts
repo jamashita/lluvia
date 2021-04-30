@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { Nullable, Predicate } from '@jamashita/anden-type';
+import { Catalogue, Nullable, Predicate } from '@jamashita/anden-type';
 import { Tree } from '../Interface/Tree';
 import { ATreeNode } from '../TreeNode/Abstract/ATreeNode';
 
@@ -35,9 +35,9 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
   }
 
   // TODO VISITOR PATTERN!
-  public forEach(enumerator: Enumerator<unknown, V>): void {
+  public forEach(catalogue: Catalogue<unknown, V>): void {
     for (const value of this.values()) {
-      enumerator(value, null);
+      catalogue(value, null);
     }
   }
 
