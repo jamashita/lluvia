@@ -25,15 +25,7 @@ export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>, 'MockPr
     super(MockProject.toMap<K, V>(project));
   }
 
-  public set(): MockProject<K, V> {
-    throw new UnimplementedError();
-  }
-
-  public remove(): MockProject<K, V> {
-    throw new UnimplementedError();
-  }
-
-  public map<W>(): MockProject<K, W> {
+  public duplicate(): MockProject<K, V> {
     throw new UnimplementedError();
   }
 
@@ -41,7 +33,15 @@ export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>, 'MockPr
     throw new UnimplementedError();
   }
 
-  public duplicate(): MockProject<K, V> {
+  public map<W>(): MockProject<K, W> {
+    throw new UnimplementedError();
+  }
+
+  public remove(): MockProject<K, V> {
+    throw new UnimplementedError();
+  }
+
+  public set(): MockProject<K, V> {
     throw new UnimplementedError();
   }
 }
