@@ -9,7 +9,7 @@ export interface Collection<K, V, N extends string = string> extends Nominative<
 
   isEmpty(): boolean;
 
-  forEach(iteration: Enumerator<K, V>): void;
+  forEach(enumerator: Enumerator<K, V>): void;
 
   every(predicate: BinaryPredicate<V, K>): boolean;
 
