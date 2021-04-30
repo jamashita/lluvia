@@ -1,4 +1,4 @@
-import { BinaryFunction, BinaryPredicate, Kind, Mapper } from '@jamashita/anden-type';
+import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { ASequence } from './Abstract/ASequence';
 
@@ -26,29 +26,33 @@ export class MutableSequence<V> extends ASequence<V, 'MutableSequence'> {
   }
 
   public set(key: number, value: V): MutableSequence<V> {
-    if (!Kind.isInteger(key)) {
+    try {
+      this.sequence = super.setInternal(key, value);
+
       return this;
     }
-    if (key < 0 || this.sequence.length <= key) {
-      return this;
+    catch (err: unknown) {
+      if (err instanceof TypeError) {
+        return this;
+      }
+
+      throw err;
     }
-
-    this.sequence = [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
-
-    return this;
   }
 
   public remove(key: number): MutableSequence<V> {
-    if (!Kind.isInteger(key)) {
+    try {
+      this.sequence = super.removeInternal(key);
+
       return this;
     }
-    if (key < 0 || this.sequence.length <= key) {
-      return this;
+    catch (err: unknown) {
+      if (err instanceof TypeError) {
+        return this;
+      }
+
+      throw err;
     }
-
-    this.sequence = [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
-
-    return this;
   }
 
   public add(value: V): MutableSequence<V> {

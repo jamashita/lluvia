@@ -3,8 +3,7 @@ import { Ambiguous, BinaryPredicate, Enumerator, isNominative, Kind, Mapper, Nul
 import { Quantity } from '../../Quantity';
 import { Project } from '../Interface/Project';
 
-export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N>
-  implements Project<K, V, N> {
+export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N> implements Project<K, V, N> {
   protected readonly project: Map<K | string, [K, V]>;
 
   protected constructor(project: Map<K | string, [K, V]>) {
@@ -12,27 +11,13 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     this.project = project;
   }
 
-  protected abstract forge(self: Map<K | string, [K, V]>): T;
-
   public abstract set(key: K, value: V): Project<K, V, N>;
 
   public abstract remove(key: K): Project<K, V, N>;
 
   public abstract map<W>(mapper: Mapper<V, W>): Project<K, W>;
 
-  public filter(predicate: BinaryPredicate<V, K>): T {
-    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>();
-
-    this.project.forEach(([k, v]: [K, V]) => {
-      if (predicate(v, k)) {
-        const key: K | string = this.hashor<K>(k);
-
-        m.set(key, [k, v]);
-      }
-    });
-
-    return this.forge(m);
-  }
+  public abstract filter(predicate: BinaryPredicate<V, K>): Project<K, V>;
 
   public abstract duplicate(): Project<K, V, N>;
 
@@ -78,16 +63,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   }
 
   public isEmpty(): boolean {
-    if (this.size() === 0) {
-      return true;
-    }
-
-    return false;
+    return this.size() === 0;
   }
 
-  public forEach(iteration: Enumerator<K, V>): void {
+  public forEach(enumerator: Enumerator<K, V>): void {
     this.project.forEach(([k, v]: [K, V]) => {
-      iteration(v, k);
+      enumerator(v, k);
     });
   }
 
@@ -186,6 +167,20 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     }
 
     return null;
+  }
+
+  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | string, [K, V]> {
+    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>();
+
+    this.project.forEach(([k, v]: [K, V]) => {
+      if (predicate(v, k)) {
+        const key: K | string = this.hashor<K>(k);
+
+        m.set(key, [k, v]);
+      }
+    });
+
+    return m;
   }
 
   protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | string, [K, W]> {

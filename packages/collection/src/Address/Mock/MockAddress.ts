@@ -25,16 +25,6 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
     super(MockAddress.toMap<V>(set));
   }
 
-  protected forge(self: Map<unknown, V>): MockAddress<V> {
-    const set: Set<V> = new Set<V>();
-
-    self.forEach((v: V) => {
-      set.add(v);
-    });
-
-    return new MockAddress<V>(set);
-  }
-
   public add(): MockAddress<V> {
     throw new UnimplementedError();
   }
@@ -49,5 +39,19 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
 
   public map<W>(): MockAddress<W> {
     throw new UnimplementedError();
+  }
+
+  public filter(): MockAddress<V> {
+    throw new UnimplementedError();
+  }
+
+  protected forge(self: Map<unknown, V>): MockAddress<V> {
+    const set: Set<V> = new Set<V>();
+
+    self.forEach((v: V) => {
+      set.add(v);
+    });
+
+    return new MockAddress<V>(set);
   }
 }

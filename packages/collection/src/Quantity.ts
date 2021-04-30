@@ -21,7 +21,7 @@ export abstract class Quantity<K, V, N extends string = string> extends Objet<N>
 
   public abstract isEmpty(): boolean;
 
-  public abstract forEach(iteration: Enumerator<K, V>): void;
+  public abstract forEach(enumerator: Enumerator<K, V>): void;
 
   public abstract every(predicate: BinaryPredicate<V, K>): boolean;
 

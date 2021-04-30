@@ -9,7 +9,7 @@ export interface ReadonlyTrees<K, V, E extends Tree<V>, N extends string = strin
 
   find(predicate: BinaryPredicate<V, K>): Nullable<TreeNode<V>>;
 
-  forEach(iteration: Enumerator<K, V>): void;
+  forEach(enumerator: Enumerator<K, V>): void;
 
   get(key: K): Nullable<E>;
 

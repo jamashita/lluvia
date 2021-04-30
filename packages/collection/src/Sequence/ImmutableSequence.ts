@@ -1,4 +1,4 @@
-import { BinaryFunction, BinaryPredicate, Kind, Mapper } from '@jamashita/anden-type';
+import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { ASequence } from './Abstract/ASequence';
 
@@ -32,29 +32,33 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
   }
 
   public set(key: number, value: V): ImmutableSequence<V> {
-    if (!Kind.isInteger(key)) {
-      return this;
-    }
-    if (key < 0 || this.sequence.length <= key) {
-      return this;
-    }
+    try {
+      const array: Array<V> = super.setInternal(key, value);
 
-    const array: Array<V> = [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
+      return ImmutableSequence.ofArray<V>(array);
+    }
+    catch (err: unknown) {
+      if (err instanceof TypeError) {
+        return this;
+      }
 
-    return ImmutableSequence.ofArray<V>(array);
+      throw err;
+    }
   }
 
   public remove(key: number): ImmutableSequence<V> {
-    if (!Kind.isInteger(key)) {
-      return this;
-    }
-    if (key < 0 || this.sequence.length <= key) {
-      return this;
-    }
+    try {
+      const array: Array<V> = super.removeInternal(key);
 
-    const array: Array<V> = [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
+      return ImmutableSequence.ofArray<V>(array);
+    }
+    catch (err: unknown) {
+      if (err instanceof TypeError) {
+        return this;
+      }
 
-    return ImmutableSequence.ofArray<V>(array);
+      throw err;
+    }
   }
 
   public add(value: V): ImmutableSequence<V> {
@@ -62,11 +66,7 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
   }
 
   public isEmpty(): boolean {
-    if (this === ImmutableSequence.empty<V>()) {
-      return true;
-    }
-
-    return super.isEmpty();
+    return this === ImmutableSequence.empty<V>();
   }
 
   public map<W>(mapper: Mapper<V, W>): ImmutableSequence<W> {
@@ -78,7 +78,7 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
   }
 
   public sort(comparator: BinaryFunction<V, V, number>): ImmutableSequence<V> {
-    const arr: Array<V> = [...this.sequence];
+    const arr: Array<V> = this.toArray();
 
     arr.sort(comparator);
 

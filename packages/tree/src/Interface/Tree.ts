@@ -8,7 +8,7 @@ export interface Tree<V, N extends string = string> extends Nominative<N> {
 
   every(predicate: Predicate<V>): boolean;
 
-  forEach(iteration: Enumerator<unknown, V>): void;
+  forEach(enumerator: Enumerator<unknown, V>): void;
 
   find(predicate: Predicate<V>): Nullable<TreeNode<V>>;
 
