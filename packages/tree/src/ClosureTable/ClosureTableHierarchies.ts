@@ -72,8 +72,8 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.every(predicate);
   }
 
-  public forEach(iteration: Enumerator<number, ClosureTableHierarchy<K>>): void {
-    this.hierarchies.forEach(iteration);
+  public forEach(enumerator: Enumerator<number, ClosureTableHierarchy<K>>): void {
+    this.hierarchies.forEach(enumerator);
   }
 
   public get(key: number): Nullable<ClosureTableHierarchy<K>> {

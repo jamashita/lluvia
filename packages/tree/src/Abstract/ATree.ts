@@ -55,9 +55,9 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
   }
 
   // TODO VISITOR PATTERN!
-  public forEach(iteration: Enumerator<unknown, V>): void {
+  public forEach(enumerator: Enumerator<unknown, V>): void {
     for (const value of this.values()) {
-      iteration(value, null);
+      enumerator(value, null);
     }
   }
 

@@ -389,6 +389,29 @@ describe('ImmutableSequence', () => {
   });
 
   describe('filter', () => {
+    it('returns ImmutableSequence.EMPTY when no match', () => {
+      expect.assertions(2);
+
+      const value1: MockValueObject<number> = new MockValueObject<number>(1);
+      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value3: MockValueObject<number> = new MockValueObject<number>(3);
+      const value4: MockValueObject<number> = new MockValueObject<number>(2);
+
+      const sequence: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray<MockValueObject<number>>([
+        value1,
+        value2,
+        value3,
+        value4
+      ]);
+
+      const filtered: ImmutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
+        return v.get() > 100;
+      });
+
+      expect(filtered.size()).toBe(0);
+      expect(filtered).toBe(ImmutableSequence.empty<number>());
+    });
+
     it('can remove match values', () => {
       expect.assertions(6);
 

@@ -1,4 +1,4 @@
-import { isNominative, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { AProject } from './Abstract/AProject';
 
@@ -45,10 +45,6 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     super(project);
   }
 
-  protected forge(self: Map<K | string, [K, V]>): ImmutableProject<K, V> {
-    return ImmutableProject.ofInternal<K, V>(self);
-  }
-
   public set(key: K, value: V): ImmutableProject<K, V> {
     const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>(this.project);
     const k: K | string = this.hashor<K>(key);
@@ -83,9 +79,11 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
   }
 
   public map<W>(mapper: Mapper<V, W>): ImmutableProject<K, W> {
-    const m: Map<K | string, [K, W]> = this.mapInternal<W>(mapper);
+    return ImmutableProject.ofInternal<K, W>(super.mapInternal<W>(mapper));
+  }
 
-    return ImmutableProject.ofInternal<K, W>(m);
+  public filter(predicate: BinaryPredicate<V, K>): ImmutableProject<K, V> {
+    return ImmutableProject.ofInternal<K, V>(super.filterInternal(predicate));
   }
 
   public duplicate(): ImmutableProject<K, V> {
