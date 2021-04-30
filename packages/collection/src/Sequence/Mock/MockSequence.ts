@@ -1,7 +1,7 @@
 import { UnimplementedError } from '@jamashita/anden-error';
 import { ASequence } from '../Abstract/ASequence';
 
-export class MockSequence<V> extends ASequence<V, 'MockSequence'> {
+export class MockSequence<V> extends ASequence<V, MockSequence<V>, 'MockSequence'> {
   public readonly noun: 'MockSequence' = 'MockSequence';
 
   public constructor(sequence: ReadonlyArray<V>) {
