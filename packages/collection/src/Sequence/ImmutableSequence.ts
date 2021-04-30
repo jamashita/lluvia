@@ -2,10 +2,14 @@ import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { ASequence } from './Abstract/ASequence';
 
-export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
+export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'ImmutableSequence'> {
   public readonly noun: 'ImmutableSequence' = 'ImmutableSequence';
 
   private static readonly EMPTY: ImmutableSequence<unknown> = new ImmutableSequence<unknown>([]);
+
+  public static empty<VT>(): ImmutableSequence<VT> {
+    return ImmutableSequence.EMPTY as ImmutableSequence<VT>;
+  }
 
   public static of<VT>(collection: Collection<number, VT>): ImmutableSequence<VT> {
     return ImmutableSequence.ofInternal<VT>([...collection.values()]);
@@ -23,66 +27,12 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
     return new ImmutableSequence<VT>(array);
   }
 
-  public static empty<VT>(): ImmutableSequence<VT> {
-    return ImmutableSequence.EMPTY as ImmutableSequence<VT>;
-  }
-
   protected constructor(sequence: Array<V>) {
     super(sequence);
   }
 
-  public set(key: number, value: V): ImmutableSequence<V> {
-    try {
-      const array: Array<V> = this.setInternal(key, value);
-
-      return ImmutableSequence.ofArray<V>(array);
-    }
-    catch (err: unknown) {
-      if (err instanceof TypeError) {
-        return this;
-      }
-
-      throw err;
-    }
-  }
-
-  public remove(key: number): ImmutableSequence<V> {
-    try {
-      const array: Array<V> = this.removeInternal(key);
-
-      return ImmutableSequence.ofArray<V>(array);
-    }
-    catch (err: unknown) {
-      if (err instanceof TypeError) {
-        return this;
-      }
-
-      throw err;
-    }
-  }
-
   public add(value: V): ImmutableSequence<V> {
     return ImmutableSequence.ofArray<V>([...this.sequence, value]);
-  }
-
-  public isEmpty(): boolean {
-    return this === ImmutableSequence.empty<V>();
-  }
-
-  public map<W>(mapper: Mapper<V, W>): ImmutableSequence<W> {
-    return ImmutableSequence.ofArray<W>(this.sequence.map<W>(mapper));
-  }
-
-  public filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<V> {
-    return ImmutableSequence.ofArray<V>(this.sequence.filter(predicate));
-  }
-
-  public sort(comparator: BinaryFunction<V, V, number>): ImmutableSequence<V> {
-    const arr: Array<V> = this.toArray();
-
-    arr.sort(comparator);
-
-    return ImmutableSequence.ofArray<V>(arr);
   }
 
   public duplicate(): ImmutableSequence<V> {
@@ -91,5 +41,37 @@ export class ImmutableSequence<V> extends ASequence<V, 'ImmutableSequence'> {
     }
 
     return ImmutableSequence.ofArray<V>([...this.sequence]);
+  }
+
+  public filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<V> {
+    return ImmutableSequence.ofArray<V>(this.sequence.filter(predicate));
+  }
+
+  public isEmpty(): boolean {
+    if (this === ImmutableSequence.empty<V>()) {
+      return true;
+    }
+
+    return super.isEmpty();
+  }
+
+  public map<W>(mapper: Mapper<V, W>): ImmutableSequence<W> {
+    return ImmutableSequence.ofArray<W>(this.sequence.map<W>(mapper));
+  }
+
+  public remove(key: number): ImmutableSequence<V> {
+    return ImmutableSequence.ofArray<V>(this.removeInternal(key));
+  }
+
+  public set(key: number, value: V): ImmutableSequence<V> {
+    return ImmutableSequence.ofArray<V>(this.setInternal(key, value));
+  }
+
+  public sort(comparator: BinaryFunction<V, V, number>): ImmutableSequence<V> {
+    const arr: Array<V> = this.toArray();
+
+    arr.sort(comparator);
+
+    return ImmutableSequence.ofArray<V>(arr);
   }
 }
