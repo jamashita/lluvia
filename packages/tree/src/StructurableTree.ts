@@ -20,12 +20,8 @@ export class StructurableTree<K extends TreeID, V extends StructurableTreeObject
     return this.root.getTreeID();
   }
 
-  public toHierarchies(): ClosureTableHierarchies<K> {
-    const hierarchies: MutableProject<K, MutableAddress<K>> = MutableProject.empty<K, MutableAddress<K>>();
-
-    this.retrieve(this.root, hierarchies);
-
-    return ClosureTableHierarchies.of<K>(hierarchies);
+  public has(key: K): boolean {
+    return this.root.has(key);
   }
 
   private retrieve(node: StructurableTreeNode<K, V>, hierarchies: MutableProject<K, MutableAddress<K>>): void {
@@ -52,7 +48,11 @@ export class StructurableTree<K extends TreeID, V extends StructurableTreeObject
     });
   }
 
-  public has(key: K): boolean {
-    return this.root.has(key);
+  public toHierarchies(): ClosureTableHierarchies<K> {
+    const hierarchies: MutableProject<K, MutableAddress<K>> = MutableProject.empty<K, MutableAddress<K>>();
+
+    this.retrieve(this.root, hierarchies);
+
+    return ClosureTableHierarchies.of<K>(hierarchies);
   }
 }

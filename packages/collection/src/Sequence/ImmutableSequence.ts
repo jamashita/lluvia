@@ -60,11 +60,23 @@ export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'Im
   }
 
   public remove(key: number): ImmutableSequence<V> {
-    return ImmutableSequence.ofArray<V>(this.removeInternal(key));
+    const sequence: Array<V> = this.removeInternal(key);
+
+    if (sequence === this.sequence) {
+      return this;
+    }
+
+    return ImmutableSequence.ofArray<V>(sequence);
   }
 
   public set(key: number, value: V): ImmutableSequence<V> {
-    return ImmutableSequence.ofArray<V>(this.setInternal(key, value));
+    const sequence: Array<V> = this.setInternal(key, value);
+
+    if (sequence === this.sequence) {
+      return this;
+    }
+
+    return ImmutableSequence.ofArray<V>(sequence);
   }
 
   public sort(comparator: BinaryFunction<V, V, number>): ImmutableSequence<V> {
