@@ -59,9 +59,9 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return false;
   }
 
-  public forEach(iteration: Enumerator<void, V>): void {
+  public forEach(enumerator: Enumerator<void, V>): void {
     this.address.forEach((v: V) => {
-      iteration(v, undefined);
+      enumerator(v, undefined);
     });
   }
 

@@ -54,10 +54,10 @@ export abstract class ATrees<K, V, T extends ATreeNode<V, T>, E extends ATree<V,
     return null;
   }
 
-  public forEach(iteration: Enumerator<K, V>): void {
+  public forEach(enumerator: Enumerator<K, V>): void {
     this.trees.forEach((tree: E, key: K) => {
       tree.forEach((value: V) => {
-        iteration(value, key);
+        enumerator(value, key);
       });
     });
   }
