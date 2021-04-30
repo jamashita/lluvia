@@ -1,3 +1,14 @@
+# [@jamashita/lluvia-collection-v1.5.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.4.0...@jamashita/lluvia-collection-v1.5.0) (2021-04-30)
+
+
+### Features
+
+* 🎸 Address new impkementation ([b96c84b](https://github.com/jamashita/lluvia/commit/b96c84b9206a7f896d671c6acc98d7568057a2fa))
+* 🎸 emmmpty adopition ([5f05f22](https://github.com/jamashita/lluvia/commit/5f05f22c1a5f3f9d982e3954679695deb4583ca8))
+* 🎸 Project settings ([2d0b163](https://github.com/jamashita/lluvia/commit/2d0b163fbb4b3b940e6b110c1506133cfb320962))
+* 🎸 Project update ([8820fd1](https://github.com/jamashita/lluvia/commit/8820fd1f8b750de5f6413cc0f0669fe27059ea68))
+* 🎸 Sequence update tet ([4e9e5cb](https://github.com/jamashita/lluvia/commit/4e9e5cb0e2d5d69e1e5b49212710efd418ef0107))
+
 # [@jamashita/lluvia-collection-v1.4.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.3.0...@jamashita/lluvia-collection-v1.4.0) (2021-04-29)
 
 
