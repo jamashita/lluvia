@@ -1,4 +1,4 @@
-import { isNominative, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { AAddress } from './Abstract/AAddress';
 
@@ -39,10 +39,6 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
     super(address);
   }
 
-  protected forge(self: Map<V | string, V>): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(self);
-  }
-
   public add(value: V): MutableAddress<V> {
     if (this.contains(value)) {
       return this;
@@ -71,14 +67,14 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
   }
 
   public map<W>(mapper: Mapper<V, W>): MutableAddress<W> {
-    const m: Map<W | string, W> = this.mapInternal<W>(mapper);
+    return MutableAddress.ofInternal<W>(this.mapInternal<W>(mapper));
+  }
 
-    return MutableAddress.ofInternal<W>(m);
+  public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
+    return MutableAddress.ofInternal<V>(this.filterInternal(predicate));
   }
 
   public duplicate(): MutableAddress<V> {
-    const m: Map<V | string, V> = new Map<V | string, V>(this.address);
-
-    return MutableAddress.ofInternal<V>(m);
+    return MutableAddress.ofInternal<V>(new Map<V | string, V>(this.address));
   }
 }
