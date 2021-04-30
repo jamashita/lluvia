@@ -70,8 +70,8 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.every(predicate);
   }
 
-  public forEach(iteration: Enumerator<K, ReadonlyAddress<K>>): void {
-    this.table.forEach(iteration);
+  public forEach(enumerator: Enumerator<K, ReadonlyAddress<K>>): void {
+    this.table.forEach(enumerator);
   }
 
   public get(key: K): Nullable<ReadonlyAddress<K>> {

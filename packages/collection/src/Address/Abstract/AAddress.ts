@@ -3,8 +3,7 @@ import { BinaryPredicate, Enumerator, Mapper, Nullable } from '@jamashita/anden-
 import { Quantity } from '../../Quantity';
 import { Address } from '../Interface/Address';
 
-export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = string> extends Quantity<void, V, N>
-  implements Address<V, N> {
+export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = string> extends Quantity<void, V, N> implements Address<V, N> {
   protected readonly address: Map<V | string, V>;
 
   protected constructor(address: Map<V | string, V>) {
@@ -12,13 +11,13 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     this.address = address;
   }
 
-  protected abstract forge(self: Map<V | string, V>): T;
-
   public abstract add(value: V): Address<V, N>;
 
   public abstract remove(value: V): Address<V, N>;
 
   public abstract map<W>(mapper: Mapper<V, W>): Address<W>;
+
+  public abstract filter(predicate: BinaryPredicate<V, void>): Address<V>;
 
   public abstract duplicate(): Address<V, N>;
 
@@ -52,16 +51,12 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
   }
 
   public isEmpty(): boolean {
-    if (this.size() === 0) {
-      return true;
-    }
-
-    return false;
+    return this.size() === 0;
   }
 
-  public forEach(iteration: Enumerator<void, V>): void {
+  public forEach(enumerator: Enumerator<void, V>): void {
     this.address.forEach((v: V) => {
-      iteration(v, undefined);
+      enumerator(v, undefined);
     });
   }
 
@@ -114,20 +109,6 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return iterable;
   }
 
-  public filter(predicate: BinaryPredicate<V, void>): T {
-    const m: Map<V | string, V> = new Map<V | string, V>();
-
-    this.address.forEach((value: V) => {
-      if (predicate(value, undefined)) {
-        const v: V | string = this.hashor(value);
-
-        m.set(v, value);
-      }
-    });
-
-    return this.forge(m);
-  }
-
   public equals(other: unknown): boolean {
     if (this === other) {
       return true;
@@ -152,6 +133,20 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     });
 
     return properties.join(', ');
+  }
+
+  protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | string, V> {
+    const m: Map<V | string, V> = new Map<V | string, V>();
+
+    this.address.forEach((value: V) => {
+      if (predicate(value, undefined)) {
+        const v: V | string = this.hashor(value);
+
+        m.set(v, value);
+      }
+    });
+
+    return m;
   }
 
   protected mapInternal<W>(mapper: Mapper<V, W>): Map<W | string, W> {

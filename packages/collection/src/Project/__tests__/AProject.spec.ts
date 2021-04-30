@@ -666,47 +666,4 @@ describe('AProject', () => {
       expect(found5).toBe(value1);
     });
   });
-
-  describe('filter', () => {
-    it('can remove match values', () => {
-      expect.assertions(7);
-
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(2);
-      const key3: MockValueObject<number> = new MockValueObject<number>(3);
-      const key4: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const value1: MockValueObject<string> = new MockValueObject<string>('a');
-      const value2: MockValueObject<string> = new MockValueObject<string>('aa');
-      const value3: MockValueObject<string> = new MockValueObject<string>('aaa');
-      const value4: MockValueObject<string> = new MockValueObject<string>('aaaa');
-      const value5: MockValueObject<string> = new MockValueObject<string>('aaaaa');
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<string>> = new MockProject<MockValueObject<number>, MockValueObject<string>>(
-        new Map<MockValueObject<number>, MockValueObject<string>>([
-          [key1, value1],
-          [key2, value2],
-          [key3, value3],
-          [key4, value4]
-        ])
-      );
-      const filtered1: MockProject<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
-        return v.get().length % 2 === 0;
-      });
-      const filtered2: MockProject<MockValueObject<number>, MockValueObject<string>> = project1.filter((_v: MockValueObject<string>, k: MockValueObject<number>) => {
-        return k.get() % 2 === 1;
-      });
-      const filtered3: MockProject<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
-        return v === value5;
-      });
-
-      expect(filtered1.size()).toBe(2);
-      expect(filtered1.get(key2)).toBe(value2);
-      expect(filtered1.get(key4)).toBe(value4);
-      expect(filtered2.size()).toBe(2);
-      expect(filtered2.get(key1)).toBe(value1);
-      expect(filtered2.get(key3)).toBe(value3);
-      expect(filtered3.size()).toBe(0);
-    });
-  });
 });

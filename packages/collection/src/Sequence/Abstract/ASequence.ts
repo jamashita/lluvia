@@ -35,8 +35,8 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
   public abstract duplicate(): Sequence<V, N>;
 
   public iterator(): IterableIterator<[number, V]> {
-    return this.sequence.map<[number, V]>((e: V, index: number) => {
-      return [index, e];
+    return this.sequence.map<[number, V]>((e: V, i: number) => {
+      return [i, e];
     }).values();
   }
 
@@ -70,15 +70,11 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
   }
 
   public isEmpty(): boolean {
-    if (this.size() === 0) {
-      return true;
-    }
-
-    return false;
+    return this.size() === 0;
   }
 
-  public forEach(iteration: Enumerator<number, V>): void {
-    this.sequence.forEach(iteration);
+  public forEach(enumerator: Enumerator<number, V>): void {
+    this.sequence.forEach(enumerator);
   }
 
   public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
@@ -148,5 +144,27 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
 
   public values(): Iterable<V> {
     return this.toArray();
+  }
+
+  protected setInternal(key: number, value: V): Array<V> {
+    if (!Kind.isInteger(key)) {
+      throw new TypeError('KEY IS NOT INTEGER');
+    }
+    if (key < 0 || this.sequence.length <= key) {
+      throw new TypeError('KEY IS OUT OF RANGE');
+    }
+
+    return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
+  }
+
+  protected removeInternal(key: number): Array<V> {
+    if (!Kind.isInteger(key)) {
+      throw new TypeError('KEY IS NOT INTEGER');
+    }
+    if (key < 0 || this.sequence.length <= key) {
+      throw new TypeError('KEY IS OUT OF RANGE');
+    }
+
+    return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
   }
 }

@@ -1,4 +1,4 @@
-import { isNominative, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { AProject } from './Abstract/AProject';
 
@@ -39,10 +39,6 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
     super(project);
   }
 
-  protected forge(self: Map<K | string, [K, V]>): MutableProject<K, V> {
-    return MutableProject.ofInternal<K, V>(self);
-  }
-
   public set(key: K, value: V): MutableProject<K, V> {
     const k: K | string = this.hashor<K>(key);
 
@@ -67,14 +63,14 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
   }
 
   public map<W>(mapper: Mapper<V, W>): MutableProject<K, W> {
-    const m: Map<K | string, [K, W]> = this.mapInternal<W>(mapper);
+    return MutableProject.ofInternal<K, W>(super.mapInternal<W>(mapper));
+  }
 
-    return MutableProject.ofInternal<K, W>(m);
+  public filter(predicate: BinaryPredicate<V, K>): MutableProject<K, V> {
+    return MutableProject.ofInternal<K, V>(super.filterInternal(predicate));
   }
 
   public duplicate(): MutableProject<K, V> {
-    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>(this.project);
-
-    return MutableProject.ofInternal<K, V>(m);
+    return MutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
   }
 }
