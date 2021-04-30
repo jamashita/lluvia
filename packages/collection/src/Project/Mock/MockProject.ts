@@ -37,17 +37,11 @@ export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>, 'MockPr
     throw new UnimplementedError();
   }
 
-  public duplicate(): MockProject<K, V> {
+  public filter(): MockProject<K, V> {
     throw new UnimplementedError();
   }
 
-  protected forge(self: Map<string, [K, V]>): MockProject<K, V> {
-    const map: Map<K, V> = new Map<K, V>();
-
-    self.forEach(([k, v]: [K, V]) => {
-      map.set(k, v);
-    });
-
-    return new MockProject<K, V>(map);
+  public duplicate(): MockProject<K, V> {
+    throw new UnimplementedError();
   }
 }
