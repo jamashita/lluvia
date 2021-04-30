@@ -6,8 +6,6 @@ export interface Address<V, N extends string = string> extends ReadonlyAddress<V
 
   filter(predicate: BinaryPredicate<V, void>): Address<V>;
 
-  iterator(): IterableIterator<[void, V]>;
-
   map<W>(mapper: Mapper<V, W>): Address<W>;
 
   remove(value: V): Address<V>;

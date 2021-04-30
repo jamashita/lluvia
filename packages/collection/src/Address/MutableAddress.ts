@@ -6,7 +6,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
   public readonly noun: 'MutableAddress' = 'MutableAddress';
 
   public static empty<VT>(): MutableAddress<VT> {
-    return new MutableAddress<VT>(new Map<VT | string, VT>());
+    return MutableAddress.ofInternal<VT>(new Map<VT | string, VT>());
   }
 
   public static of<VT>(collection: Collection<unknown, VT>): MutableAddress<VT> {
