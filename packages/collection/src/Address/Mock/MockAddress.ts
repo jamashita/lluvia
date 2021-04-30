@@ -29,11 +29,11 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
     throw new UnimplementedError();
   }
 
-  public remove(): MockAddress<V> {
+  public duplicate(): MockAddress<V> {
     throw new UnimplementedError();
   }
 
-  public duplicate(): MockAddress<V> {
+  public filter(): MockAddress<V> {
     throw new UnimplementedError();
   }
 
@@ -41,7 +41,7 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
     throw new UnimplementedError();
   }
 
-  public filter(): MockAddress<V> {
+  public remove(): MockAddress<V> {
     throw new UnimplementedError();
   }
 }
