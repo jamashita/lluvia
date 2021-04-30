@@ -44,14 +44,4 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
   public filter(): MockAddress<V> {
     throw new UnimplementedError();
   }
-
-  protected forge(self: Map<unknown, V>): MockAddress<V> {
-    const set: Set<V> = new Set<V>();
-
-    self.forEach((v: V) => {
-      set.add(v);
-    });
-
-    return new MockAddress<V>(set);
-  }
 }
