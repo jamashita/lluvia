@@ -1,7 +1,7 @@
 import { UnimplementedError } from '@jamashita/anden-error';
 import { ASequence } from '../Abstract/ASequence';
 
-export class MockSequence<V> extends ASequence<V, 'MockSequence'> {
+export class MockSequence<V> extends ASequence<V, MockSequence<V>, 'MockSequence'> {
   public readonly noun: 'MockSequence' = 'MockSequence';
 
   public constructor(sequence: ReadonlyArray<V>) {
@@ -12,15 +12,7 @@ export class MockSequence<V> extends ASequence<V, 'MockSequence'> {
     throw new UnimplementedError();
   }
 
-  public set(): MockSequence<V> {
-    throw new UnimplementedError();
-  }
-
-  public remove(): MockSequence<V> {
-    throw new UnimplementedError();
-  }
-
-  public map<W>(): MockSequence<W> {
+  public duplicate(): MockSequence<V> {
     throw new UnimplementedError();
   }
 
@@ -28,11 +20,19 @@ export class MockSequence<V> extends ASequence<V, 'MockSequence'> {
     throw new UnimplementedError();
   }
 
-  public sort(): MockSequence<V> {
+  public map<W>(): MockSequence<W> {
     throw new UnimplementedError();
   }
 
-  public duplicate(): MockSequence<V> {
+  public remove(): MockSequence<V> {
+    throw new UnimplementedError();
+  }
+
+  public set(): MockSequence<V> {
+    throw new UnimplementedError();
+  }
+
+  public sort(): MockSequence<V> {
     throw new UnimplementedError();
   }
 }

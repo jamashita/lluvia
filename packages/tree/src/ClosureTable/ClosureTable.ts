@@ -1,4 +1,4 @@
-import { BinaryPredicate, Enumerator, Kind, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Catalogue, Kind, Mapper, Nullable } from '@jamashita/anden-type';
 import {
   ImmutableProject,
   ImmutableSequence,
@@ -16,6 +16,10 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
   private readonly table: ImmutableProject<K, ReadonlyAddress<K>>;
 
   private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable<TreeID>(ImmutableProject.empty<TreeID, ReadonlyAddress<TreeID>>());
+
+  public static empty<KT extends TreeID>(): ClosureTable<KT> {
+    return ClosureTable.EMPTY as ClosureTable<KT>;
+  }
 
   public static of<KT extends TreeID>(hierarchies: ClosureTableHierarchies<KT>): ClosureTable<KT> {
     if (hierarchies.isEmpty()) {
@@ -42,10 +46,6 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return new ClosureTable<KT>(ImmutableProject.of<KT, ReadonlyAddress<KT>>(project));
   }
 
-  public static empty<KT extends TreeID>(): ClosureTable<KT> {
-    return ClosureTable.EMPTY as ClosureTable<KT>;
-  }
-
   protected constructor(table: ImmutableProject<K, ReadonlyAddress<K>>) {
     super();
     this.table = table;
@@ -70,8 +70,16 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.every(predicate);
   }
 
-  public forEach(enumerator: Enumerator<K, ReadonlyAddress<K>>): void {
-    this.table.forEach(enumerator);
+  public filter(predicate: BinaryPredicate<ReadonlyAddress<K>, K>): ImmutableProject<K, ReadonlyAddress<K>> {
+    return this.table.filter(predicate);
+  }
+
+  public find(predicate: BinaryPredicate<ReadonlyAddress<K>, K>): Nullable<ReadonlyAddress<K>> {
+    return this.table.find(predicate);
+  }
+
+  public forEach(catalogue: Catalogue<K, ReadonlyAddress<K>>): void {
+    this.table.forEach(catalogue);
   }
 
   public get(key: K): Nullable<ReadonlyAddress<K>> {
@@ -80,6 +88,14 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
 
   public isEmpty(): boolean {
     return this.table.isEmpty();
+  }
+
+  public iterator(): Iterator<[K, ReadonlyAddress<K>]> {
+    return this.table.iterator();
+  }
+
+  public map<W>(mapper: Mapper<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
+    return this.table.map<W>(mapper);
   }
 
   public serialize(): string {
@@ -96,22 +112,6 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
 
   public values(): Iterable<ReadonlyAddress<K>> {
     return this.table.values();
-  }
-
-  public filter(predicate: BinaryPredicate<ReadonlyAddress<K>, K>): ImmutableProject<K, ReadonlyAddress<K>> {
-    return this.table.filter(predicate);
-  }
-
-  public find(predicate: BinaryPredicate<ReadonlyAddress<K>, K>): Nullable<ReadonlyAddress<K>> {
-    return this.table.find(predicate);
-  }
-
-  public map<W>(mapper: Mapper<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
-    return this.table.map<W>(mapper);
-  }
-
-  public iterator(): Iterator<[K, ReadonlyAddress<K>]> {
-    return this.table.iterator();
   }
 
   public sort(): ImmutableSequence<K> {

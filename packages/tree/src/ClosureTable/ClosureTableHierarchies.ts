@@ -1,4 +1,4 @@
-import { BinaryPredicate, Enumerator, JSONable, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Catalogue, JSONable, Mapper, Nullable } from '@jamashita/anden-type';
 import {
   Collection,
   ImmutableSequence,
@@ -15,6 +15,10 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
   private readonly hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>;
 
   private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies<TreeID>(ImmutableSequence.empty<ClosureTableHierarchy<TreeID>>());
+
+  public static empty<KT extends TreeID>(): ClosureTableHierarchies<KT> {
+    return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<KT>;
+  }
 
   public static of<KT extends TreeID>(hierarchies: ReadonlyProject<KT, ReadonlyAddress<KT>>): ClosureTableHierarchies<KT> {
     const array: Array<ClosureTableHierarchy<KT>> = [];
@@ -44,10 +48,6 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return ClosureTableHierarchies.ofArray<KT>(hierarchies);
   }
 
-  public static empty<KT extends TreeID>(): ClosureTableHierarchies<KT> {
-    return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<KT>;
-  }
-
   protected constructor(hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>) {
     super();
     this.hierarchies = hierarchies;
@@ -72,8 +72,16 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.every(predicate);
   }
 
-  public forEach(enumerator: Enumerator<number, ClosureTableHierarchy<K>>): void {
-    this.hierarchies.forEach(enumerator);
+  public filter(predicate: BinaryPredicate<ClosureTableHierarchy<K>, number>): Collection<number, ClosureTableHierarchy<K>> {
+    return this.hierarchies.filter(predicate);
+  }
+
+  public find(predicate: BinaryPredicate<ClosureTableHierarchy<K>, number>): Nullable<ClosureTableHierarchy<K>> {
+    return this.hierarchies.find(predicate);
+  }
+
+  public forEach(catalogue: Catalogue<number, ClosureTableHierarchy<K>>): void {
+    this.hierarchies.forEach(catalogue);
   }
 
   public get(key: number): Nullable<ClosureTableHierarchy<K>> {
@@ -82,6 +90,14 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
 
   public isEmpty(): boolean {
     return this.hierarchies.isEmpty();
+  }
+
+  public iterator(): Iterator<[number, ClosureTableHierarchy<K>]> {
+    return this.hierarchies.iterator();
+  }
+
+  public map<W>(mapper: Mapper<ClosureTableHierarchy<K>, W>): ImmutableSequence<W> {
+    return this.hierarchies.map<W>(mapper);
   }
 
   public serialize(): string {
@@ -96,29 +112,13 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.some(predicate);
   }
 
-  public values(): Iterable<ClosureTableHierarchy<K>> {
-    return this.hierarchies.values();
-  }
-
-  public filter(predicate: BinaryPredicate<ClosureTableHierarchy<K>, number>): Collection<number, ClosureTableHierarchy<K>> {
-    return this.hierarchies.filter(predicate);
-  }
-
-  public find(predicate: BinaryPredicate<ClosureTableHierarchy<K>, number>): Nullable<ClosureTableHierarchy<K>> {
-    return this.hierarchies.find(predicate);
-  }
-
-  public map<W>(mapper: Mapper<ClosureTableHierarchy<K>, W>): ImmutableSequence<W> {
-    return this.hierarchies.map<W>(mapper);
-  }
-
-  public iterator(): Iterator<[number, ClosureTableHierarchy<K>]> {
-    return this.hierarchies.iterator();
-  }
-
   public toJSON(): ReadonlyArray<ClosureTableJSON> {
     return this.hierarchies.toArray().map<ClosureTableJSON>((hierarchy: ClosureTableHierarchy<K>) => {
       return hierarchy.toJSON();
     });
+  }
+
+  public values(): Iterable<ClosureTableHierarchy<K>> {
+    return this.hierarchies.values();
   }
 }

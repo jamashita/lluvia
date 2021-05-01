@@ -1,4 +1,4 @@
-import { BinaryPredicate, Enumerator, Nominative, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Nominative, Nullable } from '@jamashita/anden-type';
 import { TreeNode } from '../TreeNode/Interface/TreeNode';
 import { Tree } from './Tree';
 
