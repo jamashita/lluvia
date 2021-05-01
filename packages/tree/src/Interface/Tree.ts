@@ -1,4 +1,4 @@
-import { Nominative, Nullable, Predicate } from '@jamashita/anden-type';
+import { Catalogue, Nominative, Nullable, Predicate } from '@jamashita/anden-type';
 import { TreeNode } from '../TreeNode/Interface/TreeNode';
 
 export interface Tree<V, N extends string = string> extends Nominative<N> {
@@ -8,7 +8,7 @@ export interface Tree<V, N extends string = string> extends Nominative<N> {
 
   find(predicate: Predicate<V>): Nullable<TreeNode<V>>;
 
-  forEach(enumerator: Enumerator<unknown, V>): void;
+  forEach(catalogue: Catalogue<unknown, V>): void;
 
   getRoot(): TreeNode<V>;
 
