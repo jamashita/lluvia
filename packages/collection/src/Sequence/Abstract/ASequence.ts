@@ -3,7 +3,7 @@ import {
   Ambiguous,
   BinaryFunction,
   BinaryPredicate,
-  Enumerator,
+  Catalogue,
   isEqualable,
   Kind,
   Mapper,
@@ -12,7 +12,7 @@ import {
 import { Quantity } from '../../Quantity';
 import { Sequence } from '../Interface/Sequence';
 
-export abstract class ASequence<V, N extends string = string> extends Quantity<number, V, N> implements Sequence<V, N> {
+export abstract class ASequence<V, T extends ASequence<V, T>, N extends string = string> extends Quantity<number, V, N> implements Sequence<V, N> {
   protected sequence: Array<V>;
 
   protected constructor(sequence: Array<V>) {
@@ -21,34 +21,6 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
   }
 
   public abstract add(value: V): Sequence<V, N>;
-
-  public abstract set(key: number, value: V): Sequence<V>;
-
-  public abstract remove(key: number): Sequence<V>;
-
-  public abstract map<W>(mapper: Mapper<V, W>): Sequence<W, N>;
-
-  public abstract filter(predicate: BinaryPredicate<V, number>): Sequence<V, N>;
-
-  public abstract sort(comparator: BinaryFunction<V, V, number>): ASequence<V>;
-
-  public abstract duplicate(): Sequence<V, N>;
-
-  public iterator(): IterableIterator<[number, V]> {
-    return this.sequence.map<[number, V]>((e: V, i: number) => {
-      return [i, e];
-    }).values();
-  }
-
-  public get(key: number): Nullable<V> {
-    const v: Ambiguous<V> = this.sequence[key];
-
-    if (Kind.isUndefined(v)) {
-      return null;
-    }
-
-    return v;
-  }
 
   public contains(value: V): boolean {
     const found: Ambiguous<V> = this.sequence.find((v: V) => {
@@ -65,35 +37,7 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
     return !Kind.isUndefined(found);
   }
 
-  public size(): number {
-    return this.sequence.length;
-  }
-
-  public isEmpty(): boolean {
-    return this.size() === 0;
-  }
-
-  public forEach(enumerator: Enumerator<number, V>): void {
-    this.sequence.forEach(enumerator);
-  }
-
-  public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
-    const found: Ambiguous<V> = this.sequence.find(predicate);
-
-    if (Kind.isUndefined(found)) {
-      return null;
-    }
-
-    return found;
-  }
-
-  public every(predicate: BinaryPredicate<V, number>): boolean {
-    return this.sequence.every(predicate);
-  }
-
-  public some(predicate: BinaryPredicate<V, number>): boolean {
-    return this.sequence.some(predicate);
-  }
+  public abstract duplicate(): T;
 
   public equals(other: unknown): boolean {
     if (this === other) {
@@ -132,9 +76,45 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
     return false;
   }
 
-  public toArray(): Array<V> {
-    return [...this.sequence];
+  public every(predicate: BinaryPredicate<V, number>): boolean {
+    return this.sequence.every(predicate);
   }
+
+  public abstract filter(predicate: BinaryPredicate<V, number>): T;
+
+  public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
+    const found: Ambiguous<V> = this.sequence.find(predicate);
+
+    if (Kind.isUndefined(found)) {
+      return null;
+    }
+
+    return found;
+  }
+
+  public forEach(catalogue: Catalogue<number, V>): void {
+    this.sequence.forEach(catalogue);
+  }
+
+  public get(key: number): Nullable<V> {
+    const v: Ambiguous<V> = this.sequence[key];
+
+    if (Kind.isUndefined(v)) {
+      return null;
+    }
+
+    return v;
+  }
+
+  public iterator(): IterableIterator<[number, V]> {
+    return this.sequence.map<[number, V]>((e: V, i: number) => {
+      return [i, e];
+    }).values();
+  }
+
+  public abstract map<W>(mapper: Mapper<V, W>): Sequence<W>;
+
+  public abstract remove(key: number): T;
 
   public serialize(): string {
     return this.sequence.map<string>((v: V) => {
@@ -142,29 +122,45 @@ export abstract class ASequence<V, N extends string = string> extends Quantity<n
     }).join(', ');
   }
 
+  public abstract set(key: number, value: V): T;
+
+  public size(): number {
+    return this.sequence.length;
+  }
+
+  public some(predicate: BinaryPredicate<V, number>): boolean {
+    return this.sequence.some(predicate);
+  }
+
+  public abstract sort(comparator: BinaryFunction<V, V, number>): T;
+
+  public toArray(): Array<V> {
+    return [...this.sequence];
+  }
+
   public values(): Iterable<V> {
     return this.toArray();
   }
 
-  protected setInternal(key: number, value: V): Array<V> {
-    if (!Kind.isInteger(key)) {
-      throw new TypeError('KEY IS NOT INTEGER');
-    }
-    if (key < 0 || this.sequence.length <= key) {
-      throw new TypeError('KEY IS OUT OF RANGE');
-    }
-
-    return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
-  }
-
   protected removeInternal(key: number): Array<V> {
     if (!Kind.isInteger(key)) {
-      throw new TypeError('KEY IS NOT INTEGER');
+      return this.sequence;
     }
     if (key < 0 || this.sequence.length <= key) {
-      throw new TypeError('KEY IS OUT OF RANGE');
+      return this.sequence;
     }
 
     return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
+  }
+
+  protected setInternal(key: number, value: V): Array<V> {
+    if (!Kind.isInteger(key)) {
+      return this.sequence;
+    }
+    if (key < 0 || this.sequence.length <= key) {
+      return this.sequence;
+    }
+
+    return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
   }
 }

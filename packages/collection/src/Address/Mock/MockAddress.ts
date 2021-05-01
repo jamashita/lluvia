@@ -29,15 +29,7 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
     throw new UnimplementedError();
   }
 
-  public remove(): MockAddress<V> {
-    throw new UnimplementedError();
-  }
-
   public duplicate(): MockAddress<V> {
-    throw new UnimplementedError();
-  }
-
-  public map<W>(): MockAddress<W> {
     throw new UnimplementedError();
   }
 
@@ -45,13 +37,11 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
     throw new UnimplementedError();
   }
 
-  protected forge(self: Map<unknown, V>): MockAddress<V> {
-    const set: Set<V> = new Set<V>();
+  public map<W>(): MockAddress<W> {
+    throw new UnimplementedError();
+  }
 
-    self.forEach((v: V) => {
-      set.add(v);
-    });
-
-    return new MockAddress<V>(set);
+  public remove(): MockAddress<V> {
+    throw new UnimplementedError();
   }
 }

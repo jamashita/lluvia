@@ -1,4 +1,4 @@
-import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, isNominative, Mapper, Whatever } from '@jamashita/anden-type';
 import { Collection } from '../Interface/Collection';
 import { AAddress } from './Abstract/AAddress';
 
@@ -7,10 +7,22 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
 
   private static readonly EMPTY: ImmutableAddress<unknown> = new ImmutableAddress(new Map<unknown, unknown>());
 
-  public static of<VT>(collection: Collection<unknown, VT>): ImmutableAddress<VT> {
+  public static empty<VT>(): ImmutableAddress<VT> {
+    return ImmutableAddress.EMPTY as ImmutableAddress<VT>;
+  }
+
+  public static of<VT>(collection: Collection<Whatever, VT>): ImmutableAddress<VT> {
     const set: Set<VT> = new Set<VT>(collection.values());
 
     return ImmutableAddress.ofSet<VT>(set);
+  }
+
+  private static ofInternal<VT>(address: Map<VT | string, VT>): ImmutableAddress<VT> {
+    if (address.size === 0) {
+      return ImmutableAddress.empty<VT>();
+    }
+
+    return new ImmutableAddress<VT>(address);
   }
 
   public static ofSet<VT>(set: ReadonlySet<VT>): ImmutableAddress<VT> {
@@ -27,18 +39,6 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     });
 
     return ImmutableAddress.ofInternal<VT>(m);
-  }
-
-  private static ofInternal<VT>(address: Map<VT | string, VT>): ImmutableAddress<VT> {
-    if (address.size === 0) {
-      return ImmutableAddress.empty<VT>();
-    }
-
-    return new ImmutableAddress<VT>(address);
-  }
-
-  public static empty<VT>(): ImmutableAddress<VT> {
-    return ImmutableAddress.EMPTY as ImmutableAddress<VT>;
   }
 
   protected constructor(address: Map<V | string, V>) {
@@ -58,6 +58,30 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     return ImmutableAddress.ofInternal<V>(m);
   }
 
+  public duplicate(): ImmutableAddress<V> {
+    if (this.isEmpty()) {
+      return ImmutableAddress.empty<V>();
+    }
+
+    return ImmutableAddress.ofInternal<V>(new Map<V | string, V>(this.address));
+  }
+
+  public filter(predicate: BinaryPredicate<V, void>): ImmutableAddress<V> {
+    return ImmutableAddress.ofInternal<V>(this.filterInternal(predicate));
+  }
+
+  public isEmpty(): boolean {
+    if (this === ImmutableAddress.empty<V>()) {
+      return true;
+    }
+
+    return super.isEmpty();
+  }
+
+  public map<W>(mapper: Mapper<V, W>): ImmutableAddress<W> {
+    return ImmutableAddress.ofInternal<W>(this.mapInternal<W>(mapper));
+  }
+
   public remove(value: V): ImmutableAddress<V> {
     if (this.isEmpty()) {
       return this;
@@ -72,41 +96,5 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     m.delete(v);
 
     return ImmutableAddress.ofInternal<V>(m);
-  }
-
-  public isEmpty(): boolean {
-    if (this === ImmutableAddress.empty<V>()) {
-      return true;
-    }
-
-    return super.isEmpty();
-  }
-
-  public map<W>(mapper: Mapper<V, W>): ImmutableAddress<W> {
-    const m: Map<W | string, W> = this.mapInternal<W>(mapper);
-
-    return ImmutableAddress.ofInternal<W>(m);
-  }
-
-  public filter(predicate: BinaryPredicate<V, void>): ImmutableAddress<V> {
-    return ImmutableAddress.ofInternal<V>(super.filterInternal(predicate));
-  }
-
-  public duplicate(): ImmutableAddress<V> {
-    if (this.isEmpty()) {
-      return ImmutableAddress.empty<V>();
-    }
-
-    const m: Map<V | string, V> = new Map<V | string, V>(this.address);
-
-    return ImmutableAddress.ofInternal<V>(m);
-  }
-
-  protected forge(self: Map<V | string, V>): ImmutableAddress<V> {
-    if (self.size === 0) {
-      return ImmutableAddress.empty<V>();
-    }
-
-    return ImmutableAddress.ofInternal<V>(self);
   }
 }

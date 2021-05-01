@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { Ambiguous, BinaryPredicate, Enumerator, isNominative, Kind, Mapper, Nullable } from '@jamashita/anden-type';
+import { Ambiguous, BinaryPredicate, Catalogue, isNominative, Kind, Mapper, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '../../Quantity';
 import { Project } from '../Interface/Project';
 
@@ -9,37 +9,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   protected constructor(project: Map<K | string, [K, V]>) {
     super();
     this.project = project;
-  }
-
-  public abstract set(key: K, value: V): Project<K, V, N>;
-
-  public abstract remove(key: K): Project<K, V, N>;
-
-  public abstract map<W>(mapper: Mapper<V, W>): Project<K, W>;
-
-  public abstract filter(predicate: BinaryPredicate<V, K>): Project<K, V>;
-
-  public abstract duplicate(): Project<K, V, N>;
-
-  public iterator(): IterableIterator<[K, V]> {
-    return this.project.values();
-  }
-
-  public get(key: K): Nullable<V> {
-    const k: K | string = this.hashor<K>(key);
-    const p: Ambiguous<[K, V]> = this.project.get(k);
-
-    if (Kind.isUndefined(p)) {
-      return null;
-    }
-
-    return p[1];
-  }
-
-  public has(key: K): boolean {
-    const k: K | string = this.hashor<K>(key);
-
-    return this.project.has(k);
   }
 
   // FIXME O(n)
@@ -58,39 +27,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return false;
   }
 
-  public size(): number {
-    return this.project.size;
-  }
-
-  public isEmpty(): boolean {
-    return this.size() === 0;
-  }
-
-  public forEach(enumerator: Enumerator<K, V>): void {
-    this.project.forEach(([k, v]: [K, V]) => {
-      enumerator(v, k);
-    });
-  }
-
-  public every(predicate: BinaryPredicate<V, K>): boolean {
-    for (const [, [k, v]] of this.project) {
-      if (!predicate(v, k)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  public some(predicate: BinaryPredicate<V, K>): boolean {
-    for (const [, [k, v]] of this.project) {
-      if (predicate(v, k)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
+  public abstract duplicate(): T;
 
   public equals(other: unknown): boolean {
     if (this === other) {
@@ -119,24 +56,57 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     });
   }
 
-  public toMap(): Map<K, V> {
-    const map: Map<K, V> = new Map<K, V>();
+  public every(predicate: BinaryPredicate<V, K>): boolean {
+    for (const [, [k, v]] of this.project) {
+      if (!predicate(v, k)) {
+        return false;
+      }
+    }
 
-    this.forEach((v: V, k: K) => {
-      map.set(k, v);
-    });
-
-    return map;
+    return true;
   }
 
-  public serialize(): string {
-    const properties: Array<string> = [];
+  public abstract filter(predicate: BinaryPredicate<V, K>): T;
 
-    this.forEach((v: V, k: K) => {
-      properties.push(`{${Objet.identify(k)}: ${Objet.identify(v)}}`);
+  public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
+    for (const [, [k, v]] of this.project) {
+      if (predicate(v, k)) {
+        return v;
+      }
+    }
+
+    return null;
+  }
+
+  public forEach(catalogue: Catalogue<K, V>): void {
+    this.project.forEach(([k, v]: [K, V]) => {
+      catalogue(v, k);
     });
+  }
 
-    return properties.join(', ');
+  public get(key: K): Nullable<V> {
+    const k: K | string = this.hashor<K>(key);
+    const p: Ambiguous<[K, V]> = this.project.get(k);
+
+    if (Kind.isUndefined(p)) {
+      return null;
+    }
+
+    return p[1];
+  }
+
+  public has(key: K): boolean {
+    const k: K | string = this.hashor<K>(key);
+
+    return this.project.has(k);
+  }
+
+  public isEmpty(): boolean {
+    return this.size() === 0;
+  }
+
+  public iterator(): IterableIterator<[K, V]> {
+    return this.project.values();
   }
 
   public keys(): Iterable<K> {
@@ -149,6 +119,46 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return iterable;
   }
 
+  public abstract map<W>(mapper: Mapper<V, W>): Project<K, W>;
+
+  public abstract remove(key: K): T;
+
+  public serialize(): string {
+    const props: Array<string> = [];
+
+    this.forEach((v: V, k: K) => {
+      props.push(`{${Objet.identify(k)}: ${Objet.identify(v)}}`);
+    });
+
+    return props.join(', ');
+  }
+
+  public abstract set(key: K, value: V): T;
+
+  public size(): number {
+    return this.project.size;
+  }
+
+  public some(predicate: BinaryPredicate<V, K>): boolean {
+    for (const [, [k, v]] of this.project) {
+      if (predicate(v, k)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public toMap(): Map<K, V> {
+    const map: Map<K, V> = new Map<K, V>();
+
+    this.forEach((v: V, k: K) => {
+      map.set(k, v);
+    });
+
+    return map;
+  }
+
   public values(): Iterable<V> {
     const iterable: Array<V> = [];
 
@@ -157,16 +167,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     });
 
     return iterable;
-  }
-
-  public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
-    for (const [, [k, v]] of this.project) {
-      if (predicate(v, k)) {
-        return v;
-      }
-    }
-
-    return null;
   }
 
   protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | string, [K, V]> {

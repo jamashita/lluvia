@@ -15,13 +15,13 @@ export class MockTreeNode<K extends TreeID, V extends MockTreeObject<K>> extends
     super(value, ImmutableAddress.of<MockTreeNode<K, V>>(children));
   }
 
-  protected forge(node: ATreeNode<V, MockTreeNode<K, V>>): MockTreeNode<K, V> {
-    return new MockTreeNode<K, V>(node.getValue(), node.getChildren());
-  }
-
   public append(node: MockTreeNode<K, V>): MockTreeNode<K, V> {
     this.children = this.children.add(node);
 
     return this;
+  }
+
+  protected forge(node: ATreeNode<V, MockTreeNode<K, V>>): MockTreeNode<K, V> {
+    return new MockTreeNode<K, V>(node.getValue(), node.getChildren());
   }
 }

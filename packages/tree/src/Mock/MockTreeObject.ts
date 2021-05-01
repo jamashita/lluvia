@@ -25,12 +25,12 @@ export class MockTreeObject<K extends TreeID> extends ValueObject<'MockTreeObjec
     return this.id.equals(other.id);
   }
 
-  public serialize(): string {
-    return this.id.toString();
-  }
-
   public getTreeID(): K {
     return this.id;
+  }
+
+  public serialize(): string {
+    return this.id.toString();
   }
 
   public toJSON(): ObjectLiteral {

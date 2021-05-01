@@ -7,10 +7,22 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
 
   private static readonly EMPTY: ImmutableProject<unknown, unknown> = new ImmutableProject<unknown, unknown>(new Map<unknown, [unknown, unknown]>());
 
+  public static empty<KT, VT>(): ImmutableProject<KT, VT> {
+    return ImmutableProject.EMPTY as ImmutableProject<KT, VT>;
+  }
+
   public static of<KT, VT>(collection: Collection<KT, VT>): ImmutableProject<KT, VT> {
     const map: Map<KT, VT> = new Map<KT, VT>(collection);
 
     return ImmutableProject.ofMap<KT, VT>(map);
+  }
+
+  private static ofInternal<KT, VT>(project: Map<KT | string, [KT, VT]>): ImmutableProject<KT, VT> {
+    if (project.size === 0) {
+      return ImmutableProject.empty<KT, VT>();
+    }
+
+    return new ImmutableProject<KT, VT>(project);
   }
 
   public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): ImmutableProject<KT, VT> {
@@ -29,29 +41,32 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     return ImmutableProject.ofInternal<KT, VT>(m);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | string, [KT, VT]>): ImmutableProject<KT, VT> {
-    if (project.size === 0) {
-      return ImmutableProject.empty<KT, VT>();
-    }
-
-    return new ImmutableProject<KT, VT>(project);
-  }
-
-  public static empty<KT, VT>(): ImmutableProject<KT, VT> {
-    return ImmutableProject.EMPTY as ImmutableProject<KT, VT>;
-  }
-
   protected constructor(project: Map<K | string, [K, V]>) {
     super(project);
   }
 
-  public set(key: K, value: V): ImmutableProject<K, V> {
-    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>(this.project);
-    const k: K | string = this.hashor<K>(key);
+  public duplicate(): ImmutableProject<K, V> {
+    if (this.isEmpty()) {
+      return ImmutableProject.empty<K, V>();
+    }
 
-    m.set(k, [key, value]);
+    return ImmutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
+  }
 
-    return ImmutableProject.ofInternal<K, V>(m);
+  public filter(predicate: BinaryPredicate<V, K>): ImmutableProject<K, V> {
+    return ImmutableProject.ofInternal<K, V>(this.filterInternal(predicate));
+  }
+
+  public isEmpty(): boolean {
+    if (this === ImmutableProject.empty<K, V>()) {
+      return true;
+    }
+
+    return super.isEmpty();
+  }
+
+  public map<W>(mapper: Mapper<V, W>): ImmutableProject<K, W> {
+    return ImmutableProject.ofInternal<K, W>(this.mapInternal<W>(mapper));
   }
 
   public remove(key: K): ImmutableProject<K, V> {
@@ -70,27 +85,12 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     return ImmutableProject.ofInternal<K, V>(m);
   }
 
-  public isEmpty(): boolean {
-    if (this === ImmutableProject.empty<K, V>()) {
-      return true;
-    }
+  public set(key: K, value: V): ImmutableProject<K, V> {
+    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>(this.project);
+    const k: K | string = this.hashor<K>(key);
 
-    return super.isEmpty();
-  }
+    m.set(k, [key, value]);
 
-  public map<W>(mapper: Mapper<V, W>): ImmutableProject<K, W> {
-    return ImmutableProject.ofInternal<K, W>(super.mapInternal<W>(mapper));
-  }
-
-  public filter(predicate: BinaryPredicate<V, K>): ImmutableProject<K, V> {
-    return ImmutableProject.ofInternal<K, V>(super.filterInternal(predicate));
-  }
-
-  public duplicate(): ImmutableProject<K, V> {
-    if (this.isEmpty()) {
-      return ImmutableProject.empty<K, V>();
-    }
-
-    return ImmutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
+    return ImmutableProject.ofInternal<K, V>(m);
   }
 }

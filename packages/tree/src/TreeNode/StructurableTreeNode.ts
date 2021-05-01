@@ -18,18 +18,18 @@ export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeOb
     super(value, ImmutableAddress.of<StructurableTreeNode<K, V>>(children));
   }
 
+  public append(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
+    this.children = this.children.add(node);
+
+    return this;
+  }
+
   protected forge(node: ATreeNode<V, StructurableTreeNode<K, V>>): StructurableTreeNode<K, V> {
     if (node instanceof StructurableTreeNode) {
       return node as StructurableTreeNode<K, V>;
     }
 
     return StructurableTreeNode.ofValue<K, V>(node.getValue(), node.getChildren());
-  }
-
-  public append(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
-    this.children = this.children.add(node);
-
-    return this;
   }
 
   public getTreeID(): K {

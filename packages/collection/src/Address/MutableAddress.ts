@@ -5,10 +5,18 @@ import { AAddress } from './Abstract/AAddress';
 export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAddress'> {
   public readonly noun: 'MutableAddress' = 'MutableAddress';
 
+  public static empty<VT>(): MutableAddress<VT> {
+    return MutableAddress.ofInternal<VT>(new Map<VT | string, VT>());
+  }
+
   public static of<VT>(collection: Collection<unknown, VT>): MutableAddress<VT> {
     const set: Set<VT> = new Set<VT>(collection.values());
 
     return MutableAddress.ofSet<VT>(set);
+  }
+
+  private static ofInternal<VT>(address: Map<VT | string, VT>): MutableAddress<VT> {
+    return new MutableAddress<VT>(address);
   }
 
   public static ofSet<VT>(set: ReadonlySet<VT>): MutableAddress<VT> {
@@ -27,14 +35,6 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
     return MutableAddress.ofInternal<VT>(m);
   }
 
-  private static ofInternal<VT>(address: Map<VT | string, VT>): MutableAddress<VT> {
-    return new MutableAddress<VT>(address);
-  }
-
-  public static empty<VT>(): MutableAddress<VT> {
-    return new MutableAddress<VT>(new Map<VT | string, VT>());
-  }
-
   protected constructor(address: Map<V | string, V>) {
     super(address);
   }
@@ -51,6 +51,18 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
     return this;
   }
 
+  public duplicate(): MutableAddress<V> {
+    return MutableAddress.ofInternal<V>(new Map<V | string, V>(this.address));
+  }
+
+  public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
+    return MutableAddress.ofInternal<V>(this.filterInternal(predicate));
+  }
+
+  public map<W>(mapper: Mapper<V, W>): MutableAddress<W> {
+    return MutableAddress.ofInternal<W>(this.mapInternal<W>(mapper));
+  }
+
   public remove(value: V): MutableAddress<V> {
     if (this.isEmpty()) {
       return this;
@@ -64,17 +76,5 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
     this.address.delete(v);
 
     return this;
-  }
-
-  public map<W>(mapper: Mapper<V, W>): MutableAddress<W> {
-    return MutableAddress.ofInternal<W>(this.mapInternal<W>(mapper));
-  }
-
-  public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(this.filterInternal(predicate));
-  }
-
-  public duplicate(): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(new Map<V | string, V>(this.address));
   }
 }
