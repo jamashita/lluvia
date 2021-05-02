@@ -77,7 +77,11 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
   }
 
   public every(predicate: BinaryPredicate<V, number>): boolean {
-    return this.sequence.every(predicate);
+    const found: Ambiguous<V> = this.sequence.find((v: V, i: number) => {
+      return !predicate(v, i);
+    });
+
+    return Kind.isUndefined(found);
   }
 
   public abstract filter(predicate: BinaryPredicate<V, number>): T;
@@ -93,7 +97,9 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
   }
 
   public forEach(catalogue: Catalogue<number, V>): void {
-    this.sequence.forEach(catalogue);
+    this.sequence.forEach((v: V, i: number) => {
+      catalogue(v, i);
+    });
   }
 
   public get(key: number): Nullable<V> {
@@ -129,7 +135,9 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
   }
 
   public some(predicate: BinaryPredicate<V, number>): boolean {
-    return this.sequence.some(predicate);
+    const found: Ambiguous<V> = this.sequence.find(predicate);
+
+    return !Kind.isUndefined(found);
   }
 
   public abstract sort(comparator: BinaryFunction<V, V, number>): T;
@@ -140,6 +148,18 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
 
   public values(): Iterable<V> {
     return this.toArray();
+  }
+
+  protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
+    const arr: Array<V> = [];
+
+    this.sequence.forEach((v: V, i: number) => {
+      if (predicate(v, i)) {
+        arr.push(v);
+      }
+    });
+
+    return arr;
   }
 
   protected removeInternal(key: number): Array<V> {
