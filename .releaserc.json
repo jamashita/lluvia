@@ -1,5 +1,5 @@
 {
-  "branches": "release",
+  "branches": "main",
   "repositoryUrl": "https://github.com/jamashita/lluvia",
   "extends": "semantic-release-monorepo",
   "plugins": [
