@@ -36,7 +36,7 @@ export class MutableSequence<V> extends ASequence<V, MutableSequence<V>, 'Mutabl
   }
 
   public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V> {
-    return MutableSequence.ofArray<V>(this.sequence.filter(predicate));
+    return MutableSequence.ofArray<V>(this.filterInternal(predicate));
   }
 
   public map<W>(mapper: Mapper<V, W>): MutableSequence<W> {
