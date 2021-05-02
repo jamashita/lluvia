@@ -1,3 +1,26 @@
+# [@jamashita/lluvia-collection-v1.6.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.5.1...@jamashita/lluvia-collection-v1.6.0) (2021-05-01)
+
+
+### Bug Fixes
+
+* 🐛 mock ([b041927](https://github.com/jamashita/lluvia/commit/b04192738c430e03b26d38bcd09581a1275dd349))
+* 🐛 Sequeence explained ([7af8042](https://github.com/jamashita/lluvia/commit/7af804286a3f2c0c08daaebef6b7acb51446483a))
+* 🐛 trivial changes ([3b684df](https://github.com/jamashita/lluvia/commit/3b684df4bbde6840ea5ad63a27e8256ec2df5ef6))
+
+
+### Features
+
+* 🎸 Address fixation ([ef0c01e](https://github.com/jamashita/lluvia/commit/ef0c01ec6ba622bcc274a0ef0ac843ad8d2d7de4))
+* 🎸 initial fixation ([1408bae](https://github.com/jamashita/lluvia/commit/1408bae300fb29daba0c1b898c7a6ca375f8d171))
+* 🎸 Project ([b7eddd8](https://github.com/jamashita/lluvia/commit/b7eddd8df0bbd9cf2afc28c0e6fa331b60ccbcd2))
+* 🎸 update ([e38b82b](https://github.com/jamashita/lluvia/commit/e38b82b1d90a39135c1109ff4c5b11730c931cde))
+* 🎸 update ([9c4aacf](https://github.com/jamashita/lluvia/commit/9c4aacf7a6a2f653b70e77b03523cc9961f9dc75))
+
+
+### Performance Improvements
+
+* ⚡️ breaking change tree changed ([701f1e2](https://github.com/jamashita/lluvia/commit/701f1e2e10d5647fd24a7855c40a0c4b37ba2140))
+
 # [@jamashita/lluvia-collection-v1.5.1](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.5.0...@jamashita/lluvia-collection-v1.5.1) (2021-04-30)
 
 
