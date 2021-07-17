@@ -525,14 +525,6 @@
     eslint-plugin-react "7.23.2"
     eslint-plugin-react-hooks "4.2.0"
 
-"@jamashita/lluvia-collection@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/lluvia-collection/-/lluvia-collection-1.6.0.tgz#74216e7f719e18fc75c605e6593dd67fba5392b2"
-  integrity sha512-ZW3LnCVQ3UZ5jzCI7dmagqQNJQr6qhMaCbG8JXJEdoAwuI2w0taTYc3QicLDDOC/JXnkGUH5O6Y4I3ig/TvqRQ==
-  dependencies:
-    "@jamashita/anden-object" "1.8.0"
-    "@jamashita/anden-type" "1.10.1"
-
 "@jest/console@^26.6.2":
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-26.6.2.tgz#4e04bc464014358b03ab4937805ee36a0aeb98f2"
@@ -9822,9 +9814,9 @@ write-pkg@^4.0.0:
     write-json-file "^3.2.0"
 
 ws@^7.4.4:
-  version "7.4.5"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
-  integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
+  version "7.4.6"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
+  integrity sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
