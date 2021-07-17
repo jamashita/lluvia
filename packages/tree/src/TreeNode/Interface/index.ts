@@ -1,2 +1,2 @@
-export * from './ReadonlyTreeNode';
-export * from './TreeNode';
+export * from './ReadonlyTreeNode.js';
+export * from './TreeNode.js';

@@ -1,5 +1,5 @@
 import { Catalogue, Nominative, Nullable, Predicate } from '@jamashita/anden-type';
-import { TreeNode } from '../TreeNode/Interface/TreeNode';
+import { TreeNode } from '../TreeNode/Interface/TreeNode.js';
 
 export interface Tree<V, N extends string = string> extends Nominative<N> {
   contains(value: V): boolean;

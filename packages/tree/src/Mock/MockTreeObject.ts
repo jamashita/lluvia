@@ -1,8 +1,8 @@
 import { ValueObject } from '@jamashita/anden-object';
 import { ObjectLiteral } from '@jamashita/anden-type';
-import { SerializableTreeObject } from '../Interface/SerializableTreeObject';
-import { StructurableTreeObject } from '../Interface/StructurableTreeObject';
-import { TreeID } from '../Interface/TreeID';
+import { SerializableTreeObject } from '../Interface/SerializableTreeObject.js';
+import { StructurableTreeObject } from '../Interface/StructurableTreeObject.js';
+import { TreeID } from '../Interface/TreeID.js';
 
 export class MockTreeObject<K extends TreeID> extends ValueObject<'MockTreeObject'>
   implements StructurableTreeObject<K, 'MockTreeObject'>, SerializableTreeObject<'MockTreeObject'> {

@@ -1,7 +1,7 @@
 import { JSONable } from '@jamashita/anden-type';
-import { ATree } from './Abstract/ATree';
-import { SerializableTreeObject } from './Interface/SerializableTreeObject';
-import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode';
+import { ATree } from './Abstract/ATree.js';
+import { SerializableTreeObject } from './Interface/SerializableTreeObject.js';
+import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode.js';
 
 export class SerializableTree<V extends SerializableTreeObject> extends ATree<V, SerializableTreeNode<V>, 'SerializableTree'>
   implements JSONable<TreeNodeJSON> {
