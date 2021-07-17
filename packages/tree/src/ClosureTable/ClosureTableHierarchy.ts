@@ -1,7 +1,7 @@
 import { ValueObject } from '@jamashita/anden-object';
 import { JSONable, Primitive } from '@jamashita/anden-type';
-import { TreeID } from '../Interface/TreeID';
-import { TreeIDFactory } from './Interface/TreeIDFactory';
+import { TreeID } from '../Interface/TreeID.js';
+import { TreeIDFactory } from './Interface/TreeIDFactory.js';
 
 export type ClosureTableJSON = Readonly<{
   ancestor: Primitive;

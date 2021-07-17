@@ -1,9 +1,9 @@
 import { JSONable } from '@jamashita/anden-type';
-import { ImmutableAddress, MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-collection';
-import { ATrees } from './Abstract/ATrees';
-import { SerializableTreeObject } from './Interface/SerializableTreeObject';
-import { SerializableTree } from './SerializableTree';
-import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode';
+import { ImmutableAddress, MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { ATrees } from './Abstract/ATrees.js';
+import { SerializableTreeObject } from './Interface/SerializableTreeObject.js';
+import { SerializableTree } from './SerializableTree.js';
+import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode.js';
 
 export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>, 'SerializableTrees'>
   implements JSONable<ReadonlyArray<TreeNodeJSON>> {

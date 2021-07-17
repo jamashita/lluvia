@@ -1,15 +1,11 @@
 import { BinaryPredicate, Catalogue, Kind, Mapper, Nullable } from '@jamashita/anden-type';
-import {
-  ImmutableProject,
-  ImmutableSequence,
-  MutableAddress,
-  MutableProject,
-  Quantity,
-  ReadonlyAddress
-} from '@jamashita/lluvia-collection';
-import { TreeID } from '../Interface/TreeID';
-import { ClosureTableHierarchies } from './ClosureTableHierarchies';
-import { ClosureTableHierarchy } from './ClosureTableHierarchy';
+import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { Quantity } from '@jamashita/lluvia-collection';
+import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
+import { ImmutableSequence } from '@jamashita/lluvia-sequence';
+import { TreeID } from '../Interface/TreeID.js';
+import { ClosureTableHierarchies } from './ClosureTableHierarchies.js';
+import { ClosureTableHierarchy } from './ClosureTableHierarchy.js';
 
 export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>, 'ClosureTable'> {
   public readonly noun: 'ClosureTable' = 'ClosureTable';
@@ -86,7 +82,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.get(key);
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     return this.table.isEmpty();
   }
 
