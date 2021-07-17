@@ -5,7 +5,7 @@
 .eslintrc
 .lintstagedrc.json
 .releaserc.json
-commitlint.config.js
+commitlint.config.cjs
 jest.config.cjs
 lerna.json
 tsconfig.json
