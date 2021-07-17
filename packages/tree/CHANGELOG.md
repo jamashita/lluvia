@@ -1,3 +1,11 @@
+# [@jamashita/lluvia-tree-v1.6.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-tree-v1.5.0...@jamashita/lluvia-tree-v1.6.0) (2021-07-17)
+
+
+### Features
+
+* 🎸 update ([8e49c98](https://github.com/jamashita/lluvia/commit/8e49c98ec7df3e72f800f53442a0a716d288904e))
+* 🎸 update ([654bec3](https://github.com/jamashita/lluvia/commit/654bec3e802c202aa2cff3619de9f6ba123cc1b0))
+
 # [@jamashita/lluvia-tree-v1.5.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-tree-v1.4.0...@jamashita/lluvia-tree-v1.5.0) (2021-05-01)
 
 
