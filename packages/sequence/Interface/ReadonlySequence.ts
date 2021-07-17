@@ -1,5 +1,5 @@
 import { BinaryFunction, BinaryPredicate, Cloneable, Mapper } from '@jamashita/anden-type';
-import { Collection } from '../../Interface/Collection.js';
+import { Collection } from '@jamashita/lluvia-collection';
 
 export interface ReadonlySequence<V, N extends string = string> extends Collection<number, V, N>, Cloneable<ReadonlySequence<V>> {
   filter(predicate: BinaryPredicate<V, number>): ReadonlySequence<V>;

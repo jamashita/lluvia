@@ -1,6 +1,6 @@
 import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
-import { Collection } from '../Interface/Collection';
-import { ASequence } from './Abstract/ASequence';
+import { Collection } from '@jamashita/lluvia-collection';
+import { ASequence } from './Abstract/ASequence.js';
 
 export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'ImmutableSequence'> {
   public readonly noun: 'ImmutableSequence' = 'ImmutableSequence';
@@ -47,14 +47,6 @@ export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'Im
     return ImmutableSequence.ofArray<V>(this.filterInternal(predicate));
   }
 
-  public override isEmpty(): boolean {
-    if (this === ImmutableSequence.empty<V>()) {
-      return true;
-    }
-
-    return super.isEmpty();
-  }
-
   public map<W>(mapper: Mapper<V, W>): ImmutableSequence<W> {
     return ImmutableSequence.ofArray<W>(this.sequence.map<W>(mapper));
   }
@@ -85,5 +77,13 @@ export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'Im
     arr.sort(comparator);
 
     return ImmutableSequence.ofArray<V>(arr);
+  }
+
+  public override isEmpty(): boolean {
+    if (this === ImmutableSequence.empty<V>()) {
+      return true;
+    }
+
+    return super.isEmpty();
   }
 }

@@ -1,5 +1,5 @@
 import { UnimplementedError } from '@jamashita/anden-error';
-import { ASequence } from '../Abstract/ASequence';
+import { ASequence } from '../Abstract/ASequence.js';
 
 export class MockSequence<V> extends ASequence<V, MockSequence<V>, 'MockSequence'> {
   public readonly noun: 'MockSequence' = 'MockSequence';
