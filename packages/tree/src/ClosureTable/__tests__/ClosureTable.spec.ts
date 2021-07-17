@@ -1,11 +1,11 @@
 import { MockAddress, MockProject, Project, ReadonlyAddress, ReadonlySequence } from '@jamashita/lluvia-collection';
 import sinon, { SinonSpy } from 'sinon';
-import { MockTreeID } from '../../Mock/MockTreeID';
-import { ClosureTable } from '../ClosureTable';
-import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
-import { MockClosureTable } from '../Mock/MockClosureTable';
-import { MockClosureTableHierarchies } from '../Mock/MockClosureTableHierarchies';
-import { MockClosureTableHierarchy } from '../Mock/MockClosureTableHierarchy';
+import { MockTreeID } from '../../Mock/MockTreeID.js';
+import { ClosureTable } from '../ClosureTable.js';
+import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
+import { MockClosureTable } from '../Mock/MockClosureTable.js';
+import { MockClosureTableHierarchies } from '../Mock/MockClosureTableHierarchies.js';
+import { MockClosureTableHierarchy } from '../Mock/MockClosureTableHierarchy.js';
 
 describe('ClosureTable', () => {
   describe('of', () => {

@@ -1,5 +1,5 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { ImmutableProject } from '../ImmutableProject';
+import { ImmutableProject } from '../ImmutableProject.js';
 
 describe('ImmutableProject', () => {
   describe('of', () => {

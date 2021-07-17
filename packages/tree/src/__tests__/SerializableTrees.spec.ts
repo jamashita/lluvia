@@ -1,9 +1,9 @@
 import { ImmutableAddress } from '@jamashita/lluvia-collection';
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
-import { SerializableTree } from '../SerializableTree';
-import { SerializableTrees } from '../SerializableTrees';
-import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode';
+import { MockTreeID } from '../Mock/MockTreeID.js';
+import { MockTreeObject } from '../Mock/MockTreeObject.js';
+import { SerializableTree } from '../SerializableTree.js';
+import { SerializableTrees } from '../SerializableTrees.js';
+import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode.js';
 
 describe('SerializableTrees', () => {
   describe('empty', () => {

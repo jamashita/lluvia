@@ -1,5 +1,5 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { MutableProject } from '../MutableProject';
+import { MutableProject } from '../MutableProject.js';
 
 describe('MutableProject', () => {
   describe('of', () => {

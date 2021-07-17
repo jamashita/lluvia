@@ -1,11 +1,11 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { ImmutableAddress, ImmutableProject, MockAddress } from '@jamashita/lluvia-collection';
 import sinon, { SinonSpy } from 'sinon';
-import { MockTreeID } from '../../Mock/MockTreeID';
-import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
-import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy';
-import { MockClosureTableHierarchy } from '../Mock/MockClosureTableHierarchy';
-import { MockTreeIDFactory } from '../Mock/MockTreeIDFactory';
+import { MockTreeID } from '../../Mock/MockTreeID.js';
+import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
+import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy.js';
+import { MockClosureTableHierarchy } from '../Mock/MockClosureTableHierarchy.js';
+import { MockTreeIDFactory } from '../Mock/MockTreeIDFactory.js';
 
 describe('ClosureTableHierarchies', () => {
   describe('of', () => {

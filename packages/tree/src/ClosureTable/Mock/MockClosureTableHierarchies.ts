@@ -1,7 +1,7 @@
 import { ImmutableSequence } from '@jamashita/lluvia-collection';
-import { TreeID } from '../../Interface/TreeID';
-import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
-import { ClosureTableHierarchy } from '../ClosureTableHierarchy';
+import { TreeID } from '../../Interface/TreeID.js';
+import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
+import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
 
 export class MockClosureTableHierarchies<K extends TreeID> extends ClosureTableHierarchies<K> {
   public constructor(...hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>) {

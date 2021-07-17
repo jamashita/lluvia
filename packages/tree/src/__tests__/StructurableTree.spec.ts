@@ -1,10 +1,10 @@
 import { ImmutableAddress } from '@jamashita/lluvia-collection';
 import sinon, { SinonSpy } from 'sinon';
-import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
-import { StructurableTree } from '../StructurableTree';
-import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
+import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies.js';
+import { MockTreeID } from '../Mock/MockTreeID.js';
+import { MockTreeObject } from '../Mock/MockTreeObject.js';
+import { StructurableTree } from '../StructurableTree.js';
+import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode.js';
 
 describe('StructurableTree', () => {
   describe('getTreeID', () => {

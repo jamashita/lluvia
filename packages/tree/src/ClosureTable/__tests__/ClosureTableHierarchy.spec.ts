@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { MockTreeID } from '../../Mock/MockTreeID';
-import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy';
+import { MockTreeID } from '../../Mock/MockTreeID.js';
+import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy.js';
 import { MockTreeIDFactory } from '../Mock/MockTreeIDFactory';
 
 describe('ClosureTableHierarchy', () => {

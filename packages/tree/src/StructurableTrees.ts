@@ -7,15 +7,15 @@ import {
   ReadonlyProject,
   ReadonlySequence
 } from '@jamashita/lluvia-collection';
-import { ATrees } from './Abstract/ATrees';
-import { ClosureTable } from './ClosureTable/ClosureTable';
-import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies';
-import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy';
-import { TreeError } from './Error/TreeError';
-import { StructurableTreeObject } from './Interface/StructurableTreeObject';
-import { TreeID } from './Interface/TreeID';
-import { StructurableTree } from './StructurableTree';
-import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
+import { ATrees } from './Abstract/ATrees.js';
+import { ClosureTable } from './ClosureTable/ClosureTable.js';
+import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies.js';
+import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy.js';
+import { TreeError } from './Error/TreeError.js';
+import { StructurableTreeObject } from './Interface/StructurableTreeObject.js';
+import { TreeID } from './Interface/TreeID.js';
+import { StructurableTree } from './StructurableTree.js';
+import { StructurableTreeNode } from './TreeNode/StructurableTreeNode.js';
 
 export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>, 'StructurableTrees'> {
   public readonly noun: 'StructurableTrees' = 'StructurableTrees';

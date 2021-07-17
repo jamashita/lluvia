@@ -1,5 +1,5 @@
 import { ImmutableAddress, MockAddress, MutableAddress } from '@jamashita/lluvia-collection';
-import { MockTreeID } from '../../Mock/MockTreeID';
+import { MockTreeID } from '../../Mock/MockTreeID.js';
 import { MockTreeObject } from '../../Mock/MockTreeObject';
 import { StructurableTreeNode } from '../StructurableTreeNode';
 

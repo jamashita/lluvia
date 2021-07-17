@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable } from '@jamashita/anden-type';
-import { MutableSequence } from '../MutableSequence';
+import { MutableSequence } from '../MutableSequence.js';
 
 describe('MutableSequence', () => {
   describe('of', () => {
