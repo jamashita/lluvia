@@ -15,7 +15,16 @@
   ],
   "references": [
     {
+      "path": "../address/tsconfig.build.json"
+    },
+    {
       "path": "../collection/tsconfig.build.json"
+    },
+    {
+      "path": "../project/tsconfig.build.json"
+    },
+    {
+      "path": "../sequence/tsconfig.build.json"
     }
   ]
 }
