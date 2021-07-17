@@ -45,7 +45,7 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return true;
   }
 
-  public abstract filter(predicate: BinaryPredicate<V, void>): T;
+  public abstract override filter(predicate: BinaryPredicate<V, void>): T;
 
   public find(predicate: BinaryPredicate<V, void>): Nullable<V> {
     for (const [, v] of this.address) {
@@ -82,7 +82,7 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return iterable.values();
   }
 
-  public abstract map<W>(mapper: Mapper<V, W>): Address<W>;
+  public abstract override map<W>(mapper: Mapper<V, W>): Address<W>;
 
   public abstract remove(value: V): T;
 

@@ -88,7 +88,7 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.get(key);
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     return this.hierarchies.isEmpty();
   }
 

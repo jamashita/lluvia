@@ -84,7 +84,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     return Kind.isUndefined(found);
   }
 
-  public abstract filter(predicate: BinaryPredicate<V, number>): T;
+  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
 
   public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
     const found: Ambiguous<V> = this.sequence.find(predicate);
@@ -118,7 +118,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     }).values();
   }
 
-  public abstract map<W>(mapper: Mapper<V, W>): Sequence<W>;
+  public abstract override map<W>(mapper: Mapper<V, W>): Sequence<W>;
 
   public abstract remove(key: number): T;
 

@@ -47,7 +47,7 @@ export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'Im
     return ImmutableSequence.ofArray<V>(this.filterInternal(predicate));
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     if (this === ImmutableSequence.empty<V>()) {
       return true;
     }

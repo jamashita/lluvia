@@ -57,7 +57,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     return ImmutableProject.ofInternal<K, V>(this.filterInternal(predicate));
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     if (this === ImmutableProject.empty<K, V>()) {
       return true;
     }

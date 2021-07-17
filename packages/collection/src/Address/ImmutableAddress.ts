@@ -70,7 +70,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     return ImmutableAddress.ofInternal<V>(this.filterInternal(predicate));
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     if (this === ImmutableAddress.empty<V>()) {
       return true;
     }

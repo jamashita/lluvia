@@ -66,7 +66,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return true;
   }
 
-  public abstract filter(predicate: BinaryPredicate<V, K>): T;
+  public abstract override filter(predicate: BinaryPredicate<V, K>): T;
 
   public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
     for (const [, [k, v]] of this.project) {
@@ -101,7 +101,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return this.project.has(k);
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     return this.size() === 0;
   }
 
@@ -119,7 +119,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return iterable;
   }
 
-  public abstract map<W>(mapper: Mapper<V, W>): Project<K, W>;
+  public abstract override map<W>(mapper: Mapper<V, W>): Project<K, W>;
 
   public abstract remove(key: K): T;
 
