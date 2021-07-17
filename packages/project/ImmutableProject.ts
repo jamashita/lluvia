@@ -1,6 +1,6 @@
 import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
-import { Collection } from '../Interface/Collection';
-import { AProject } from './Abstract/AProject';
+import { Collection } from '@jamashita/lluvia-collection';
+import { AProject } from './Abstract/AProject.js';
 
 export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>, 'ImmutableProject'> {
   public readonly noun: 'ImmutableProject' = 'ImmutableProject';

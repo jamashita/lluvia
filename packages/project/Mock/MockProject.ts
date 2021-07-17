@@ -1,6 +1,6 @@
 import { UnimplementedError } from '@jamashita/anden-error';
 import { isNominative } from '@jamashita/anden-type';
-import { AProject } from '../Abstract/AProject';
+import { AProject } from '../Abstract/AProject.js';
 
 export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>, 'MockProject'> {
   public readonly noun: 'MockProject' = 'MockProject';
