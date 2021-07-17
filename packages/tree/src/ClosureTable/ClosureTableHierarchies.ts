@@ -1,14 +1,11 @@
 import { BinaryPredicate, Catalogue, JSONable, Mapper, Nullable } from '@jamashita/anden-type';
-import {
-  Collection,
-  ImmutableSequence,
-  Quantity,
-  ReadonlyAddress,
-  ReadonlyProject
-} from '@jamashita/lluvia-collection';
-import { TreeID } from '../Interface/TreeID';
-import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy';
-import { TreeIDFactory } from './Interface/TreeIDFactory';
+import { ReadonlyAddress } from '@jamashita/lluvia-address';
+import { Collection, Quantity } from '@jamashita/lluvia-collection';
+import { ReadonlyProject } from '@jamashita/lluvia-project';
+import { ImmutableSequence } from '@jamashita/lluvia-sequence';
+import { TreeID } from '../Interface/TreeID.js';
+import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy.js';
+import { TreeIDFactory } from './Interface/TreeIDFactory.js';
 
 export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>, 'ClosureTableHierarchies'> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
   public readonly noun: 'ClosureTableHierarchies' = 'ClosureTableHierarchies';
@@ -88,7 +85,7 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.get(key);
   }
 
-  public isEmpty(): boolean {
+  public override isEmpty(): boolean {
     return this.hierarchies.isEmpty();
   }
 
