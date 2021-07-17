@@ -27,12 +27,12 @@
     "clean:others": "rimraf *.log && rimraf tsconfig.build.tsbuildinfo"
   },
   "dependencies": {
-    "@jamashita/anden-object": "1.8.0",
+    "@jamashita/anden-object": "1.11.0",
     "@jamashita/anden-type": "1.10.1"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "1.8.0",
-    "sinon": "10.0.1"
+    "@jamashita/anden-error": "1.10.0",
+    "sinon": "11.1.1"
   },
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0",
