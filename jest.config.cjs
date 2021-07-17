@@ -15,11 +15,18 @@ module.exports = {
     'node_modules',
     'Mock'
   ],
+  globals: {
+    'ts-jest': {
+      useESM: true
+    }
+  },
+  preset: 'ts-jest/presets/js-with-ts-esm',
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
   moduleNameMapper: {
-    '^@jamashita/lluvia-(.*)$': '<rootDir>/packages/$1/src/index'
+    '^@jamashita/lluvia-(.*)$': '<rootDir>/packages/$1/src/index',
+    '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   moduleFileExtensions: [
     'js',
