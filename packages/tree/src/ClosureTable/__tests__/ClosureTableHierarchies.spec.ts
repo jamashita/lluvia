@@ -1,5 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { ImmutableAddress, ImmutableProject, MockAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress, MockAddress } from '@jamashita/lluvia-address';
+import { ImmutableProject } from '@jamashita/lluvia-project';
 import sinon, { SinonSpy } from 'sinon';
 import { MockTreeID } from '../../Mock/MockTreeID.js';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';

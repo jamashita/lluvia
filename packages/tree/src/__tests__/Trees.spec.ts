@@ -1,6 +1,7 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable } from '@jamashita/anden-type';
-import { MockAddress, MockProject } from '@jamashita/lluvia-collection';
+import { MockAddress } from '@jamashita/lluvia-address';
+import { MockProject } from '@jamashita/lluvia-project';
 import sinon, { SinonSpy } from 'sinon';
 import { MockTree } from '../Mock/MockTree.js';
 import { MockTreeID } from '../Mock/MockTreeID.js';

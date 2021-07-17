@@ -1,4 +1,4 @@
-import { ImmutableAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress } from '@jamashita/lluvia-address';
 import sinon, { SinonSpy } from 'sinon';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies.js';
 import { MockTreeID } from '../Mock/MockTreeID.js';

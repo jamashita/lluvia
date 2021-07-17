@@ -1,4 +1,6 @@
-import { MockAddress, MockProject, Project, ReadonlyAddress, ReadonlySequence } from '@jamashita/lluvia-collection';
+import { MockAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { MockProject, Project } from '@jamashita/lluvia-project';
+import { ReadonlySequence } from '@jamashita/lluvia-sequence';
 import sinon, { SinonSpy } from 'sinon';
 import { MockTreeID } from '../../Mock/MockTreeID.js';
 import { ClosureTable } from '../ClosureTable.js';

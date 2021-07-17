@@ -1,4 +1,4 @@
-import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { SerializableTreeObject } from '../../Interface/SerializableTreeObject.js';
 import { StructurableTreeObject } from '../../Interface/StructurableTreeObject.js';
 import { TreeID } from '../../Interface/TreeID.js';

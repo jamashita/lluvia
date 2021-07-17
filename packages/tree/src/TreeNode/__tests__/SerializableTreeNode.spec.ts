@@ -1,4 +1,4 @@
-import { ImmutableAddress, MockAddress, MutableAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress, MockAddress, MutableAddress } from '@jamashita/lluvia-address';
 import { MockTreeID } from '../../Mock/MockTreeID.js';
 import { MockTreeObject } from '../../Mock/MockTreeObject.js';
 import { SerializableTreeNode } from '../SerializableTreeNode.js';

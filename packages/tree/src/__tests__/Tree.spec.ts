@@ -1,4 +1,4 @@
-import { ImmutableAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress } from '@jamashita/lluvia-address';
 import sinon, { SinonSpy } from 'sinon';
 import { MockTree } from '../Mock/MockTree.js';
 import { MockTreeID } from '../Mock/MockTreeID.js';

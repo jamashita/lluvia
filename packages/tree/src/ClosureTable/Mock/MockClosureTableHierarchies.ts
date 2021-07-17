@@ -1,4 +1,4 @@
-import { ImmutableSequence } from '@jamashita/lluvia-collection';
+import { ImmutableSequence } from '@jamashita/lluvia-sequence';
 import { TreeID } from '../../Interface/TreeID.js';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
 import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';

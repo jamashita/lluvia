@@ -1,5 +1,6 @@
 import { Kind, Nullable } from '@jamashita/anden-type';
-import { ImmutableProject, MutableAddress, MutableProject, ReadonlyAddress } from '@jamashita/lluvia-collection';
+import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
 import { TreeID } from '../../Interface/TreeID.js';
 import { ClosureTable } from '../ClosureTable.js';
 import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';

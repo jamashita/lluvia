@@ -1,5 +1,7 @@
 import { Nullable } from '@jamashita/anden-type';
-import { ImmutableAddress, ImmutableProject, ImmutableSequence } from '@jamashita/lluvia-collection';
+import { ImmutableAddress } from '@jamashita/lluvia-address';
+import { ImmutableProject } from '@jamashita/lluvia-project';
+import { ImmutableSequence } from '@jamashita/lluvia-sequence';
 import { ClosureTable } from '../ClosureTable/ClosureTable.js';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies.js';
 import { MockClosureTableHierarchies } from '../ClosureTable/Mock/MockClosureTableHierarchies.js';
@@ -9,7 +11,7 @@ import { MockTreeID } from '../Mock/MockTreeID.js';
 import { MockTreeObject } from '../Mock/MockTreeObject.js';
 import { StructurableTree } from '../StructurableTree.js';
 import { StructurableTrees } from '../StructurableTrees.js';
-import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
+import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode.js';
 
 describe('StructurableTrees', () => {
   describe('ofTable', () => {

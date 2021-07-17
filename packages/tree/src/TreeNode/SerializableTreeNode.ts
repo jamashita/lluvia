@@ -1,5 +1,5 @@
 import { JSONable, ObjectLiteral } from '@jamashita/anden-type';
-import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { SerializableTreeObject } from '../Interface/SerializableTreeObject.js';
 import { ATreeNode } from './Abstract/ATreeNode.js';
 
