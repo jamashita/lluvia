@@ -1,9 +1,9 @@
-import { ImmutableAddress } from '@jamashita/lluvia-collection';
+import { ImmutableAddress } from '@jamashita/lluvia-address';
 import sinon, { SinonSpy } from 'sinon';
-import { MockTree } from '../Mock/MockTree';
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
-import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode';
+import { MockTree } from '../Mock/MockTree.js';
+import { MockTreeID } from '../Mock/MockTreeID.js';
+import { MockTreeObject } from '../Mock/MockTreeObject.js';
+import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode.js';
 
 describe('Tree', () => {
   describe('equals', () => {

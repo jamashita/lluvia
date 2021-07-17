@@ -1,8 +1,8 @@
 import sinon, { SinonSpy } from 'sinon';
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
-import { SerializableTree } from '../SerializableTree';
-import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode';
+import { MockTreeID } from '../Mock/MockTreeID.js';
+import { MockTreeObject } from '../Mock/MockTreeObject.js';
+import { SerializableTree } from '../SerializableTree.js';
+import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode.js';
 
 describe('SerializableTree', () => {
   describe('toJSON', () => {
