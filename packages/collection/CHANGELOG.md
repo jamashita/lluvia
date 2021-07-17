@@ -1,3 +1,17 @@
+# [@jamashita/lluvia-collection-v1.7.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.6.0...@jamashita/lluvia-collection-v1.7.0) (2021-07-17)
+
+
+### Bug Fixes
+
+* 🐛 trivial cahnged ([2ede168](https://github.com/jamashita/lluvia/commit/2ede1681f45d5658ad12009df2e1112336c39993))
+
+
+### Features
+
+* 🎸 project separated ([3e270a2](https://github.com/jamashita/lluvia/commit/3e270a255959c89bf5e78925d157ea22c30c2f2e))
+* 🎸 sequence separated ([321583c](https://github.com/jamashita/lluvia/commit/321583c208abad1defd2dae46af91531c7f143ef))
+* 🎸 update ([8e49c98](https://github.com/jamashita/lluvia/commit/8e49c98ec7df3e72f800f53442a0a716d288904e))
+
 # [@jamashita/lluvia-collection-v1.6.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.5.1...@jamashita/lluvia-collection-v1.6.0) (2021-05-01)
 
 
