@@ -27,7 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
-    "@jamashita/eslint-plugin": "1.45.0",
+    "@jamashita/eslint-plugin": "1.46.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/commit-analyzer": "8.0.1",
     "@semantic-release/git": "9.0.0",
@@ -37,7 +37,7 @@
     "@types/jest": "26.0.24",
     "@types/sinon": "10.0.2",
     "concurrently": "6.2.0",
-    "eslint": "7.30.0",
+    "eslint": "7.31.0",
     "git-cz": "4.7.6",
     "husky": "7.0.1",
     "jest": "27.0.6",
