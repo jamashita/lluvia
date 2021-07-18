@@ -1,9 +1,9 @@
 import { ImmutableAddress, MutableAddress } from '@jamashita/lluvia-address';
 import { MutableProject } from '@jamashita/lluvia-project';
-import { ATree } from './Abstract/ATree.js';
+import { ATree } from './ATree.js';
 import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies.js';
-import { StructurableTreeObject } from './Interface/StructurableTreeObject.js';
-import { TreeID } from './Interface/TreeID.js';
+import { StructurableTreeObject } from './StructurableTreeObject.js';
+import { TreeID } from './TreeID.js';
 import { StructurableTreeNode } from './TreeNode/StructurableTreeNode.js';
 
 export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>, 'StructurableTree'> {

@@ -1,6 +1,6 @@
 import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
-import { Collection } from './Interface/Collection.js';
+import { Collection } from './Collection.js';
 
 export abstract class Quantity<K, V, N extends string = string> extends Objet<N> implements Collection<K, V, N> {
   protected constructor() {
