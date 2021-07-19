@@ -1,5 +1,5 @@
 import { ImmutableSequence } from '@jamashita/lluvia-sequence';
-import { TreeID } from '../../Interface/TreeID.js';
+import { TreeID } from '../../TreeID.js';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
 import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
 

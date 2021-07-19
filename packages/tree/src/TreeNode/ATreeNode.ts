@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden-object';
 import { isEqualable, Kind, Nullable, Predicate } from '@jamashita/anden-type';
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import { TreeNode } from '../Interface/TreeNode.js';
+import { TreeNode } from './TreeNode.js';
 
 export abstract class ATreeNode<V, T extends ATreeNode<V, T>, N extends string = string> extends Objet<N>
   implements TreeNode<V> {

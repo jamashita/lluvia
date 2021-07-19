@@ -3,7 +3,7 @@ import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
 import { ImmutableSequence } from '@jamashita/lluvia-sequence';
-import { TreeID } from '../Interface/TreeID.js';
+import { TreeID } from '../TreeID.js';
 import { ClosureTableHierarchies } from './ClosureTableHierarchies.js';
 import { ClosureTableHierarchy } from './ClosureTableHierarchy.js';
 
