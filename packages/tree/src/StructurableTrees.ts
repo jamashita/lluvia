@@ -2,14 +2,14 @@ import { Kind, Nullable } from '@jamashita/anden-type';
 import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject, MutableProject, ReadonlyProject } from '@jamashita/lluvia-project';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
-import { ATrees } from './Abstract/ATrees.js';
+import { ATrees } from './ATrees.js';
 import { ClosureTable } from './ClosureTable/ClosureTable.js';
 import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies.js';
 import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy.js';
 import { TreeError } from './Error/TreeError.js';
-import { StructurableTreeObject } from './Interface/StructurableTreeObject.js';
-import { TreeID } from './Interface/TreeID.js';
 import { StructurableTree } from './StructurableTree.js';
+import { StructurableTreeObject } from './StructurableTreeObject.js';
+import { TreeID } from './TreeID.js';
 import { StructurableTreeNode } from './TreeNode/StructurableTreeNode.js';
 
 export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>, 'StructurableTrees'> {

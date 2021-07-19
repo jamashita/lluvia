@@ -1,6 +1,6 @@
 import { MutableProject, ReadonlyProject } from '@jamashita/lluvia-project';
-import { ATrees } from '../Abstract/ATrees.js';
-import { TreeID } from '../Interface/TreeID.js';
+import { ATrees } from '../ATrees.js';
+import { TreeID } from '../TreeID.js';
 import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode.js';
 import { MockTree } from './MockTree.js';
 import { MockTreeObject } from './MockTreeObject.js';

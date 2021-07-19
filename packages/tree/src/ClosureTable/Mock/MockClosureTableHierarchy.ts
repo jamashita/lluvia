@@ -1,4 +1,4 @@
-import { TreeID } from '../../Interface/TreeID.js';
+import { TreeID } from '../../TreeID.js';
 import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
 
 export class MockClosureTableHierarchy<K extends TreeID> extends ClosureTableHierarchy<K> {
