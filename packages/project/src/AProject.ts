@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden-object';
 import { Ambiguous, BinaryPredicate, Catalogue, isNominative, Kind, Mapper, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
-import { Project } from '../Interface/Project.js';
+import { Project } from './Project.js';
 
 export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N> implements Project<K, V, N> {
   protected readonly project: Map<K | string, [K, V]>;

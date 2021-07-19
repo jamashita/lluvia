@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden-object';
 import { Catalogue, Nullable, Predicate } from '@jamashita/anden-type';
-import { Tree } from '../Interface/Tree.js';
-import { ATreeNode } from '../TreeNode/Abstract/ATreeNode.js';
+import { Tree } from './Tree.js';
+import { ATreeNode } from './TreeNode/ATreeNode.js';
 
 export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = string> extends Objet<N> implements Tree<V, N> {
   protected readonly root: T;

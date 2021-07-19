@@ -1,2 +1,2 @@
-export * from './Interface/index.js';
+export * from './Collection.js';
 export * from './Quantity.js';

@@ -1,8 +1,8 @@
 import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { SerializableTreeObject } from '../../Interface/SerializableTreeObject.js';
-import { StructurableTreeObject } from '../../Interface/StructurableTreeObject.js';
-import { TreeID } from '../../Interface/TreeID.js';
-import { ATreeNode } from '../Abstract/ATreeNode.js';
+import { SerializableTreeObject } from '../../SerializableTreeObject.js';
+import { StructurableTreeObject } from '../../StructurableTreeObject.js';
+import { TreeID } from '../../TreeID.js';
+import { ATreeNode } from '../ATreeNode.js';
 
 interface MockTreeObject<K extends TreeID> extends StructurableTreeObject<K>, SerializableTreeObject {
   // NOOP
