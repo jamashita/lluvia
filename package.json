@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "author": "jamashita <jamashita@arachnid.xyz>",
-  "main": "index.js",
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
@@ -25,6 +25,8 @@
     "update:upgrade": "ncu --packageManager yarn --deep --upgrade --timeout 600000"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "7.14.5",
+    "@babel/preset-env": "7.14.8",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@jamashita/eslint-plugin": "1.46.0",
@@ -36,6 +38,7 @@
     "@semantic-release/release-notes-generator": "9.0.3",
     "@types/jest": "26.0.24",
     "@types/sinon": "10.0.2",
+    "babel-jest": "27.0.6",
     "concurrently": "6.2.0",
     "eslint": "7.31.0",
     "git-cz": "4.7.6",
