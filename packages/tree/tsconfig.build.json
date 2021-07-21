@@ -7,6 +7,11 @@
   "include": [
     "src/**/*.ts"
   ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.spec.ts"
+  ],
   "references": [
     {
       "path": "../address/tsconfig.build.json"
