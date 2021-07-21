@@ -22,8 +22,12 @@ module.exports = {
   },
   preset: 'ts-jest/presets/js-with-ts-esm',
   transform: {
+    '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.tsx?$': 'ts-jest'
   },
+  transformIgnorePatterns: [
+    'node_modules/?!@jamashita'
+  ],
   moduleNameMapper: {
     '^@jamashita/lluvia-(.*)$': '<rootDir>/packages/$1/src/index',
     '^(\\.{1,2}/.*)\\.js$': '$1',
