@@ -28,11 +28,11 @@
   },
   "dependencies": {
     "@jamashita/lluvia-collection": "1.7.0",
-    "@jamashita/anden-object": "1.11.0",
-    "@jamashita/anden-type": "1.10.1"
+    "@jamashita/anden-object": "1.12.0",
+    "@jamashita/anden-type": "1.11.0"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "1.10.0",
+    "@jamashita/anden-error": "1.11.0",
     "sinon": "11.1.1"
   },
   "engines": {
