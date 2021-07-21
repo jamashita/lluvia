@@ -1096,27 +1096,27 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jamashita/anden-error@1.11.0", "@jamashita/anden-error@^1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-1.11.0.tgz#6aad902acf445e7eecb78fb84ab0014c056f20ba"
-  integrity sha512-GLtzXmR0vulTSoGszSYducThQPnWhagDuabrBuqHG0HZ8Q64fzRhkrFwKWyNyDLVrMy0mh2Wa49vRD97RB1Nlw==
+"@jamashita/anden-error@1.11.1", "@jamashita/anden-error@^1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-1.11.1.tgz#1711ba4e50cd9f215781a20af7814222ae6bae2f"
+  integrity sha512-EibKp1VcRDtxhw/PsMK+8p6dYCC+bdQs905zmCS8Q7a/9Rgu4kRRIha2kxCa8VO9GR1N6XWZWggCf2p0dFIZvw==
   dependencies:
-    "@jamashita/anden-type" "^1.11.0"
+    "@jamashita/anden-type" "^1.11.1"
     make-error-cause "2.3.0"
 
-"@jamashita/anden-object@1.12.0":
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-1.12.0.tgz#a7e0b1389b0307507aa01e60a7a09c3cfcdc2e2e"
-  integrity sha512-SJQmYMzyMw+0eugVSHYYQsBb2oCQFw9mrL3oNNDC9iyXIWKjl8HtcEWCraiklBJ5Zy2aYDxIecNuFZBWF6tNZQ==
+"@jamashita/anden-object@1.12.1":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-1.12.1.tgz#a346be2ae7c19afefb42e8316cbd7c21e04bf256"
+  integrity sha512-0ekLRmHP5lpYx3EEu8Od1ob6DBIofPK0T77z2yobNre4fkixWyZC0zpGrZP7yrA9Z9mkoWGU5UB1DurJUgxP5Q==
   dependencies:
-    "@jamashita/anden-error" "^1.11.0"
-    "@jamashita/anden-type" "^1.11.0"
+    "@jamashita/anden-error" "^1.11.1"
+    "@jamashita/anden-type" "^1.11.1"
     object-hash "2.2.0"
 
-"@jamashita/anden-type@1.11.0", "@jamashita/anden-type@^1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-1.11.0.tgz#dad15649e915a257a4584a938c4e78a47f5a4f1a"
-  integrity sha512-jjdjL9F3EM2RHdg6weYF6DIB8+IcWNUiNJN19x9tkDwzBqCIiQ6N9m9nroVAJ+hYTEOyUrxXPvqlm2iaZMA65w==
+"@jamashita/anden-type@1.11.1", "@jamashita/anden-type@^1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-1.11.1.tgz#587778da42195a44aba867e140ea04a609abd68a"
+  integrity sha512-TluRN/XkjkIJjLPZi8abiGHsdMg7BwuiKL2z3GN3MpodlRlSdR8FTHYy9NvN+52tDEX3ySYrH8f6+VzHg+U9Og==
   dependencies:
     reflect-metadata "0.1.13"
 
@@ -3273,9 +3273,9 @@ camelcase@^6.2.0:
   integrity sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
 
 caniuse-lite@^1.0.30001219:
-  version "1.0.30001245"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001245.tgz#45b941bbd833cb0fa53861ff2bae746b3c6ca5d4"
-  integrity sha512-768fM9j1PKXpOCKws6eTo3RHmvTUsG9UrpT4WoREFeZgJBTi4/X9g565azS/rVUGtqb8nt7FjLeF5u4kukERnA==
+  version "1.0.30001246"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001246.tgz#fe17d9919f87124d6bb416ef7b325356d69dc76c"
+  integrity sha512-Tc+ff0Co/nFNbLOrziBXmMVtpt9S2c2Y+Z9Nk9Khj09J+0zR9ejvIW5qkZAErCbOrVODCx/MN+GpB5FNBs5GFA==
 
 cardinal@^2.1.1:
   version "2.1.1"
