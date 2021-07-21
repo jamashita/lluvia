@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-collection-v1.8.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v1.7.0...@jamashita/lluvia-collection-v1.8.0) (2021-07-21)
+
+
+### Features
+
+* 🎸 update ([780d8b4](https://github.com/jamashita/lluvia/commit/780d8b4b19124ac1758b23105cddb13f500b5493))
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
