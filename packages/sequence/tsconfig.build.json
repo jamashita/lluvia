@@ -8,6 +8,11 @@
   "include": [
     "src/**/*.ts"
   ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.spec.ts"
+  ],
   "references": [
     {
       "path": "../collection/tsconfig.build.json"
