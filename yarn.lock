@@ -1096,27 +1096,27 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jamashita/anden-error@1.11.1", "@jamashita/anden-error@^1.11.1":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-1.11.1.tgz#1711ba4e50cd9f215781a20af7814222ae6bae2f"
-  integrity sha512-EibKp1VcRDtxhw/PsMK+8p6dYCC+bdQs905zmCS8Q7a/9Rgu4kRRIha2kxCa8VO9GR1N6XWZWggCf2p0dFIZvw==
+"@jamashita/anden-error@2.0.0", "@jamashita/anden-error@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-2.0.0.tgz#ca3acb6b63d880bff4832c5ecddb2eaf2cb4aba5"
+  integrity sha512-UxupOYca5ReIBHdMbUxWK9MieTAu1dAqb02VFzIBaAAqCMxRYmM5cZ3S6mAWkEnR4R+bs80By1IVZZPhExa8ew==
   dependencies:
-    "@jamashita/anden-type" "^1.11.1"
+    "@jamashita/anden-type" "^2.0.0"
     make-error-cause "2.3.0"
 
-"@jamashita/anden-object@1.12.1":
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-1.12.1.tgz#a346be2ae7c19afefb42e8316cbd7c21e04bf256"
-  integrity sha512-0ekLRmHP5lpYx3EEu8Od1ob6DBIofPK0T77z2yobNre4fkixWyZC0zpGrZP7yrA9Z9mkoWGU5UB1DurJUgxP5Q==
+"@jamashita/anden-object@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.0.0.tgz#4dd92cff6dbb98027386993098a943587eb9b577"
+  integrity sha512-eVVw0z4np2kfxSbqJ/mm7w1IBEH3xdpqJYv6/IeCSq/me698RIni/5LmAh1AWI+h9y+0e/q2gD0i/YR/eJj0Ug==
   dependencies:
-    "@jamashita/anden-error" "^1.11.1"
-    "@jamashita/anden-type" "^1.11.1"
+    "@jamashita/anden-error" "^2.0.0"
+    "@jamashita/anden-type" "^2.0.0"
     object-hash "2.2.0"
 
-"@jamashita/anden-type@1.11.1", "@jamashita/anden-type@^1.11.1":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-1.11.1.tgz#587778da42195a44aba867e140ea04a609abd68a"
-  integrity sha512-TluRN/XkjkIJjLPZi8abiGHsdMg7BwuiKL2z3GN3MpodlRlSdR8FTHYy9NvN+52tDEX3ySYrH8f6+VzHg+U9Og==
+"@jamashita/anden-type@2.0.0", "@jamashita/anden-type@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.0.0.tgz#dfce63a8275dd0f4280189fcfbde3f27feec7d0a"
+  integrity sha512-1WT0AOAXc4NjfZV2Y1XxBcS9S4vB0S8FeTdJAazcOKOgFvBYDZLACNopHSgY556G1dKUSpCUlHYPFhQz31npng==
   dependencies:
     reflect-metadata "0.1.13"
 
@@ -9347,9 +9347,9 @@ typescript@4.3.5:
   integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
 
 uglify-js@^3.1.4:
-  version "3.13.10"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.13.10.tgz#a6bd0d28d38f592c3adb6b180ea6e07e1e540a8d"
-  integrity sha512-57H3ACYFXeo1IaZ1w02sfA71wI60MGco/IQFjOqK+WtKoprh7Go2/yvd2HPtoJILO2Or84ncLccI4xoHMTSbGg==
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.14.0.tgz#2d723a0afee81e0d08db9354a9c277006e942386"
+  integrity sha512-R/tiGB1ZXp2BC+TkRGLwj8xUZgdfT2f4UZEgX6aVjJ5uttPrr4fYmwTWDGqVnBCLbOXRMY6nr/BTbwCtVfps0g==
 
 uid-number@0.0.6:
   version "0.0.6"
