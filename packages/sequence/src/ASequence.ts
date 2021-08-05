@@ -22,6 +22,18 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
 
   public abstract add(value: V): Sequence<V, N>;
 
+  public abstract set(key: number, value: V): T;
+
+  public abstract remove(key: number): T;
+
+  public abstract duplicate(): T;
+
+  public abstract override map<W>(mapper: Mapper<V, W>): Sequence<W>;
+
+  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
+
+  public abstract sort(comparator: BinaryFunction<V, V, number>): T;
+
   public contains(value: V): boolean {
     const found: Ambiguous<V> = this.sequence.find((v: V) => {
       if (v === value) {
@@ -36,8 +48,6 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
 
     return !Kind.isUndefined(found);
   }
-
-  public abstract duplicate(): T;
 
   public equals(other: unknown): boolean {
     if (this === other) {
@@ -61,7 +71,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
           return false;
         }
       }
-      else if (tr.value !== or.value) {
+ else if (tr.value !== or.value) {
         return false;
       }
 
@@ -83,8 +93,6 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
 
     return Kind.isUndefined(found);
   }
-
-  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
 
   public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
     const found: Ambiguous<V> = this.sequence.find(predicate);
@@ -118,17 +126,11 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     }).values();
   }
 
-  public abstract override map<W>(mapper: Mapper<V, W>): Sequence<W>;
-
-  public abstract remove(key: number): T;
-
   public serialize(): string {
     return this.sequence.map<string>((v: V) => {
       return Objet.identify(v);
     }).join(', ');
   }
-
-  public abstract set(key: number, value: V): T;
 
   public size(): number {
     return this.sequence.length;
@@ -139,8 +141,6 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
 
     return !Kind.isUndefined(found);
   }
-
-  public abstract sort(comparator: BinaryFunction<V, V, number>): T;
 
   public toArray(): Array<V> {
     return [...this.sequence];

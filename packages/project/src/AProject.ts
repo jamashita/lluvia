@@ -11,6 +11,16 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     this.project = project;
   }
 
+  public abstract set(key: K, value: V): T;
+
+  public abstract remove(key: K): T;
+
+  public abstract duplicate(): T;
+
+  public abstract override map<W>(mapper: Mapper<V, W>): Project<K, W>;
+
+  public abstract override filter(predicate: BinaryPredicate<V, K>): T;
+
   // FIXME O(n)
   public contains(value: V): boolean {
     for (const [, [, v]] of this.project) {
@@ -26,8 +36,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
 
     return false;
   }
-
-  public abstract duplicate(): T;
 
   public equals(other: unknown): boolean {
     if (this === other) {
@@ -65,8 +73,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
 
     return true;
   }
-
-  public abstract override filter(predicate: BinaryPredicate<V, K>): T;
 
   public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
     for (const [, [k, v]] of this.project) {
@@ -119,10 +125,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return iterable;
   }
 
-  public abstract override map<W>(mapper: Mapper<V, W>): Project<K, W>;
-
-  public abstract remove(key: K): T;
-
   public serialize(): string {
     const props: Array<string> = [];
 
@@ -132,8 +134,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
 
     return props.join(', ');
   }
-
-  public abstract set(key: K, value: V): T;
 
   public size(): number {
     return this.project.size;

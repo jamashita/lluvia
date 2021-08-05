@@ -9,10 +9,6 @@ export abstract class Quantity<K, V, N extends string = string> extends Objet<N>
 
   public abstract iterator(): Iterator<[K, V]>;
 
-  public [Symbol.iterator](): Iterator<[K, V]> {
-    return this.iterator();
-  }
-
   public abstract contains(value: V): boolean;
 
   public abstract every(predicate: BinaryPredicate<V, K>): boolean;
@@ -25,10 +21,6 @@ export abstract class Quantity<K, V, N extends string = string> extends Objet<N>
 
   public abstract get(key: K): Nullable<V>;
 
-  public isEmpty(): boolean {
-    return this.size() === 0;
-  }
-
   public abstract map<W>(mapper: Mapper<V, W>): Collection<K, W>;
 
   public abstract size(): number;
@@ -36,4 +28,12 @@ export abstract class Quantity<K, V, N extends string = string> extends Objet<N>
   public abstract some(predicate: BinaryPredicate<V, K>): boolean;
 
   public abstract values(): Iterable<V>;
+
+  public [Symbol.iterator](): Iterator<[K, V]> {
+    return this.iterator();
+  }
+
+  public isEmpty(): boolean {
+    return this.size() === 0;
+  }
 }

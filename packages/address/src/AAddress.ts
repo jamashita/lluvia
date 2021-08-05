@@ -13,11 +13,17 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
 
   public abstract add(value: V): T;
 
+  public abstract duplicate(): T;
+
+  public abstract remove(value: V): T;
+
+  public abstract override filter(predicate: BinaryPredicate<V, void>): T;
+
+  public abstract override map<W>(mapper: Mapper<V, W>): Address<W>;
+
   public contains(value: V): boolean {
     return this.address.has(this.hashor<V>(value));
   }
-
-  public abstract duplicate(): T;
 
   public equals(other: unknown): boolean {
     if (this === other) {
@@ -44,8 +50,6 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
 
     return true;
   }
-
-  public abstract override filter(predicate: BinaryPredicate<V, void>): T;
 
   public find(predicate: BinaryPredicate<V, void>): Nullable<V> {
     for (const [, v] of this.address) {
@@ -81,10 +85,6 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
 
     return iterable.values();
   }
-
-  public abstract override map<W>(mapper: Mapper<V, W>): Address<W>;
-
-  public abstract remove(value: V): T;
 
   public serialize(): string {
     const props: Array<string> = [];
