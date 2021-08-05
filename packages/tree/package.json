@@ -36,7 +36,7 @@
     "@jamashita/lluvia-sequence": "^2.2.0"
   },
   "devDependencies": {
-    "sinon": "11.1.1"
+    "sinon": "11.1.2"
   },
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0",
