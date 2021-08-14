@@ -17,7 +17,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     return ImmutableProject.ofMap<KT, VT>(map);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | string, [KT, VT]>): ImmutableProject<KT, VT> {
+  private static ofInternal<KT, VT>(project: Map<KT | number, [KT, VT]>): ImmutableProject<KT, VT> {
     if (project.size === 0) {
       return ImmutableProject.empty<KT, VT>();
     }
@@ -26,7 +26,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
   }
 
   public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): ImmutableProject<KT, VT> {
-    const m: Map<KT | string, [KT, VT]> = new Map<KT | string, [KT, VT]>();
+    const m: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
 
     map.forEach((v: VT, k: KT) => {
       if (isNominative(k)) {
@@ -41,7 +41,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     return ImmutableProject.ofInternal<KT, VT>(m);
   }
 
-  protected constructor(project: Map<K | string, [K, V]>) {
+  protected constructor(project: Map<K | number, [K, V]>) {
     super(project);
   }
 
@@ -50,7 +50,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
       return ImmutableProject.empty<K, V>();
     }
 
-    return ImmutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
+    return ImmutableProject.ofInternal<K, V>(new Map<K | number, [K, V]>(this.project));
   }
 
   public filter(predicate: BinaryPredicate<V, K>): ImmutableProject<K, V> {
@@ -77,8 +77,8 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
       return this;
     }
 
-    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>(this.project);
-    const k: K | string = this.hashor<K>(key);
+    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>(this.project);
+    const k: K | number = this.hashor<K>(key);
 
     m.delete(k);
 
@@ -86,8 +86,8 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
   }
 
   public set(key: K, value: V): ImmutableProject<K, V> {
-    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>(this.project);
-    const k: K | string = this.hashor<K>(key);
+    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>(this.project);
+    const k: K | number = this.hashor<K>(key);
 
     m.set(k, [key, value]);
 

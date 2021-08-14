@@ -4,9 +4,9 @@ import { Quantity } from '@jamashita/lluvia-collection';
 import { Project } from './Project.js';
 
 export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N> implements Project<K, V, N> {
-  protected readonly project: Map<K | string, [K, V]>;
+  protected readonly project: Map<K | number, [K, V]>;
 
-  protected constructor(project: Map<K | string, [K, V]>) {
+  protected constructor(project: Map<K | number, [K, V]>) {
     super();
     this.project = project;
   }
@@ -91,7 +91,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   }
 
   public get(key: K): Nullable<V> {
-    const k: K | string = this.hashor<K>(key);
+    const k: K | number = this.hashor<K>(key);
     const p: Ambiguous<[K, V]> = this.project.get(k);
 
     if (Kind.isUndefined(p)) {
@@ -102,7 +102,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   }
 
   public has(key: K): boolean {
-    const k: K | string = this.hashor<K>(key);
+    const k: K | number = this.hashor<K>(key);
 
     return this.project.has(k);
   }
@@ -169,12 +169,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return iterable;
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | string, [K, V]> {
-    const m: Map<K | string, [K, V]> = new Map<K | string, [K, V]>();
+  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | number, [K, V]> {
+    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
 
     this.project.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {
-        const key: K | string = this.hashor<K>(k);
+        const key: K | number = this.hashor<K>(k);
 
         m.set(key, [k, v]);
       }
@@ -183,12 +183,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return m;
   }
 
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | string, [K, W]> {
-    const m: Map<K | string, [K, W]> = new Map<K | string, [K, W]>();
+  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | number, [K, W]> {
+    const m: Map<K | number, [K, W]> = new Map<K | number, [K, W]>();
     let i: number = 0;
 
     this.project.forEach(([k, v]: [K, V]) => {
-      const key: K | string = this.hashor<K>(k);
+      const key: K | number = this.hashor<K>(k);
 
       m.set(key, [k, mapper(v, i)]);
       i++;

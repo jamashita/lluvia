@@ -4,9 +4,9 @@ import { Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address.js';
 
 export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = string> extends Quantity<void, V, N> implements Address<V, N> {
-  protected readonly address: Map<V | string, V>;
+  protected readonly address: Map<V | number, V>;
 
-  protected constructor(address: Map<V | string, V>) {
+  protected constructor(address: Map<V | number, V>) {
     super();
     this.address = address;
   }
@@ -129,12 +129,12 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return iterable;
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | string, V> {
-    const m: Map<V | string, V> = new Map<V | string, V>();
+  protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | number, V> {
+    const m: Map<V | number, V> = new Map<V | number, V>();
 
     this.address.forEach((value: V) => {
       if (predicate(value, undefined)) {
-        const v: V | string = this.hashor(value);
+        const v: V | number = this.hashor(value);
 
         m.set(v, value);
       }
@@ -143,13 +143,13 @@ export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = s
     return m;
   }
 
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<W | string, W> {
-    const m: Map<W | string, W> = new Map<W | string, W>();
+  protected mapInternal<W>(mapper: Mapper<V, W>): Map<W | number, W> {
+    const m: Map<W | number, W> = new Map<W | number, W>();
     let i: number = 0;
 
     this.address.forEach((value: V) => {
       const w: W = mapper(value, i);
-      const v: W | string = this.hashor<W>(w);
+      const v: W | number = this.hashor<W>(w);
 
       m.set(v, w);
       i++;

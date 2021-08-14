@@ -6,7 +6,7 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
   public readonly noun: 'MutableProject' = 'MutableProject';
 
   public static empty<KT, VT>(): MutableProject<KT, VT> {
-    return MutableProject.ofInternal<KT, VT>(new Map<KT | string, [KT, VT]>());
+    return MutableProject.ofInternal<KT, VT>(new Map<KT | number, [KT, VT]>());
   }
 
   public static of<KT, VT>(collection: Collection<KT, VT>): MutableProject<KT, VT> {
@@ -15,12 +15,12 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
     return MutableProject.ofMap<KT, VT>(map);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | string, [KT, VT]>): MutableProject<KT, VT> {
+  private static ofInternal<KT, VT>(project: Map<KT | number, [KT, VT]>): MutableProject<KT, VT> {
     return new MutableProject<KT, VT>(project);
   }
 
   public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): MutableProject<KT, VT> {
-    const m: Map<KT | string, [KT, VT]> = new Map<KT | string, [KT, VT]>();
+    const m: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
 
     map.forEach((v: VT, k: KT) => {
       if (isNominative(k)) {
@@ -35,12 +35,12 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
     return MutableProject.ofInternal<KT, VT>(m);
   }
 
-  protected constructor(project: Map<K | string, [K, V]>) {
+  protected constructor(project: Map<K | number, [K, V]>) {
     super(project);
   }
 
   public duplicate(): MutableProject<K, V> {
-    return MutableProject.ofInternal<K, V>(new Map<K | string, [K, V]>(this.project));
+    return MutableProject.ofInternal<K, V>(new Map<K | number, [K, V]>(this.project));
   }
 
   public filter(predicate: BinaryPredicate<V, K>): MutableProject<K, V> {
@@ -59,7 +59,7 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
       return this;
     }
 
-    const k: K | string = this.hashor<K>(key);
+    const k: K | number = this.hashor<K>(key);
 
     this.project.delete(k);
 
@@ -67,7 +67,7 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, '
   }
 
   public set(key: K, value: V): MutableProject<K, V> {
-    const k: K | string = this.hashor<K>(key);
+    const k: K | number = this.hashor<K>(key);
 
     this.project.set(k, [key, value]);
 
