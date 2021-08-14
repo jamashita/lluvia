@@ -5,8 +5,7 @@ import { SerializableTree } from './SerializableTree.js';
 import { SerializableTreeObject } from './SerializableTreeObject.js';
 import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode.js';
 
-export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>, 'SerializableTrees'>
-  implements JSONable<ReadonlyArray<TreeNodeJSON>> {
+export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>, 'SerializableTrees'> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
   public readonly noun: 'SerializableTrees' = 'SerializableTrees';
 
   public static empty<VT extends SerializableTreeObject>(): SerializableTrees<VT> {

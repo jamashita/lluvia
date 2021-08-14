@@ -6,7 +6,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
   public readonly noun: 'MutableAddress' = 'MutableAddress';
 
   public static empty<VT>(): MutableAddress<VT> {
-    return MutableAddress.ofInternal<VT>(new Map<VT | string, VT>());
+    return MutableAddress.ofInternal<VT>(new Map<VT | number, VT>());
   }
 
   public static of<VT>(collection: Collection<unknown, VT>): MutableAddress<VT> {
@@ -15,12 +15,12 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
     return MutableAddress.ofSet<VT>(set);
   }
 
-  private static ofInternal<VT>(address: Map<VT | string, VT>): MutableAddress<VT> {
+  private static ofInternal<VT>(address: Map<VT | number, VT>): MutableAddress<VT> {
     return new MutableAddress<VT>(address);
   }
 
   public static ofSet<VT>(set: ReadonlySet<VT>): MutableAddress<VT> {
-    const m: Map<VT | string, VT> = new Map<VT | string, VT>();
+    const m: Map<VT | number, VT> = new Map<VT | number, VT>();
 
     set.forEach((v: VT) => {
       if (isNominative(v)) {
@@ -35,7 +35,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
     return MutableAddress.ofInternal<VT>(m);
   }
 
-  protected constructor(address: Map<V | string, V>) {
+  protected constructor(address: Map<V | number, V>) {
     super(address);
   }
 
@@ -44,7 +44,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
       return this;
     }
 
-    const v: V | string = this.hashor<V>(value);
+    const v: V | number = this.hashor<V>(value);
 
     this.address.set(v, value);
 
@@ -52,7 +52,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
   }
 
   public duplicate(): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(new Map<V | string, V>(this.address));
+    return MutableAddress.ofInternal<V>(new Map<V | number, V>(this.address));
   }
 
   public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
@@ -71,7 +71,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAd
       return this;
     }
 
-    const v: V | string = this.hashor<V>(value);
+    const v: V | number = this.hashor<V>(value);
 
     this.address.delete(v);
 

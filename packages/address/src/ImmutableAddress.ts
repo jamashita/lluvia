@@ -17,7 +17,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     return ImmutableAddress.ofSet<VT>(set);
   }
 
-  private static ofInternal<VT>(address: Map<VT | string, VT>): ImmutableAddress<VT> {
+  private static ofInternal<VT>(address: Map<VT | number, VT>): ImmutableAddress<VT> {
     if (address.size === 0) {
       return ImmutableAddress.empty<VT>();
     }
@@ -26,7 +26,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
   }
 
   public static ofSet<VT>(set: ReadonlySet<VT>): ImmutableAddress<VT> {
-    const m: Map<VT | string, VT> = new Map<VT | string, VT>();
+    const m: Map<VT | number, VT> = new Map<VT | number, VT>();
 
     set.forEach((v: VT) => {
       if (isNominative(v)) {
@@ -41,7 +41,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     return ImmutableAddress.ofInternal<VT>(m);
   }
 
-  protected constructor(address: Map<V | string, V>) {
+  protected constructor(address: Map<V | number, V>) {
     super(address);
   }
 
@@ -50,8 +50,8 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
       return this;
     }
 
-    const m: Map<V | string, V> = new Map<V | string, V>(this.address);
-    const v: V | string = this.hashor<V>(value);
+    const m: Map<V | number, V> = new Map<V | number, V>(this.address);
+    const v: V | number = this.hashor<V>(value);
 
     m.set(v, value);
 
@@ -63,7 +63,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
       return ImmutableAddress.empty<V>();
     }
 
-    return ImmutableAddress.ofInternal<V>(new Map<V | string, V>(this.address));
+    return ImmutableAddress.ofInternal<V>(new Map<V | number, V>(this.address));
   }
 
   public filter(predicate: BinaryPredicate<V, void>): ImmutableAddress<V> {
@@ -90,8 +90,8 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
       return this;
     }
 
-    const m: Map<V | string, V> = new Map<V | string, V>(this.address);
-    const v: V | string = this.hashor<V>(value);
+    const m: Map<V | number, V> = new Map<V | number, V>(this.address);
+    const v: V | number = this.hashor<V>(value);
 
     m.delete(v);
 

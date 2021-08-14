@@ -5,8 +5,8 @@ import { AProject } from '../AProject.js';
 export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>, 'MockProject'> {
   public readonly noun: 'MockProject' = 'MockProject';
 
-  private static toMap<KT, VT>(project: Map<KT, VT>): Map<KT | string, [KT, VT]> {
-    const map: Map<KT | string, [KT, VT]> = new Map<KT | string, [KT, VT]>();
+  private static toMap<KT, VT>(project: Map<KT, VT>): Map<KT | number, [KT, VT]> {
+    const map: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
 
     project.forEach((v: VT, k: KT) => {
       if (isNominative(k)) {
