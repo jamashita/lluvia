@@ -8,8 +8,7 @@ export type ClosureTableJSON = Readonly<{
   offspring: Primitive;
 }>;
 
-export class ClosureTableHierarchy<K extends TreeID> extends ValueObject<'ClosureTableHierarchy'>
-  implements JSONable<ClosureTableJSON> {
+export class ClosureTableHierarchy<K extends TreeID> extends ValueObject<'ClosureTableHierarchy'> implements JSONable<ClosureTableJSON> {
   public readonly noun: 'ClosureTableHierarchy' = 'ClosureTableHierarchy';
   private readonly ancestor: K;
   private readonly offspring: K;
