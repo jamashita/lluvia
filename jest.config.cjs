@@ -30,7 +30,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@jamashita/lluvia-(.*)$': '<rootDir>/packages/$1/src/index',
-    '^(\\.{1,2}/.*)\\.js$': '$1',
+    '^(\\.{1,2}/.*)\\.js$': '$1'
   },
   moduleFileExtensions: [
     'js',

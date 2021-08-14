@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@jamashita/anden-error": "2.0.0",
-    "@jamashita/anden-object": "2.0.0",
-    "@jamashita/anden-type": "2.0.0",
+    "@jamashita/anden-object": "2.1.0",
+    "@jamashita/anden-type": "2.1.0",
     "@jamashita/lluvia-address": "^2.2.0",
     "@jamashita/lluvia-collection": "^2.1.0",
     "@jamashita/lluvia-project": "^2.2.0",
