@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-sequence-v2.4.1](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.4.0...@jamashita/lluvia-sequence-v2.4.1) (2021-08-28)
+
+
+### Bug Fixes
+
+* 🐛 removed "type": "module" ([aee4da1](https://github.com/jamashita/lluvia/commit/aee4da1338c025e5cadf5d20ad77fecd9d4b1c2d))
+
 # [@jamashita/lluvia-sequence-v2.4.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.3.0...@jamashita/lluvia-sequence-v2.4.0) (2021-08-28)
 
 
