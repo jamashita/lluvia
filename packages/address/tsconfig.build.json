@@ -1,10 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "composite": true
-  },
   "include": [
     "src/**/*.ts"
   ],
@@ -12,10 +7,5 @@
     "node_modules",
     "dist",
     "src/**/*.spec.ts"
-  ],
-  "references": [
-    {
-      "path": "../collection/tsconfig.build.json"
-    }
   ]
 }

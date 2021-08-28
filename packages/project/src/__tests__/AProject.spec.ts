@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { BinaryPredicate, Nullable } from '@jamashita/anden-type';
-import { MockProject } from '../Mock/MockProject.js';
+import { MockProject } from '../Mock/MockProject';
 
 describe('AProject', () => {
   describe('iterator', () => {

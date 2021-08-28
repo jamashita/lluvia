@@ -1,6 +1,6 @@
-import { BinaryPredicate, isNominative, Mapper, Whatever } from '@jamashita/anden-type';
+import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
-import { AAddress } from './AAddress.js';
+import { AAddress } from './AAddress';
 
 export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'ImmutableAddress'> {
   public readonly noun: 'ImmutableAddress' = 'ImmutableAddress';
@@ -11,7 +11,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'Immut
     return ImmutableAddress.EMPTY as ImmutableAddress<VT>;
   }
 
-  public static of<VT>(collection: Collection<Whatever, VT>): ImmutableAddress<VT> {
+  public static of<VT>(collection: Collection<unknown, VT>): ImmutableAddress<VT> {
     const set: Set<VT> = new Set<VT>(collection.values());
 
     return ImmutableAddress.ofSet<VT>(set);

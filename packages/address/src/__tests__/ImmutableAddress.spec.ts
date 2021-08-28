@@ -1,5 +1,5 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { ImmutableAddress } from '../ImmutableAddress.js';
+import { ImmutableAddress } from '../ImmutableAddress';
 
 describe('ImmutableAddress', () => {
   describe('of', () => {

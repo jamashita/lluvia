@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
-import { Address } from './Address.js';
+import { Address } from './Address';
 
 export abstract class AAddress<V, T extends AAddress<V, T>, N extends string = string> extends Quantity<void, V, N> implements Address<V, N> {
   protected readonly address: Map<V | number, V>;

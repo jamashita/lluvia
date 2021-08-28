@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable, Predicate } from '@jamashita/anden-type';
-import { MockSequence } from '../Mock/MockSequence.js';
+import { MockSequence } from '../Mock/MockSequence';
 
 describe('ASequence', () => {
   describe('iterator', () => {

@@ -1,5 +1,5 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { MutableAddress } from '../MutableAddress.js';
+import { MutableAddress } from '../MutableAddress';
 
 describe('MutableAddress', () => {
   describe('of', () => {

@@ -3,9 +3,9 @@ import { ReadonlyAddress } from '@jamashita/lluvia-address';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { ReadonlyProject } from '@jamashita/lluvia-project';
 import { ImmutableSequence } from '@jamashita/lluvia-sequence';
-import { TreeID } from '../TreeID.js';
-import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy.js';
-import { TreeIDFactory } from './TreeIDFactory.js';
+import { TreeID } from '../TreeID';
+import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy';
+import { TreeIDFactory } from './TreeIDFactory';
 
 export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>, 'ClosureTableHierarchies'> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
   public readonly noun: 'ClosureTableHierarchies' = 'ClosureTableHierarchies';

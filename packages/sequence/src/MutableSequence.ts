@@ -1,6 +1,6 @@
 import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
-import { ASequence } from './ASequence.js';
+import { ASequence } from './ASequence';
 
 export class MutableSequence<V> extends ASequence<V, MutableSequence<V>, 'MutableSequence'> {
   public readonly noun: 'MutableSequence' = 'MutableSequence';
