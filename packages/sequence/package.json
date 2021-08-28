@@ -18,7 +18,9 @@
     "src"
   ],
   "scripts": {
-    "build": "yarn clean && tsc -b tsconfig.build.json",
+    "build": "yarn clean && concurrently \"npm:build:*\"",
+    "build:cjs": "tsc -b tsconfig.cjs.json",
+    "build:esm": "tsc -b tsconfig.esm.json",
     "clean": "concurrently \"npm:clean:*\"",
     "clean:coverage": "rimraf coverage",
     "clean:dist": "rimraf dist",
