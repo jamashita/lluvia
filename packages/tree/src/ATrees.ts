@@ -1,9 +1,9 @@
 import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, Catalogue, Kind, Nullable } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
-import { ATree } from './ATree.js';
-import { ATreeNode } from './TreeNode/ATreeNode.js';
-import { Trees } from './Trees.js';
+import { ATree } from './ATree';
+import { ATreeNode } from './TreeNode/ATreeNode';
+import { Trees } from './Trees';
 
 export abstract class ATrees<K, V, T extends ATreeNode<V, T>, E extends ATree<V, T>, C extends Collection<K, E>, N extends string = string> extends Objet<N> implements Trees<K, V, E, N> {
   protected readonly trees: C;

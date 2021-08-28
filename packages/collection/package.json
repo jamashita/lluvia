@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/lluvia-collection",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -9,29 +9,28 @@
   "license": "MIT",
   "author": "jamashita <jamashita@arachnid.xyz>",
   "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": "./dist/index.js"
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "yarn clean && tsc -b tsconfig.build.json",
+    "build": "yarn clean && concurrently \"npm:build:*\"",
+    "build:cjs": "tsc -b tsconfig.cjs.json",
+    "build:esm": "tsc -b tsconfig.esm.json",
     "clean": "concurrently \"npm:clean:*\"",
     "clean:coverage": "rimraf coverage",
     "clean:dist": "rimraf dist",
     "clean:others": "rimraf *.log && rimraf tsconfig.build.tsbuildinfo"
   },
   "dependencies": {
-    "@jamashita/anden-object": "2.1.0",
-    "@jamashita/anden-type": "2.1.0"
+    "@jamashita/anden-object": "2.2.1",
+    "@jamashita/anden-type": "2.1.2"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "2.0.0",
+    "@jamashita/anden-error": "2.1.1",
     "sinon": "11.1.2"
   },
   "engines": {

@@ -1,7 +1,7 @@
 import { ImmutableAddress, MockAddress, MutableAddress } from '@jamashita/lluvia-address';
-import { MockTreeID } from '../../Mock/MockTreeID.js';
-import { MockTreeObject } from '../../Mock/MockTreeObject.js';
-import { StructurableTreeNode } from '../StructurableTreeNode.js';
+import { MockTreeID } from '../../Mock/MockTreeID';
+import { MockTreeObject } from '../../Mock/MockTreeObject';
+import { StructurableTreeNode } from '../StructurableTreeNode';
 
 describe('StructurableTreeNode', () => {
   describe('of', () => {

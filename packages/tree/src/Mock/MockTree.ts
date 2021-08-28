@@ -1,8 +1,8 @@
-import { ATree } from '../ATree.js';
-import { SerializableTreeObject } from '../SerializableTreeObject.js';
-import { StructurableTreeObject } from '../StructurableTreeObject.js';
-import { TreeID } from '../TreeID.js';
-import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode.js';
+import { ATree } from '../ATree';
+import { SerializableTreeObject } from '../SerializableTreeObject';
+import { StructurableTreeObject } from '../StructurableTreeObject';
+import { TreeID } from '../TreeID';
+import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode';
 
 interface MockTreeObject<K extends TreeID> extends StructurableTreeObject<K>, SerializableTreeObject {
   // NOOP

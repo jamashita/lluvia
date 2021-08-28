@@ -1,6 +1,6 @@
 import { ValueObject } from '@jamashita/anden-object';
 import { Primitive } from '@jamashita/anden-type';
-import { TreeID } from '../TreeID.js';
+import { TreeID } from '../TreeID';
 
 export class MockTreeID extends ValueObject<'MockTreeID'> implements TreeID<'MockTreeID'> {
   public readonly noun: 'MockTreeID' = 'MockTreeID';

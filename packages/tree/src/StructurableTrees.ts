@@ -2,15 +2,15 @@ import { Kind, Nullable } from '@jamashita/anden-type';
 import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject, MutableProject, ReadonlyProject } from '@jamashita/lluvia-project';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
-import { ATrees } from './ATrees.js';
-import { ClosureTable } from './ClosureTable/ClosureTable.js';
-import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies.js';
-import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy.js';
-import { TreeError } from './Error/TreeError.js';
-import { StructurableTree } from './StructurableTree.js';
-import { StructurableTreeObject } from './StructurableTreeObject.js';
-import { TreeID } from './TreeID.js';
-import { StructurableTreeNode } from './TreeNode/StructurableTreeNode.js';
+import { ATrees } from './ATrees';
+import { ClosureTable } from './ClosureTable/ClosureTable';
+import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies';
+import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy';
+import { TreeError } from './Error/TreeError';
+import { StructurableTree } from './StructurableTree';
+import { StructurableTreeObject } from './StructurableTreeObject';
+import { TreeID } from './TreeID';
+import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
 
 export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>, 'StructurableTrees'> {
   public readonly noun: 'StructurableTrees' = 'StructurableTrees';

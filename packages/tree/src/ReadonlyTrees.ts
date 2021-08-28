@@ -1,6 +1,6 @@
 import { BinaryPredicate, Catalogue, Nominative, Nullable } from '@jamashita/anden-type';
-import { Tree } from './Tree.js';
-import { TreeNode } from './TreeNode/TreeNode.js';
+import { Tree } from './Tree';
+import { TreeNode } from './TreeNode/TreeNode';
 
 export interface ReadonlyTrees<K, V, E extends Tree<V>, N extends string = string> extends Nominative<N> {
   contains(value: V): boolean;

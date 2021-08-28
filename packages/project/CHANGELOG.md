@@ -1,3 +1,16 @@
+# [@jamashita/lluvia-project-v2.4.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-project-v2.3.0...@jamashita/lluvia-project-v2.4.0) (2021-08-28)
+
+
+### Bug Fixes
+
+* 🐛 build option ([e1fd3fb](https://github.com/jamashita/lluvia/commit/e1fd3fb9dd70356900f6575bde4353e10374d183))
+* 🐛 removed .js for Dual Package ([7906454](https://github.com/jamashita/lluvia/commit/7906454c6492fec33a0298ace56c22269fa5c30c))
+
+
+### Features
+
+* 🎸 update ([6dbf637](https://github.com/jamashita/lluvia/commit/6dbf637058a92048b2612d79db6722b0bd833d4a))
+
 # [@jamashita/lluvia-project-v2.3.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-project-v2.2.0...@jamashita/lluvia-project-v2.3.0) (2021-08-14)
 
 

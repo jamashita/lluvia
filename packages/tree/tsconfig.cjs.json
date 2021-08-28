@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist/cjs"
+  },
+  "references": [
+    {
+      "path": "../address/tsconfig.cjs.json"
+    },
+    {
+      "path": "../collection/tsconfig.cjs.json"
+    },
+    {
+      "path": "../project/tsconfig.cjs.json"
+    },
+    {
+      "path": "../sequence/tsconfig.cjs.json"
+    }
+  ]
+}
