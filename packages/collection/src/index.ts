@@ -1,2 +1,2 @@
-export * from './Collection.js';
-export * from './Quantity.js';
+export * from './Collection';
+export * from './Quantity';

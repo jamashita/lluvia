@@ -1,6 +1,6 @@
 import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
-import { AAddress } from './AAddress.js';
+import { AAddress } from './AAddress';
 
 export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAddress'> {
   public readonly noun: 'MutableAddress' = 'MutableAddress';

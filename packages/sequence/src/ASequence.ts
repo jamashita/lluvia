@@ -10,7 +10,7 @@ import {
   Nullable
 } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
-import { Sequence } from './Sequence.js';
+import { Sequence } from './Sequence';
 
 export abstract class ASequence<V, T extends ASequence<V, T>, N extends string = string> extends Quantity<number, V, N> implements Sequence<V, N> {
   protected sequence: Array<V>;

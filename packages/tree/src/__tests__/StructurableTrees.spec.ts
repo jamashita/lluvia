@@ -2,16 +2,16 @@ import { Nullable } from '@jamashita/anden-type';
 import { ImmutableAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject } from '@jamashita/lluvia-project';
 import { ImmutableSequence } from '@jamashita/lluvia-sequence';
-import { ClosureTable } from '../ClosureTable/ClosureTable.js';
-import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies.js';
-import { MockClosureTableHierarchies } from '../ClosureTable/Mock/MockClosureTableHierarchies.js';
-import { MockClosureTableHierarchy } from '../ClosureTable/Mock/MockClosureTableHierarchy.js';
-import { TreeError } from '../Error/TreeError.js';
-import { MockTreeID } from '../Mock/MockTreeID.js';
-import { MockTreeObject } from '../Mock/MockTreeObject.js';
-import { StructurableTree } from '../StructurableTree.js';
-import { StructurableTrees } from '../StructurableTrees.js';
-import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode.js';
+import { ClosureTable } from '../ClosureTable/ClosureTable';
+import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
+import { MockClosureTableHierarchies } from '../ClosureTable/Mock/MockClosureTableHierarchies';
+import { MockClosureTableHierarchy } from '../ClosureTable/Mock/MockClosureTableHierarchy';
+import { TreeError } from '../Error/TreeError';
+import { MockTreeID } from '../Mock/MockTreeID';
+import { MockTreeObject } from '../Mock/MockTreeObject';
+import { StructurableTree } from '../StructurableTree';
+import { StructurableTrees } from '../StructurableTrees';
+import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
 
 describe('StructurableTrees', () => {
   describe('ofTable', () => {
