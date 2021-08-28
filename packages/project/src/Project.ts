@@ -1,5 +1,5 @@
 import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
-import { ReadonlyProject } from './ReadonlyProject.js';
+import { ReadonlyProject } from './ReadonlyProject';
 
 export interface Project<K, V, N extends string = string> extends ReadonlyProject<K, V, N> {
   filter(predicate: BinaryPredicate<V, K>): Project<K, V>;

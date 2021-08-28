@@ -1,5 +1,5 @@
-import { MockTreeID } from '../../Mock/MockTreeID.js';
-import { TreeIDFactory } from '../TreeIDFactory.js';
+import { MockTreeID } from '../../Mock/MockTreeID';
+import { TreeIDFactory } from '../TreeIDFactory';
 
 export class MockTreeIDFactory implements TreeIDFactory<MockTreeID> {
   public forge(id: string): MockTreeID {

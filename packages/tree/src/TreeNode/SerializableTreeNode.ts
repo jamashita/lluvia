@@ -1,7 +1,7 @@
 import { JSONable, ObjectLiteral } from '@jamashita/anden-type';
 import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { SerializableTreeObject } from '../SerializableTreeObject.js';
-import { ATreeNode } from './ATreeNode.js';
+import { SerializableTreeObject } from '../SerializableTreeObject';
+import { ATreeNode } from './ATreeNode';
 
 export type TreeNodeJSON = Readonly<{
   value: ObjectLiteral;

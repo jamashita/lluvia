@@ -1,9 +1,9 @@
 import { Kind, Nullable } from '@jamashita/anden-type';
 import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
-import { TreeID } from '../../TreeID.js';
-import { ClosureTable } from '../ClosureTable.js';
-import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
+import { TreeID } from '../../TreeID';
+import { ClosureTable } from '../ClosureTable';
+import { ClosureTableHierarchy } from '../ClosureTableHierarchy';
 
 export class MockClosureTable<K extends TreeID> extends ClosureTable<K> {
   private static toProject<KT extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<KT>>): ImmutableProject<KT, ReadonlyAddress<KT>> {

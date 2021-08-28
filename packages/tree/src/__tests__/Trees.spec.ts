@@ -3,11 +3,11 @@ import { Nullable } from '@jamashita/anden-type';
 import { MockAddress } from '@jamashita/lluvia-address';
 import { MockProject } from '@jamashita/lluvia-project';
 import sinon, { SinonSpy } from 'sinon';
-import { MockTree } from '../Mock/MockTree.js';
-import { MockTreeID } from '../Mock/MockTreeID.js';
-import { MockTreeObject } from '../Mock/MockTreeObject.js';
-import { MockTrees } from '../Mock/MockTrees.js';
-import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode.js';
+import { MockTree } from '../Mock/MockTree';
+import { MockTreeID } from '../Mock/MockTreeID';
+import { MockTreeObject } from '../Mock/MockTreeObject';
+import { MockTrees } from '../Mock/MockTrees';
+import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode';
 
 describe('Trees', () => {
   describe('contains', () => {

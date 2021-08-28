@@ -1,5 +1,5 @@
 import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
-import { ReadonlySequence } from './ReadonlySequence.js';
+import { ReadonlySequence } from './ReadonlySequence';
 
 export interface Sequence<V, N extends string = string> extends ReadonlySequence<V, N> {
   add(value: V): Sequence<V>;

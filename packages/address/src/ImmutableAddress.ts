@@ -1,6 +1,6 @@
 import { BinaryPredicate, isNominative, Mapper, Whatever } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
-import { AAddress } from './AAddress.js';
+import { AAddress } from './AAddress';
 
 export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>, 'ImmutableAddress'> {
   public readonly noun: 'ImmutableAddress' = 'ImmutableAddress';

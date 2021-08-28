@@ -1,6 +1,6 @@
 import { UnimplementedError } from '@jamashita/anden-error';
 import { isNominative } from '@jamashita/anden-type';
-import { AAddress } from '../AAddress.js';
+import { AAddress } from '../AAddress';
 
 export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
   public readonly noun: 'MockAddress' = 'MockAddress';

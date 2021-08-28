@@ -1,7 +1,7 @@
 import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { StructurableTreeObject } from '../StructurableTreeObject.js';
-import { TreeID } from '../TreeID.js';
-import { ATreeNode } from './ATreeNode.js';
+import { StructurableTreeObject } from '../StructurableTreeObject';
+import { TreeID } from '../TreeID';
+import { ATreeNode } from './ATreeNode';
 
 export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>, 'StructurableTreeNode'> {
   public readonly noun: 'StructurableTreeNode' = 'StructurableTreeNode';
