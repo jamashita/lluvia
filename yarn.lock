@@ -525,15 +525,6 @@
     "@jamashita/anden-type" "^2.1.0"
     make-error-cause "2.3.0"
 
-"@jamashita/anden-object@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.1.0.tgz#f24fd74aabff48cf4bcf1c2fd144c9e7838540d7"
-  integrity sha512-X5FbkG/+btiDawgtAHrlNmUaoRhYi61lNHLaQOd5JwOnTMCQ0i53dkINq1UUlcHxCkLnrJOEaHrXRN/7Aggm8Q==
-  dependencies:
-    "@jamashita/anden-error" "^2.0.0"
-    "@jamashita/anden-type" "^2.0.0"
-    hash-it "5.0.2"
-
 "@jamashita/anden-object@2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.2.1.tgz#6ea6d4f892947829df034981d2863ec12996ce58"
@@ -543,14 +534,7 @@
     "@jamashita/anden-type" "^2.1.0"
     hash-it "5.0.2"
 
-"@jamashita/anden-type@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.1.0.tgz#f3b15816c6a5f58b16cc0a1383aee3101335fcfa"
-  integrity sha512-u7hEYTfH0tzOhJ/gC2TCVGwLqcTx0M8DqdwpAyZmBI5U4rbgrETWQ/T83FnnwLo8C9uRpEPiUGFYwybHC/IJtw==
-  dependencies:
-    reflect-metadata "0.1.13"
-
-"@jamashita/anden-type@2.1.2", "@jamashita/anden-type@^2.0.0", "@jamashita/anden-type@^2.1.0":
+"@jamashita/anden-type@2.1.2", "@jamashita/anden-type@^2.1.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.1.2.tgz#5d043d8d8ca9565f19a9e9c565fd91023d7d17ae"
   integrity sha512-B9mIsuzYED6BNSl2sYBlTGZDeuzgsAfad7Ou9PM0hWwf6nQ4Qlf7mJ4+rTT/aGUKcLeEMPNmYfFbh/zWCq1aAw==
@@ -571,41 +555,6 @@
     eslint-plugin-node "11.1.0"
     eslint-plugin-react "7.24.0"
     eslint-plugin-react-hooks "4.2.0"
-
-"@jamashita/lluvia-address@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/lluvia-address/-/lluvia-address-2.3.0.tgz#ac1d4037cac588c3fd8d126eaf5ab854914ece02"
-  integrity sha512-MkfrLJeGIPl3ulsStvWZROHZM+bhq6hzM22H00wyC+U+4XMRYNU94AJGHMBrt2E9gEpD8XiFCzSbJCDyCWlunQ==
-  dependencies:
-    "@jamashita/anden-object" "2.1.0"
-    "@jamashita/anden-type" "2.1.0"
-    "@jamashita/lluvia-collection" "^2.1.0"
-
-"@jamashita/lluvia-collection@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/lluvia-collection/-/lluvia-collection-2.2.0.tgz#f22aca2bc1d253ebdcd8ccc550e79085588d1297"
-  integrity sha512-3n1Npqz3qzzFDBP+1JGKrxlHBnpCx76+XCWGEdOYh0xNFzCE/mUoZCfi4I4/xqaf6c5SaaTlBS6rzXKk3/tIqw==
-  dependencies:
-    "@jamashita/anden-object" "2.1.0"
-    "@jamashita/anden-type" "2.1.0"
-
-"@jamashita/lluvia-project@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/lluvia-project/-/lluvia-project-2.3.0.tgz#eb880322b2daf55be54c3fd4069f1de560fa78dc"
-  integrity sha512-GOrmxvWaqJsrsg8OtIKuK5omL/rWe3yEyzwP7uvs8xavim7GG1mX2HNpS94J/fYHm4Ls/eI6mc672mBZTFKYHg==
-  dependencies:
-    "@jamashita/anden-object" "2.1.0"
-    "@jamashita/anden-type" "2.1.0"
-    "@jamashita/lluvia-collection" "^2.1.0"
-
-"@jamashita/lluvia-sequence@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/lluvia-sequence/-/lluvia-sequence-2.3.0.tgz#c56ce1ba64ea78699ccf41cf9657eab1eef548fc"
-  integrity sha512-XxJhm5iszM6K/G+QbOqjnhEeOzn/robQ3WwkAjcvjqu2RnvV4RP/XE8ubtCji3G0lFla1gNxhhXlI7Qgrlh0mQ==
-  dependencies:
-    "@jamashita/anden-object" "2.1.0"
-    "@jamashita/anden-type" "2.1.0"
-    "@jamashita/lluvia-collection" "^2.1.0"
 
 "@jest/console@^27.1.0":
   version "27.1.0"
@@ -8610,9 +8559,9 @@ tmp@^0.0.33:
     os-tmpdir "~1.0.2"
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
-  integrity sha1-I2QN17QtAEM5ERQIIOXPRA5SHdE=
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
+  integrity sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
