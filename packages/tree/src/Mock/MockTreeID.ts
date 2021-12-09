@@ -2,8 +2,7 @@ import { ValueObject } from '@jamashita/anden-object';
 import { Primitive } from '@jamashita/anden-type';
 import { TreeID } from '../TreeID';
 
-export class MockTreeID extends ValueObject<'MockTreeID'> implements TreeID<'MockTreeID'> {
-  public readonly noun: 'MockTreeID' = 'MockTreeID';
+export class MockTreeID extends ValueObject implements TreeID {
   private readonly id: string;
 
   public constructor(id: string) {

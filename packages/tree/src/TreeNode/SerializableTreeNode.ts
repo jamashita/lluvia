@@ -8,9 +8,7 @@ export type TreeNodeJSON = Readonly<{
   children: ReadonlyArray<ObjectLiteral>;
 }>;
 
-export class SerializableTreeNode<V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>, 'SerializableTreeNode'> implements JSONable<TreeNodeJSON> {
-  public readonly noun: 'SerializableTreeNode' = 'SerializableTreeNode';
-
+export class SerializableTreeNode<V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
   public static of<VT extends SerializableTreeObject>(node: SerializableTreeNode<VT>): SerializableTreeNode<VT> {
     return new SerializableTreeNode<VT>(node.getValue(), node.getChildren());
   }

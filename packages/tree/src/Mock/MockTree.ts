@@ -8,9 +8,7 @@ interface MockTreeObject<K extends TreeID> extends StructurableTreeObject<K>, Se
   // NOOP
 }
 
-export class MockTree<K extends TreeID, V extends MockTreeObject<K>> extends ATree<V, MockTreeNode<K, V>, 'MockTree'> {
-  public readonly noun: 'MockTree' = 'MockTree';
-
+export class MockTree<K extends TreeID, V extends MockTreeObject<K>> extends ATree<V, MockTreeNode<K, V>> {
   public constructor(root: MockTreeNode<K, V>) {
     super(root);
   }

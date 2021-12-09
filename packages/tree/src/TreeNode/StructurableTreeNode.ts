@@ -3,9 +3,7 @@ import { StructurableTreeObject } from '../StructurableTreeObject';
 import { TreeID } from '../TreeID';
 import { ATreeNode } from './ATreeNode';
 
-export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>, 'StructurableTreeNode'> {
-  public readonly noun: 'StructurableTreeNode' = 'StructurableTreeNode';
-
+export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>> {
   public static of<KT extends TreeID, VT extends StructurableTreeObject<KT>>(node: StructurableTreeNode<KT, VT>): StructurableTreeNode<KT, VT> {
     return StructurableTreeNode.ofValue<KT, VT>(node.getValue(), node.getChildren());
   }
