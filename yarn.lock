@@ -535,19 +535,19 @@
     "@jamashita/anden-type" "^2.2.0"
     make-error-cause "2.3.0"
 
-"@jamashita/anden-object@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.5.0.tgz#65a2557a9e1f91fcaa026d0cbcbfbfc7544c1e1d"
-  integrity sha512-xY5mf35sy6W0W+ey5CQFu04sEcHzlyJl32wJuf8+7Ysh07hNRLmnN9yTBGq56jn3VD4DY0NPMHjLiMUT6uo6dw==
+"@jamashita/anden-object@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.6.0.tgz#def9c7aa1503a8490ca6560f7c86f9a781a6ccc7"
+  integrity sha512-Wh0ucRx4iHsg6fkUDV5NY6JezKlsym1ZLCOQE6QL7ERnBS4Lw99ftRHvaipv5EdBst7oTTaZiAcgMlg45Br9rg==
   dependencies:
     "@jamashita/anden-error" "^2.3.0"
     "@jamashita/anden-type" "^2.2.0"
     hash-it "5.0.2"
 
-"@jamashita/anden-type@2.2.0", "@jamashita/anden-type@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.2.0.tgz#2b4bddbccba6399c8489cd5783948bbb4b599e39"
-  integrity sha512-R9ivgatNbmV6Y/QImuRFakC2L4He8QAwHaKIchq7IuxibCvjKqSXxz24bTZnOOsF9mL1hiPX79ctFaAg8AW49w==
+"@jamashita/anden-type@2.3.0", "@jamashita/anden-type@^2.2.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.3.0.tgz#99e2721ec7440eb6b1a28052576a0123926dede6"
+  integrity sha512-lxrJwM69haZ0HAdVuXvbiv9qQIq4i15A+KTEUdL1EvuTJKCIl/+TjQYQmQKIw2a9DHNOgZsPohCV3MQo5M26HQ==
   dependencies:
     reflect-metadata "0.1.13"
 
