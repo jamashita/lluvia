@@ -2,9 +2,7 @@ import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 
-export class MutableAddress<V> extends AAddress<V, MutableAddress<V>, 'MutableAddress'> {
-  public readonly noun: 'MutableAddress' = 'MutableAddress';
-
+export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
   public static empty<VT>(): MutableAddress<VT> {
     return MutableAddress.ofInternal<VT>(new Map<VT | number, VT>());
   }
