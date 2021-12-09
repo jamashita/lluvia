@@ -4,8 +4,6 @@ import { ImmutableAddress } from '../ImmutableAddress';
 describe('ImmutableAddress', () => {
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      expect.assertions(4);
-
       const address: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.ofSet<MockValueObject<number>>(
         new Set<MockValueObject<number>>([
           new MockValueObject<number>(1),
@@ -27,8 +25,6 @@ describe('ImmutableAddress', () => {
 
   describe('ofSet', () => {
     it('returns ImmutableAddress.empty() when the size is 0', () => {
-      expect.assertions(2);
-
       const address: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.ofSet<MockValueObject<number>>(new Set<MockValueObject<number>>());
 
       expect(address.isEmpty()).toBe(true);
@@ -36,8 +32,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('returns instance', () => {
-      expect.assertions(2);
-
       const address1: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.ofSet<MockValueObject<number>>(
         new Set<MockValueObject<number>>([new MockValueObject<number>(1), new MockValueObject<number>(3)])
       );
@@ -56,22 +50,16 @@ describe('ImmutableAddress', () => {
 
   describe('empty', () => {
     it('returns singleton instance', () => {
-      expect.assertions(1);
-
       expect(ImmutableAddress.empty<MockValueObject<number>>()).toBe(ImmutableAddress.empty<MockValueObject<number>>());
     });
 
     it('always returns 0-size set', () => {
-      expect.assertions(1);
-
       expect(ImmutableAddress.empty<MockValueObject<number>>().isEmpty()).toBe(true);
     });
   });
 
   describe('add', () => {
     it('can extend immutably', () => {
-      expect.assertions(10);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -97,8 +85,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('does nothing when the arguments are already contained', () => {
-      expect.assertions(3);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -113,8 +99,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('does nothing when the other same value object are already contained', () => {
-      expect.assertions(3);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(1);
@@ -130,8 +114,6 @@ describe('ImmutableAddress', () => {
 
   describe('remove', () => {
     it('can remove retaining value if it contains', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -145,8 +127,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('does nothing when there is no such value', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -160,8 +140,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('returns the removed Address', () => {
-      expect.assertions(3);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(2);
@@ -177,8 +155,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('returns ImmutableAddress.empty() when the size will be 0', () => {
-      expect.assertions(1);
-
       const value: MockValueObject<number> = new MockValueObject<number>(1);
 
       const address1: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.ofSet<MockValueObject<number>>(new Set<MockValueObject<number>>([value]));
@@ -188,8 +164,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('does nothing when Address is empty', () => {
-      expect.assertions(1);
-
       const address: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.empty<MockValueObject<number>>();
 
       expect(address.remove(new MockValueObject<number>(1))).toBe(address);
@@ -198,8 +172,6 @@ describe('ImmutableAddress', () => {
 
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -217,8 +189,6 @@ describe('ImmutableAddress', () => {
 
   describe('map', () => {
     it('execute the mapper function and returns mapped Address immutably', () => {
-      expect.assertions(6);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -241,8 +211,6 @@ describe('ImmutableAddress', () => {
 
   describe('filter', () => {
     it('can remove match values', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -266,8 +234,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('returns ImmutableAddress.empty() when matches nothing', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -287,8 +253,6 @@ describe('ImmutableAddress', () => {
 
   describe('duplicate', () => {
     it('returns ImmutableAddress.empty() when there are no values', () => {
-      expect.assertions(1);
-
       const address: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.ofSet<MockValueObject<number>>(
         new Set<MockValueObject<number>>()
       );
@@ -297,8 +261,6 @@ describe('ImmutableAddress', () => {
     });
 
     it('returns shallow-copied instance', () => {
-      expect.assertions(7);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);

@@ -5,8 +5,6 @@ import { MockSequence } from '../Mock/MockSequence';
 describe('ASequence', () => {
   describe('iterator', () => {
     it('returns [number, MockValueObject<number>]', () => {
-      expect.assertions(4);
-
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2)
@@ -24,8 +22,6 @@ describe('ASequence', () => {
 
   describe('get', () => {
     it('returns value at the correct key', () => {
-      expect.assertions(4);
-
       const values: Array<MockValueObject<number>> = [
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),
@@ -41,8 +37,6 @@ describe('ASequence', () => {
     });
 
     it('returns null at incorrect keys', () => {
-      expect.assertions(2);
-
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),
@@ -56,8 +50,6 @@ describe('ASequence', () => {
 
   describe('contains', () => {
     it('returns false if the value does not exist', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -68,8 +60,6 @@ describe('ASequence', () => {
     });
 
     it('returns true if the value exists', () => {
-      expect.assertions(3);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(2);
@@ -84,8 +74,6 @@ describe('ASequence', () => {
 
   describe('isEmpty', () => {
     it('returns true if the values does not exist', () => {
-      expect.assertions(2);
-
       const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2)
@@ -99,8 +87,6 @@ describe('ASequence', () => {
 
   describe('forEach', () => {
     it('calls back as much as the size of set', () => {
-      expect.assertions(4);
-
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),
@@ -116,8 +102,6 @@ describe('ASequence', () => {
 
   describe('find', () => {
     it('returns the first found value', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -152,8 +136,6 @@ describe('ASequence', () => {
 
   describe('every', () => {
     it('returns true if all the values are the same', () => {
-      expect.assertions(1);
-
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(2),
         new MockValueObject<number>(4),
@@ -169,8 +151,6 @@ describe('ASequence', () => {
     });
 
     it('returns false if at least one of the values is not false', () => {
-      expect.assertions(6);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(4);
       const value3: MockValueObject<number> = new MockValueObject<number>(6);
@@ -236,8 +216,6 @@ describe('ASequence', () => {
 
   describe('some', () => {
     it('returns true if at least one of the values returns true', () => {
-      expect.assertions(2);
-
       const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(2),
         new MockValueObject<number>(4),
@@ -263,8 +241,6 @@ describe('ASequence', () => {
     });
 
     it('returns false if none of the values are true', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
       const value2: MockValueObject<number> = new MockValueObject<number>(4);
       const value3: MockValueObject<number> = new MockValueObject<number>(6);
@@ -289,8 +265,6 @@ describe('ASequence', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
       const value: MockValueObject<number> = new MockValueObject<number>(1);
 
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value]);
@@ -299,8 +273,6 @@ describe('ASequence', () => {
     });
 
     it('returns false if the size is different', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -311,16 +283,12 @@ describe('ASequence', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([]);
 
       expect(sequence.equals(new MockValueObject('mock'))).toBe(false);
     });
 
     it('returns true even if the order is different', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -331,8 +299,6 @@ describe('ASequence', () => {
     });
 
     it('returns true if the length is the same and the sequence is the same', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -345,8 +311,6 @@ describe('ASequence', () => {
 
   describe('toString', () => {
     it('returns concatenated string', () => {
-      expect.assertions(1);
-
       const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),
@@ -359,8 +323,6 @@ describe('ASequence', () => {
 
   describe('toArray', () => {
     it('returns its retaining shallow-copied array', () => {
-      expect.assertions(5);
-
       const values: Array<MockValueObject<number>> = [
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),
@@ -383,8 +345,6 @@ describe('ASequence', () => {
 
   describe('values', () => {
     it('returns its retaining values', () => {
-      expect.assertions(2);
-
       const values: Array<MockValueObject<number>> = [
         new MockValueObject<number>(1),
         new MockValueObject<number>(2)

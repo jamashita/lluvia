@@ -6,8 +6,6 @@ import { MockTreeIDFactory } from '../Mock/MockTreeIDFactory';
 describe('ClosureTableHierarchy', () => {
   describe('ofJSON', () => {
     it('returns instance from json by forging with factory', () => {
-      expect.assertions(2);
-
       const json: ClosureTableJSON = {
         ancestor: '7fc1343b-f086-4951-876f-410067a6937d',
         offspring: 'e45eb02f-837a-40c9-8925-474e2f18faf0'
@@ -24,24 +22,18 @@ describe('ClosureTableHierarchy', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
       const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
 
       expect(hierarchy.equals(hierarchy)).toBe(true);
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock'), new MockTreeID('mock'));
 
       expect(hierarchy.equals(new MockValueObject('mock'))).toBe(false);
     });
 
     it('returns true when all the properties are the same', () => {
-      expect.assertions(4);
-
       const hierarchy1: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
       const hierarchy2: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock3'), new MockTreeID('mock2'));
       const hierarchy3: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock4'));
@@ -57,8 +49,6 @@ describe('ClosureTableHierarchy', () => {
 
   describe('toString', () => {
     it('returns ancestor and offspring', () => {
-      expect.assertions(1);
-
       const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
 
       expect(hierarchy.toString()).toBe('mock1, mock2');

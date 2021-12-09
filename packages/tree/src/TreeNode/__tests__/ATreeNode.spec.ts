@@ -6,8 +6,6 @@ import { MockTreeNode } from '../Mock/MockTreeNode';
 describe('ATreeNode', () => {
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(2);
-
       const node01: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')));
       const node02: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
@@ -23,16 +21,12 @@ describe('ATreeNode', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')));
 
       expect(node.equals(new MockTreeObject(new MockTreeID('mock')))).toBe(false);
     });
 
     it('returns true when all the properties are the same', () => {
-      expect.assertions(11);
-
       const node01: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')));
       const node02: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')));
       const node03: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')));
@@ -94,8 +88,6 @@ describe('ATreeNode', () => {
 
   describe('toString', () => {
     it('returns JSON-like string', () => {
-      expect.assertions(3);
-
       const node01: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')));
       const node02: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
@@ -122,8 +114,6 @@ describe('ATreeNode', () => {
   });
   describe('isLeaf', () => {
     it('returns false if it owns children', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -137,8 +127,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns true if it does not own children', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')));
 
       expect(node.isLeaf()).toBe(true);
@@ -147,8 +135,6 @@ describe('ATreeNode', () => {
 
   describe('contains', () => {
     it('returns true if TreeNode itself has the value', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -167,8 +153,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns true if TreeNode\'s children have the value', () => {
-      expect.assertions(2);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -188,8 +172,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns true if TreeNode does not contain such value', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -210,8 +192,6 @@ describe('ATreeNode', () => {
 
   describe('size', () => {
     it('returns 1 when the TreeNode does not have children', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1'))
       );
@@ -220,8 +200,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns self + all children\'s number if TreeNode have children', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -242,8 +220,6 @@ describe('ATreeNode', () => {
 
   describe('find', () => {
     it('returns the value itself when the TreeNode value matches', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -264,8 +240,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns children\'s value when the TreeNode\'s children value matches', () => {
-      expect.assertions(2);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -289,8 +263,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns null when the TreeNode does not have such value', () => {
-      expect.assertions(1);
-
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -313,8 +285,6 @@ describe('ATreeNode', () => {
 
   describe('values', () => {
     it('returns its own value as Array', () => {
-      expect.assertions(2);
-
       const value: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 1'));
 
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -328,8 +298,6 @@ describe('ATreeNode', () => {
     });
 
     it('returns complex Array by retrieving tree', () => {
-      expect.assertions(6);
-
       const value1: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 1'));
       const value2: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 2'));
       const value3: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 3'));

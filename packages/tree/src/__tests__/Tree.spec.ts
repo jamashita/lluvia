@@ -1,5 +1,4 @@
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import sinon, { SinonSpy } from 'sinon';
 import { MockTree } from '../Mock/MockTree';
 import { MockTreeID } from '../Mock/MockTreeID';
 import { MockTreeObject } from '../Mock/MockTreeObject';
@@ -8,24 +7,18 @@ import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode';
 describe('Tree', () => {
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock'))));
 
       expect(tree.equals(tree)).toBe(true);
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock'))));
 
       expect(tree.equals(new MockTreeObject(new MockTreeID('mock')))).toBe(false);
     });
 
     it('returns true when all the properties are the same', () => {
-      expect.assertions(11);
-
       const tree01: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1'))));
       const tree02: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2'))));
       const tree03: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1'))));
@@ -86,29 +79,27 @@ describe('Tree', () => {
 
   describe('toString', () => {
     it('delegates its node instance', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
-      const spy: SinonSpy = sinon.spy();
       const root: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject<MockTreeID>(new MockTreeID('mock')));
 
-      root.toString = spy;
+      root.toString = fn;
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
       tree.toString();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('getRoot', () => {
     it('returns root', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
-      const spy: SinonSpy = sinon.spy();
       const root: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock')));
 
-      root.getValue = spy;
+      root.getValue = fn;
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
@@ -118,29 +109,27 @@ describe('Tree', () => {
 
   describe('contains', () => {
     it('delegates to retaining root', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
       const root: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock')));
-      const spy: SinonSpy = sinon.spy();
 
-      root.contains = spy;
+      root.contains = fn;
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
       tree.contains(new MockTreeObject(new MockTreeID('mockmock')));
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('find', () => {
     it('delegates to retaining root', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
       const root: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock')));
-      const spy: SinonSpy = sinon.spy();
 
-      root.find = spy;
+      root.find = fn;
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
@@ -148,48 +137,44 @@ describe('Tree', () => {
         return true;
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('size', () => {
     it('delegates to retaining root', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
       const root: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock')));
-      const spy: SinonSpy = sinon.spy();
 
-      root.size = spy;
+      root.size = fn;
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
       tree.size();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('values', () => {
     it('delegates to retaining root', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
       const root: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock')));
-      const spy: SinonSpy = sinon.spy();
 
-      root.values = spy;
+      root.values = fn;
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
       tree.values();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('forEach', () => {
     it('iterates root\'s value when the tree only has root', () => {
-      expect.assertions(1);
-
       const obj: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 1'));
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(obj));
 
@@ -199,8 +184,6 @@ describe('Tree', () => {
     });
 
     it('returns true when all the tree nodes satisfy the value', () => {
-      expect.assertions(7);
-
       const obj1: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 1'));
       const obj2: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 2'));
       const obj3: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 3'));
@@ -266,8 +249,6 @@ describe('Tree', () => {
 
   describe('every', () => {
     it('returns true when the tree is only a root and it is the very value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1'))));
 
       const every: boolean = tree.every((v: MockTreeObject<MockTreeID>) => {
@@ -278,8 +259,6 @@ describe('Tree', () => {
     });
 
     it('returns false when the tree is only a root but it is not the value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1'))));
 
       const every: boolean = tree.every((v: MockTreeObject<MockTreeID>) => {
@@ -290,8 +269,6 @@ describe('Tree', () => {
     });
 
     it('returns true when all the tree nodes satisfy the value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),
@@ -336,8 +313,6 @@ describe('Tree', () => {
     });
 
     it('returns false when one of the tree nodes does not satisfy the value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),
@@ -384,8 +359,6 @@ describe('Tree', () => {
 
   describe('some', () => {
     it('returns true when the tree is only a root and it is the very value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1'))));
 
       const some: boolean = tree.some((v: MockTreeObject<MockTreeID>) => {
@@ -396,8 +369,6 @@ describe('Tree', () => {
     });
 
     it('returns false when the tree is only a root but it is not the value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1'))));
 
       const some: boolean = tree.some((v: MockTreeObject<MockTreeID>) => {
@@ -408,8 +379,6 @@ describe('Tree', () => {
     });
 
     it('returns true when one of the tree nodes satisfy the value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),
@@ -454,8 +423,6 @@ describe('Tree', () => {
     });
 
     it('returns false when none of the tree nodes satisfy the value', () => {
-      expect.assertions(1);
-
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mocc 1')),

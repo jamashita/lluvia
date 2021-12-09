@@ -5,8 +5,6 @@ import { MockProject } from '../Mock/MockProject';
 describe('AProject', () => {
   describe('iterator', () => {
     it('returns [MockValueObject<string>, MockValueObject<number>]', () => {
-      expect.assertions(4);
-
       const key1: MockValueObject<string> = new MockValueObject<string>('a');
       const key2: MockValueObject<string> = new MockValueObject<string>('d');
       const keys: Array<MockValueObject<string>> = [key1, key2];
@@ -35,8 +33,6 @@ describe('AProject', () => {
 
   describe('get', () => {
     it('returns value at the correct key', () => {
-      expect.assertions(3);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(1);
 
@@ -52,8 +48,6 @@ describe('AProject', () => {
     });
 
     it('returns null at incorrect keys', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -70,8 +64,6 @@ describe('AProject', () => {
 
   describe('has', () => {
     it('returns false if the key does not exist', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -85,8 +77,6 @@ describe('AProject', () => {
     });
 
     it('returns true if the key exists', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(1);
 
@@ -103,8 +93,6 @@ describe('AProject', () => {
 
   describe('contains', () => {
     it('returns false if the value does not exist', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
 
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
@@ -118,8 +106,6 @@ describe('AProject', () => {
     });
 
     it('returns true if the value exists', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
 
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
@@ -136,8 +122,6 @@ describe('AProject', () => {
 
   describe('isEmpty', () => {
     it('returns true if the values does not exist', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -155,8 +139,6 @@ describe('AProject', () => {
 
   describe('forEach', () => {
     it('calls back as much as the size of set', () => {
-      expect.assertions(5);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -187,8 +169,6 @@ describe('AProject', () => {
 
   describe('every', () => {
     it('returns true if all the values are the same', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(3);
       const key2: MockValueObject<number> = new MockValueObject<number>(6);
       const key3: MockValueObject<number> = new MockValueObject<number>(9);
@@ -219,8 +199,6 @@ describe('AProject', () => {
     });
 
     it('if one of them are not satisfied, returns false', () => {
-      expect.assertions(6);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(2);
       const key3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -305,8 +283,6 @@ describe('AProject', () => {
 
   describe('some', () => {
     it('returns true if at least one of the values returns true', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(2);
       const key3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -335,8 +311,6 @@ describe('AProject', () => {
     });
 
     it('returns false if none of the values are true', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(2);
       const key3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -368,8 +342,6 @@ describe('AProject', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
       const key: MockValueObject<number> = new MockValueObject<number>(1);
 
       const value: MockValueObject<number> = new MockValueObject<number>(2);
@@ -382,8 +354,6 @@ describe('AProject', () => {
     });
 
     it('returns false if the size is different', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -404,8 +374,6 @@ describe('AProject', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
         new Map<MockValueObject<number>, MockValueObject<number>>()
       );
@@ -414,8 +382,6 @@ describe('AProject', () => {
     });
 
     it('returns false if the values are different', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -439,8 +405,6 @@ describe('AProject', () => {
     });
 
     it('returns false if the keys are different', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
       const key3: MockValueObject<number> = new MockValueObject<number>(5);
@@ -465,8 +429,6 @@ describe('AProject', () => {
     });
 
     it('returns true even if the order is different', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -490,8 +452,6 @@ describe('AProject', () => {
     });
 
     it('returns true if the same and the order is the same', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -517,8 +477,6 @@ describe('AProject', () => {
 
   describe('toString', () => {
     it('returns key-value concatenated string', () => {
-      expect.assertions(1);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -538,8 +496,6 @@ describe('AProject', () => {
 
   describe('toMap', () => {
     it('returns its retaining shallow-copied map', () => {
-      expect.assertions(5);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -570,8 +526,6 @@ describe('AProject', () => {
 
   describe('keys', () => {
     it('returns its retaining keys', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<string> = new MockValueObject<string>('a');
       const key2: MockValueObject<string> = new MockValueObject<string>('d');
       const keys: Array<MockValueObject<string>> = [key1, key2];
@@ -597,8 +551,6 @@ describe('AProject', () => {
 
   describe('values', () => {
     it('returns its retaining values', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<string> = new MockValueObject<string>('a');
       const key2: MockValueObject<string> = new MockValueObject<string>('d');
 
@@ -624,8 +576,6 @@ describe('AProject', () => {
 
   describe('find', () => {
     it('returns the first found value', () => {
-      expect.assertions(5);
-
       const key1: MockValueObject<string> = new MockValueObject<string>('a');
       const key2: MockValueObject<string> = new MockValueObject<string>('d');
       const key3: MockValueObject<string> = new MockValueObject<string>('g');

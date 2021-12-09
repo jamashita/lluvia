@@ -5,8 +5,6 @@ import { MutableSequence } from '../MutableSequence';
 describe('MutableSequence', () => {
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      expect.assertions(4);
-
       const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2)
@@ -26,16 +24,12 @@ describe('MutableSequence', () => {
 
   describe('ofArray', () => {
     it('returns MutableSequence.empty() when set size is 0', () => {
-      expect.assertions(1);
-
       const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([]);
 
       expect(sequence.isEmpty()).toBe(true);
     });
 
     it('returns instance', () => {
-      expect.assertions(2);
-
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(3)
@@ -53,22 +47,16 @@ describe('MutableSequence', () => {
 
   describe('empty', () => {
     it('does not return singleton instance', () => {
-      expect.assertions(1);
-
       expect(MutableSequence.empty<MockValueObject<number>>()).not.toBe(MutableSequence.empty<MockValueObject<number>>());
     });
 
     it('always returns 0-size array', () => {
-      expect.assertions(1);
-
       expect(MutableSequence.empty<MockValueObject<number>>().isEmpty()).toBe(true);
     });
   });
 
   describe('add', () => {
     it('can extend mutably', () => {
-      expect.assertions(13);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -102,8 +90,6 @@ describe('MutableSequence', () => {
 
   describe('set', () => {
     it('can be set the value into first position', () => {
-      expect.assertions(5);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -124,8 +110,6 @@ describe('MutableSequence', () => {
     });
 
     it('can be set the value into middle position', () => {
-      expect.assertions(5);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -146,8 +130,6 @@ describe('MutableSequence', () => {
     });
 
     it('can be set the value into last position', () => {
-      expect.assertions(5);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -168,8 +150,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns itself when given key is less than 0', () => {
-      expect.assertions(2);
-
       const value: MockValueObject<number> = new MockValueObject<number>(1);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([]);
@@ -182,8 +162,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns itself when given key is greater than sequence length', () => {
-      expect.assertions(2);
-
       const value: MockValueObject<number> = new MockValueObject<number>(1);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([]);
@@ -196,8 +174,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns itself when given key is not integer', () => {
-      expect.assertions(2);
-
       const value: MockValueObject<number> = new MockValueObject<number>(1);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([]);
@@ -212,8 +188,6 @@ describe('MutableSequence', () => {
 
   describe('remove', () => {
     it('can remove retaining value if it contains', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -230,8 +204,6 @@ describe('MutableSequence', () => {
     });
 
     it('removes middle value', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -250,8 +222,6 @@ describe('MutableSequence', () => {
     });
 
     it('removes last value', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -270,8 +240,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns itself when give key is greater than sequence length', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -287,8 +255,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns itself when give key is less than 0', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -304,8 +270,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns itself when give key is not integer', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -323,8 +287,6 @@ describe('MutableSequence', () => {
 
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
-      expect.assertions(2);
-
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2)
@@ -338,8 +300,6 @@ describe('MutableSequence', () => {
 
   describe('map', () => {
     it('execute the mapper function and returns mapped Address immutably', () => {
-      expect.assertions(5);
-
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),
@@ -370,8 +330,6 @@ describe('MutableSequence', () => {
 
   describe('filter', () => {
     it('can remove match values', () => {
-      expect.assertions(6);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -406,8 +364,6 @@ describe('MutableSequence', () => {
 
   describe('sort', () => {
     it('when the size is 0, just returns another empty MutableSequence', () => {
-      expect.assertions(2);
-
       const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.empty<MockValueObject<number>>();
       const sorted: MutableSequence<MockValueObject<number>> = sequence.sort(() => {
         return 1;
@@ -418,8 +374,6 @@ describe('MutableSequence', () => {
     });
 
     it('when the size is 1, just copy a sequence shallowly', () => {
-      expect.assertions(3);
-
       const arr: Array<MockValueObject<number>> = [
         new MockValueObject<number>(2)
       ];
@@ -434,8 +388,6 @@ describe('MutableSequence', () => {
     });
 
     it('returns like an array', () => {
-      expect.assertions(10);
-
       const arr: Array<MockValueObject<number>> = [
         new MockValueObject<number>(4),
         new MockValueObject<number>(2),
@@ -462,8 +414,6 @@ describe('MutableSequence', () => {
 
   describe('duplicate', () => {
     it('returns shallow-copied instance', () => {
-      expect.assertions(6);
-
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray<MockValueObject<number>>([
         new MockValueObject<number>(1),
         new MockValueObject<number>(2),

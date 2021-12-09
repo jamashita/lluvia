@@ -5,8 +5,6 @@ import { MockAddress } from '../Mock/MockAddress';
 describe('AAddress', () => {
   describe('iterator', () => {
     it('returns [void, MockValueObject<number>]', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const values: Array<MockValueObject<number>> = [value1, value2];
@@ -26,8 +24,6 @@ describe('AAddress', () => {
 
   describe('get', () => {
     it('always returns null', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
 
       const address1: MockAddress<MockValueObject<number>> = new MockAddress<MockValueObject<number>>(
@@ -46,8 +42,6 @@ describe('AAddress', () => {
 
   describe('contains', () => {
     it('returns false if the value does not exist', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -60,8 +54,6 @@ describe('AAddress', () => {
     });
 
     it('returns true if the value exists', () => {
-      expect.assertions(3);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(2);
@@ -78,8 +70,6 @@ describe('AAddress', () => {
 
   describe('isEmpty', () => {
     it('returns true if the values does not exist', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -97,8 +87,6 @@ describe('AAddress', () => {
 
   describe('forEach', () => {
     it('calls back as much as the size of set', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -119,8 +107,6 @@ describe('AAddress', () => {
 
   describe('find', () => {
     it('returns the first found value', () => {
-      expect.assertions(4);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -152,8 +138,6 @@ describe('AAddress', () => {
 
   describe('every', () => {
     it('returns true if all the values are the same', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
       const value2: MockValueObject<number> = new MockValueObject<number>(4);
       const value3: MockValueObject<number> = new MockValueObject<number>(6);
@@ -171,8 +155,6 @@ describe('AAddress', () => {
     });
 
     it('returns false if at least one of the values is not false', () => {
-      expect.assertions(6);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(4);
       const value3: MockValueObject<number> = new MockValueObject<number>(6);
@@ -220,8 +202,6 @@ describe('AAddress', () => {
 
   describe('some', () => {
     it('returns true if at least one of the values returns true', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
       const value2: MockValueObject<number> = new MockValueObject<number>(4);
       const value3: MockValueObject<number> = new MockValueObject<number>(6);
@@ -249,8 +229,6 @@ describe('AAddress', () => {
     });
 
     it('returns false if none of the values are true', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(4);
       const value2: MockValueObject<number> = new MockValueObject<number>(6);
       const value3: MockValueObject<number> = new MockValueObject<number>(8);
@@ -272,8 +250,6 @@ describe('AAddress', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
       const value: MockValueObject<number> = new MockValueObject<number>(1);
 
       const address: MockAddress<MockValueObject<number>> = new MockAddress<MockValueObject<number>>(
@@ -284,8 +260,6 @@ describe('AAddress', () => {
     });
 
     it('returns false if the size is different', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -300,8 +274,6 @@ describe('AAddress', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const address: MockAddress<MockValueObject<number>> = new MockAddress<MockValueObject<number>>(
         new Set<MockValueObject<number>>()
       );
@@ -310,8 +282,6 @@ describe('AAddress', () => {
     });
 
     it('returns true even if the order is different', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -326,8 +296,6 @@ describe('AAddress', () => {
     });
 
     it('returns true if the size is the same and the order is the quite same', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -344,8 +312,6 @@ describe('AAddress', () => {
 
   describe('toString', () => {
     it('returns concatenated string', () => {
-      expect.assertions(1);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -360,8 +326,6 @@ describe('AAddress', () => {
 
   describe('toSet', () => {
     it('returns its retaining shallow-copied set', () => {
-      expect.assertions(5);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const value3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -385,8 +349,6 @@ describe('AAddress', () => {
 
   describe('values', () => {
     it('returns its retaining values', () => {
-      expect.assertions(2);
-
       const value1: MockValueObject<number> = new MockValueObject<number>(1);
       const value2: MockValueObject<number> = new MockValueObject<number>(2);
       const values: Array<MockValueObject<number>> = [value1, value2];

@@ -6,8 +6,6 @@ import { StructurableTreeNode } from '../StructurableTreeNode';
 describe('StructurableTreeNode', () => {
   describe('of', () => {
     it('returns ImmutableAddress.empty() when empty children given', () => {
-      expect.assertions(2);
-
       const node01: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')), MutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>());
       const node02: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')), new MockAddress<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()));
 
@@ -18,8 +16,6 @@ describe('StructurableTreeNode', () => {
 
   describe('ofValue', () => {
     it('copies shallowly', () => {
-      expect.assertions(2);
-
       const node01: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -42,8 +38,6 @@ describe('StructurableTreeNode', () => {
 
   describe('append', () => {
     it('appends a node into its children', () => {
-      expect.assertions(6);
-
       const id1: MockTreeID = new MockTreeID('mock 1');
       const id2: MockTreeID = new MockTreeID('mock 2');
       const id3: MockTreeID = new MockTreeID('mock 3');
@@ -97,8 +91,6 @@ describe('StructurableTreeNode', () => {
     });
 
     it('can append a node into the node which do have no children', () => {
-      expect.assertions(4);
-
       const id1: MockTreeID = new MockTreeID('mock 1');
       const id3: MockTreeID = new MockTreeID('mock 3');
       const id4: MockTreeID = new MockTreeID('mock 4');
@@ -143,8 +135,6 @@ describe('StructurableTreeNode', () => {
 
   describe('find', () => {
     it('returns the value itself when the TreeNode value matches', () => {
-      expect.assertions(1);
-
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -165,8 +155,6 @@ describe('StructurableTreeNode', () => {
     });
 
     it('returns children\'s value when the TreeNode\'s children value matches', () => {
-      expect.assertions(2);
-
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -190,8 +178,6 @@ describe('StructurableTreeNode', () => {
     });
 
     it('returns null when the TreeNode does not have such value', () => {
-      expect.assertions(1);
-
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -214,8 +200,6 @@ describe('StructurableTreeNode', () => {
 
   describe('getTreeID', () => {
     it('returns value\'s TreeID', () => {
-      expect.assertions(1);
-
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
@@ -233,8 +217,6 @@ describe('StructurableTreeNode', () => {
 
   describe('has', () => {
     it('returns true when the value is contained in the tree node', () => {
-      expect.assertions(4);
-
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
@@ -253,8 +235,6 @@ describe('StructurableTreeNode', () => {
     });
 
     it('returns false when the value is not contained in the tree node', () => {
-      expect.assertions(2);
-
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeObject(new MockTreeID('mock 1')),
         ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([

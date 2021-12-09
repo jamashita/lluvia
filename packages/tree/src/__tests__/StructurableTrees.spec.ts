@@ -16,8 +16,6 @@ import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
 describe('StructurableTrees', () => {
   describe('ofTable', () => {
     it('returns StructurableTrees.empty<MockTreeID, MockTreeObject<MockTreeID>>() when empty ClosureTable<MockTreeID> and empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
-      expect.assertions(2);
-
       const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
       const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.empty<MockTreeObject<MockTreeID>>();
 
@@ -28,8 +26,6 @@ describe('StructurableTrees', () => {
     });
 
     it('throws TreeError when empty ClosureTable<MockTreeID> given', () => {
-      expect.assertions(1);
-
       const id: MockTreeID = new MockTreeID('id 1');
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
@@ -43,8 +39,6 @@ describe('StructurableTrees', () => {
     });
 
     it('throws TreeError when empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
-      expect.assertions(1);
-
       const id: MockTreeID = new MockTreeID('id 1');
 
       const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
@@ -60,8 +54,6 @@ describe('StructurableTrees', () => {
     });
 
     it('throws TreeError when values do not have such key', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
 
@@ -80,8 +72,6 @@ describe('StructurableTrees', () => {
     });
 
     it('returns one simplest flat Tree', () => {
-      expect.assertions(5);
-
       const id: MockTreeID = new MockTreeID('id 1');
 
       const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
@@ -106,8 +96,6 @@ describe('StructurableTrees', () => {
     });
 
     it('returns 2 or more simplest flat Trees', () => {
-      expect.assertions(9);
-
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
 
@@ -142,8 +130,6 @@ describe('StructurableTrees', () => {
     });
 
     it('returns one complex Tree', () => {
-      expect.assertions(18);
-
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
       const id3: MockTreeID = new MockTreeID('id 3');
@@ -272,16 +258,12 @@ describe('StructurableTrees', () => {
 
   describe('empty', () => {
     it('does not return singleton instance', () => {
-      expect.assertions(1);
-
       expect(StructurableTrees.empty()).not.toBe(StructurableTrees.empty());
     });
   });
 
   describe('add', () => {
     it('add one tree into empty trees', () => {
-      expect.assertions(4);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
 
       const tree1: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -306,8 +288,6 @@ describe('StructurableTrees', () => {
     });
 
     it('add one tree into simple trees', () => {
-      expect.assertions(9);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -389,8 +369,6 @@ describe('StructurableTrees', () => {
 
   describe('has', () => {
     it('returns true if given key exists', () => {
-      expect.assertions(6);
-
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
       const id3: MockTreeID = new MockTreeID('id 3');
@@ -432,8 +410,6 @@ describe('StructurableTrees', () => {
 
   describe('toHierarchies', () => {
     it('returns one-length array when no no-children one tree given', () => {
-      expect.assertions(3);
-
       const id1: MockTreeID = new MockTreeID('id 1');
 
       const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
@@ -454,8 +430,6 @@ describe('StructurableTrees', () => {
     });
 
     it('returns true if given key exists', () => {
-      expect.assertions(18);
-
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
       const id3: MockTreeID = new MockTreeID('id 3');

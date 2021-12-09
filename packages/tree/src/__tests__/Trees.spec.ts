@@ -2,7 +2,6 @@ import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable } from '@jamashita/anden-type';
 import { MockAddress } from '@jamashita/lluvia-address';
 import { MockProject } from '@jamashita/lluvia-project';
-import sinon, { SinonSpy } from 'sinon';
 import { MockTree } from '../Mock/MockTree';
 import { MockTreeID } from '../Mock/MockTreeID';
 import { MockTreeObject } from '../Mock/MockTreeObject';
@@ -12,9 +11,7 @@ import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode';
 describe('Trees', () => {
   describe('contains', () => {
     it('delegates its retaining tree', () => {
-      expect.assertions(1);
-
-      const spy: SinonSpy = sinon.spy();
+      const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -29,20 +26,18 @@ describe('Trees', () => {
         ])
       );
 
-      tree.contains = spy;
+      tree.contains = fn;
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
 
       trees.contains(new MockTreeObject<MockTreeID>(id));
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -62,8 +57,6 @@ describe('Trees', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -83,9 +76,7 @@ describe('Trees', () => {
     });
 
     it('delegates its retaining project', () => {
-      expect.assertions(1);
-
-      const spy: SinonSpy = sinon.spy();
+      const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -104,7 +95,7 @@ describe('Trees', () => {
 
       // @ts-expect-error
       trees.trees = project;
-      project.equals = spy;
+      project.equals = fn;
 
       trees.equals(new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(
         new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
@@ -114,14 +105,12 @@ describe('Trees', () => {
         )
       ));
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('every', () => {
     it('returns true when all objects pass the condition', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -161,8 +150,6 @@ describe('Trees', () => {
     });
 
     it('returns false when one of the objects does not pass the condition', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -204,8 +191,6 @@ describe('Trees', () => {
 
   describe('forEach', () => {
     it('retrieves inner trees', () => {
-      expect.assertions(3);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -253,9 +238,7 @@ describe('Trees', () => {
 
   describe('get', () => {
     it('delegates its retaining project', () => {
-      expect.assertions(1);
-
-      const spy: SinonSpy = sinon.spy();
+      const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -274,19 +257,17 @@ describe('Trees', () => {
 
       // @ts-expect-error
       trees.trees = project;
-      project.get = spy;
+      project.get = fn;
 
       trees.get(new MockTreeID('tree id 1010'));
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('isEmpty', () => {
     it('delegates its retaining project', () => {
-      expect.assertions(1);
-
-      const spy: SinonSpy = sinon.spy();
+      const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -305,19 +286,17 @@ describe('Trees', () => {
 
       // @ts-expect-error
       trees.trees = project;
-      project.isEmpty = spy;
+      project.isEmpty = fn;
 
       trees.isEmpty();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('toString', () => {
     it('delegates its retaining project', () => {
-      expect.assertions(1);
-
-      const spy: SinonSpy = sinon.spy();
+      const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -336,19 +315,17 @@ describe('Trees', () => {
 
       // @ts-expect-error
       trees.trees = project;
-      project.toString = spy;
+      project.toString = fn;
 
       trees.toString();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('size', () => {
     it('delegates its retaining project', () => {
-      expect.assertions(1);
-
-      const spy: SinonSpy = sinon.spy();
+      const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
@@ -367,18 +344,16 @@ describe('Trees', () => {
 
       // @ts-expect-error
       trees.trees = project;
-      project.size = spy;
+      project.size = fn;
 
       trees.size();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('some', () => {
     it('returns true when one of the objects passes the condition', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -418,8 +393,6 @@ describe('Trees', () => {
     });
 
     it('returns false when none of the objects does not pass the condition', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -461,8 +434,6 @@ describe('Trees', () => {
 
   describe('values', () => {
     it('returns all objects', () => {
-      expect.assertions(3);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -509,8 +480,6 @@ describe('Trees', () => {
 
   describe('find', () => {
     it('returns found one when the condition passes', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -550,8 +519,6 @@ describe('Trees', () => {
     });
 
     it('returns null when any conditions do not pass', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');

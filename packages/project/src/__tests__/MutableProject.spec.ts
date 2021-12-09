@@ -4,8 +4,6 @@ import { MutableProject } from '../MutableProject';
 describe('MutableProject', () => {
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      expect.assertions(6);
-
       const project: MutableProject<MockValueObject<number>, MockValueObject<number>> = MutableProject.ofMap<MockValueObject<number>, MockValueObject<number>>(
         new Map<MockValueObject<number>, MockValueObject<number>>([
           [new MockValueObject<number>(1), new MockValueObject<number>(2)],
@@ -28,8 +26,6 @@ describe('MutableProject', () => {
 
   describe('ofMap', () => {
     it('returns MutableAddress.empty() when set size is 0', () => {
-      expect.assertions(1);
-
       const project: MutableProject<MockValueObject<number>, MockValueObject<number>> = MutableProject.ofMap<MockValueObject<number>, MockValueObject<number>>(
         new Map<MockValueObject<number>, MockValueObject<number>>([])
       );
@@ -38,8 +34,6 @@ describe('MutableProject', () => {
     });
 
     it('returns instance', () => {
-      expect.assertions(2);
-
       const project1: MutableProject<MockValueObject<number>, MockValueObject<number>> = MutableProject.ofMap<MockValueObject<number>, MockValueObject<number>>(
         new Map<MockValueObject<number>, MockValueObject<number>>([
           [new MockValueObject<number>(1), new MockValueObject<number>(2)],
@@ -61,22 +55,16 @@ describe('MutableProject', () => {
 
   describe('empty', () => {
     it('does not return singleton instance', () => {
-      expect.assertions(1);
-
       expect(MutableProject.empty<MockValueObject<number>, MockValueObject<number>>()).not.toBe(MutableProject.empty<MockValueObject<number>, MockValueObject<number>>());
     });
 
     it('always returns 0-size set', () => {
-      expect.assertions(1);
-
       expect(MutableProject.empty<MockValueObject<number>, MockValueObject<number>>().isEmpty()).toBe(true);
     });
   });
 
   describe('set', () => {
     it('can extend mutably', () => {
-      expect.assertions(7);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -101,8 +89,6 @@ describe('MutableProject', () => {
     });
 
     it('overwrites when the keys are already contained', () => {
-      expect.assertions(3);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
 
       const value1: MockValueObject<number> = new MockValueObject<number>(2);
@@ -119,8 +105,6 @@ describe('MutableProject', () => {
     });
 
     it('also can overwrite when the other same key value objects are already contained', () => {
-      expect.assertions(4);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(1);
 
@@ -141,8 +125,6 @@ describe('MutableProject', () => {
 
   describe('remove', () => {
     it('can remove retaining key if it contains', () => {
-      expect.assertions(2);
-
       const key: MockValueObject<number> = new MockValueObject<number>(1);
 
       const value: MockValueObject<number> = new MockValueObject<number>(2);
@@ -157,8 +139,6 @@ describe('MutableProject', () => {
     });
 
     it('does nothing when there is no such key', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(2);
 
@@ -174,16 +154,12 @@ describe('MutableProject', () => {
     });
 
     it('does nothing when the project is empty', () => {
-      expect.assertions(1);
-
       const project: MutableProject<MockValueObject<number>, MockValueObject<number>> = MutableProject.empty<MockValueObject<number>, MockValueObject<number>>();
 
       expect(project.remove(new MockValueObject<number>(1))).toBe(project);
     });
 
     it('returns the removed Project', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key3: MockValueObject<number> = new MockValueObject<number>(1);
 
@@ -201,8 +177,6 @@ describe('MutableProject', () => {
 
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
-      expect.assertions(2);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
 
       const value: MockValueObject<number> = new MockValueObject<number>(2);
@@ -221,8 +195,6 @@ describe('MutableProject', () => {
 
   describe('map', () => {
     it('execute the mapper function and returns mapped Address immutably', () => {
-      expect.assertions(4);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
 
@@ -249,8 +221,6 @@ describe('MutableProject', () => {
 
   describe('filter', () => {
     it('can remove match values', () => {
-      expect.assertions(7);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(2);
       const key3: MockValueObject<number> = new MockValueObject<number>(3);
@@ -292,8 +262,6 @@ describe('MutableProject', () => {
 
   describe('duplicate', () => {
     it('returns shallow-copied instance', () => {
-      expect.assertions(7);
-
       const key1: MockValueObject<number> = new MockValueObject<number>(1);
       const key2: MockValueObject<number> = new MockValueObject<number>(3);
       const key3: MockValueObject<number> = new MockValueObject<number>(5);
