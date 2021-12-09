@@ -3,7 +3,7 @@ import { isEqualable, Kind, Nullable, Predicate } from '@jamashita/anden-type';
 import { ImmutableAddress } from '@jamashita/lluvia-address';
 import { TreeNode } from './TreeNode';
 
-export abstract class ATreeNode<V, T extends ATreeNode<V, T>, N extends string = string> extends Objet<N> implements TreeNode<V> {
+export abstract class ATreeNode<V, T extends ATreeNode<V, T>> extends Objet implements TreeNode<V> {
   protected readonly value: V;
   protected children: ImmutableAddress<T>;
 
@@ -13,9 +13,9 @@ export abstract class ATreeNode<V, T extends ATreeNode<V, T>, N extends string =
     this.children = children;
   }
 
-  protected abstract forge(node: ATreeNode<V, T>): T;
-
   public abstract append(node: T): T;
+
+  protected abstract forge(node: ATreeNode<V, T>): T;
 
   public contains(value: V): boolean {
     if (this.valueEquals(value)) {
@@ -94,6 +94,17 @@ export abstract class ATreeNode<V, T extends ATreeNode<V, T>, N extends string =
     return size;
   }
 
+  private valueEquals(other: unknown): boolean {
+    if (this.value === other) {
+      return true;
+    }
+    if (isEqualable(this.value)) {
+      return this.value.equals(other);
+    }
+
+    return false;
+  }
+
   public values(): Iterable<V> {
     if (this.isLeaf()) {
       return [this.value];
@@ -104,17 +115,6 @@ export abstract class ATreeNode<V, T extends ATreeNode<V, T>, N extends string =
     this.valuesInternal(values);
 
     return values;
-  }
-
-  private valueEquals(other: unknown): boolean {
-    if (this.value === other) {
-      return true;
-    }
-    if (isEqualable(this.value)) {
-      return this.value.equals(other);
-    }
-
-    return false;
   }
 
   private valuesInternal(values: Array<V>): void {

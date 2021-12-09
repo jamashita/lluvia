@@ -1,6 +1,6 @@
 import { BinaryPredicate, Catalogue, Mapper, Nominative, Nullable } from '@jamashita/anden-type';
 
-export interface Collection<K, V, N extends string = string> extends Nominative<N>, Iterable<[K, V]> {
+export interface Collection<K, V> extends Nominative, Iterable<[K, V]> {
   contains(value: V): boolean;
 
   every(predicate: BinaryPredicate<V, K>): boolean;

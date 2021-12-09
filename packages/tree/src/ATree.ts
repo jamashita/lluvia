@@ -3,7 +3,7 @@ import { Catalogue, Nullable, Predicate } from '@jamashita/anden-type';
 import { Tree } from './Tree';
 import { ATreeNode } from './TreeNode/ATreeNode';
 
-export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = string> extends Objet<N> implements Tree<V, N> {
+export abstract class ATree<V, T extends ATreeNode<V, T>> extends Objet implements Tree<V> {
   protected readonly root: T;
 
   protected constructor(root: T) {
@@ -28,6 +28,19 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
 
   public every(predicate: Predicate<V>): boolean {
     return this.everyInternal(this.root, predicate);
+  }
+
+  private everyInternal(node: T, predicate: Predicate<V>): boolean {
+    if (!predicate(node.getValue())) {
+      return false;
+    }
+    if (node.isLeaf()) {
+      return true;
+    }
+
+    return node.getChildren().every((child: T) => {
+      return this.everyInternal(child, predicate);
+    });
   }
 
   public find(predicate: Predicate<V>): Nullable<T> {
@@ -57,23 +70,6 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
     return this.someInternal(this.root, predicate);
   }
 
-  public values(): Iterable<V> {
-    return this.root.values();
-  }
-
-  private everyInternal(node: T, predicate: Predicate<V>): boolean {
-    if (!predicate(node.getValue())) {
-      return false;
-    }
-    if (node.isLeaf()) {
-      return true;
-    }
-
-    return node.getChildren().every((child: T) => {
-      return this.everyInternal(child, predicate);
-    });
-  }
-
   private someInternal(node: T, predicate: Predicate<V>): boolean {
     if (predicate(node.getValue())) {
       return true;
@@ -85,5 +81,9 @@ export abstract class ATree<V, T extends ATreeNode<V, T>, N extends string = str
     return node.getChildren().some((n: T) => {
       return this.someInternal(n, predicate);
     });
+  }
+
+  public values(): Iterable<V> {
+    return this.root.values();
   }
 }
