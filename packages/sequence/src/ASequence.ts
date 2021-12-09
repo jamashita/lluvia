@@ -12,7 +12,7 @@ import {
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Sequence } from './Sequence';
 
-export abstract class ASequence<V, T extends ASequence<V, T>, N extends string = string> extends Quantity<number, V, N> implements Sequence<V, N> {
+export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
 
   protected constructor(sequence: Array<V>) {
@@ -20,17 +20,17 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     this.sequence = sequence;
   }
 
-  public abstract add(value: V): Sequence<V, N>;
-
-  public abstract set(key: number, value: V): T;
-
-  public abstract remove(key: number): T;
+  public abstract add(value: V): Sequence<V>;
 
   public abstract duplicate(): T;
 
+  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
+
   public abstract override map<W>(mapper: Mapper<V, W>): Sequence<W>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
+  public abstract remove(key: number): T;
+
+  public abstract set(key: number, value: V): T;
 
   public abstract sort(comparator: BinaryFunction<V, V, number>): T;
 
@@ -71,7 +71,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
           return false;
         }
       }
- else if (tr.value !== or.value) {
+      else if (tr.value !== or.value) {
         return false;
       }
 
@@ -92,6 +92,18 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     });
 
     return Kind.isUndefined(found);
+  }
+
+  protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
+    const arr: Array<V> = [];
+
+    this.sequence.forEach((v: V, i: number) => {
+      if (predicate(v, i)) {
+        arr.push(v);
+      }
+    });
+
+    return arr;
   }
 
   public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
@@ -126,10 +138,32 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     }).values();
   }
 
+  protected removeInternal(key: number): Array<V> {
+    if (!Kind.isInteger(key)) {
+      return this.sequence;
+    }
+    if (key < 0 || this.sequence.length <= key) {
+      return this.sequence;
+    }
+
+    return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
+  }
+
   public serialize(): string {
     return this.sequence.map<string>((v: V) => {
       return Objet.identify(v);
     }).join(', ');
+  }
+
+  protected setInternal(key: number, value: V): Array<V> {
+    if (!Kind.isInteger(key)) {
+      return this.sequence;
+    }
+    if (key < 0 || this.sequence.length <= key) {
+      return this.sequence;
+    }
+
+    return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
   }
 
   public size(): number {
@@ -148,39 +182,5 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
 
   public values(): Iterable<V> {
     return this.toArray();
-  }
-
-  protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
-    const arr: Array<V> = [];
-
-    this.sequence.forEach((v: V, i: number) => {
-      if (predicate(v, i)) {
-        arr.push(v);
-      }
-    });
-
-    return arr;
-  }
-
-  protected removeInternal(key: number): Array<V> {
-    if (!Kind.isInteger(key)) {
-      return this.sequence;
-    }
-    if (key < 0 || this.sequence.length <= key) {
-      return this.sequence;
-    }
-
-    return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
-  }
-
-  protected setInternal(key: number, value: V): Array<V> {
-    if (!Kind.isInteger(key)) {
-      return this.sequence;
-    }
-    if (key < 0 || this.sequence.length <= key) {
-      return this.sequence;
-    }
-
-    return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
   }
 }

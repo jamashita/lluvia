@@ -2,9 +2,7 @@ import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
-export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>, 'ImmutableProject'> {
-  public readonly noun: 'ImmutableProject' = 'ImmutableProject';
-
+export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>> {
   private static readonly EMPTY: ImmutableProject<unknown, unknown> = new ImmutableProject<unknown, unknown>(new Map<unknown, [unknown, unknown]>());
 
   public static empty<KT, VT>(): ImmutableProject<KT, VT> {

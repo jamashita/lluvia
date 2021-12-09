@@ -12,9 +12,7 @@ import { StructurableTreeObject } from './StructurableTreeObject';
 import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
 
-export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>, 'StructurableTrees'> {
-  public readonly noun: 'StructurableTrees' = 'StructurableTrees';
-
+export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>> {
   public static empty<KT extends TreeID, VT extends StructurableTreeObject<KT>>(): StructurableTrees<KT, VT> {
     return StructurableTrees.ofProject<KT, VT>(ImmutableProject.empty<KT, StructurableTree<KT, VT>>());
   }

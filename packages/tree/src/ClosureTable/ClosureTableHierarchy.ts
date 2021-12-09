@@ -8,8 +8,7 @@ export type ClosureTableJSON = Readonly<{
   offspring: Primitive;
 }>;
 
-export class ClosureTableHierarchy<K extends TreeID> extends ValueObject<'ClosureTableHierarchy'> implements JSONable<ClosureTableJSON> {
-  public readonly noun: 'ClosureTableHierarchy' = 'ClosureTableHierarchy';
+export class ClosureTableHierarchy<K extends TreeID> extends ValueObject implements JSONable<ClosureTableJSON> {
   private readonly ancestor: K;
   private readonly offspring: K;
 
@@ -47,6 +46,14 @@ export class ClosureTableHierarchy<K extends TreeID> extends ValueObject<'Closur
     return true;
   }
 
+  public getAncestor(): K {
+    return this.ancestor;
+  }
+
+  public getOffspring(): K {
+    return this.offspring;
+  }
+
   public serialize(): string {
     const properties: Array<string> = [];
 
@@ -61,13 +68,5 @@ export class ClosureTableHierarchy<K extends TreeID> extends ValueObject<'Closur
       ancestor: this.ancestor.get(),
       offspring: this.offspring.get()
     };
-  }
-
-  public getAncestor(): K {
-    return this.ancestor;
-  }
-
-  public getOffspring(): K {
-    return this.offspring;
   }
 }

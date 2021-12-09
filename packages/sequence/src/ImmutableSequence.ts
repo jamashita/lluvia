@@ -2,9 +2,7 @@ import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
-export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>, 'ImmutableSequence'> {
-  public readonly noun: 'ImmutableSequence' = 'ImmutableSequence';
-
+export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>> {
   private static readonly EMPTY: ImmutableSequence<unknown> = new ImmutableSequence<unknown>([]);
 
   public static empty<VT>(): ImmutableSequence<VT> {

@@ -6,9 +6,7 @@ import { StructurableTreeObject } from './StructurableTreeObject';
 import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
 
-export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>, 'StructurableTree'> {
-  public readonly noun: 'StructurableTree' = 'StructurableTree';
-
+export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>> {
   public static of<KT extends TreeID, VT extends StructurableTreeObject<KT>>(root: StructurableTreeNode<KT, VT>): StructurableTree<KT, VT> {
     return new StructurableTree<KT, VT>(root);
   }

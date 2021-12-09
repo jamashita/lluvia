@@ -1,7 +1,7 @@
 import { BinaryPredicate, Cloneable, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 
-export interface ReadonlyProject<K, V, N extends string = string> extends Collection<K, V, N>, Cloneable<ReadonlyProject<K, V>> {
+export interface ReadonlyProject<K, V> extends Collection<K, V>, Cloneable<ReadonlyProject<K, V>> {
   filter(predicate: BinaryPredicate<V, K>): ReadonlyProject<K, V>;
 
   has(key: K): boolean;

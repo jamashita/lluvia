@@ -7,8 +7,7 @@ import { TreeID } from '../TreeID';
 import { ClosureTableHierarchies } from './ClosureTableHierarchies';
 import { ClosureTableHierarchy } from './ClosureTableHierarchy';
 
-export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>, 'ClosureTable'> {
-  public readonly noun: 'ClosureTable' = 'ClosureTable';
+export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableProject<K, ReadonlyAddress<K>>;
 
   private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable<TreeID>(ImmutableProject.empty<TreeID, ReadonlyAddress<TreeID>>());
@@ -106,10 +105,6 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.some(predicate);
   }
 
-  public values(): Iterable<ReadonlyAddress<K>> {
-    return this.table.values();
-  }
-
   public sort(): ImmutableSequence<K> {
     const keys: Array<K> = [...this.table].sort(([, v1]: [K, ReadonlyAddress<K>], [, v2]: [K, ReadonlyAddress<K>]) => {
       return v1.size() - v2.size();
@@ -118,5 +113,9 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     });
 
     return ImmutableSequence.ofArray<K>(keys);
+  }
+
+  public values(): Iterable<ReadonlyAddress<K>> {
+    return this.table.values();
   }
 }

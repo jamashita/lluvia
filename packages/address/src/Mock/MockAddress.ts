@@ -2,9 +2,7 @@ import { UnimplementedError } from '@jamashita/anden-error';
 import { isNominative } from '@jamashita/anden-type';
 import { AAddress } from '../AAddress';
 
-export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
-  public readonly noun: 'MockAddress' = 'MockAddress';
-
+export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
   private static toMap<VT>(set: ReadonlySet<VT>): Map<VT | number, VT> {
     const m: Map<VT | number, VT> = new Map<VT | number, VT>();
 
