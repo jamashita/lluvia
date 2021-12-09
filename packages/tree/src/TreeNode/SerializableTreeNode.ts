@@ -9,12 +9,12 @@ export type TreeNodeJSON = Readonly<{
 }>;
 
 export class SerializableTreeNode<V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
-  public static of<VT extends SerializableTreeObject>(node: SerializableTreeNode<VT>): SerializableTreeNode<VT> {
-    return new SerializableTreeNode<VT>(node.getValue(), node.getChildren());
+  public static of<V extends SerializableTreeObject>(node: SerializableTreeNode<V>): SerializableTreeNode<V> {
+    return new SerializableTreeNode<V>(node.getValue(), node.getChildren());
   }
 
-  public static ofValue<VT extends SerializableTreeObject>(value: VT, children?: ReadonlyAddress<SerializableTreeNode<VT>>): SerializableTreeNode<VT> {
-    return new SerializableTreeNode<VT>(value, children);
+  public static ofValue<V extends SerializableTreeObject>(value: V, children?: ReadonlyAddress<SerializableTreeNode<V>>): SerializableTreeNode<V> {
+    return new SerializableTreeNode<V>(value, children);
   }
 
   protected constructor(value: V, children: ReadonlyAddress<SerializableTreeNode<V>> = ImmutableAddress.empty<SerializableTreeNode<V>>()) {

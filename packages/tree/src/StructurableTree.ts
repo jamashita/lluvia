@@ -7,8 +7,8 @@ import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
 
 export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>> {
-  public static of<KT extends TreeID, VT extends StructurableTreeObject<KT>>(root: StructurableTreeNode<KT, VT>): StructurableTree<KT, VT> {
-    return new StructurableTree<KT, VT>(root);
+  public static of<K extends TreeID, V extends StructurableTreeObject<K>>(root: StructurableTreeNode<K, V>): StructurableTree<K, V> {
+    return new StructurableTree<K, V>(root);
   }
 
   protected constructor(root: StructurableTreeNode<K, V>) {

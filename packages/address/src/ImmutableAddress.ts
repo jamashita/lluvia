@@ -5,28 +5,28 @@ import { AAddress } from './AAddress';
 export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
   private static readonly EMPTY: ImmutableAddress<unknown> = new ImmutableAddress(new Map<unknown, unknown>());
 
-  public static empty<VT>(): ImmutableAddress<VT> {
-    return ImmutableAddress.EMPTY as ImmutableAddress<VT>;
+  public static empty<V>(): ImmutableAddress<V> {
+    return ImmutableAddress.EMPTY as ImmutableAddress<V>;
   }
 
-  public static of<VT>(collection: Collection<unknown, VT>): ImmutableAddress<VT> {
-    const set: Set<VT> = new Set<VT>(collection.values());
+  public static of<V>(collection: Collection<unknown, V>): ImmutableAddress<V> {
+    const set: Set<V> = new Set<V>(collection.values());
 
-    return ImmutableAddress.ofSet<VT>(set);
+    return ImmutableAddress.ofSet<V>(set);
   }
 
-  private static ofInternal<VT>(address: Map<VT | number, VT>): ImmutableAddress<VT> {
+  private static ofInternal<V>(address: Map<V | number, V>): ImmutableAddress<V> {
     if (address.size === 0) {
-      return ImmutableAddress.empty<VT>();
+      return ImmutableAddress.empty<V>();
     }
 
-    return new ImmutableAddress<VT>(address);
+    return new ImmutableAddress<V>(address);
   }
 
-  public static ofSet<VT>(set: ReadonlySet<VT>): ImmutableAddress<VT> {
-    const m: Map<VT | number, VT> = new Map<VT | number, VT>();
+  public static ofSet<V>(set: ReadonlySet<V>): ImmutableAddress<V> {
+    const m: Map<V | number, V> = new Map<V | number, V>();
 
-    set.forEach((v: VT) => {
+    set.forEach((v: V) => {
       if (isNominative(v)) {
         m.set(v.hashCode(), v);
 
@@ -36,7 +36,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
       m.set(v, v);
     });
 
-    return ImmutableAddress.ofInternal<VT>(m);
+    return ImmutableAddress.ofInternal<V>(m);
   }
 
   protected constructor(address: Map<V | number, V>) {

@@ -3,20 +3,20 @@ import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
 export class MutableSequence<V> extends ASequence<V, MutableSequence<V>> {
-  public static empty<VT>(): MutableSequence<VT> {
-    return MutableSequence.ofArray<VT>([]);
+  public static empty<V>(): MutableSequence<V> {
+    return MutableSequence.ofArray<V>([]);
   }
 
-  public static of<VT>(collection: Collection<number, VT>): MutableSequence<VT> {
-    return MutableSequence.ofInternal<VT>([...collection.values()]);
+  public static of<V>(collection: Collection<number, V>): MutableSequence<V> {
+    return MutableSequence.ofInternal<V>([...collection.values()]);
   }
 
-  public static ofArray<VT>(array: ReadonlyArray<VT>): MutableSequence<VT> {
-    return MutableSequence.ofInternal<VT>([...array]);
+  public static ofArray<V>(array: ReadonlyArray<V>): MutableSequence<V> {
+    return MutableSequence.ofInternal<V>([...array]);
   }
 
-  private static ofInternal<VT>(array: Array<VT>): MutableSequence<VT> {
-    return new MutableSequence<VT>(array);
+  private static ofInternal<V>(array: Array<V>): MutableSequence<V> {
+    return new MutableSequence<V>(array);
   }
 
   protected constructor(sequence: Array<V>) {

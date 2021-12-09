@@ -12,36 +12,36 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
 
   private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies<TreeID>(ImmutableSequence.empty<ClosureTableHierarchy<TreeID>>());
 
-  public static empty<KT extends TreeID>(): ClosureTableHierarchies<KT> {
-    return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<KT>;
+  public static empty<K extends TreeID>(): ClosureTableHierarchies<K> {
+    return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<K>;
   }
 
-  public static of<KT extends TreeID>(hierarchies: ReadonlyProject<KT, ReadonlyAddress<KT>>): ClosureTableHierarchies<KT> {
-    const array: Array<ClosureTableHierarchy<KT>> = [];
+  public static of<K extends TreeID>(hierarchies: ReadonlyProject<K, ReadonlyAddress<K>>): ClosureTableHierarchies<K> {
+    const array: Array<ClosureTableHierarchy<K>> = [];
 
-    hierarchies.forEach((offsprings: ReadonlyAddress<KT>, ancestor: KT) => {
-      offsprings.forEach((offspring: KT) => {
-        array.push(ClosureTableHierarchy.of<KT>(ancestor, offspring));
+    hierarchies.forEach((offsprings: ReadonlyAddress<K>, ancestor: K) => {
+      offsprings.forEach((offspring: K) => {
+        array.push(ClosureTableHierarchy.of<K>(ancestor, offspring));
       });
     });
 
-    return ClosureTableHierarchies.ofArray<KT>(array);
+    return ClosureTableHierarchies.ofArray<K>(array);
   }
 
-  public static ofArray<KT extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<KT>>): ClosureTableHierarchies<KT> {
+  public static ofArray<K extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>): ClosureTableHierarchies<K> {
     if (hierarchies.length === 0) {
-      return ClosureTableHierarchies.empty<KT>();
+      return ClosureTableHierarchies.empty<K>();
     }
 
-    return new ClosureTableHierarchies<KT>(ImmutableSequence.ofArray<ClosureTableHierarchy<KT>>(hierarchies));
+    return new ClosureTableHierarchies<K>(ImmutableSequence.ofArray<ClosureTableHierarchy<K>>(hierarchies));
   }
 
-  public static ofJSON<KT extends TreeID>(json: ReadonlyArray<ClosureTableJSON>, factory: TreeIDFactory<KT>): ClosureTableHierarchies<KT> {
-    const hierarchies: Array<ClosureTableHierarchy<KT>> = json.map<ClosureTableHierarchy<KT>>((j: ClosureTableJSON) => {
-      return ClosureTableHierarchy.ofJSON<KT>(j, factory);
+  public static ofJSON<K extends TreeID>(json: ReadonlyArray<ClosureTableJSON>, factory: TreeIDFactory<K>): ClosureTableHierarchies<K> {
+    const hierarchies: Array<ClosureTableHierarchy<K>> = json.map<ClosureTableHierarchy<K>>((j: ClosureTableJSON) => {
+      return ClosureTableHierarchy.ofJSON<K>(j, factory);
     });
 
-    return ClosureTableHierarchies.ofArray<KT>(hierarchies);
+    return ClosureTableHierarchies.ofArray<K>(hierarchies);
   }
 
   protected constructor(hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>) {

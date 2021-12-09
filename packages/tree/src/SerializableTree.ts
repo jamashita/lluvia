@@ -4,8 +4,8 @@ import { SerializableTreeObject } from './SerializableTreeObject';
 import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode';
 
 export class SerializableTree<V extends SerializableTreeObject> extends ATree<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
-  public static of<VT extends SerializableTreeObject>(root: SerializableTreeNode<VT>): SerializableTree<VT> {
-    return new SerializableTree<VT>(root);
+  public static of<V extends SerializableTreeObject>(root: SerializableTreeNode<V>): SerializableTree<V> {
+    return new SerializableTree<V>(root);
   }
 
   protected constructor(root: SerializableTreeNode<V>) {

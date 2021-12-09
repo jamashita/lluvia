@@ -6,20 +6,20 @@ import { SerializableTreeObject } from './SerializableTreeObject';
 import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode';
 
 export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
-  public static empty<VT extends SerializableTreeObject>(): SerializableTrees<VT> {
-    return SerializableTrees.ofAddress<VT>(ImmutableAddress.empty<SerializableTree<VT>>());
+  public static empty<V extends SerializableTreeObject>(): SerializableTrees<V> {
+    return SerializableTrees.ofAddress<V>(ImmutableAddress.empty<SerializableTree<V>>());
   }
 
-  public static of<VT extends SerializableTreeObject>(trees: SerializableTrees<VT>): SerializableTrees<VT> {
-    return SerializableTrees.ofAddress<VT>(trees.trees);
+  public static of<V extends SerializableTreeObject>(trees: SerializableTrees<V>): SerializableTrees<V> {
+    return SerializableTrees.ofAddress<V>(trees.trees);
   }
 
-  public static ofAddress<VT extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<VT>>): SerializableTrees<VT> {
-    return SerializableTrees.ofInternal<VT>(address);
+  public static ofAddress<V extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<V>>): SerializableTrees<V> {
+    return SerializableTrees.ofInternal<V>(address);
   }
 
-  private static ofInternal<VT extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<VT>>): SerializableTrees<VT> {
-    return new SerializableTrees<VT>(MutableAddress.of<SerializableTree<VT>>(address));
+  private static ofInternal<V extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<V>>): SerializableTrees<V> {
+    return new SerializableTrees<V>(MutableAddress.of<SerializableTree<V>>(address));
   }
 
   protected constructor(trees: MutableAddress<SerializableTree<V>>) {

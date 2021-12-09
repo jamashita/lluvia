@@ -3,24 +3,24 @@ import { Collection } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
 export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
-  public static empty<KT, VT>(): MutableProject<KT, VT> {
-    return MutableProject.ofInternal<KT, VT>(new Map<KT | number, [KT, VT]>());
+  public static empty<K, V>(): MutableProject<K, V> {
+    return MutableProject.ofInternal<K, V>(new Map<K | number, [K, V]>());
   }
 
-  public static of<KT, VT>(collection: Collection<KT, VT>): MutableProject<KT, VT> {
-    const map: Map<KT, VT> = new Map<KT, VT>(collection);
+  public static of<K, V>(collection: Collection<K, V>): MutableProject<K, V> {
+    const map: Map<K, V> = new Map<K, V>(collection);
 
-    return MutableProject.ofMap<KT, VT>(map);
+    return MutableProject.ofMap<K, V>(map);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | number, [KT, VT]>): MutableProject<KT, VT> {
-    return new MutableProject<KT, VT>(project);
+  private static ofInternal<K, V>(project: Map<K | number, [K, V]>): MutableProject<K, V> {
+    return new MutableProject<K, V>(project);
   }
 
-  public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): MutableProject<KT, VT> {
-    const m: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
+  public static ofMap<K, V>(map: ReadonlyMap<K, V>): MutableProject<K, V> {
+    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
 
-    map.forEach((v: VT, k: KT) => {
+    map.forEach((v: V, k: K) => {
       if (isNominative(k)) {
         m.set(k.hashCode(), [k, v]);
 
@@ -30,7 +30,7 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
       m.set(k, [k, v]);
     });
 
-    return MutableProject.ofInternal<KT, VT>(m);
+    return MutableProject.ofInternal<K, V>(m);
   }
 
   protected constructor(project: Map<K | number, [K, V]>) {

@@ -5,28 +5,28 @@ import { AProject } from './AProject';
 export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>> {
   private static readonly EMPTY: ImmutableProject<unknown, unknown> = new ImmutableProject<unknown, unknown>(new Map<unknown, [unknown, unknown]>());
 
-  public static empty<KT, VT>(): ImmutableProject<KT, VT> {
-    return ImmutableProject.EMPTY as ImmutableProject<KT, VT>;
+  public static empty<K, V>(): ImmutableProject<K, V> {
+    return ImmutableProject.EMPTY as ImmutableProject<K, V>;
   }
 
-  public static of<KT, VT>(collection: Collection<KT, VT>): ImmutableProject<KT, VT> {
-    const map: Map<KT, VT> = new Map<KT, VT>(collection);
+  public static of<K, V>(collection: Collection<K, V>): ImmutableProject<K, V> {
+    const map: Map<K, V> = new Map<K, V>(collection);
 
-    return ImmutableProject.ofMap<KT, VT>(map);
+    return ImmutableProject.ofMap<K, V>(map);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | number, [KT, VT]>): ImmutableProject<KT, VT> {
+  private static ofInternal<K, V>(project: Map<K | number, [K, V]>): ImmutableProject<K, V> {
     if (project.size === 0) {
-      return ImmutableProject.empty<KT, VT>();
+      return ImmutableProject.empty<K, V>();
     }
 
-    return new ImmutableProject<KT, VT>(project);
+    return new ImmutableProject<K, V>(project);
   }
 
-  public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): ImmutableProject<KT, VT> {
-    const m: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
+  public static ofMap<K, V>(map: ReadonlyMap<K, V>): ImmutableProject<K, V> {
+    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
 
-    map.forEach((v: VT, k: KT) => {
+    map.forEach((v: V, k: K) => {
       if (isNominative(k)) {
         m.set(k.hashCode(), [k, v]);
 
@@ -36,7 +36,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
       m.set(k, [k, v]);
     });
 
-    return ImmutableProject.ofInternal<KT, VT>(m);
+    return ImmutableProject.ofInternal<K, V>(m);
   }
 
   protected constructor(project: Map<K | number, [K, V]>) {

@@ -12,22 +12,22 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
 
   private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable<TreeID>(ImmutableProject.empty<TreeID, ReadonlyAddress<TreeID>>());
 
-  public static empty<KT extends TreeID>(): ClosureTable<KT> {
-    return ClosureTable.EMPTY as ClosureTable<KT>;
+  public static empty<K extends TreeID>(): ClosureTable<K> {
+    return ClosureTable.EMPTY as ClosureTable<K>;
   }
 
-  public static of<KT extends TreeID>(hierarchies: ClosureTableHierarchies<KT>): ClosureTable<KT> {
+  public static of<K extends TreeID>(hierarchies: ClosureTableHierarchies<K>): ClosureTable<K> {
     if (hierarchies.isEmpty()) {
-      return ClosureTable.empty<KT>();
+      return ClosureTable.empty<K>();
     }
 
-    const project: MutableProject<KT, MutableAddress<KT>> = MutableProject.empty<KT, MutableAddress<KT>>();
+    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty<K, MutableAddress<K>>();
 
-    hierarchies.forEach((hierarchy: ClosureTableHierarchy<KT>) => {
-      const offsprings: Nullable<MutableAddress<KT>> = project.get(hierarchy.getAncestor());
+    hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
+      const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
-        const address: MutableAddress<KT> = MutableAddress.empty<KT>();
+        const address: MutableAddress<K> = MutableAddress.empty<K>();
 
         address.add(hierarchy.getOffspring());
         project.set(hierarchy.getAncestor(), address);
@@ -38,7 +38,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return new ClosureTable<KT>(ImmutableProject.of<KT, ReadonlyAddress<KT>>(project));
+    return new ClosureTable<K>(ImmutableProject.of<K, ReadonlyAddress<K>>(project));
   }
 
   protected constructor(table: ImmutableProject<K, ReadonlyAddress<K>>) {

@@ -5,24 +5,24 @@ import { ASequence } from './ASequence';
 export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>> {
   private static readonly EMPTY: ImmutableSequence<unknown> = new ImmutableSequence<unknown>([]);
 
-  public static empty<VT>(): ImmutableSequence<VT> {
-    return ImmutableSequence.EMPTY as ImmutableSequence<VT>;
+  public static empty<V>(): ImmutableSequence<V> {
+    return ImmutableSequence.EMPTY as ImmutableSequence<V>;
   }
 
-  public static of<VT>(collection: Collection<number, VT>): ImmutableSequence<VT> {
-    return ImmutableSequence.ofInternal<VT>([...collection.values()]);
+  public static of<V>(collection: Collection<number, V>): ImmutableSequence<V> {
+    return ImmutableSequence.ofInternal<V>([...collection.values()]);
   }
 
-  public static ofArray<VT>(array: ReadonlyArray<VT>): ImmutableSequence<VT> {
-    return ImmutableSequence.ofInternal<VT>([...array]);
+  public static ofArray<V>(array: ReadonlyArray<V>): ImmutableSequence<V> {
+    return ImmutableSequence.ofInternal<V>([...array]);
   }
 
-  private static ofInternal<VT>(array: Array<VT>): ImmutableSequence<VT> {
+  private static ofInternal<V>(array: Array<V>): ImmutableSequence<V> {
     if (array.length === 0) {
-      return ImmutableSequence.empty<VT>();
+      return ImmutableSequence.empty<V>();
     }
 
-    return new ImmutableSequence<VT>(array);
+    return new ImmutableSequence<V>(array);
   }
 
   protected constructor(sequence: Array<V>) {
