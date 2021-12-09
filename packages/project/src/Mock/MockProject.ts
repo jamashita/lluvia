@@ -2,9 +2,7 @@ import { UnimplementedError } from '@jamashita/anden-error';
 import { isNominative } from '@jamashita/anden-type';
 import { AProject } from '../AProject';
 
-export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>, 'MockProject'> {
-  public readonly noun: 'MockProject' = 'MockProject';
-
+export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>> {
   private static toMap<KT, VT>(project: Map<KT, VT>): Map<KT | number, [KT, VT]> {
     const map: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
 

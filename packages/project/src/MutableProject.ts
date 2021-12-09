@@ -2,9 +2,7 @@ import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
-export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>, 'MutableProject'> {
-  public readonly noun: 'MutableProject' = 'MutableProject';
-
+export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
   public static empty<KT, VT>(): MutableProject<KT, VT> {
     return MutableProject.ofInternal<KT, VT>(new Map<KT | number, [KT, VT]>());
   }
