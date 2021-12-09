@@ -2,12 +2,10 @@ import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
 import { Collection } from './Collection';
 
-export abstract class Quantity<K, V, N extends string = string> extends Objet<N> implements Collection<K, V, N> {
+export abstract class Quantity<K, V> extends Objet implements Collection<K, V> {
   protected constructor() {
     super();
   }
-
-  public abstract iterator(): Iterator<[K, V]>;
 
   public abstract contains(value: V): boolean;
 
@@ -20,6 +18,8 @@ export abstract class Quantity<K, V, N extends string = string> extends Objet<N>
   public abstract forEach(catalogue: Catalogue<K, V>): void;
 
   public abstract get(key: K): Nullable<V>;
+
+  public abstract iterator(): Iterator<[K, V]>;
 
   public abstract map<W>(mapper: Mapper<V, W>): Collection<K, W>;
 
