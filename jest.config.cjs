@@ -13,7 +13,7 @@ module.exports = {
   collectCoverage: true,
   coveragePathIgnorePatterns: [
     'node_modules',
-    'Mock'
+    'mock'
   ],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
