@@ -1,9 +1,9 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { ImmutableAddress, MockAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject } from '@jamashita/lluvia-project';
-import { MockTreeID } from '../../bb/MockTreeID';
-import { MockClosureTableHierarchy } from '../bb/MockClosureTableHierarchy';
-import { MockTreeIDFactory } from '../bb/MockTreeIDFactory';
+import { MockTreeID } from '../../mock/MockTreeID';
+import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy';
+import { MockTreeIDFactory } from '../mock/MockTreeIDFactory';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
 import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy';
 

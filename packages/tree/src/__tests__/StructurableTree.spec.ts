@@ -1,7 +1,7 @@
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import { MockTreeID } from '../bb/MockTreeID';
-import { MockTreeObject } from '../bb/MockTreeObject';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
+import { MockTreeID } from '../mock/MockTreeID';
+import { MockTreeObject } from '../mock/MockTreeObject';
 import { StructurableTree } from '../StructurableTree';
 import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
 

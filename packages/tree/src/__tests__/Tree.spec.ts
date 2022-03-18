@@ -1,8 +1,8 @@
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import { MockTree } from '../bb/MockTree';
-import { MockTreeID } from '../bb/MockTreeID';
-import { MockTreeObject } from '../bb/MockTreeObject';
-import { MockTreeNode } from '../TreeNode/bb/MockTreeNode';
+import { MockTree } from '../mock/MockTree';
+import { MockTreeID } from '../mock/MockTreeID';
+import { MockTreeObject } from '../mock/MockTreeObject';
+import { MockTreeNode } from '../TreeNode/mock/MockTreeNode';
 
 describe('Tree', () => {
   describe('equals', () => {

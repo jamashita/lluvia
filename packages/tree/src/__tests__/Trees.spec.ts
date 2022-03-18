@@ -2,11 +2,11 @@ import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable } from '@jamashita/anden-type';
 import { MockAddress } from '@jamashita/lluvia-address';
 import { MockProject } from '@jamashita/lluvia-project';
-import { MockTree } from '../bb/MockTree';
-import { MockTreeID } from '../bb/MockTreeID';
-import { MockTreeObject } from '../bb/MockTreeObject';
-import { MockTrees } from '../bb/MockTrees';
-import { MockTreeNode } from '../TreeNode/bb/MockTreeNode';
+import { MockTree } from '../mock/MockTree';
+import { MockTreeID } from '../mock/MockTreeID';
+import { MockTreeObject } from '../mock/MockTreeObject';
+import { MockTrees } from '../mock/MockTrees';
+import { MockTreeNode } from '../TreeNode/mock/MockTreeNode';
 
 describe('Trees', () => {
   describe('contains', () => {

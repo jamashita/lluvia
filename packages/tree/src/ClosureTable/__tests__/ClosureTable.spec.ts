@@ -1,10 +1,10 @@
 import { MockAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { MockProject, Project } from '@jamashita/lluvia-project';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
-import { MockTreeID } from '../../bb/MockTreeID';
-import { MockClosureTable } from '../bb/MockClosureTable';
-import { MockClosureTableHierarchies } from '../bb/MockClosureTableHierarchies';
-import { MockClosureTableHierarchy } from '../bb/MockClosureTableHierarchy';
+import { MockTreeID } from '../../mock/MockTreeID';
+import { MockClosureTable } from '../mock/MockClosureTable';
+import { MockClosureTableHierarchies } from '../mock/MockClosureTableHierarchies';
+import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy';
 import { ClosureTable } from '../ClosureTable';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
 

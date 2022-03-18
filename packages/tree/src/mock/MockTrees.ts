@@ -1,7 +1,7 @@
 import { MutableProject, ReadonlyProject } from '@jamashita/lluvia-project';
 import { ATrees } from '../ATrees';
 import { TreeID } from '../TreeID';
-import { MockTreeNode } from '../TreeNode/bb/MockTreeNode';
+import { MockTreeNode } from '../TreeNode/mock/MockTreeNode';
 import { MockTree } from './MockTree';
 import { MockTreeObject } from './MockTreeObject';
 
