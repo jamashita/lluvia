@@ -1,4 +1,4 @@
-import { MockTreeID } from '../../Mock/MockTreeID';
+import { MockTreeID } from '../../bb/MockTreeID';
 import { TreeIDFactory } from '../TreeIDFactory';
 
 export class MockTreeIDFactory implements TreeIDFactory<MockTreeID> {

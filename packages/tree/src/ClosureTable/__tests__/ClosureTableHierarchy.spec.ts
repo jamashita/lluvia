@@ -1,7 +1,7 @@
 import { MockValueObject } from '@jamashita/anden-object';
-import { MockTreeID } from '../../Mock/MockTreeID';
+import { MockTreeID } from '../../bb/MockTreeID';
+import { MockTreeIDFactory } from '../bb/MockTreeIDFactory';
 import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy';
-import { MockTreeIDFactory } from '../Mock/MockTreeIDFactory';
 
 describe('ClosureTableHierarchy', () => {
   describe('ofJSON', () => {

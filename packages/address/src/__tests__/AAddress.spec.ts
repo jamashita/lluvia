@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable, Predicate } from '@jamashita/anden-type';
-import { MockAddress } from '../Mock/MockAddress';
+import { MockAddress } from '../bb/MockAddress';
 
 describe('AAddress', () => {
   describe('iterator', () => {

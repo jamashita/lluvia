@@ -1,6 +1,6 @@
 export * from './ClosureTable/index';
 export * from './Error/TreeError';
-export * from './Mock/index';
+export * from './bb/index';
 export * from './TreeNode/index';
 export * from './ATree';
 export * from './ATrees';

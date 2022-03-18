@@ -13,7 +13,7 @@ export class MockTreeNode<K extends TreeID, V extends MockTreeObject<K>> extends
     super(value, ImmutableAddress.of<MockTreeNode<K, V>>(children));
   }
 
-  public append(node: MockTreeNode<K, V>): MockTreeNode<K, V> {
+  public append(node: MockTreeNode<K, V>): this {
     this.children = this.children.add(node);
 
     return this;

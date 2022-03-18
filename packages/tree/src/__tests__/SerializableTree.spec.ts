@@ -1,5 +1,5 @@
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
+import { MockTreeID } from '../bb/MockTreeID';
+import { MockTreeObject } from '../bb/MockTreeObject';
 import { SerializableTree } from '../SerializableTree';
 import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode';
 
