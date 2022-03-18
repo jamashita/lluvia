@@ -13,14 +13,14 @@ export class ClosureTableHierarchy<K extends TreeID> extends ValueObject impleme
   private readonly offspring: K;
 
   public static of<K extends TreeID>(ancestor: K, offspring: K): ClosureTableHierarchy<K> {
-    return new ClosureTableHierarchy<K>(ancestor, offspring);
+    return new ClosureTableHierarchy(ancestor, offspring);
   }
 
   public static ofJSON<K extends TreeID>(json: ClosureTableJSON, factory: TreeIDFactory<K>): ClosureTableHierarchy<K> {
     const ancestor: K = factory.forge(json.ancestor);
     const offspring: K = factory.forge(json.offspring);
 
-    return ClosureTableHierarchy.of<K>(ancestor, offspring);
+    return ClosureTableHierarchy.of(ancestor, offspring);
   }
 
   protected constructor(ancestor: K, offspring: K) {

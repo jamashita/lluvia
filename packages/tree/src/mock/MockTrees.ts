@@ -7,7 +7,7 @@ import { MockTreeObject } from './MockTreeObject';
 
 export class MockTrees<K extends TreeID, V extends MockTreeObject<K>> extends ATrees<K, V, MockTreeNode<K, V>, MockTree<K, V>, MutableProject<K, MockTree<K, V>>> {
   public constructor(trees: ReadonlyProject<K, MockTree<K, V>>) {
-    super(MutableProject.of<K, MockTree<K, V>>(trees));
+    super(MutableProject.of(trees));
   }
 
   public add(tree: MockTree<K, V>): this {

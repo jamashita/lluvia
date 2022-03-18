@@ -9,14 +9,14 @@ export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeOb
   }
 
   public static ofValue<K extends TreeID, V extends StructurableTreeObject<K>>(value: V, children?: ReadonlyAddress<StructurableTreeNode<K, V>>): StructurableTreeNode<K, V> {
-    return new StructurableTreeNode<K, V>(value, children);
+    return new StructurableTreeNode(value, children);
   }
 
   protected constructor(value: V, children: ReadonlyAddress<StructurableTreeNode<K, V>> = ImmutableAddress.empty<StructurableTreeNode<K, V>>()) {
-    super(value, ImmutableAddress.of<StructurableTreeNode<K, V>>(children));
+    super(value, ImmutableAddress.of(children));
   }
 
-  public append(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
+  public append(node: StructurableTreeNode<K, V>): this {
     this.children = this.children.add(node);
 
     return this;
@@ -27,7 +27,7 @@ export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeOb
       return node as StructurableTreeNode<K, V>;
     }
 
-    return StructurableTreeNode.ofValue<K, V>(node.getValue(), node.getChildren());
+    return StructurableTreeNode.ofValue(node.getValue(), node.getChildren());
   }
 
   public getTreeID(): K {

@@ -7,26 +7,26 @@ import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeN
 
 export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
   public static empty<V extends SerializableTreeObject>(): SerializableTrees<V> {
-    return SerializableTrees.ofAddress<V>(ImmutableAddress.empty<SerializableTree<V>>());
+    return SerializableTrees.ofAddress(ImmutableAddress.empty());
   }
 
   public static of<V extends SerializableTreeObject>(trees: SerializableTrees<V>): SerializableTrees<V> {
-    return SerializableTrees.ofAddress<V>(trees.trees);
+    return SerializableTrees.ofAddress(trees.trees);
   }
 
   public static ofAddress<V extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<V>>): SerializableTrees<V> {
-    return SerializableTrees.ofInternal<V>(address);
+    return SerializableTrees.ofInternal(address);
   }
 
   private static ofInternal<V extends SerializableTreeObject>(address: ReadonlyAddress<SerializableTree<V>>): SerializableTrees<V> {
-    return new SerializableTrees<V>(MutableAddress.of<SerializableTree<V>>(address));
+    return new SerializableTrees(MutableAddress.of(address));
   }
 
   protected constructor(trees: MutableAddress<SerializableTree<V>>) {
     super(trees);
   }
 
-  public add(tree: SerializableTree<V>): SerializableTrees<V> {
+  public add(tree: SerializableTree<V>): this {
     this.trees.add(tree);
 
     return this;

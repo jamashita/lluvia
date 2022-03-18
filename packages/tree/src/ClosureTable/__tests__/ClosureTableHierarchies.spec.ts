@@ -2,15 +2,15 @@ import { MockValueObject } from '@jamashita/anden-object';
 import { ImmutableAddress, MockAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject } from '@jamashita/lluvia-project';
 import { MockTreeID } from '../../mock/MockTreeID';
-import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy';
-import { MockTreeIDFactory } from '../mock/MockTreeIDFactory';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
 import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy';
+import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy';
+import { MockTreeIDFactory } from '../mock/MockTreeIDFactory';
 
 describe('ClosureTableHierarchies', () => {
   describe('of', () => {
     it('returns flattened ClosureTableHierarchies', () => {
-      const project: ImmutableProject<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableProject.ofMap<MockTreeID, ImmutableAddress<MockTreeID>>(new Map<MockTreeID, ImmutableAddress<MockTreeID>>([
+      const project: ImmutableProject<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableProject.ofMap(new Map([
         [new MockTreeID('mock 1'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 1'), new MockTreeID('mock 2'), new MockTreeID('mock 3'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))],
         [new MockTreeID('mock 2'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 2'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))],
         [new MockTreeID('mock 3'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 3')]))],
@@ -18,7 +18,7 @@ describe('ClosureTableHierarchies', () => {
         [new MockTreeID('mock 5'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 5')]))]
       ]));
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.of<MockTreeID>(project);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.of(project);
 
       expect(hierarchies.size()).toBe(11);
       expect(hierarchies.get(0)?.getAncestor().get()).toBe('mock 1');
@@ -48,7 +48,7 @@ describe('ClosureTableHierarchies', () => {
 
   describe('ofArray', () => {
     it('returns ClosureTableHierarchies.empty() when 0-length array given', () => {
-      expect(ClosureTableHierarchies.ofArray<MockTreeID>([])).toBe(ClosureTableHierarchies.empty<MockTreeID>());
+      expect(ClosureTableHierarchies.ofArray([])).toBe(ClosureTableHierarchies.empty());
     });
   });
 
@@ -67,7 +67,7 @@ describe('ClosureTableHierarchies', () => {
 
       const factory: MockTreeIDFactory = new MockTreeIDFactory();
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofJSON<MockTreeID>(json, factory);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofJSON(json, factory);
 
       expect(hierarchies.size()).toBe(json.length);
       for (let i: number = 0; i < hierarchies.size(); i++) {
@@ -79,23 +79,23 @@ describe('ClosureTableHierarchies', () => {
 
   describe('empty', () => {
     it('\'s size is 0', () => {
-      expect(ClosureTableHierarchies.empty<MockTreeID>().size()).toBe(0);
+      expect(ClosureTableHierarchies.empty().size()).toBe(0);
     });
 
     it('returns singleton instance', () => {
-      expect(ClosureTableHierarchies.empty<MockTreeID>()).toBe(ClosureTableHierarchies.empty<MockTreeID>());
+      expect(ClosureTableHierarchies.empty()).toBe(ClosureTableHierarchies.empty());
     });
   });
 
   describe('iterator', () => {
     it('returns [void, ClosureTableHierarchy]', () => {
       const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
+        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
       ];
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray<MockTreeID>(array);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
       let i: number = 0;
 
       for (const [, v] of hierarchies) {
@@ -108,11 +108,11 @@ describe('ClosureTableHierarchies', () => {
   describe('contains', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.contains = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -125,24 +125,24 @@ describe('ClosureTableHierarchies', () => {
   describe('equals', () => {
     it('returns true when the same instance given', () => {
       const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
+        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
       ];
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray<MockTreeID>(array);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
 
       expect(hierarchies.equals(hierarchies)).toBe(true);
     });
 
     it('returns false when the different class instance given', () => {
       const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
+        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
       ];
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray<MockTreeID>(array);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
 
       expect(hierarchies.equals(new MockValueObject('mock'))).toBe(false);
     });
@@ -150,17 +150,17 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.equals = fn;
 
       const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
+        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
       ];
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray<MockTreeID>(array);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -174,11 +174,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.every = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -194,11 +194,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.forEach = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -214,11 +214,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.get = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -232,11 +232,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.isEmpty = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -250,11 +250,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.toString = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -268,11 +268,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.size = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -286,11 +286,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.some = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -306,11 +306,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.values = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -324,11 +324,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.filter = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -344,11 +344,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.find = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -364,11 +364,11 @@ describe('ClosureTableHierarchies', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress<ClosureTableHierarchy<MockTreeID>>(new Set<ClosureTableHierarchy<MockTreeID>>());
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
       address.map = fn;
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty<MockTreeID>();
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
@@ -383,12 +383,12 @@ describe('ClosureTableHierarchies', () => {
   describe('toJSON', () => {
     it('returns ReadonlyArray<ClosureTableJSON>', () => {
       const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
-        new MockClosureTableHierarchy<MockTreeID>(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
+        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
       ];
 
-      const hierarchy: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray<MockTreeID>(array);
+      const hierarchy: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
 
       expect(hierarchy.toJSON()).toStrictEqual([
         {

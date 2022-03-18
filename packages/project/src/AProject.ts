@@ -75,7 +75,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | number, [K, V]> {
-    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
+    const m: Map<K | number, [K, V]> = new Map();
 
     this.project.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {
@@ -105,7 +105,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public get(key: K): Nullable<V> {
-    const k: K | number = this.hashor<K>(key);
+    const k: K | number = this.hashor(key);
     const p: Ambiguous<[K, V]> = this.project.get(k);
 
     if (Kind.isUndefined(p)) {
@@ -116,7 +116,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public has(key: K): boolean {
-    const k: K | number = this.hashor<K>(key);
+    const k: K | number = this.hashor(key);
 
     return this.project.has(k);
   }
@@ -140,11 +140,11 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | number, [K, W]> {
-    const m: Map<K | number, [K, W]> = new Map<K | number, [K, W]>();
+    const m: Map<K | number, [K, W]> = new Map();
     let i: number = 0;
 
     this.project.forEach(([k, v]: [K, V]) => {
-      const key: K | number = this.hashor<K>(k);
+      const key: K | number = this.hashor(k);
 
       m.set(key, [k, mapper(v, i)]);
       i++;
@@ -178,7 +178,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public toMap(): Map<K, V> {
-    const map: Map<K, V> = new Map<K, V>();
+    const map: Map<K, V> = new Map();
 
     this.forEach((v: V, k: K) => {
       map.set(k, v);

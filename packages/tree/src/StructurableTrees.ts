@@ -6,15 +6,15 @@ import { ATrees } from './ATrees';
 import { ClosureTable } from './ClosureTable/ClosureTable';
 import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies';
 import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy';
-import { TreeError } from './Error/TreeError';
 import { StructurableTree } from './StructurableTree';
 import { StructurableTreeObject } from './StructurableTreeObject';
+import { TreeError } from './TreeError';
 import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
 
 export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>> {
   public static empty<K extends TreeID, V extends StructurableTreeObject<K>>(): StructurableTrees<K, V> {
-    return StructurableTrees.ofProject<K, V>(ImmutableProject.empty<K, StructurableTree<K, V>>());
+    return StructurableTrees.ofProject(ImmutableProject.empty());
   }
 
   private static forgeInternal<K extends TreeID, V extends StructurableTreeObject<K>>(key: K, values: ReadonlyProject<K, V>, table: ClosureTable<K>, pool: MutableProject<K, StructurableTreeNode<K, V>>, used: MutableAddress<K>): StructurableTreeNode<K, V> {
@@ -39,7 +39,7 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
       throw new TreeError(`CLOSURE TABLE DOES NOT CONTAIN THIS KEY. GIVEN: ${key.toString()}`);
     }
 
-    const address: MutableAddress<StructurableTreeNode<K, V>> = MutableAddress.empty<StructurableTreeNode<K, V>>();
+    const address: MutableAddress<StructurableTreeNode<K, V>> = MutableAddress.empty();
 
     children.forEach((k: K) => {
       if (k.equals(key)) {
@@ -49,10 +49,10 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
         return;
       }
 
-      address.add(StructurableTrees.forgeInternal<K, V>(k, values, table, pool, used));
+      address.add(StructurableTrees.forgeInternal(k, values, table, pool, used));
     });
 
-    const node: StructurableTreeNode<K, V> = StructurableTreeNode.ofValue<K, V>(value, address);
+    const node: StructurableTreeNode<K, V> = StructurableTreeNode.ofValue(value, address);
 
     pool.set(key, node);
 
@@ -60,21 +60,21 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
   }
 
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(trees: StructurableTrees<K, V>): StructurableTrees<K, V> {
-    return StructurableTrees.ofProject<K, V>(trees.trees);
+    return StructurableTrees.ofProject(trees.trees);
   }
 
   public static ofInternal<K extends TreeID, V extends StructurableTreeObject<K>>(project: ReadonlyProject<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
-    return new StructurableTrees<K, V>(MutableProject.of<K, StructurableTree<K, V>>(project));
+    return new StructurableTrees(MutableProject.of(project));
   }
 
   public static ofProject<K extends TreeID, V extends StructurableTreeObject<K>>(project: ReadonlyProject<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
-    return StructurableTrees.ofInternal<K, V>(project);
+    return StructurableTrees.ofInternal(project);
   }
 
   public static ofTable<K extends TreeID, V extends StructurableTreeObject<K>>(table: ClosureTable<K>, values: ReadonlySequence<V>): StructurableTrees<K, V> {
     if (table.isEmpty()) {
       if (values.isEmpty()) {
-        return StructurableTrees.empty<K, V>();
+        return StructurableTrees.empty();
       }
 
       throw new TreeError('CLOSURE TABLE IS EMPTY');
@@ -84,14 +84,14 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
     }
 
     const vs: ReadonlyProject<K, V> = StructurableTrees.toProject<K, V>(values);
-    const pool: MutableProject<K, StructurableTreeNode<K, V>> = MutableProject.empty<K, StructurableTreeNode<K, V>>();
-    const used: MutableAddress<K> = MutableAddress.empty<K>();
+    const pool: MutableProject<K, StructurableTreeNode<K, V>> = MutableProject.empty();
+    const used: MutableAddress<K> = MutableAddress.empty();
 
     table.sort().toArray().forEach((key: K) => {
       StructurableTrees.forgeInternal(key, vs, table, pool, used);
     });
 
-    const trees: MutableProject<K, StructurableTree<K, V>> = pool.map<StructurableTree<K, V>>((node: StructurableTreeNode<K, V>) => {
+    const trees: MutableProject<K, StructurableTree<K, V>> = pool.map((node: StructurableTreeNode<K, V>): StructurableTree<K, V> => {
       return StructurableTree.of<K, V>(node);
     });
 
@@ -99,7 +99,7 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
   }
 
   private static toProject<K extends TreeID, V extends StructurableTreeObject<K>>(sequence: ReadonlySequence<V>): ReadonlyProject<K, V> {
-    const project: MutableProject<K, V> = MutableProject.empty<K, V>();
+    const project: MutableProject<K, V> = MutableProject.empty();
 
     sequence.forEach((v: V) => {
       project.set(v.getTreeID(), v);
@@ -112,7 +112,7 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
     super(trees);
   }
 
-  public add(tree: StructurableTree<K, V>): StructurableTrees<K, V> {
+  public add(tree: StructurableTree<K, V>): this {
     this.trees.set(tree.getTreeID(), tree);
 
     return this;
@@ -131,6 +131,6 @@ export class StructurableTrees<K extends TreeID, V extends StructurableTreeObjec
       hierarchies.push(...tree.toHierarchies().values());
     });
 
-    return ClosureTableHierarchies.ofArray<K>(hierarchies);
+    return ClosureTableHierarchies.ofArray(hierarchies);
   }
 }

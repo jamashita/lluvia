@@ -10,7 +10,7 @@ import { ClosureTableHierarchy } from './ClosureTableHierarchy';
 export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableProject<K, ReadonlyAddress<K>>;
 
-  private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable<TreeID>(ImmutableProject.empty<TreeID, ReadonlyAddress<TreeID>>());
+  private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable(ImmutableProject.empty());
 
   public static empty<K extends TreeID>(): ClosureTable<K> {
     return ClosureTable.EMPTY as ClosureTable<K>;
@@ -18,16 +18,16 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
 
   public static of<K extends TreeID>(hierarchies: ClosureTableHierarchies<K>): ClosureTable<K> {
     if (hierarchies.isEmpty()) {
-      return ClosureTable.empty<K>();
+      return ClosureTable.empty();
     }
 
-    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty<K, MutableAddress<K>>();
+    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
       const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
-        const address: MutableAddress<K> = MutableAddress.empty<K>();
+        const address: MutableAddress<K> = MutableAddress.empty();
 
         address.add(hierarchy.getOffspring());
         project.set(hierarchy.getAncestor(), address);
@@ -38,7 +38,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return new ClosureTable<K>(ImmutableProject.of<K, ReadonlyAddress<K>>(project));
+    return new ClosureTable(ImmutableProject.of(project));
   }
 
   protected constructor(table: ImmutableProject<K, ReadonlyAddress<K>>) {
@@ -90,7 +90,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
   }
 
   public map<W>(mapper: Mapper<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
-    return this.table.map<W>(mapper);
+    return this.table.map(mapper);
   }
 
   public serialize(): string {
@@ -112,7 +112,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
       return k;
     });
 
-    return ImmutableSequence.ofArray<K>(keys);
+    return ImmutableSequence.ofArray(keys);
   }
 
   public values(): Iterable<ReadonlyAddress<K>> {

@@ -66,7 +66,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
     let or: IteratorResult<unknown> = oi.next();
 
     while (tr.done !== true && or.done !== true) {
-      if (isEqualable(tr.value) && isEqualable(or.value)) {
+      if (isEqualable(tr.value)) {
         if (!tr.value.equals(or.value)) {
           return false;
         }
@@ -87,11 +87,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
   }
 
   public every(predicate: BinaryPredicate<V, number>): boolean {
-    const found: Ambiguous<V> = this.sequence.find((v: V, i: number) => {
-      return !predicate(v, i);
-    });
-
-    return Kind.isUndefined(found);
+    return this.sequence.every(predicate);
   }
 
   protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
@@ -117,9 +113,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
   }
 
   public forEach(catalogue: Catalogue<number, V>): void {
-    this.sequence.forEach((v: V, i: number) => {
-      catalogue(v, i);
-    });
+    this.sequence.forEach(catalogue);
   }
 
   public get(key: number): Nullable<V> {
@@ -171,9 +165,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
   }
 
   public some(predicate: BinaryPredicate<V, number>): boolean {
-    const found: Ambiguous<V> = this.sequence.find(predicate);
-
-    return !Kind.isUndefined(found);
+    return this.sequence.some(predicate);
   }
 
   public toArray(): Array<V> {

@@ -7,13 +7,13 @@ import { ClosureTableHierarchy } from '../ClosureTableHierarchy';
 
 export class MockClosureTable<K extends TreeID> extends ClosureTable<K> {
   private static toProject<K extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>): ImmutableProject<K, ReadonlyAddress<K>> {
-    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty<K, MutableAddress<K>>();
+    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
       const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
-        const address: MutableAddress<K> = MutableAddress.empty<K>();
+        const address: MutableAddress<K> = MutableAddress.empty();
 
         address.add(hierarchy.getOffspring());
         project.set(hierarchy.getAncestor(), address);
@@ -24,7 +24,7 @@ export class MockClosureTable<K extends TreeID> extends ClosureTable<K> {
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return ImmutableProject.of<K, ReadonlyAddress<K>>(project);
+    return ImmutableProject.of(project);
   }
 
   public constructor(...hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>) {

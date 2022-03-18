@@ -6,11 +6,11 @@ import { ClosureTable } from '../ClosureTable/ClosureTable';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
 import { MockClosureTableHierarchies } from '../ClosureTable/mock/MockClosureTableHierarchies';
 import { MockClosureTableHierarchy } from '../ClosureTable/mock/MockClosureTableHierarchy';
-import { TreeError } from '../Error/TreeError';
 import { MockTreeID } from '../mock/MockTreeID';
 import { MockTreeObject } from '../mock/MockTreeObject';
 import { StructurableTree } from '../StructurableTree';
 import { StructurableTrees } from '../StructurableTrees';
+import { TreeError } from '../TreeError';
 import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
 
 describe('StructurableTrees', () => {

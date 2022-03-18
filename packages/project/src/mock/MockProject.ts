@@ -4,7 +4,7 @@ import { AProject } from '../AProject';
 
 export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>> {
   private static toMap<K, V>(project: Map<K, V>): Map<K | number, [K, V]> {
-    const map: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
+    const map: Map<K | number, [K, V]> = new Map();
 
     project.forEach((v: V, k: K) => {
       if (isNominative(k)) {
@@ -20,7 +20,7 @@ export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>> {
   }
 
   public constructor(project: Map<K, V>) {
-    super(MockProject.toMap<K, V>(project));
+    super(MockProject.toMap(project));
   }
 
   public duplicate(): MockProject<K, V> {

@@ -6,15 +6,15 @@ import { SerializableTreeNode } from '../SerializableTreeNode';
 describe('SerializableTreeNode', () => {
   describe('of', () => {
     it('copies shallowly', () => {
-      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')))
           ])
         )
       );
-      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.of<MockTreeObject<MockTreeID>>(node01);
+      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.of(node01);
 
       expect(node01.getValue().equals(node02.getValue())).toBe(true);
       expect(node01.getChildren().equals(node02.getChildren())).toBe(true);
@@ -23,8 +23,8 @@ describe('SerializableTreeNode', () => {
 
   describe('ofValue', () => {
     it('returns ImmutableAddress.empty() when empty children given', () => {
-      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')), MutableAddress.empty<SerializableTreeNode<MockTreeObject<MockTreeID>>>());
-      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')), new MockAddress<SerializableTreeNode<MockTreeObject<MockTreeID>>>(new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>()));
+      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')), MutableAddress.empty());
+      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')), new MockAddress(new Set()));
 
       expect(node01.getChildren()).toBe(ImmutableAddress.empty<SerializableTreeNode<MockTreeObject<MockTreeID>>>());
       expect(node02.getChildren()).toBe(ImmutableAddress.empty<SerializableTreeNode<MockTreeObject<MockTreeID>>>());
@@ -38,19 +38,19 @@ describe('SerializableTreeNode', () => {
       const id3: MockTreeID = new MockTreeID('mock 3');
       const id4: MockTreeID = new MockTreeID('mock 4');
 
-      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id1),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(id2))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(id2))
           ])
         )
       );
-      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id3),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(id4))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(id4))
           ])
         )
       );
@@ -90,14 +90,14 @@ describe('SerializableTreeNode', () => {
       const id3: MockTreeID = new MockTreeID('mock 3');
       const id4: MockTreeID = new MockTreeID('mock 4');
 
-      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id1)
       );
-      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id3),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(id4))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(id4))
           ])
         )
       );
@@ -130,14 +130,14 @@ describe('SerializableTreeNode', () => {
 
   describe('find', () => {
     it('returns the value itself when the TreeNode value matches', () => {
-      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-                new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-                  SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 3')))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
+              ImmutableAddress.ofSet(
+                new Set([
+                  SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
               ))
           ])
@@ -150,14 +150,14 @@ describe('SerializableTreeNode', () => {
     });
 
     it('returns children\'s value when the TreeNode\'s children value matches', () => {
-      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-                new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-                  SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 3')))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
+              ImmutableAddress.ofSet(
+                new Set([
+                  SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
               ))
           ])
@@ -173,14 +173,14 @@ describe('SerializableTreeNode', () => {
     });
 
     it('returns null when the TreeNode does not have such value', () => {
-      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-            SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-                new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-                  SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 3')))
+        ImmutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
+              ImmutableAddress.ofSet(
+                new Set([
+                  SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
               ))
           ])
@@ -195,14 +195,14 @@ describe('SerializableTreeNode', () => {
 
   describe('toJSON', () => {
     it('returns SerializableTreeNodeJSON', () => {
-      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
+      const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-          SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')),
-            ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 3')))
+        ImmutableAddress.ofSet(new Set([
+          SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
+            ImmutableAddress.ofSet(new Set([
+              SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
             ]))),
-          SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 4')))
+          SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4')))
         ]))
       );
 

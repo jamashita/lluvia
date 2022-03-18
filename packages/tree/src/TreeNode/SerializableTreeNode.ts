@@ -10,18 +10,18 @@ export type TreeNodeJSON = Readonly<{
 
 export class SerializableTreeNode<V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
   public static of<V extends SerializableTreeObject>(node: SerializableTreeNode<V>): SerializableTreeNode<V> {
-    return new SerializableTreeNode<V>(node.getValue(), node.getChildren());
+    return new SerializableTreeNode(node.getValue(), node.getChildren());
   }
 
   public static ofValue<V extends SerializableTreeObject>(value: V, children?: ReadonlyAddress<SerializableTreeNode<V>>): SerializableTreeNode<V> {
-    return new SerializableTreeNode<V>(value, children);
+    return new SerializableTreeNode(value, children);
   }
 
   protected constructor(value: V, children: ReadonlyAddress<SerializableTreeNode<V>> = ImmutableAddress.empty<SerializableTreeNode<V>>()) {
-    super(value, ImmutableAddress.of<SerializableTreeNode<V>>(children));
+    super(value, ImmutableAddress.of(children));
   }
 
-  public append(node: SerializableTreeNode<V>): SerializableTreeNode<V> {
+  public append(node: SerializableTreeNode<V>): this {
     this.children = this.children.add(node);
 
     return this;
@@ -32,7 +32,7 @@ export class SerializableTreeNode<V extends SerializableTreeObject> extends ATre
       return node as SerializableTreeNode<V>;
     }
 
-    return SerializableTreeNode.ofValue<V>(node.getValue(), node.getChildren());
+    return SerializableTreeNode.ofValue(node.getValue(), node.getChildren());
   }
 
   public toJSON(): TreeNodeJSON {

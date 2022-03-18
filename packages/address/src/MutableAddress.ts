@@ -4,21 +4,21 @@ import { AAddress } from './AAddress';
 
 export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
   public static empty<V>(): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(new Map<V | number, V>());
+    return MutableAddress.ofInternal<V>(new Map());
   }
 
   public static of<V>(collection: Collection<unknown, V>): MutableAddress<V> {
-    const set: Set<V> = new Set<V>(collection.values());
+    const set: Set<V> = new Set(collection.values());
 
-    return MutableAddress.ofSet<V>(set);
+    return MutableAddress.ofSet(set);
   }
 
   private static ofInternal<V>(address: Map<V | number, V>): MutableAddress<V> {
-    return new MutableAddress<V>(address);
+    return new MutableAddress(address);
   }
 
   public static ofSet<V>(set: ReadonlySet<V>): MutableAddress<V> {
-    const m: Map<V | number, V> = new Map<V | number, V>();
+    const m: Map<V | number, V> = new Map();
 
     set.forEach((v: V) => {
       if (isNominative(v)) {
@@ -30,19 +30,19 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
       m.set(v, v);
     });
 
-    return MutableAddress.ofInternal<V>(m);
+    return MutableAddress.ofInternal(m);
   }
 
   protected constructor(address: Map<V | number, V>) {
     super(address);
   }
 
-  public add(value: V): MutableAddress<V> {
+  public add(value: V): this {
     if (this.contains(value)) {
       return this;
     }
 
-    const v: V | number = this.hashor<V>(value);
+    const v: V | number = this.hashor(value);
 
     this.address.set(v, value);
 
@@ -50,18 +50,18 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
   }
 
   public duplicate(): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(new Map<V | number, V>(this.address));
+    return MutableAddress.ofInternal(new Map(this.address));
   }
 
   public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
-    return MutableAddress.ofInternal<V>(this.filterInternal(predicate));
+    return MutableAddress.ofInternal(this.filterInternal(predicate));
   }
 
   public map<W>(mapper: Mapper<V, W>): MutableAddress<W> {
-    return MutableAddress.ofInternal<W>(this.mapInternal<W>(mapper));
+    return MutableAddress.ofInternal(this.mapInternal(mapper));
   }
 
-  public remove(value: V): MutableAddress<V> {
+  public remove(value: V): this {
     if (this.isEmpty()) {
       return this;
     }
@@ -69,7 +69,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
       return this;
     }
 
-    const v: V | number = this.hashor<V>(value);
+    const v: V | number = this.hashor(value);
 
     this.address.delete(v);
 

@@ -4,7 +4,7 @@ import { AAddress } from '../AAddress';
 
 export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
   private static toMap<V>(set: ReadonlySet<V>): Map<V | number, V> {
-    const m: Map<V | number, V> = new Map<V | number, V>();
+    const m: Map<V | number, V> = new Map();
 
     set.forEach((v: V) => {
       if (isNominative(v)) {
@@ -20,7 +20,7 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
   }
 
   public constructor(set: ReadonlySet<V>) {
-    super(MockAddress.toMap<V>(set));
+    super(MockAddress.toMap(set));
   }
 
   public add(): MockAddress<V> {

@@ -1,7 +1,7 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { MockTreeID } from '../../mock/MockTreeID';
-import { MockTreeIDFactory } from '../mock/MockTreeIDFactory';
 import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy';
+import { MockTreeIDFactory } from '../mock/MockTreeIDFactory';
 
 describe('ClosureTableHierarchy', () => {
   describe('ofJSON', () => {
@@ -13,7 +13,7 @@ describe('ClosureTableHierarchy', () => {
 
       const factory: MockTreeIDFactory = new MockTreeIDFactory();
 
-      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.ofJSON<MockTreeID>(json, factory);
+      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.ofJSON(json, factory);
 
       expect(hierarchy.getAncestor().get()).toBe(json.ancestor);
       expect(hierarchy.getOffspring().get()).toBe(json.offspring);
@@ -22,23 +22,23 @@ describe('ClosureTableHierarchy', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
+      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock1'), new MockTreeID('mock2'));
 
       expect(hierarchy.equals(hierarchy)).toBe(true);
     });
 
     it('returns false when the different class instance given', () => {
-      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock'), new MockTreeID('mock'));
+      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock'), new MockTreeID('mock'));
 
       expect(hierarchy.equals(new MockValueObject('mock'))).toBe(false);
     });
 
     it('returns true when all the properties are the same', () => {
-      const hierarchy1: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
-      const hierarchy2: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock3'), new MockTreeID('mock2'));
-      const hierarchy3: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock4'));
-      const hierarchy4: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock3'), new MockTreeID('mock4'));
-      const hierarchy5: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
+      const hierarchy1: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock1'), new MockTreeID('mock2'));
+      const hierarchy2: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock3'), new MockTreeID('mock2'));
+      const hierarchy3: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock1'), new MockTreeID('mock4'));
+      const hierarchy4: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock3'), new MockTreeID('mock4'));
+      const hierarchy5: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock1'), new MockTreeID('mock2'));
 
       expect(hierarchy1.equals(hierarchy2)).toBe(false);
       expect(hierarchy1.equals(hierarchy3)).toBe(false);
@@ -49,7 +49,7 @@ describe('ClosureTableHierarchy', () => {
 
   describe('toString', () => {
     it('returns ancestor and offspring', () => {
-      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of<MockTreeID>(new MockTreeID('mock1'), new MockTreeID('mock2'));
+      const hierarchy: ClosureTableHierarchy<MockTreeID> = ClosureTableHierarchy.of(new MockTreeID('mock1'), new MockTreeID('mock2'));
 
       expect(hierarchy.toString()).toBe('mock1, mock2');
     });

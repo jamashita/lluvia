@@ -4,20 +4,20 @@ import { MutableAddress } from '../MutableAddress';
 describe('MutableAddress', () => {
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([
-          new MockValueObject<number>(1),
-          new MockValueObject<number>(2)
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([
+          new MockValueObject(1),
+          new MockValueObject(2)
         ])
       );
-      const copied: MutableAddress<MockValueObject<number>> = MutableAddress.of<MockValueObject<number>>(address);
+      const copied: MutableAddress<MockValueObject<number>> = MutableAddress.of(address);
 
       expect(address.size()).toBe(copied.size());
       address.forEach((v: MockValueObject<number>) => {
         expect(copied.contains(v)).toBe(true);
       });
 
-      address.add(new MockValueObject<number>(3));
+      address.add(new MockValueObject(3));
 
       expect(address.size()).not.toBe(copied.size());
     });
@@ -25,17 +25,17 @@ describe('MutableAddress', () => {
 
   describe('ofSet', () => {
     it('returns instance', () => {
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([
-          new MockValueObject<number>(1),
-          new MockValueObject<number>(3)
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([
+          new MockValueObject(1),
+          new MockValueObject(3)
         ])
       );
-      const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([
-          new MockValueObject<number>(2),
-          new MockValueObject<number>(4),
-          new MockValueObject<number>(5)
+      const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([
+          new MockValueObject(2),
+          new MockValueObject(4),
+          new MockValueObject(5)
         ])
       );
 
@@ -46,21 +46,21 @@ describe('MutableAddress', () => {
 
   describe('empty', () => {
     it('does not return singleton instance', () => {
-      expect(MutableAddress.empty<MockValueObject<number>>()).not.toBe(MutableAddress.empty<MockValueObject<number>>());
+      expect(MutableAddress.empty()).not.toBe(MutableAddress.empty());
     });
 
     it('always returns 0-size set', () => {
-      expect(MutableAddress.empty<MockValueObject<number>>().isEmpty()).toBe(true);
+      expect(MutableAddress.empty().isEmpty()).toBe(true);
     });
   });
 
   describe('add', () => {
     it('can extend mutably', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.empty<MockValueObject<number>>();
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.empty();
 
       expect(address1.size()).toBe(0);
 
@@ -77,11 +77,11 @@ describe('MutableAddress', () => {
     });
 
     it('does nothing when the address are already contained', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2])
       );
       const address2: MutableAddress<MockValueObject<number>> = address1.add(value1);
 
@@ -90,12 +90,12 @@ describe('MutableAddress', () => {
     });
 
     it('does nothing when the other same value objects are already contained', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(1);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(1);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2])
       );
       const address2: MutableAddress<MockValueObject<number>> = address1.add(value3);
 
@@ -106,11 +106,11 @@ describe('MutableAddress', () => {
 
   describe('remove', () => {
     it('can remove retaining value if it contains', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2])
       );
       const address2: MutableAddress<MockValueObject<number>> = address1.remove(value1);
 
@@ -119,11 +119,11 @@ describe('MutableAddress', () => {
     });
 
     it('does nothing when there is no such value', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1])
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1])
       );
       const beforeLength: number = address.size();
 
@@ -132,22 +132,22 @@ describe('MutableAddress', () => {
     });
 
     it('does nothing when Address is empty', () => {
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.empty<MockValueObject<number>>();
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.empty();
 
-      expect(address.remove(new MockValueObject<number>(1))).toBe(address);
+      expect(address.remove(new MockValueObject(1))).toBe(address);
     });
   });
 
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2])
       );
-      const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([])
+      const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([])
       );
 
       expect(address1.isEmpty()).toBe(false);
@@ -157,15 +157,15 @@ describe('MutableAddress', () => {
 
   describe('map', () => {
     it('execute the mapper function and returns mapped Address immutably', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
-      const value4: MockValueObject<number> = new MockValueObject<number>(4);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2, value3, value4])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2, value3, value4])
       );
-      const address2: MutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>) => {
+      const address2: MutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>): MockValueObject<number> => {
         return new MockValueObject(v.get() * 2);
       });
 
@@ -179,14 +179,14 @@ describe('MutableAddress', () => {
 
   describe('filter', () => {
     it('can remove match values', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
-      const value4: MockValueObject<number> = new MockValueObject<number>(4);
-      const value5: MockValueObject<number> = new MockValueObject<number>(5);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
+      const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2, value3, value4])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2, value3, value4])
       );
       const filtered1: MutableAddress<MockValueObject<number>> = address1.filter((v: MockValueObject<number>) => {
         return v.get() % 2 === 0;
@@ -204,14 +204,14 @@ describe('MutableAddress', () => {
 
   describe('duplicate', () => {
     it('returns shallow-copied instance', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
-      const value4: MockValueObject<number> = new MockValueObject<number>(4);
-      const value5: MockValueObject<number> = new MockValueObject<number>(5);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
+      const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet<MockValueObject<number>>(
-        new Set<MockValueObject<number>>([value1, value2, value3, value4])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2, value3, value4])
       );
       const address2: MutableAddress<MockValueObject<number>> = address1.duplicate();
 

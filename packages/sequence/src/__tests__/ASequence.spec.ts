@@ -5,9 +5,9 @@ import { MockSequence } from '../mock/MockSequence';
 describe('ASequence', () => {
   describe('iterator', () => {
     it('returns [number, MockValueObject<number>]', () => {
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2)
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(1),
+        new MockValueObject(2)
       ]);
 
       let i: number = 0;
@@ -23,12 +23,12 @@ describe('ASequence', () => {
   describe('get', () => {
     it('returns value at the correct key', () => {
       const values: Array<MockValueObject<number>> = [
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(3)
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3)
       ];
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>(values);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence(values);
 
       expect(sequence.size()).toBe(values.length);
       for (let i: number = 0; i < sequence.size(); i++) {
@@ -37,10 +37,10 @@ describe('ASequence', () => {
     });
 
     it('returns null at incorrect keys', () => {
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(3)
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3)
       ]);
 
       expect(sequence.get(-1)).toBeNull();
@@ -50,21 +50,21 @@ describe('ASequence', () => {
 
   describe('contains', () => {
     it('returns false if the value does not exist', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1, value2]);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([value1, value2]);
 
       expect(sequence.contains(value3)).toBe(false);
     });
 
     it('returns true if the value exists', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(2);
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1, value2]);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([value1, value2]);
 
       expect(sequence.contains(value1)).toBe(true);
       expect(sequence.contains(value2)).toBe(true);
@@ -74,11 +74,11 @@ describe('ASequence', () => {
 
   describe('isEmpty', () => {
     it('returns true if the values does not exist', () => {
-      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2)
+      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(1),
+        new MockValueObject(2)
       ]);
-      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([]);
+      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence([]);
 
       expect(sequence1.isEmpty()).toBe(false);
       expect(sequence2.isEmpty()).toBe(true);
@@ -87,10 +87,10 @@ describe('ASequence', () => {
 
   describe('forEach', () => {
     it('calls back as much as the size of set', () => {
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(3)
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3)
       ]);
 
       expect(sequence.size()).toBe(3);
@@ -102,12 +102,12 @@ describe('ASequence', () => {
 
   describe('find', () => {
     it('returns the first found value', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
-      const value4: MockValueObject<number> = new MockValueObject<number>(4);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
         value1,
         value2,
         value3,
@@ -136,11 +136,11 @@ describe('ASequence', () => {
 
   describe('every', () => {
     it('returns true if all the values are the same', () => {
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(4),
-        new MockValueObject<number>(6),
-        new MockValueObject<number>(8)
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(2),
+        new MockValueObject(4),
+        new MockValueObject(6),
+        new MockValueObject(8)
       ]);
 
       const every: boolean = sequence.every((v: MockValueObject<number>) => {
@@ -151,43 +151,43 @@ describe('ASequence', () => {
     });
 
     it('returns false if at least one of the values is not false', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-      const value3: MockValueObject<number> = new MockValueObject<number>(6);
-      const value4: MockValueObject<number> = new MockValueObject<number>(8);
-      const value5: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
+      const value4: MockValueObject<number> = new MockValueObject(8);
+      const value5: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([
         value1,
         value2,
         value3,
         value4
       ]);
-      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence([
         value2,
         value1,
         value3,
         value4
       ]);
-      const sequence3: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence3: MockSequence<MockValueObject<number>> = new MockSequence([
         value2,
         value3,
         value1,
         value4
       ]);
-      const sequence4: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence4: MockSequence<MockValueObject<number>> = new MockSequence([
         value2,
         value3,
         value4,
         value1
       ]);
-      const sequence5: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence5: MockSequence<MockValueObject<number>> = new MockSequence([
         value1,
         value5,
         value3,
         value4
       ]);
-      const sequence6: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence6: MockSequence<MockValueObject<number>> = new MockSequence([
         value1,
         value2,
         value5,
@@ -216,17 +216,17 @@ describe('ASequence', () => {
 
   describe('some', () => {
     it('returns true if at least one of the values returns true', () => {
-      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(4),
-        new MockValueObject<number>(6),
-        new MockValueObject<number>(8)
+      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(2),
+        new MockValueObject(4),
+        new MockValueObject(6),
+        new MockValueObject(8)
       ]);
-      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(4),
-        new MockValueObject<number>(3),
-        new MockValueObject<number>(3)
+      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(1),
+        new MockValueObject(4),
+        new MockValueObject(3),
+        new MockValueObject(3)
       ]);
 
       const predicate: Predicate<MockValueObject<number>> = (v: MockValueObject<number>) => {
@@ -241,12 +241,12 @@ describe('ASequence', () => {
     });
 
     it('returns false if none of the values are true', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-      const value3: MockValueObject<number> = new MockValueObject<number>(6);
-      const value4: MockValueObject<number> = new MockValueObject<number>(8);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
+      const value4: MockValueObject<number> = new MockValueObject(8);
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
         value1,
         value2,
         value3,
@@ -265,45 +265,45 @@ describe('ASequence', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      const value: MockValueObject<number> = new MockValueObject<number>(1);
+      const value: MockValueObject<number> = new MockValueObject(1);
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value]);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([value]);
 
       expect(sequence.equals(sequence)).toBe(true);
     });
 
     it('returns false if the size is different', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1]);
-      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1, value2]);
+      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([value1]);
+      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence([value1, value2]);
 
       expect(sequence1.equals(sequence2)).toBe(false);
     });
 
     it('returns false when the different class instance given', () => {
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([]);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([]);
 
       expect(sequence.equals(new MockValueObject('mock'))).toBe(false);
     });
 
     it('returns true even if the order is different', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value2, value1]);
-      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1, value2]);
+      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([value2, value1]);
+      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence([value1, value2]);
 
       expect(sequence1.equals(sequence2)).toBe(false);
     });
 
     it('returns true if the length is the same and the sequence is the same', () => {
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1, value2]);
-      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([value1, value2]);
+      const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([value1, value2]);
+      const sequence2: MockSequence<MockValueObject<number>> = new MockSequence([value1, value2]);
 
       expect(sequence1.equals(sequence2)).toBe(true);
     });
@@ -311,10 +311,10 @@ describe('ASequence', () => {
 
   describe('toString', () => {
     it('returns concatenated string', () => {
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>([
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(3)
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3)
       ]);
 
       expect(sequence.toString()).toBe('1, 2, 3');
@@ -324,12 +324,12 @@ describe('ASequence', () => {
   describe('toArray', () => {
     it('returns its retaining shallow-copied array', () => {
       const values: Array<MockValueObject<number>> = [
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2),
-        new MockValueObject<number>(3)
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3)
       ];
 
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>(values);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence(values);
       const array: Array<MockValueObject<number>> = sequence.toArray();
 
       expect(sequence.size()).toBe(values.length);
@@ -337,7 +337,7 @@ describe('ASequence', () => {
         expect(sequence.get(i)).toBe(array[i]);
       }
 
-      array.push(new MockValueObject<number>(4));
+      array.push(new MockValueObject(4));
 
       expect(sequence.size()).not.toBe(array.length);
     });
@@ -346,10 +346,10 @@ describe('ASequence', () => {
   describe('values', () => {
     it('returns its retaining values', () => {
       const values: Array<MockValueObject<number>> = [
-        new MockValueObject<number>(1),
-        new MockValueObject<number>(2)
+        new MockValueObject(1),
+        new MockValueObject(2)
       ];
-      const sequence: MockSequence<MockValueObject<number>> = new MockSequence<MockValueObject<number>>(values);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence(values);
 
       let i: number = 0;
 

@@ -8,7 +8,7 @@ import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
 
 export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>> {
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(root: StructurableTreeNode<K, V>): StructurableTree<K, V> {
-    return new StructurableTree<K, V>(root);
+    return new StructurableTree(root);
   }
 
   protected constructor(root: StructurableTreeNode<K, V>) {
@@ -24,7 +24,7 @@ export class StructurableTree<K extends TreeID, V extends StructurableTreeObject
   }
 
   private retrieve(node: StructurableTreeNode<K, V>, hierarchies: MutableProject<K, MutableAddress<K>>): void {
-    const offsprings: MutableAddress<K> = MutableAddress.empty<K>();
+    const offsprings: MutableAddress<K> = MutableAddress.empty();
 
     offsprings.add(node.getTreeID());
     hierarchies.set(node.getTreeID(), offsprings);
@@ -36,8 +36,7 @@ export class StructurableTree<K extends TreeID, V extends StructurableTreeObject
 
   private retrieveChildren(node: StructurableTreeNode<K, V>, children: ImmutableAddress<StructurableTreeNode<K, V>>, hierarchies: MutableProject<K, MutableAddress<K>>): void {
     children.forEach((child: StructurableTreeNode<K, V>) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      hierarchies.get(node.getTreeID())!.add(child.getTreeID());
+      hierarchies.get(node.getTreeID())?.add(child.getTreeID());
 
       this.retrieve(child, hierarchies);
 
@@ -48,7 +47,7 @@ export class StructurableTree<K extends TreeID, V extends StructurableTreeObject
   }
 
   public toHierarchies(): ClosureTableHierarchies<K> {
-    const hierarchies: MutableProject<K, MutableAddress<K>> = MutableProject.empty<K, MutableAddress<K>>();
+    const hierarchies: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
 
     this.retrieve(this.root, hierarchies);
 
