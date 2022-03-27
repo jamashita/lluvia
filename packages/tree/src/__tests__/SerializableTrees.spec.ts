@@ -1,6 +1,6 @@
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
+import { MockTreeID } from '../mock/MockTreeID';
+import { MockTreeObject } from '../mock/MockTreeObject';
 import { SerializableTree } from '../SerializableTree';
 import { SerializableTrees } from '../SerializableTrees';
 import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode';
@@ -8,8 +8,6 @@ import { SerializableTreeNode } from '../TreeNode/SerializableTreeNode';
 describe('SerializableTrees', () => {
   describe('empty', () => {
     it('does not return singleton instance', () => {
-      expect.assertions(2);
-
       expect(SerializableTrees.empty().size()).toBe(0);
       expect(SerializableTrees.empty()).not.toBe(SerializableTrees.empty());
     });
@@ -17,8 +15,6 @@ describe('SerializableTrees', () => {
 
   describe('add', () => {
     it('add one tree into empty trees', () => {
-      expect.assertions(4);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
 
       const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
@@ -43,8 +39,6 @@ describe('SerializableTrees', () => {
     });
 
     it('add one tree into simple trees', () => {
-      expect.assertions(9);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
@@ -126,8 +120,6 @@ describe('SerializableTrees', () => {
 
   describe('toJSON', () => {
     it('returns ReadonlyArray<TreeNodeJSON>', () => {
-      expect.assertions(1);
-
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');

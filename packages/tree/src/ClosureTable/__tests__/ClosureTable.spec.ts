@@ -1,41 +1,32 @@
 import { MockAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { MockProject, Project } from '@jamashita/lluvia-project';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
-import sinon, { SinonSpy } from 'sinon';
-import { MockTreeID } from '../../Mock/MockTreeID';
+import { MockTreeID } from '../../mock/MockTreeID';
 import { ClosureTable } from '../ClosureTable';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies';
-import { MockClosureTable } from '../Mock/MockClosureTable';
-import { MockClosureTableHierarchies } from '../Mock/MockClosureTableHierarchies';
-import { MockClosureTableHierarchy } from '../Mock/MockClosureTableHierarchy';
+import { MockClosureTable } from '../mock/MockClosureTable';
+import { MockClosureTableHierarchies } from '../mock/MockClosureTableHierarchies';
+import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy';
 
 describe('ClosureTable', () => {
   describe('of', () => {
     it('returns ClosureTable.empty() ClosureTableHierarchies.empty() given', () => {
-      expect.assertions(1);
-
-      expect(ClosureTable.of<MockTreeID>(ClosureTableHierarchies.empty<MockTreeID>())).toBe(ClosureTable.empty<MockTreeID>());
+      expect(ClosureTable.of(ClosureTableHierarchies.empty())).toBe(ClosureTable.empty());
     });
   });
 
   describe('empty', () => {
     it('returns singleton instance', () => {
-      expect.assertions(1);
-
-      expect(ClosureTable.empty<MockTreeID>()).toBe(ClosureTable.empty<MockTreeID>());
+      expect(ClosureTable.empty()).toBe(ClosureTable.empty());
     });
 
     it('\'s size is 0', () => {
-      expect.assertions(1);
-
-      expect(ClosureTable.empty<MockTreeID>().size()).toBe(0);
+      expect(ClosureTable.empty().size()).toBe(0);
     });
   });
 
   describe('iterator', () => {
     it('returns [K, ReadonlyAddress<K>]', () => {
-      expect.assertions(9);
-
       const hierarchies: ClosureTableHierarchies<MockTreeID> = new MockClosureTableHierarchies(
         new MockClosureTableHierarchy(new MockTreeID('mock 10'), new MockTreeID('mock 10')),
         new MockClosureTableHierarchy(new MockTreeID('mock 11'), new MockTreeID('mock 11')),
@@ -46,7 +37,7 @@ describe('ClosureTable', () => {
         new MockClosureTableHierarchy(new MockTreeID('mock 10'), new MockTreeID('mock 03'))
       );
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(hierarchies);
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(hierarchies);
       let i: number = 0;
 
       for (const [, v] of table) {
@@ -83,68 +74,58 @@ describe('ClosureTable', () => {
 
   describe('contains', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.contains = fn;
 
-      project.contains = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
-      table.contains(new MockAddress<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock')])));
+      table.contains(new MockAddress<MockTreeID>(new Set([new MockTreeID('mock')])));
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
 
       expect(table.equals(table)).toBe(true);
     });
 
     it('return false when the different class instance given', () => {
-      expect.assertions(1);
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
 
       expect(table.equals(new MockTreeID('mock'))).toBe(false);
     });
 
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.equals = fn;
 
-      project.equals = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
-      table.equals(new MockClosureTable<MockTreeID>());
+      table.equals(new MockClosureTable());
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('every', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.every = fn;
 
-      project.every = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
@@ -152,20 +133,18 @@ describe('ClosureTable', () => {
         return true;
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('forEach', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.forEach = fn;
 
-      project.forEach = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
@@ -173,96 +152,86 @@ describe('ClosureTable', () => {
         // NOOP
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('get', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.get = fn;
 
-      project.get = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
       table.get(new MockTreeID('mock'));
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('isEmpty', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.isEmpty = fn;
 
-      project.isEmpty = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
       table.isEmpty();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('toString', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.toString = fn;
 
-      project.toString = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
       table.toString();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('size', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.size = fn;
 
-      project.size = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
       table.size();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('some', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.some = fn;
 
-      project.some = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
@@ -270,39 +239,35 @@ describe('ClosureTable', () => {
         return true;
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('values', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.values = fn;
 
-      project.values = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
       table.values();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('filter', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.filter = fn;
 
-      project.filter = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
@@ -310,20 +275,18 @@ describe('ClosureTable', () => {
         return true;
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('find', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.find = fn;
 
-      project.find = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
@@ -331,19 +294,18 @@ describe('ClosureTable', () => {
         return true;
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
+
   describe('map', () => {
     it('delegates its inner collection object', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
+      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
 
-      const spy: SinonSpy = sinon.spy();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject<MockTreeID, ReadonlyAddress<MockTreeID>>(new Map<MockTreeID, ReadonlyAddress<MockTreeID>>());
+      project.map = fn;
 
-      project.map = spy;
-
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
       table.table = project;
 
@@ -351,14 +313,12 @@ describe('ClosureTable', () => {
         return offsprings;
       });
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('sort', () => {
     it('returns desc ordered pairs', () => {
-      expect.assertions(4);
-
       const hierarchies: ClosureTableHierarchies<MockTreeID> = new MockClosureTableHierarchies(
         new MockClosureTableHierarchy(new MockTreeID('mock 10'), new MockTreeID('mock 01')),
         new MockClosureTableHierarchy(new MockTreeID('mock 10'), new MockTreeID('mock 02')),
@@ -368,7 +328,7 @@ describe('ClosureTable', () => {
         new MockClosureTableHierarchy(new MockTreeID('mock 12'), new MockTreeID('mock 03'))
       );
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(hierarchies);
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(hierarchies);
       const keys: ReadonlySequence<MockTreeID> = table.sort();
 
       expect(keys.size()).toBe(3);

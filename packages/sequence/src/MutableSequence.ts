@@ -3,51 +3,51 @@ import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
 export class MutableSequence<V> extends ASequence<V, MutableSequence<V>> {
-  public static empty<VT>(): MutableSequence<VT> {
-    return MutableSequence.ofArray<VT>([]);
+  public static empty<V>(): MutableSequence<V> {
+    return MutableSequence.ofArray([]);
   }
 
-  public static of<VT>(collection: Collection<number, VT>): MutableSequence<VT> {
-    return MutableSequence.ofInternal<VT>([...collection.values()]);
+  public static of<V>(collection: Collection<number, V>): MutableSequence<V> {
+    return MutableSequence.ofInternal([...collection.values()]);
   }
 
-  public static ofArray<VT>(array: ReadonlyArray<VT>): MutableSequence<VT> {
-    return MutableSequence.ofInternal<VT>([...array]);
+  public static ofArray<V>(array: ReadonlyArray<V>): MutableSequence<V> {
+    return MutableSequence.ofInternal([...array]);
   }
 
-  private static ofInternal<VT>(array: Array<VT>): MutableSequence<VT> {
-    return new MutableSequence<VT>(array);
+  private static ofInternal<V>(array: Array<V>): MutableSequence<V> {
+    return new MutableSequence(array);
   }
 
   protected constructor(sequence: Array<V>) {
     super(sequence);
   }
 
-  public add(value: V): MutableSequence<V> {
+  public add(value: V): this {
     this.sequence.push(value);
 
     return this;
   }
 
   public duplicate(): MutableSequence<V> {
-    return MutableSequence.ofArray<V>([...this.sequence]);
+    return MutableSequence.ofArray([...this.sequence]);
   }
 
   public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V> {
-    return MutableSequence.ofArray<V>(this.filterInternal(predicate));
+    return MutableSequence.ofArray(this.filterInternal(predicate));
   }
 
   public map<W>(mapper: Mapper<V, W>): MutableSequence<W> {
-    return MutableSequence.ofArray<W>(this.sequence.map<W>(mapper));
+    return MutableSequence.ofArray(this.sequence.map(mapper));
   }
 
-  public remove(key: number): MutableSequence<V> {
+  public remove(key: number): this {
     this.sequence = this.removeInternal(key);
 
     return this;
   }
 
-  public set(key: number, value: V): MutableSequence<V> {
+  public set(key: number, value: V): this {
     this.sequence = this.setInternal(key, value);
 
     return this;
@@ -58,6 +58,6 @@ export class MutableSequence<V> extends ASequence<V, MutableSequence<V>> {
 
     arr.sort(comparator);
 
-    return MutableSequence.ofArray<V>(arr);
+    return MutableSequence.ofArray(arr);
   }
 }
