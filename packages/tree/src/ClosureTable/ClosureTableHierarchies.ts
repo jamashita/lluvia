@@ -7,42 +7,41 @@ import { TreeID } from '../TreeID';
 import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy';
 import { TreeIDFactory } from './TreeIDFactory';
 
-export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>, 'ClosureTableHierarchies'> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
-  public readonly noun: 'ClosureTableHierarchies' = 'ClosureTableHierarchies';
+export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
   private readonly hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>;
 
-  private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies<TreeID>(ImmutableSequence.empty<ClosureTableHierarchy<TreeID>>());
+  private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies(ImmutableSequence.empty());
 
-  public static empty<KT extends TreeID>(): ClosureTableHierarchies<KT> {
-    return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<KT>;
+  public static empty<K extends TreeID>(): ClosureTableHierarchies<K> {
+    return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<K>;
   }
 
-  public static of<KT extends TreeID>(hierarchies: ReadonlyProject<KT, ReadonlyAddress<KT>>): ClosureTableHierarchies<KT> {
-    const array: Array<ClosureTableHierarchy<KT>> = [];
+  public static of<K extends TreeID>(hierarchies: ReadonlyProject<K, ReadonlyAddress<K>>): ClosureTableHierarchies<K> {
+    const array: Array<ClosureTableHierarchy<K>> = [];
 
-    hierarchies.forEach((offsprings: ReadonlyAddress<KT>, ancestor: KT) => {
-      offsprings.forEach((offspring: KT) => {
-        array.push(ClosureTableHierarchy.of<KT>(ancestor, offspring));
+    hierarchies.forEach((offsprings: ReadonlyAddress<K>, ancestor: K) => {
+      offsprings.forEach((offspring: K) => {
+        array.push(ClosureTableHierarchy.of(ancestor, offspring));
       });
     });
 
-    return ClosureTableHierarchies.ofArray<KT>(array);
+    return ClosureTableHierarchies.ofArray(array);
   }
 
-  public static ofArray<KT extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<KT>>): ClosureTableHierarchies<KT> {
+  public static ofArray<K extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>): ClosureTableHierarchies<K> {
     if (hierarchies.length === 0) {
-      return ClosureTableHierarchies.empty<KT>();
+      return ClosureTableHierarchies.empty();
     }
 
-    return new ClosureTableHierarchies<KT>(ImmutableSequence.ofArray<ClosureTableHierarchy<KT>>(hierarchies));
+    return new ClosureTableHierarchies(ImmutableSequence.ofArray(hierarchies));
   }
 
-  public static ofJSON<KT extends TreeID>(json: ReadonlyArray<ClosureTableJSON>, factory: TreeIDFactory<KT>): ClosureTableHierarchies<KT> {
-    const hierarchies: Array<ClosureTableHierarchy<KT>> = json.map<ClosureTableHierarchy<KT>>((j: ClosureTableJSON) => {
-      return ClosureTableHierarchy.ofJSON<KT>(j, factory);
+  public static ofJSON<K extends TreeID>(json: ReadonlyArray<ClosureTableJSON>, factory: TreeIDFactory<K>): ClosureTableHierarchies<K> {
+    const hierarchies: Array<ClosureTableHierarchy<K>> = json.map((j: ClosureTableJSON): ClosureTableHierarchy<K> => {
+      return ClosureTableHierarchy.ofJSON(j, factory);
     });
 
-    return ClosureTableHierarchies.ofArray<KT>(hierarchies);
+    return ClosureTableHierarchies.ofArray(hierarchies);
   }
 
   protected constructor(hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>) {
@@ -94,7 +93,7 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
   }
 
   public map<W>(mapper: Mapper<ClosureTableHierarchy<K>, W>): ImmutableSequence<W> {
-    return this.hierarchies.map<W>(mapper);
+    return this.hierarchies.map(mapper);
   }
 
   public serialize(): string {
@@ -110,7 +109,7 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
   }
 
   public toJSON(): ReadonlyArray<ClosureTableJSON> {
-    return this.hierarchies.toArray().map<ClosureTableJSON>((hierarchy: ClosureTableHierarchy<K>) => {
+    return this.hierarchies.toArray().map((hierarchy: ClosureTableHierarchy<K>): ClosureTableJSON => {
       return hierarchy.toJSON();
     });
   }

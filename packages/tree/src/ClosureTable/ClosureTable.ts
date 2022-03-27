@@ -7,28 +7,27 @@ import { TreeID } from '../TreeID';
 import { ClosureTableHierarchies } from './ClosureTableHierarchies';
 import { ClosureTableHierarchy } from './ClosureTableHierarchy';
 
-export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>, 'ClosureTable'> {
-  public readonly noun: 'ClosureTable' = 'ClosureTable';
+export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableProject<K, ReadonlyAddress<K>>;
 
-  private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable<TreeID>(ImmutableProject.empty<TreeID, ReadonlyAddress<TreeID>>());
+  private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable(ImmutableProject.empty());
 
-  public static empty<KT extends TreeID>(): ClosureTable<KT> {
-    return ClosureTable.EMPTY as ClosureTable<KT>;
+  public static empty<K extends TreeID>(): ClosureTable<K> {
+    return ClosureTable.EMPTY as ClosureTable<K>;
   }
 
-  public static of<KT extends TreeID>(hierarchies: ClosureTableHierarchies<KT>): ClosureTable<KT> {
+  public static of<K extends TreeID>(hierarchies: ClosureTableHierarchies<K>): ClosureTable<K> {
     if (hierarchies.isEmpty()) {
-      return ClosureTable.empty<KT>();
+      return ClosureTable.empty();
     }
 
-    const project: MutableProject<KT, MutableAddress<KT>> = MutableProject.empty<KT, MutableAddress<KT>>();
+    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
 
-    hierarchies.forEach((hierarchy: ClosureTableHierarchy<KT>) => {
-      const offsprings: Nullable<MutableAddress<KT>> = project.get(hierarchy.getAncestor());
+    hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
+      const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
-        const address: MutableAddress<KT> = MutableAddress.empty<KT>();
+        const address: MutableAddress<K> = MutableAddress.empty();
 
         address.add(hierarchy.getOffspring());
         project.set(hierarchy.getAncestor(), address);
@@ -39,7 +38,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return new ClosureTable<KT>(ImmutableProject.of<KT, ReadonlyAddress<KT>>(project));
+    return new ClosureTable(ImmutableProject.of(project));
   }
 
   protected constructor(table: ImmutableProject<K, ReadonlyAddress<K>>) {
@@ -91,7 +90,7 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
   }
 
   public map<W>(mapper: Mapper<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
-    return this.table.map<W>(mapper);
+    return this.table.map(mapper);
   }
 
   public serialize(): string {
@@ -106,10 +105,6 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.some(predicate);
   }
 
-  public values(): Iterable<ReadonlyAddress<K>> {
-    return this.table.values();
-  }
-
   public sort(): ImmutableSequence<K> {
     const keys: Array<K> = [...this.table].sort(([, v1]: [K, ReadonlyAddress<K>], [, v2]: [K, ReadonlyAddress<K>]) => {
       return v1.size() - v2.size();
@@ -117,6 +112,10 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
       return k;
     });
 
-    return ImmutableSequence.ofArray<K>(keys);
+    return ImmutableSequence.ofArray(keys);
+  }
+
+  public values(): Iterable<ReadonlyAddress<K>> {
+    return this.table.values();
   }
 }

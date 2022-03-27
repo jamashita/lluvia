@@ -2,33 +2,31 @@ import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
-export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>, 'ImmutableProject'> {
-  public readonly noun: 'ImmutableProject' = 'ImmutableProject';
+export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>> {
+  private static readonly EMPTY: ImmutableProject<unknown, unknown> = new ImmutableProject(new Map());
 
-  private static readonly EMPTY: ImmutableProject<unknown, unknown> = new ImmutableProject<unknown, unknown>(new Map<unknown, [unknown, unknown]>());
-
-  public static empty<KT, VT>(): ImmutableProject<KT, VT> {
-    return ImmutableProject.EMPTY as ImmutableProject<KT, VT>;
+  public static empty<K, V>(): ImmutableProject<K, V> {
+    return ImmutableProject.EMPTY as ImmutableProject<K, V>;
   }
 
-  public static of<KT, VT>(collection: Collection<KT, VT>): ImmutableProject<KT, VT> {
-    const map: Map<KT, VT> = new Map<KT, VT>(collection);
+  public static of<K, V>(collection: Collection<K, V>): ImmutableProject<K, V> {
+    const map: Map<K, V> = new Map(collection);
 
-    return ImmutableProject.ofMap<KT, VT>(map);
+    return ImmutableProject.ofMap(map);
   }
 
-  private static ofInternal<KT, VT>(project: Map<KT | number, [KT, VT]>): ImmutableProject<KT, VT> {
+  private static ofInternal<K, V>(project: Map<K | number, [K, V]>): ImmutableProject<K, V> {
     if (project.size === 0) {
-      return ImmutableProject.empty<KT, VT>();
+      return ImmutableProject.empty();
     }
 
-    return new ImmutableProject<KT, VT>(project);
+    return new ImmutableProject(project);
   }
 
-  public static ofMap<KT, VT>(map: ReadonlyMap<KT, VT>): ImmutableProject<KT, VT> {
-    const m: Map<KT | number, [KT, VT]> = new Map<KT | number, [KT, VT]>();
+  public static ofMap<K, V>(map: ReadonlyMap<K, V>): ImmutableProject<K, V> {
+    const m: Map<K | number, [K, V]> = new Map();
 
-    map.forEach((v: VT, k: KT) => {
+    map.forEach((v: V, k: K) => {
       if (isNominative(k)) {
         m.set(k.hashCode(), [k, v]);
 
@@ -38,7 +36,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
       m.set(k, [k, v]);
     });
 
-    return ImmutableProject.ofInternal<KT, VT>(m);
+    return ImmutableProject.ofInternal(m);
   }
 
   protected constructor(project: Map<K | number, [K, V]>) {
@@ -47,18 +45,18 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
 
   public duplicate(): ImmutableProject<K, V> {
     if (this.isEmpty()) {
-      return ImmutableProject.empty<K, V>();
+      return ImmutableProject.empty();
     }
 
-    return ImmutableProject.ofInternal<K, V>(new Map<K | number, [K, V]>(this.project));
+    return ImmutableProject.ofInternal(new Map(this.project));
   }
 
   public filter(predicate: BinaryPredicate<V, K>): ImmutableProject<K, V> {
-    return ImmutableProject.ofInternal<K, V>(this.filterInternal(predicate));
+    return ImmutableProject.ofInternal(this.filterInternal(predicate));
   }
 
   public override isEmpty(): boolean {
-    if (this === ImmutableProject.empty<K, V>()) {
+    if (this === ImmutableProject.empty()) {
       return true;
     }
 
@@ -66,7 +64,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
   }
 
   public map<W>(mapper: Mapper<V, W>): ImmutableProject<K, W> {
-    return ImmutableProject.ofInternal<K, W>(this.mapInternal<W>(mapper));
+    return ImmutableProject.ofInternal(this.mapInternal(mapper));
   }
 
   public remove(key: K): ImmutableProject<K, V> {
@@ -77,20 +75,27 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
       return this;
     }
 
-    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>(this.project);
-    const k: K | number = this.hashor<K>(key);
+    const m: Map<K | number, [K, V]> = new Map(this.project);
+    if (isNominative(key)) {
+      m.delete(key.hashCode());
+    }
+    else {
+      m.delete(key);
+    }
 
-    m.delete(k);
-
-    return ImmutableProject.ofInternal<K, V>(m);
+    return ImmutableProject.ofInternal(m);
   }
 
   public set(key: K, value: V): ImmutableProject<K, V> {
-    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>(this.project);
-    const k: K | number = this.hashor<K>(key);
+    const m: Map<K | number, [K, V]> = new Map(this.project);
 
-    m.set(k, [key, value]);
+    if (isNominative(key)) {
+      m.set(key.hashCode(), [key, value]);
+    }
+    else {
+      m.set(key, [key, value]);
+    }
 
-    return ImmutableProject.ofInternal<K, V>(m);
+    return ImmutableProject.ofInternal(m);
   }
 }

@@ -12,7 +12,7 @@ import {
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Sequence } from './Sequence';
 
-export abstract class ASequence<V, T extends ASequence<V, T>, N extends string = string> extends Quantity<number, V, N> implements Sequence<V, N> {
+export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
 
   protected constructor(sequence: Array<V>) {
@@ -20,17 +20,17 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     this.sequence = sequence;
   }
 
-  public abstract add(value: V): Sequence<V, N>;
-
-  public abstract set(key: number, value: V): T;
-
-  public abstract remove(key: number): T;
+  public abstract add(value: V): Sequence<V>;
 
   public abstract duplicate(): T;
 
+  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
+
   public abstract override map<W>(mapper: Mapper<V, W>): Sequence<W>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
+  public abstract remove(key: number): T;
+
+  public abstract set(key: number, value: V): T;
 
   public abstract sort(comparator: BinaryFunction<V, V, number>): T;
 
@@ -66,12 +66,12 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     let or: IteratorResult<unknown> = oi.next();
 
     while (tr.done !== true && or.done !== true) {
-      if (isEqualable(tr.value) && isEqualable(or.value)) {
+      if (isEqualable(tr.value)) {
         if (!tr.value.equals(or.value)) {
           return false;
         }
       }
- else if (tr.value !== or.value) {
+      else if (tr.value !== or.value) {
         return false;
       }
 
@@ -87,11 +87,19 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
   }
 
   public every(predicate: BinaryPredicate<V, number>): boolean {
-    const found: Ambiguous<V> = this.sequence.find((v: V, i: number) => {
-      return !predicate(v, i);
+    return this.sequence.every(predicate);
+  }
+
+  protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
+    const arr: Array<V> = [];
+
+    this.sequence.forEach((v: V, i: number) => {
+      if (predicate(v, i)) {
+        arr.push(v);
+      }
     });
 
-    return Kind.isUndefined(found);
+    return arr;
   }
 
   public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
@@ -105,9 +113,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
   }
 
   public forEach(catalogue: Catalogue<number, V>): void {
-    this.sequence.forEach((v: V, i: number) => {
-      catalogue(v, i);
-    });
+    this.sequence.forEach(catalogue);
   }
 
   public get(key: number): Nullable<V> {
@@ -126,40 +132,12 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     }).values();
   }
 
-  public serialize(): string {
-    return this.sequence.map<string>((v: V) => {
-      return Objet.identify(v);
-    }).join(', ');
-  }
+  public reduce(reducer: BinaryFunction<V, V, V>, initialValue?: V): V {
+    if (Kind.isUndefined(initialValue)) {
+      return this.sequence.reduce(reducer);
+    }
 
-  public size(): number {
-    return this.sequence.length;
-  }
-
-  public some(predicate: BinaryPredicate<V, number>): boolean {
-    const found: Ambiguous<V> = this.sequence.find(predicate);
-
-    return !Kind.isUndefined(found);
-  }
-
-  public toArray(): Array<V> {
-    return [...this.sequence];
-  }
-
-  public values(): Iterable<V> {
-    return this.toArray();
-  }
-
-  protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
-    const arr: Array<V> = [];
-
-    this.sequence.forEach((v: V, i: number) => {
-      if (predicate(v, i)) {
-        arr.push(v);
-      }
-    });
-
-    return arr;
+    return this.sequence.reduce(reducer, initialValue);
   }
 
   protected removeInternal(key: number): Array<V> {
@@ -173,6 +151,12 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
   }
 
+  public serialize(): string {
+    return this.sequence.map<string>((v: V) => {
+      return Objet.identify(v);
+    }).join(', ');
+  }
+
   protected setInternal(key: number, value: V): Array<V> {
     if (!Kind.isInteger(key)) {
       return this.sequence;
@@ -182,5 +166,21 @@ export abstract class ASequence<V, T extends ASequence<V, T>, N extends string =
     }
 
     return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
+  }
+
+  public size(): number {
+    return this.sequence.length;
+  }
+
+  public some(predicate: BinaryPredicate<V, number>): boolean {
+    return this.sequence.some(predicate);
+  }
+
+  public toArray(): Array<V> {
+    return [...this.sequence];
+  }
+
+  public values(): Iterable<V> {
+    return this.toArray();
   }
 }

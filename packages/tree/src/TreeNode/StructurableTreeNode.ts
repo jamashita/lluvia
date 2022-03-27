@@ -3,22 +3,20 @@ import { StructurableTreeObject } from '../StructurableTreeObject';
 import { TreeID } from '../TreeID';
 import { ATreeNode } from './ATreeNode';
 
-export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>, 'StructurableTreeNode'> {
-  public readonly noun: 'StructurableTreeNode' = 'StructurableTreeNode';
-
-  public static of<KT extends TreeID, VT extends StructurableTreeObject<KT>>(node: StructurableTreeNode<KT, VT>): StructurableTreeNode<KT, VT> {
-    return StructurableTreeNode.ofValue<KT, VT>(node.getValue(), node.getChildren());
+export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>> {
+  public static of<K extends TreeID, V extends StructurableTreeObject<K>>(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
+    return StructurableTreeNode.ofValue<K, V>(node.getValue(), node.getChildren());
   }
 
-  public static ofValue<KT extends TreeID, VT extends StructurableTreeObject<KT>>(value: VT, children?: ReadonlyAddress<StructurableTreeNode<KT, VT>>): StructurableTreeNode<KT, VT> {
-    return new StructurableTreeNode<KT, VT>(value, children);
+  public static ofValue<K extends TreeID, V extends StructurableTreeObject<K>>(value: V, children?: ReadonlyAddress<StructurableTreeNode<K, V>>): StructurableTreeNode<K, V> {
+    return new StructurableTreeNode(value, children);
   }
 
   protected constructor(value: V, children: ReadonlyAddress<StructurableTreeNode<K, V>> = ImmutableAddress.empty<StructurableTreeNode<K, V>>()) {
-    super(value, ImmutableAddress.of<StructurableTreeNode<K, V>>(children));
+    super(value, ImmutableAddress.of(children));
   }
 
-  public append(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
+  public append(node: StructurableTreeNode<K, V>): this {
     this.children = this.children.add(node);
 
     return this;
@@ -29,7 +27,7 @@ export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeOb
       return node as StructurableTreeNode<K, V>;
     }
 
-    return StructurableTreeNode.ofValue<K, V>(node.getValue(), node.getChildren());
+    return StructurableTreeNode.ofValue(node.getValue(), node.getChildren());
   }
 
   public getTreeID(): K {

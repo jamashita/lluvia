@@ -1,7 +1,7 @@
 import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
 import { ReadonlySequence } from './ReadonlySequence';
 
-export interface Sequence<V, N extends string = string> extends ReadonlySequence<V, N> {
+export interface Sequence<V> extends ReadonlySequence<V> {
   add(value: V): Sequence<V>;
 
   filter(predicate: BinaryPredicate<V, number>): Sequence<V>;

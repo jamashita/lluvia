@@ -3,7 +3,7 @@ import { Ambiguous, BinaryPredicate, Catalogue, isNominative, Kind, Mapper, Null
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Project } from './Project';
 
-export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends string = string> extends Quantity<K, V, N> implements Project<K, V, N> {
+export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quantity<K, V> implements Project<K, V> {
   protected readonly project: Map<K | number, [K, V]>;
 
   protected constructor(project: Map<K | number, [K, V]>) {
@@ -11,15 +11,15 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     this.project = project;
   }
 
-  public abstract set(key: K, value: V): T;
-
-  public abstract remove(key: K): T;
-
   public abstract duplicate(): T;
+
+  public abstract override filter(predicate: BinaryPredicate<V, K>): T;
 
   public abstract override map<W>(mapper: Mapper<V, W>): Project<K, W>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, K>): T;
+  public abstract remove(key: K): T;
+
+  public abstract set(key: K, value: V): T;
 
   // FIXME O(n)
   public contains(value: V): boolean {
@@ -74,6 +74,23 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     return true;
   }
 
+  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | number, [K, V]> {
+    const m: Map<K | number, [K, V]> = new Map();
+
+    this.project.forEach(([k, v]: [K, V]) => {
+      if (predicate(v, k)) {
+        if (isNominative(k)) {
+          m.set(k.hashCode(), [k, v]);
+        }
+        else {
+          m.set(k, [k, v]);
+        }
+      }
+    });
+
+    return m;
+  }
+
   public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
     for (const [, [k, v]] of this.project) {
       if (predicate(v, k)) {
@@ -91,8 +108,15 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   }
 
   public get(key: K): Nullable<V> {
-    const k: K | number = this.hashor<K>(key);
-    const p: Ambiguous<[K, V]> = this.project.get(k);
+    // eslint-disable-next-line @typescript-eslint/init-declarations
+    let p: Ambiguous<[K, V]>;
+
+    if (isNominative(key)) {
+      p = this.project.get(key.hashCode());
+    }
+    else {
+      p = this.project.get(key);
+    }
 
     if (Kind.isUndefined(p)) {
       return null;
@@ -102,9 +126,11 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   }
 
   public has(key: K): boolean {
-    const k: K | number = this.hashor<K>(key);
+    if (isNominative(key)) {
+      return this.project.has(key.hashCode());
+    }
 
-    return this.project.has(k);
+    return this.project.has(key);
   }
 
   public override isEmpty(): boolean {
@@ -123,6 +149,24 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     });
 
     return iterable;
+  }
+
+  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | number, [K, W]> {
+    const m: Map<K | number, [K, W]> = new Map();
+    let i: number = 0;
+
+    this.project.forEach(([k, v]: [K, V]) => {
+      if (isNominative(k)) {
+        m.set(k.hashCode(), [k, mapper(v, i)]);
+      }
+      else {
+        m.set(k, [k, mapper(v, i)]);
+      }
+
+      i++;
+    });
+
+    return m;
   }
 
   public serialize(): string {
@@ -150,7 +194,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
   }
 
   public toMap(): Map<K, V> {
-    const map: Map<K, V> = new Map<K, V>();
+    const map: Map<K, V> = new Map();
 
     this.forEach((v: V, k: K) => {
       map.set(k, v);
@@ -167,34 +211,6 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>, N extends stri
     });
 
     return iterable;
-  }
-
-  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | number, [K, V]> {
-    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
-
-    this.project.forEach(([k, v]: [K, V]) => {
-      if (predicate(v, k)) {
-        const key: K | number = this.hashor<K>(k);
-
-        m.set(key, [k, v]);
-      }
-    });
-
-    return m;
-  }
-
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | number, [K, W]> {
-    const m: Map<K | number, [K, W]> = new Map<K | number, [K, W]>();
-    let i: number = 0;
-
-    this.project.forEach(([k, v]: [K, V]) => {
-      const key: K | number = this.hashor<K>(k);
-
-      m.set(key, [k, mapper(v, i)]);
-      i++;
-    });
-
-    return m;
   }
 }
 

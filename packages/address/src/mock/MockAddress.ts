@@ -2,13 +2,11 @@ import { UnimplementedError } from '@jamashita/anden-error';
 import { isNominative } from '@jamashita/anden-type';
 import { AAddress } from '../AAddress';
 
-export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
-  public readonly noun: 'MockAddress' = 'MockAddress';
+export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
+  private static toMap<V>(set: ReadonlySet<V>): Map<V | number, V> {
+    const m: Map<V | number, V> = new Map();
 
-  private static toMap<VT>(set: ReadonlySet<VT>): Map<VT | number, VT> {
-    const m: Map<VT | number, VT> = new Map<VT | number, VT>();
-
-    set.forEach((v: VT) => {
+    set.forEach((v: V) => {
       if (isNominative(v)) {
         m.set(v.hashCode(), v);
 
@@ -22,7 +20,7 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>, 'MockAddress'> {
   }
 
   public constructor(set: ReadonlySet<V>) {
-    super(MockAddress.toMap<V>(set));
+    super(MockAddress.toMap(set));
   }
 
   public add(): MockAddress<V> {
