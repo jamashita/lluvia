@@ -76,18 +76,25 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     }
 
     const m: Map<K | number, [K, V]> = new Map(this.project);
-    const k: K | number = this.hashor(key);
-
-    m.delete(k);
+    if (isNominative(key)) {
+      m.delete(key.hashCode());
+    }
+    else {
+      m.delete(key);
+    }
 
     return ImmutableProject.ofInternal(m);
   }
 
   public set(key: K, value: V): ImmutableProject<K, V> {
     const m: Map<K | number, [K, V]> = new Map(this.project);
-    const k: K | number = this.hashor(key);
 
-    m.set(k, [key, value]);
+    if (isNominative(key)) {
+      m.set(key.hashCode(), [key, value]);
+    }
+    else {
+      m.set(key, [key, value]);
+    }
 
     return ImmutableProject.ofInternal(m);
   }

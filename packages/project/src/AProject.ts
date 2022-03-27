@@ -79,9 +79,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
 
     this.project.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {
-        const key: K | number = this.hashor<K>(k);
-
-        m.set(key, [k, v]);
+        if (isNominative(k)) {
+          m.set(k.hashCode(), [k, v]);
+        }
+        else {
+          m.set(k, [k, v]);
+        }
       }
     });
 
@@ -105,8 +108,15 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public get(key: K): Nullable<V> {
-    const k: K | number = this.hashor(key);
-    const p: Ambiguous<[K, V]> = this.project.get(k);
+    // eslint-disable-next-line @typescript-eslint/init-declarations
+    let p: Ambiguous<[K, V]>;
+
+    if (isNominative(key)) {
+      p = this.project.get(key.hashCode());
+    }
+    else {
+      p = this.project.get(key);
+    }
 
     if (Kind.isUndefined(p)) {
       return null;
@@ -116,9 +126,11 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public has(key: K): boolean {
-    const k: K | number = this.hashor(key);
+    if (isNominative(key)) {
+      return this.project.has(key.hashCode());
+    }
 
-    return this.project.has(k);
+    return this.project.has(key);
   }
 
   public override isEmpty(): boolean {
@@ -144,9 +156,13 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
     let i: number = 0;
 
     this.project.forEach(([k, v]: [K, V]) => {
-      const key: K | number = this.hashor(k);
+      if (isNominative(k)) {
+        m.set(k.hashCode(), [k, mapper(v, i)]);
+      }
+      else {
+        m.set(k, [k, mapper(v, i)]);
+      }
 
-      m.set(key, [k, mapper(v, i)]);
       i++;
     });
 

@@ -42,9 +42,12 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
       return this;
     }
 
-    const v: V | number = this.hashor(value);
-
-    this.address.set(v, value);
+    if (isNominative(value)) {
+      this.address.set(value.hashCode(), value);
+    }
+    else {
+      this.address.set(value, value);
+    }
 
     return this;
   }
@@ -69,9 +72,12 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
       return this;
     }
 
-    const v: V | number = this.hashor(value);
-
-    this.address.delete(v);
+    if (isNominative(value)) {
+      this.address.delete(value.hashCode());
+    }
+    else {
+      this.address.delete(value);
+    }
 
     return this;
   }

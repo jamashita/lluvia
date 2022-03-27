@@ -49,9 +49,13 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
     }
 
     const m: Map<V | number, V> = new Map(this.address);
-    const v: V | number = this.hashor(value);
 
-    m.set(v, value);
+    if (isNominative(value)) {
+      m.set(value.hashCode(), value);
+    }
+    else {
+      m.set(value, value);
+    }
 
     return ImmutableAddress.ofInternal(m);
   }
@@ -89,9 +93,13 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
     }
 
     const m: Map<V | number, V> = new Map(this.address);
-    const v: V | number = this.hashor(value);
 
-    m.delete(v);
+    if (isNominative(value)) {
+      m.delete(value.hashCode());
+    }
+    else {
+      m.delete(value);
+    }
 
     return ImmutableAddress.ofInternal(m);
   }

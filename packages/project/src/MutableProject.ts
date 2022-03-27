@@ -57,17 +57,23 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
       return this;
     }
 
-    const k: K | number = this.hashor(key);
-
-    this.project.delete(k);
+    if (isNominative(key)) {
+      this.project.delete(key.hashCode());
+    }
+    else {
+      this.project.delete(key);
+    }
 
     return this;
   }
 
   public set(key: K, value: V): this {
-    const k: K | number = this.hashor(key);
-
-    this.project.set(k, [key, value]);
+    if (isNominative(key)) {
+      this.project.set(key.hashCode(), [key, value]);
+    }
+    else {
+      this.project.set(key, [key, value]);
+    }
 
     return this;
   }

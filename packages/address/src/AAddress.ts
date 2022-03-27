@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Catalogue, isNominative, Mapper, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address';
 
@@ -22,7 +22,11 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
   public abstract remove(value: V): T;
 
   public contains(value: V): boolean {
-    return this.address.has(this.hashor<V>(value));
+    if (isNominative(value)) {
+      return this.address.has(value.hashCode());
+    }
+
+    return this.address.has(value);
   }
 
   public equals(other: unknown): boolean {
@@ -56,9 +60,12 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
 
     this.address.forEach((value: V) => {
       if (predicate(value, undefined)) {
-        const v: V | number = this.hashor(value);
-
-        m.set(v, value);
+        if (isNominative(value)) {
+          m.set(value.hashCode(), value);
+        }
+        else {
+          m.set(value, value);
+        }
       }
     });
 
@@ -106,9 +113,14 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
 
     this.address.forEach((value: V) => {
       const w: W = mapper(value, i);
-      const v: W | number = this.hashor<W>(w);
 
-      m.set(v, w);
+      if (isNominative(w)) {
+        m.set(w.hashCode(), w);
+      }
+      else {
+        m.set(w, w);
+      }
+
       i++;
     });
 
