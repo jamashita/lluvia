@@ -1,23 +1,20 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { BinaryPredicate, Nullable } from '@jamashita/anden-type';
-import { MockProject } from '../Mock/MockProject';
+import { MockProject } from '../mock/MockProject';
 
 describe('AProject', () => {
   describe('iterator', () => {
     it('returns [MockValueObject<string>, MockValueObject<number>]', () => {
-      expect.assertions(4);
-
-      const key1: MockValueObject<string> = new MockValueObject<string>('a');
-      const key2: MockValueObject<string> = new MockValueObject<string>('d');
+      const key1: MockValueObject<string> = new MockValueObject('a');
+      const key2: MockValueObject<string> = new MockValueObject('d');
       const keys: Array<MockValueObject<string>> = [key1, key2];
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
       const values: Array<MockValueObject<number>> = [value1, value2];
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject<MockValueObject<string>,
-        MockValueObject<number>>(
-        new Map<MockValueObject<string>, MockValueObject<number>>([
+      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -35,15 +32,13 @@ describe('AProject', () => {
 
   describe('get', () => {
     it('returns value at the correct key', () => {
-      expect.assertions(3);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(1);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(1);
+      const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
 
       expect(project.size()).toBe(1);
@@ -52,15 +47,13 @@ describe('AProject', () => {
     });
 
     it('returns null at incorrect keys', () => {
-      expect.assertions(2);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
 
       expect(project.size()).toBe(1);
@@ -70,30 +63,26 @@ describe('AProject', () => {
 
   describe('has', () => {
     it('returns false if the key does not exist', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
 
       expect(project.has(key2)).toBe(false);
     });
 
     it('returns true if the key exists', () => {
-      expect.assertions(2);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(1);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(1);
+      const value1: MockValueObject<number> = new MockValueObject(3);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(3);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
 
       expect(project.has(key1)).toBe(true);
@@ -103,30 +92,26 @@ describe('AProject', () => {
 
   describe('contains', () => {
     it('returns false if the value does not exist', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(3);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
 
       expect(project.contains(value2)).toBe(false);
     });
 
     it('returns true if the value exists', () => {
-      expect.assertions(2);
+      const key1: MockValueObject<number> = new MockValueObject(1);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
 
       expect(project.contains(value1)).toBe(true);
@@ -136,16 +121,14 @@ describe('AProject', () => {
 
   describe('isEmpty', () => {
     it('returns true if the values does not exist', () => {
-      expect.assertions(2);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
       const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>()
+        new Map()
       );
 
       expect(project1.isEmpty()).toBe(false);
@@ -155,21 +138,19 @@ describe('AProject', () => {
 
   describe('forEach', () => {
     it('calls back as much as the size of set', () => {
-      expect.assertions(5);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(2);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(3);
 
       const kv: Array<[MockValueObject<number>, MockValueObject<number>]> = [
         [key1, value1],
         [key2, value2]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>(kv)
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map(kv)
       );
       let i: number = 0;
 
@@ -187,15 +168,13 @@ describe('AProject', () => {
 
   describe('every', () => {
     it('returns true if all the values are the same', () => {
-      expect.assertions(2);
+      const key1: MockValueObject<number> = new MockValueObject(3);
+      const key2: MockValueObject<number> = new MockValueObject(6);
+      const key3: MockValueObject<number> = new MockValueObject(9);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(3);
-      const key2: MockValueObject<number> = new MockValueObject<number>(6);
-      const key3: MockValueObject<number> = new MockValueObject<number>(9);
-
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-      const value3: MockValueObject<number> = new MockValueObject<number>(6);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
 
       const kv: Array<[MockValueObject<number>, MockValueObject<number>]> = [
         [key1, value1],
@@ -203,8 +182,8 @@ describe('AProject', () => {
         [key3, value3]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>(kv)
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map(kv)
       );
 
       const every1: boolean = project.every((_: MockValueObject<number>, key: MockValueObject<number>) => {
@@ -219,61 +198,59 @@ describe('AProject', () => {
     });
 
     it('if one of them are not satisfied, returns false', () => {
-      expect.assertions(6);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(2);
+      const key3: MockValueObject<number> = new MockValueObject(3);
+      const key4: MockValueObject<number> = new MockValueObject(4);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(2);
-      const key3: MockValueObject<number> = new MockValueObject<number>(3);
-      const key4: MockValueObject<number> = new MockValueObject<number>(4);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
+      const value4: MockValueObject<number> = new MockValueObject(8);
+      const value5: MockValueObject<number> = new MockValueObject(3);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-      const value3: MockValueObject<number> = new MockValueObject<number>(6);
-      const value4: MockValueObject<number> = new MockValueObject<number>(8);
-      const value5: MockValueObject<number> = new MockValueObject<number>(3);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2],
           [key3, value3],
           [key4, value4]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value2],
           [key2, value1],
           [key3, value3],
           [key4, value4]
         ])
       );
-      const project3: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project3: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value2],
           [key2, value3],
           [key3, value1],
           [key4, value4]
         ])
       );
-      const project4: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project4: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value2],
           [key2, value3],
           [key3, value4],
           [key4, value1]
         ])
       );
-      const project5: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project5: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value5],
           [key3, value3],
           [key4, value4]
         ])
       );
-      const project6: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project6: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2],
           [key3, value5],
@@ -305,15 +282,13 @@ describe('AProject', () => {
 
   describe('some', () => {
     it('returns true if at least one of the values returns true', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(2);
+      const key3: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(2);
-      const key3: MockValueObject<number> = new MockValueObject<number>(3);
-
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-      const value3: MockValueObject<number> = new MockValueObject<number>(6);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
 
       const kv: Array<[MockValueObject<number>, MockValueObject<number>]> = [
         [key1, value1],
@@ -321,8 +296,8 @@ describe('AProject', () => {
         [key3, value3]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>(kv)
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map(kv)
       );
 
       const predicate: BinaryPredicate<MockValueObject<number>, MockValueObject<number>> = (value: MockValueObject<number>) => {
@@ -335,20 +310,18 @@ describe('AProject', () => {
     });
 
     it('returns false if none of the values are true', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(2);
+      const key3: MockValueObject<number> = new MockValueObject(3);
+      const key4: MockValueObject<number> = new MockValueObject(4);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(2);
-      const key3: MockValueObject<number> = new MockValueObject<number>(3);
-      const key4: MockValueObject<number> = new MockValueObject<number>(4);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
+      const value4: MockValueObject<number> = new MockValueObject(8);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-      const value3: MockValueObject<number> = new MockValueObject<number>(6);
-      const value4: MockValueObject<number> = new MockValueObject<number>(8);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2],
           [key3, value3],
@@ -368,33 +341,29 @@ describe('AProject', () => {
 
   describe('equals', () => {
     it('returns true when the same instance given', () => {
-      expect.assertions(1);
+      const key: MockValueObject<number> = new MockValueObject(1);
 
-      const key: MockValueObject<number> = new MockValueObject<number>(1);
+      const value: MockValueObject<number> = new MockValueObject(2);
 
-      const value: MockValueObject<number> = new MockValueObject<number>(2);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key, value]])
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key, value]])
       );
 
       expect(project.equals(project)).toBe(true);
     });
 
     it('returns false if the size is different', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([[key1, value1]])
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([[key1, value1]])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -404,32 +373,28 @@ describe('AProject', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      expect.assertions(1);
-
       const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>()
+        new Map()
       );
 
       expect(project.equals(new MockValueObject('mock'))).toBe(false);
     });
 
     it('returns false if the values are different', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value1]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -439,23 +404,21 @@ describe('AProject', () => {
     });
 
     it('returns false if the keys are different', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
+      const key3: MockValueObject<number> = new MockValueObject(5);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
-      const key3: MockValueObject<number> = new MockValueObject<number>(5);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key3, value2]
         ])
@@ -465,22 +428,20 @@ describe('AProject', () => {
     });
 
     it('returns true even if the order is different', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key2, value2],
           [key1, value1]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -490,22 +451,20 @@ describe('AProject', () => {
     });
 
     it('returns true if the same and the order is the same', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -517,16 +476,14 @@ describe('AProject', () => {
 
   describe('toString', () => {
     it('returns key-value concatenated string', () => {
-      expect.assertions(1);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>([
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -538,20 +495,18 @@ describe('AProject', () => {
 
   describe('toMap', () => {
     it('returns its retaining shallow-copied map', () => {
-      expect.assertions(5);
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
 
-      const key1: MockValueObject<number> = new MockValueObject<number>(1);
-      const key2: MockValueObject<number> = new MockValueObject<number>(3);
-
-      const value1: MockValueObject<number> = new MockValueObject<number>(2);
-      const value2: MockValueObject<number> = new MockValueObject<number>(4);
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
       const kv: Array<[MockValueObject<number>, MockValueObject<number>]> = [
         [key1, value1],
         [key2, value2]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
-        new Map<MockValueObject<number>, MockValueObject<number>>(kv)
+      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+        new Map(kv)
       );
       const map: Map<MockValueObject<number>, MockValueObject<number>> = project.toMap();
       let i: number = 0;
@@ -570,17 +525,15 @@ describe('AProject', () => {
 
   describe('keys', () => {
     it('returns its retaining keys', () => {
-      expect.assertions(2);
-
-      const key1: MockValueObject<string> = new MockValueObject<string>('a');
-      const key2: MockValueObject<string> = new MockValueObject<string>('d');
+      const key1: MockValueObject<string> = new MockValueObject('a');
+      const key2: MockValueObject<string> = new MockValueObject('d');
       const keys: Array<MockValueObject<string>> = [key1, key2];
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject<MockValueObject<string>, MockValueObject<number>>(
-        new Map<MockValueObject<string>, MockValueObject<number>>([
+      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -597,17 +550,15 @@ describe('AProject', () => {
 
   describe('values', () => {
     it('returns its retaining values', () => {
-      expect.assertions(2);
+      const key1: MockValueObject<string> = new MockValueObject('a');
+      const key2: MockValueObject<string> = new MockValueObject('d');
 
-      const key1: MockValueObject<string> = new MockValueObject<string>('a');
-      const key2: MockValueObject<string> = new MockValueObject<string>('d');
-
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
       const values: Array<MockValueObject<number>> = [value1, value2];
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject<MockValueObject<string>, MockValueObject<number>>(
-        new Map<MockValueObject<string>, MockValueObject<number>>([
+      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(
+        new Map([
           [key1, value1],
           [key2, value2]
         ])
@@ -624,19 +575,17 @@ describe('AProject', () => {
 
   describe('find', () => {
     it('returns the first found value', () => {
-      expect.assertions(5);
+      const key1: MockValueObject<string> = new MockValueObject('a');
+      const key2: MockValueObject<string> = new MockValueObject('d');
+      const key3: MockValueObject<string> = new MockValueObject('g');
+      const key4: MockValueObject<string> = new MockValueObject('k');
 
-      const key1: MockValueObject<string> = new MockValueObject<string>('a');
-      const key2: MockValueObject<string> = new MockValueObject<string>('d');
-      const key3: MockValueObject<string> = new MockValueObject<string>('g');
-      const key4: MockValueObject<string> = new MockValueObject<string>('k');
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const value1: MockValueObject<number> = new MockValueObject<number>(1);
-      const value2: MockValueObject<number> = new MockValueObject<number>(2);
-      const value3: MockValueObject<number> = new MockValueObject<number>(3);
-      const value4: MockValueObject<number> = new MockValueObject<number>(4);
-
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject<MockValueObject<string>, MockValueObject<number>>(new Map<MockValueObject<string>, MockValueObject<number>>([
+      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(new Map([
         [key1, value1],
         [key2, value2],
         [key3, value3],

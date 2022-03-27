@@ -3,10 +3,10 @@ import { isNominative } from '@jamashita/anden-type';
 import { AAddress } from '../AAddress';
 
 export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
-  private static toMap<VT>(set: ReadonlySet<VT>): Map<VT | number, VT> {
-    const m: Map<VT | number, VT> = new Map<VT | number, VT>();
+  private static toMap<V>(set: ReadonlySet<V>): Map<V | number, V> {
+    const m: Map<V | number, V> = new Map();
 
-    set.forEach((v: VT) => {
+    set.forEach((v: V) => {
       if (isNominative(v)) {
         m.set(v.hashCode(), v);
 
@@ -20,7 +20,7 @@ export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
   }
 
   public constructor(set: ReadonlySet<V>) {
-    super(MockAddress.toMap<V>(set));
+    super(MockAddress.toMap(set));
   }
 
   public add(): MockAddress<V> {

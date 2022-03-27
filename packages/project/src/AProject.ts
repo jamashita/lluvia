@@ -75,13 +75,16 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | number, [K, V]> {
-    const m: Map<K | number, [K, V]> = new Map<K | number, [K, V]>();
+    const m: Map<K | number, [K, V]> = new Map();
 
     this.project.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {
-        const key: K | number = this.hashor<K>(k);
-
-        m.set(key, [k, v]);
+        if (isNominative(k)) {
+          m.set(k.hashCode(), [k, v]);
+        }
+        else {
+          m.set(k, [k, v]);
+        }
       }
     });
 
@@ -105,8 +108,15 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public get(key: K): Nullable<V> {
-    const k: K | number = this.hashor<K>(key);
-    const p: Ambiguous<[K, V]> = this.project.get(k);
+    // eslint-disable-next-line @typescript-eslint/init-declarations
+    let p: Ambiguous<[K, V]>;
+
+    if (isNominative(key)) {
+      p = this.project.get(key.hashCode());
+    }
+    else {
+      p = this.project.get(key);
+    }
 
     if (Kind.isUndefined(p)) {
       return null;
@@ -116,9 +126,11 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public has(key: K): boolean {
-    const k: K | number = this.hashor<K>(key);
+    if (isNominative(key)) {
+      return this.project.has(key.hashCode());
+    }
 
-    return this.project.has(k);
+    return this.project.has(key);
   }
 
   public override isEmpty(): boolean {
@@ -140,13 +152,17 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | number, [K, W]> {
-    const m: Map<K | number, [K, W]> = new Map<K | number, [K, W]>();
+    const m: Map<K | number, [K, W]> = new Map();
     let i: number = 0;
 
     this.project.forEach(([k, v]: [K, V]) => {
-      const key: K | number = this.hashor<K>(k);
+      if (isNominative(k)) {
+        m.set(k.hashCode(), [k, mapper(v, i)]);
+      }
+      else {
+        m.set(k, [k, mapper(v, i)]);
+      }
 
-      m.set(key, [k, mapper(v, i)]);
       i++;
     });
 
@@ -178,7 +194,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public toMap(): Map<K, V> {
-    const map: Map<K, V> = new Map<K, V>();
+    const map: Map<K, V> = new Map();
 
     this.forEach((v: V, k: K) => {
       map.set(k, v);

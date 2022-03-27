@@ -1,33 +1,29 @@
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import sinon, { SinonSpy } from 'sinon';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
-import { MockTreeID } from '../Mock/MockTreeID';
-import { MockTreeObject } from '../Mock/MockTreeObject';
+import { MockTreeID } from '../mock/MockTreeID';
+import { MockTreeObject } from '../mock/MockTreeObject';
 import { StructurableTree } from '../StructurableTree';
 import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
 
 describe('StructurableTree', () => {
   describe('getTreeID', () => {
     it('delegates its root instance', () => {
-      expect.assertions(1);
+      const fn: jest.Mock = jest.fn();
 
-      const spy: SinonSpy = sinon.spy();
       const root: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject<MockTreeID>(new MockTreeID('mock')));
 
-      root.getTreeID = spy;
+      root.getTreeID = fn;
 
       const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(root);
 
       tree.getTreeID();
 
-      expect(spy.called).toBe(true);
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 
   describe('toHierarchies', () => {
     it('returns one-length array when no no-children tree given', () => {
-      expect.assertions(3);
-
       const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
         StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
       );
@@ -40,8 +36,6 @@ describe('StructurableTree', () => {
     });
 
     it('returns simpler array when simplest Tree given', () => {
-      expect.assertions(11);
-
       const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
         StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),
@@ -70,8 +64,6 @@ describe('StructurableTree', () => {
     });
 
     it('returns closure table array when complex Tree given', () => {
-      expect.assertions(49);
-
       const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
         StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),
@@ -158,8 +150,6 @@ describe('StructurableTree', () => {
 
   describe('has', () => {
     it('returns true when the value is contained in the tree node', () => {
-      expect.assertions(9);
-
       const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
         StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),
@@ -202,8 +192,6 @@ describe('StructurableTree', () => {
     });
 
     it('returns false when the value is not contained in the tree node', () => {
-      expect.assertions(2);
-
       const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
         StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
           new MockTreeObject(new MockTreeID('mock 1')),

@@ -2,7 +2,7 @@ import { ATree } from '../ATree';
 import { SerializableTreeObject } from '../SerializableTreeObject';
 import { StructurableTreeObject } from '../StructurableTreeObject';
 import { TreeID } from '../TreeID';
-import { MockTreeNode } from '../TreeNode/Mock/MockTreeNode';
+import { MockTreeNode } from '../TreeNode/mock/MockTreeNode';
 
 interface MockTreeObject<K extends TreeID> extends StructurableTreeObject<K>, SerializableTreeObject {
   // NOOP
