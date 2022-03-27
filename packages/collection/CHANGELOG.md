@@ -1,3 +1,11 @@
+# [@jamashita/lluvia-collection-v2.6.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.5.0...@jamashita/lluvia-collection-v2.6.0) (2022-03-27)
+
+
+### Features
+
+* 🎸 removed sinon ([2da0a8f](https://github.com/jamashita/lluvia/commit/2da0a8f1f46f01491dbca9404f5175cee2fed854))
+* 🎸 updated ([a3ebce1](https://github.com/jamashita/lluvia/commit/a3ebce13011f7e180d106e8752c379c987c7fc9c))
+
 # [@jamashita/lluvia-collection-v2.5.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.4.0...@jamashita/lluvia-collection-v2.5.0) (2021-12-09)
 
 ### Features
