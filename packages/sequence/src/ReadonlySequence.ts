@@ -8,6 +8,8 @@ export interface ReadonlySequence<V> extends Collection<number, V>, Cloneable<Re
 
   map<W>(mapper: Mapper<V, W>): ReadonlySequence<W>;
 
+  reduce(reducer: BinaryFunction<V, V, V>, initialValue?: V): V;
+
   sort(comparator: BinaryFunction<V, V, number>): ReadonlySequence<V>;
 
   toArray(): Array<V>;

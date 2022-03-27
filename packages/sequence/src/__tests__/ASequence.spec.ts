@@ -214,6 +214,44 @@ describe('ASequence', () => {
     });
   });
 
+  describe('reduce', () => {
+    it('throws TypeError when array size is 0 and initialValue is undefined', () => {
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([]);
+
+      expect(() => {
+        sequence.reduce((_o1: MockValueObject<number>, o2: MockValueObject<number>) => {
+          return o2;
+        });
+      }).toThrow(TypeError);
+    });
+
+    it('returns initialValue itself when the array size is 0', () => {
+      const o: MockValueObject<number> = new MockValueObject(1);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([]);
+
+      expect(sequence.reduce((_o1: MockValueObject<number>, o2: MockValueObject<number>) => {
+        return o2;
+      }, o)).toBe(o);
+    });
+
+    it('returns first element when the array size is only 1', () => {
+      const o: MockValueObject<number> = new MockValueObject(1);
+      const sequence: MockSequence<MockValueObject<number>> = new MockSequence([o]);
+
+      expect(sequence.reduce((o1: MockValueObject<number>) => {
+        return o1;
+      })).toBe(o);
+    });
+
+    it('returns reduced value', () => {
+      const sequence: MockSequence<number> = new MockSequence([1, 2, 3, 4]);
+
+      expect(sequence.reduce((o1: number, o2: number) => {
+        return o1 + o2;
+      })).toBe(10);
+    });
+  });
+
   describe('some', () => {
     it('returns true if at least one of the values returns true', () => {
       const sequence1: MockSequence<MockValueObject<number>> = new MockSequence([

@@ -132,6 +132,14 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
     }).values();
   }
 
+  public reduce(reducer: BinaryFunction<V, V, V>, initialValue?: V): V {
+    if (Kind.isUndefined(initialValue)) {
+      return this.sequence.reduce(reducer);
+    }
+
+    return this.sequence.reduce(reducer, initialValue);
+  }
+
   protected removeInternal(key: number): Array<V> {
     if (!Kind.isInteger(key)) {
       return this.sequence;
