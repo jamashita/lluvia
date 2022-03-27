@@ -532,27 +532,27 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jamashita/anden-error@2.3.0", "@jamashita/anden-error@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-2.3.0.tgz#6cf287f22a36bd2b0680f62abd2d46cd495e9bef"
-  integrity sha512-x1/a+VuUE+INeL0cB5mvrgWlChkJzdeXfKjxUuYwGPsk0B35dmHlhJm4x1TMhbVQOtn7QScq6FA2fkXqYIeSpg==
+"@jamashita/anden-error@2.4.0", "@jamashita/anden-error@^2.3.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-error/-/anden-error-2.4.0.tgz#a003140ae3f8923c4153fe16eb64d29ea96d6600"
+  integrity sha512-I+CcIEnhaf/dBBchR1oouMDErw8MLqlgiEpZrOj4gEgPJMDBIirSkbCTG5Cpy5TqBAQD7EavcuMZQPTmGoH+YA==
   dependencies:
-    "@jamashita/anden-type" "^2.2.0"
+    "@jamashita/anden-type" "^2.3.0"
     make-error-cause "2.3.0"
 
-"@jamashita/anden-object@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.6.0.tgz#def9c7aa1503a8490ca6560f7c86f9a781a6ccc7"
-  integrity sha512-Wh0ucRx4iHsg6fkUDV5NY6JezKlsym1ZLCOQE6QL7ERnBS4Lw99ftRHvaipv5EdBst7oTTaZiAcgMlg45Br9rg==
+"@jamashita/anden-object@2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-object/-/anden-object-2.7.0.tgz#1675de7235c99c0323d8f485b7f65954ca5f2ec0"
+  integrity sha512-CGCFLyB8kU19cmvYH17INkzOv6nagFinOaRFo9yfT/UWvRw1Hj0PpRNcp3OyOCvvQ7pgOx3/xzP6vVMbkPdVJA==
   dependencies:
     "@jamashita/anden-error" "^2.3.0"
-    "@jamashita/anden-type" "^2.2.0"
+    "@jamashita/anden-type" "^2.3.0"
     hash-it "5.0.2"
 
-"@jamashita/anden-type@2.3.0", "@jamashita/anden-type@^2.2.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.3.0.tgz#99e2721ec7440eb6b1a28052576a0123926dede6"
-  integrity sha512-lxrJwM69haZ0HAdVuXvbiv9qQIq4i15A+KTEUdL1EvuTJKCIl/+TjQYQmQKIw2a9DHNOgZsPohCV3MQo5M26HQ==
+"@jamashita/anden-type@2.4.0", "@jamashita/anden-type@^2.3.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/anden-type/-/anden-type-2.4.0.tgz#91357e19f6c0232f34fcf45d7708c2834fefbb0f"
+  integrity sha512-uholMCl47+Mig2hmpDkWTSBYNYBRQFMcaGNMp0qoaZHQE4O1I1nmsykwwyILNrfbyaEUf0+zMxBjAp/hrBq/XA==
   dependencies:
     reflect-metadata "0.1.13"
 
