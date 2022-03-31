@@ -2,6 +2,18 @@ import { MockValueObject } from '@jamashita/anden-object';
 import { ImmutableProject } from '../ImmutableProject';
 
 describe('ImmutableProject', () => {
+  describe('empty', () => {
+    it('returns singleton singleton instance', () => {
+      expect(ImmutableProject.empty()).toBe(ImmutableProject.empty());
+    });
+
+    it('always returns 0-size map', () => {
+      const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.empty();
+
+      expect(project.size()).toBe(0);
+    });
+  });
+
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
       const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
@@ -54,174 +66,23 @@ describe('ImmutableProject', () => {
     });
   });
 
-  describe('empty', () => {
-    it('returns singleton singleton instance', () => {
-      expect(ImmutableProject.empty()).toBe(ImmutableProject.empty());
-    });
-
-    it('always returns 0-size map', () => {
-      const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.empty();
-
-      expect(project.size()).toBe(0);
-    });
-  });
-
-  describe('set', () => {
-    it('can extend immutably', () => {
-      const key1: MockValueObject<number> = new MockValueObject(1);
-      const key2: MockValueObject<number> = new MockValueObject(3);
-
-      const value1: MockValueObject<number> = new MockValueObject(2);
-      const value2: MockValueObject<number> = new MockValueObject(4);
-
-      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.empty();
-
-      expect(project1.size()).toBe(0);
-
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value1);
-
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(0);
-      expect(project2.size()).toBe(1);
-
-      const project3: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project2.set(key2, value2);
-
-      expect(project1).not.toBe(project2);
-      expect(project2).not.toBe(project3);
-      expect(project3).not.toBe(project1);
-      expect(project1.size()).toBe(0);
-      expect(project2.size()).toBe(1);
-      expect(project3.size()).toBe(2);
-    });
-
-    it('overwrites when the keys are already contained', () => {
-      const key1: MockValueObject<number> = new MockValueObject(1);
-
-      const value1: MockValueObject<number> = new MockValueObject(2);
-      const value2: MockValueObject<number> = new MockValueObject(3);
-
+  describe('duplicate', () => {
+    it('returns ImmutableProject.empty() when there are no key-value pairs', () => {
       const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key1, value1]])
-      );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value2);
-
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(1);
-      expect(project2.get(key1)).toBe(value2);
-    });
-
-    it('stores key-value when the keys are not contained yet', () => {
-      const key1: MockValueObject<number> = new MockValueObject(1);
-      const key2: MockValueObject<number> = new MockValueObject(3);
-
-      const value1: MockValueObject<number> = new MockValueObject(2);
-      const value2: MockValueObject<number> = new MockValueObject(3);
-
-      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key1, value1]])
-      );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.set(key2, value2);
-
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(2);
-      expect(project2.get(key1)).toBe(value1);
-      expect(project2.get(key2)).toBe(value2);
-    });
-  });
-
-  describe('remove', () => {
-    it('can remove retaining value if it contains', () => {
-      const key: MockValueObject<number> = new MockValueObject(1);
-
-      const value: MockValueObject<number> = new MockValueObject(2);
-
-      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key, value]])
-      );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
-
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(0);
-    });
-
-    it('does nothing when there is no such key', () => {
-      const key1: MockValueObject<number> = new MockValueObject(1);
-      const key2: MockValueObject<number> = new MockValueObject(2);
-
-      const value: MockValueObject<number> = new MockValueObject(2);
-
-      const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key1, value]])
-      );
-      const beforeLength: number = project.size();
-
-      expect(project.remove(key2)).toBe(project);
-      expect(project.size()).toBe(beforeLength);
-    });
-
-    it('does nothing when the project is empty', () => {
-      const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.empty();
-
-      expect(project.remove(new MockValueObject(1))).toBe(project);
-    });
-
-    it('returns the removed Project', () => {
-      const key1: MockValueObject<number> = new MockValueObject(1);
-      const key2: MockValueObject<number> = new MockValueObject(1);
-
-      const value: MockValueObject<number> = new MockValueObject(2);
-
-      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key1, value]])
-      );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.remove(key2);
-
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(0);
-    });
-
-    it('returns ImmutableProject.empty() when the size will be 0', () => {
-      const key: MockValueObject<number> = new MockValueObject(1);
-
-      const value: MockValueObject<number> = new MockValueObject(2);
-
-      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key, value]])
-      );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
-
-      expect(project2).toBe(ImmutableProject.empty());
-    });
-  });
-
-  describe('isEmpty', () => {
-    it('returns true if the value size is 0', () => {
-      const key: MockValueObject<number> = new MockValueObject(1);
-
-      const value: MockValueObject<number> = new MockValueObject(2);
-
-      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
-        new Map([[key, value]])
-      );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
         new Map([])
       );
 
-      expect(project1.isEmpty()).toBe(false);
-      expect(project2.isEmpty()).toBe(true);
+      expect(project1.duplicate()).toBe(ImmutableProject.empty());
     });
-  });
 
-  describe('map', () => {
-    it('execute the mapper function and returns mapped Address immutably', () => {
+    it('returns shallow-copied instance', () => {
       const key1: MockValueObject<number> = new MockValueObject(1);
       const key2: MockValueObject<number> = new MockValueObject(3);
+      const key3: MockValueObject<number> = new MockValueObject(5);
 
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
+      const value3: MockValueObject<number> = new MockValueObject(6);
 
       const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
         new Map([
@@ -229,14 +90,14 @@ describe('ImmutableProject', () => {
           [key2, value2]
         ])
       );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.map((v: MockValueObject<number>): MockValueObject<number> => {
-        return new MockValueObject(v.get() + 10);
-      });
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.duplicate();
 
       expect(project1.size()).toBe(project2.size());
       expect(project1).not.toBe(project2);
+      expect(project2).not.toBe(project2.set(key3, value3));
       project1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
-        expect(project2.get(k)?.get()).toBe(v.get() + 10);
+        expect(project2.has(k)).toBe(true);
+        expect(project2.contains(v)).toBe(true);
       });
     });
   });
@@ -309,23 +170,31 @@ describe('ImmutableProject', () => {
     });
   });
 
-  describe('duplicate', () => {
-    it('returns ImmutableProject.empty() when there are no key-value pairs', () => {
+  describe('isEmpty', () => {
+    it('returns true if the value size is 0', () => {
+      const key: MockValueObject<number> = new MockValueObject(1);
+
+      const value: MockValueObject<number> = new MockValueObject(2);
+
       const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key, value]])
+      );
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
         new Map([])
       );
 
-      expect(project1.duplicate()).toBe(ImmutableProject.empty());
+      expect(project1.isEmpty()).toBe(false);
+      expect(project2.isEmpty()).toBe(true);
     });
+  });
 
-    it('returns shallow-copied instance', () => {
+  describe('map', () => {
+    it('execute the mapper function and returns mapped Address immutably', () => {
       const key1: MockValueObject<number> = new MockValueObject(1);
       const key2: MockValueObject<number> = new MockValueObject(3);
-      const key3: MockValueObject<number> = new MockValueObject(5);
 
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
-      const value3: MockValueObject<number> = new MockValueObject(6);
 
       const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
         new Map([
@@ -333,15 +202,146 @@ describe('ImmutableProject', () => {
           [key2, value2]
         ])
       );
-      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.duplicate();
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.map((v: MockValueObject<number>): MockValueObject<number> => {
+        return new MockValueObject(v.get() + 10);
+      });
 
       expect(project1.size()).toBe(project2.size());
       expect(project1).not.toBe(project2);
-      expect(project2).not.toBe(project2.set(key3, value3));
       project1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
-        expect(project2.has(k)).toBe(true);
-        expect(project2.contains(v)).toBe(true);
+        expect(project2.get(k)?.get()).toBe(v.get() + 10);
       });
+    });
+  });
+
+  describe('remove', () => {
+    it('can remove retaining value if it contains', () => {
+      const key: MockValueObject<number> = new MockValueObject(1);
+
+      const value: MockValueObject<number> = new MockValueObject(2);
+
+      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key, value]])
+      );
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
+
+      expect(project1.size()).toBe(1);
+      expect(project2.size()).toBe(0);
+    });
+
+    it('does nothing when there is no such key', () => {
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(2);
+
+      const value: MockValueObject<number> = new MockValueObject(2);
+
+      const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key1, value]])
+      );
+      const beforeLength: number = project.size();
+
+      expect(project.remove(key2)).toBe(project);
+      expect(project.size()).toBe(beforeLength);
+    });
+
+    it('does nothing when the project is empty', () => {
+      const project: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.empty();
+
+      expect(project.remove(new MockValueObject(1))).toBe(project);
+    });
+
+    it('returns the removed Project', () => {
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(1);
+
+      const value: MockValueObject<number> = new MockValueObject(2);
+
+      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key1, value]])
+      );
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.remove(key2);
+
+      expect(project1).not.toBe(project2);
+      expect(project1.size()).toBe(1);
+      expect(project2.size()).toBe(0);
+    });
+
+    it('returns ImmutableProject.empty() when the size will be 0', () => {
+      const key: MockValueObject<number> = new MockValueObject(1);
+
+      const value: MockValueObject<number> = new MockValueObject(2);
+
+      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key, value]])
+      );
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
+
+      expect(project2).toBe(ImmutableProject.empty());
+    });
+  });
+
+  describe('set', () => {
+    it('can extend immutably', () => {
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
+
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(4);
+
+      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.empty();
+
+      expect(project1.size()).toBe(0);
+
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value1);
+
+      expect(project1).not.toBe(project2);
+      expect(project1.size()).toBe(0);
+      expect(project2.size()).toBe(1);
+
+      const project3: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project2.set(key2, value2);
+
+      expect(project1).not.toBe(project2);
+      expect(project2).not.toBe(project3);
+      expect(project3).not.toBe(project1);
+      expect(project1.size()).toBe(0);
+      expect(project2.size()).toBe(1);
+      expect(project3.size()).toBe(2);
+    });
+
+    it('overwrites when the keys are already contained', () => {
+      const key1: MockValueObject<number> = new MockValueObject(1);
+
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(3);
+
+      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key1, value1]])
+      );
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value2);
+
+      expect(project1).not.toBe(project2);
+      expect(project1.size()).toBe(1);
+      expect(project2.size()).toBe(1);
+      expect(project2.get(key1)).toBe(value2);
+    });
+
+    it('stores key-value when the keys are not contained yet', () => {
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(3);
+
+      const value1: MockValueObject<number> = new MockValueObject(2);
+      const value2: MockValueObject<number> = new MockValueObject(3);
+
+      const project1: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = ImmutableProject.ofMap(
+        new Map([[key1, value1]])
+      );
+      const project2: ImmutableProject<MockValueObject<number>, MockValueObject<number>> = project1.set(key2, value2);
+
+      expect(project1).not.toBe(project2);
+      expect(project1.size()).toBe(1);
+      expect(project2.size()).toBe(2);
+      expect(project2.get(key1)).toBe(value1);
+      expect(project2.get(key2)).toBe(value2);
     });
   });
 });
