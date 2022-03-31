@@ -2,6 +2,16 @@ import { MockValueObject } from '@jamashita/anden-object';
 import { MutableAddress } from '../MutableAddress';
 
 describe('MutableAddress', () => {
+  describe('empty', () => {
+    it('does not return singleton instance', () => {
+      expect(MutableAddress.empty()).not.toBe(MutableAddress.empty());
+    });
+
+    it('always returns 0-size set', () => {
+      expect(MutableAddress.empty().isEmpty()).toBe(true);
+    });
+  });
+
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
       const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
@@ -41,16 +51,6 @@ describe('MutableAddress', () => {
 
       expect(address1.size()).toBe(2);
       expect(address2.size()).toBe(3);
-    });
-  });
-
-  describe('empty', () => {
-    it('does not return singleton instance', () => {
-      expect(MutableAddress.empty()).not.toBe(MutableAddress.empty());
-    });
-
-    it('always returns 0-size set', () => {
-      expect(MutableAddress.empty().isEmpty()).toBe(true);
     });
   });
 
@@ -104,37 +104,50 @@ describe('MutableAddress', () => {
     });
   });
 
-  describe('remove', () => {
-    it('can remove retaining value if it contains', () => {
+  describe('duplicate', () => {
+    it('returns shallow-copied instance', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
+      const value5: MockValueObject<number> = new MockValueObject(5);
 
       const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2])
+        new Set([value1, value2, value3, value4])
       );
-      const address2: MutableAddress<MockValueObject<number>> = address1.remove(value1);
+      const address2: MutableAddress<MockValueObject<number>> = address1.duplicate();
 
-      expect(address1).toBe(address2);
-      expect(address2.size()).toBe(1);
+      expect(address1.size()).toBe(address2.size());
+      expect(address1).not.toBe(address2);
+      expect(address2).toBe(address2.add(value5));
+      address1.forEach((v: MockValueObject<number>) => {
+        expect(address2.contains(v)).toBe(true);
+      });
     });
+  });
 
-    it('does nothing when there is no such value', () => {
+  describe('filter', () => {
+    it('can remove match values', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
+      const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1])
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1, value2, value3, value4])
       );
-      const beforeLength: number = address.size();
+      const filtered1: MutableAddress<MockValueObject<number>> = address1.filter((v: MockValueObject<number>) => {
+        return v.get() % 2 === 0;
+      });
+      const filtered2: MutableAddress<MockValueObject<number>> = address1.filter((v: MockValueObject<number>) => {
+        return v === value5;
+      });
 
-      expect(address.remove(value2)).toBe(address);
-      expect(address.size()).toBe(beforeLength);
-    });
-
-    it('does nothing when Address is empty', () => {
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.empty();
-
-      expect(address.remove(new MockValueObject(1))).toBe(address);
+      expect(filtered1.size()).toBe(2);
+      expect(filtered1.contains(value2)).toBe(true);
+      expect(filtered1.contains(value4)).toBe(true);
+      expect(filtered2.size()).toBe(0);
     });
   });
 
@@ -177,50 +190,37 @@ describe('MutableAddress', () => {
     });
   });
 
-  describe('filter', () => {
-    it('can remove match values', () => {
+  describe('remove', () => {
+    it('can remove retaining value if it contains', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
-      const value3: MockValueObject<number> = new MockValueObject(3);
-      const value4: MockValueObject<number> = new MockValueObject(4);
-      const value5: MockValueObject<number> = new MockValueObject(5);
 
       const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2, value3, value4])
+        new Set([value1, value2])
       );
-      const filtered1: MutableAddress<MockValueObject<number>> = address1.filter((v: MockValueObject<number>) => {
-        return v.get() % 2 === 0;
-      });
-      const filtered2: MutableAddress<MockValueObject<number>> = address1.filter((v: MockValueObject<number>) => {
-        return v === value5;
-      });
+      const address2: MutableAddress<MockValueObject<number>> = address1.remove(value1);
 
-      expect(filtered1.size()).toBe(2);
-      expect(filtered1.contains(value2)).toBe(true);
-      expect(filtered1.contains(value4)).toBe(true);
-      expect(filtered2.size()).toBe(0);
+      expect(address1).toBe(address2);
+      expect(address2.size()).toBe(1);
     });
-  });
 
-  describe('duplicate', () => {
-    it('returns shallow-copied instance', () => {
+    it('does nothing when there is no such value', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
-      const value3: MockValueObject<number> = new MockValueObject(3);
-      const value4: MockValueObject<number> = new MockValueObject(4);
-      const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2, value3, value4])
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1])
       );
-      const address2: MutableAddress<MockValueObject<number>> = address1.duplicate();
+      const beforeLength: number = address.size();
 
-      expect(address1.size()).toBe(address2.size());
-      expect(address1).not.toBe(address2);
-      expect(address2).toBe(address2.add(value5));
-      address1.forEach((v: MockValueObject<number>) => {
-        expect(address2.contains(v)).toBe(true);
-      });
+      expect(address.remove(value2)).toBe(address);
+      expect(address.size()).toBe(beforeLength);
+    });
+
+    it('does nothing when Address is empty', () => {
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.empty();
+
+      expect(address.remove(new MockValueObject(1))).toBe(address);
     });
   });
 });
