@@ -3,6 +3,16 @@ import { Nullable } from '@jamashita/anden-type';
 import { MutableSequence } from '../MutableSequence';
 
 describe('MutableSequence', () => {
+  describe('empty', () => {
+    it('does not return singleton instance', () => {
+      expect(MutableSequence.empty()).not.toBe(MutableSequence.empty());
+    });
+
+    it('always returns 0-size array', () => {
+      expect(MutableSequence.empty().isEmpty()).toBe(true);
+    });
+  });
+
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
       const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
@@ -45,16 +55,6 @@ describe('MutableSequence', () => {
     });
   });
 
-  describe('empty', () => {
-    it('does not return singleton instance', () => {
-      expect(MutableSequence.empty()).not.toBe(MutableSequence.empty());
-    });
-
-    it('always returns 0-size array', () => {
-      expect(MutableSequence.empty().isEmpty()).toBe(true);
-    });
-  });
-
   describe('add', () => {
     it('can extend mutably', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
@@ -88,101 +88,98 @@ describe('MutableSequence', () => {
     });
   });
 
-  describe('set', () => {
-    it('can be set the value into first position', () => {
+  describe('duplicate', () => {
+    it('returns shallow-copied instance', () => {
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3),
+        new MockValueObject(2)
+      ]);
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.duplicate();
+
+      expect(sequence1.size()).toBe(sequence2.size());
+      expect(sequence1).not.toBe(sequence2);
+      sequence1.forEach((v: MockValueObject<number>, k: number) => {
+        expect(v).toBe(sequence2.get(k));
+      });
+    });
+  });
+
+  describe('filter', () => {
+    it('can remove match values', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
-      const value4: MockValueObject<number> = new MockValueObject(4);
+      const value4: MockValueObject<number> = new MockValueObject(2);
+      const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
+      const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
         value1,
         value2,
-        value3
+        value3,
+        value4
       ]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(0, value4);
 
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(3);
-      expect(sequence2.get(0)).toBe(value4);
-      expect(sequence2.get(1)).toBe(value2);
-      expect(sequence2.get(2)).toBe(value3);
+      const filtered1: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
+        return v.get() % 2 === 0;
+      });
+      const filtered2: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
+        return v === value4;
+      });
+      const filtered3: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
+        return v === value5;
+      });
+
+      expect(filtered1.size()).toBe(2);
+      expect(filtered1.get(0)).toBe(value2);
+      expect(filtered1.get(1)).toBe(value4);
+      expect(filtered2.size()).toBe(1);
+      expect(filtered2.get(0)).toBe(value4);
+      expect(filtered3.size()).toBe(0);
     });
+  });
 
-    it('can be set the value into middle position', () => {
-      const value1: MockValueObject<number> = new MockValueObject(1);
-      const value2: MockValueObject<number> = new MockValueObject(2);
-      const value3: MockValueObject<number> = new MockValueObject(3);
-      const value4: MockValueObject<number> = new MockValueObject(4);
-
+  describe('isEmpty', () => {
+    it('returns true if the value size is 0', () => {
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
+        new MockValueObject(1),
+        new MockValueObject(2)
       ]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(1, value4);
+      const sequence2: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
 
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(3);
-      expect(sequence2.get(0)).toBe(value1);
-      expect(sequence2.get(1)).toBe(value4);
-      expect(sequence2.get(2)).toBe(value3);
+      expect(sequence1.isEmpty()).toBe(false);
+      expect(sequence2.isEmpty()).toBe(true);
     });
+  });
 
-    it('can be set the value into last position', () => {
-      const value1: MockValueObject<number> = new MockValueObject(1);
-      const value2: MockValueObject<number> = new MockValueObject(2);
-      const value3: MockValueObject<number> = new MockValueObject(3);
-      const value4: MockValueObject<number> = new MockValueObject(4);
-
+  describe('map', () => {
+    it('execute the mapper function and returns mapped Address immutably', () => {
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
+        new MockValueObject(1),
+        new MockValueObject(2),
+        new MockValueObject(3)
       ]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(2, value4);
+      const sequence2: MutableSequence<MockValueObject<string>> = sequence1.map(
+        (value: MockValueObject<number>): MockValueObject<string> => {
+          const num: number = value.get();
 
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(3);
-      expect(sequence2.get(0)).toBe(value1);
-      expect(sequence2.get(1)).toBe(value2);
-      expect(sequence2.get(2)).toBe(value4);
-    });
+          return new MockValueObject<string>(`${num ** 2}`);
+        }
+      );
 
-    it('returns itself when given key is less than 0', () => {
-      const value: MockValueObject<number> = new MockValueObject(1);
+      expect(sequence1.size()).toBe(sequence2.size());
+      expect(sequence1).not.toBe(sequence2);
+      sequence2.forEach((v: MockValueObject<string>, k: number) => {
+        const value: Nullable<MockValueObject<number>> = sequence1.get(k);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-      const beforeLength: number = sequence1.size();
+        if (value === null) {
+          fail();
+          return;
+        }
 
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(-1, value);
-
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(beforeLength);
-    });
-
-    it('returns itself when given key is greater than sequence length', () => {
-      const value: MockValueObject<number> = new MockValueObject(1);
-
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-      const beforeLength: number = sequence1.size();
-
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(300, value);
-
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(beforeLength);
-    });
-
-    it('returns itself when given key is not integer', () => {
-      const value: MockValueObject<number> = new MockValueObject(1);
-
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-      const beforeLength: number = sequence1.size();
-
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(0.9, value);
-
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(beforeLength);
+        expect(v.get()).toBe(`${value.get() ** 2}`);
+      });
     });
   });
 
@@ -285,80 +282,101 @@ describe('MutableSequence', () => {
     });
   });
 
-  describe('isEmpty', () => {
-    it('returns true if the value size is 0', () => {
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        new MockValueObject(1),
-        new MockValueObject(2)
-      ]);
-      const sequence2: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-
-      expect(sequence1.isEmpty()).toBe(false);
-      expect(sequence2.isEmpty()).toBe(true);
-    });
-  });
-
-  describe('map', () => {
-    it('execute the mapper function and returns mapped Address immutably', () => {
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        new MockValueObject(1),
-        new MockValueObject(2),
-        new MockValueObject(3)
-      ]);
-      const sequence2: MutableSequence<MockValueObject<string>> = sequence1.map(
-        (value: MockValueObject<number>): MockValueObject<string> => {
-          const num: number = value.get();
-
-          return new MockValueObject<string>(`${num ** 2}`);
-        }
-      );
-
-      expect(sequence1.size()).toBe(sequence2.size());
-      expect(sequence1).not.toBe(sequence2);
-      sequence2.forEach((v: MockValueObject<string>, k: number) => {
-        const value: Nullable<MockValueObject<number>> = sequence1.get(k);
-
-        if (value === null) {
-          fail();
-          return;
-        }
-
-        expect(v.get()).toBe(`${value.get() ** 2}`);
-      });
-    });
-  });
-
-  describe('filter', () => {
-    it('can remove match values', () => {
+  describe('set', () => {
+    it('can be set the value into first position', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
-      const value4: MockValueObject<number> = new MockValueObject(2);
-      const value5: MockValueObject<number> = new MockValueObject(5);
+      const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
         value1,
         value2,
-        value3,
-        value4
+        value3
       ]);
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(0, value4);
 
-      const filtered1: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
-        return v.get() % 2 === 0;
-      });
-      const filtered2: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
-        return v === value4;
-      });
-      const filtered3: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
-        return v === value5;
-      });
+      expect(sequence1).toBe(sequence2);
+      expect(sequence1.size()).toBe(3);
+      expect(sequence2.get(0)).toBe(value4);
+      expect(sequence2.get(1)).toBe(value2);
+      expect(sequence2.get(2)).toBe(value3);
+    });
 
-      expect(filtered1.size()).toBe(2);
-      expect(filtered1.get(0)).toBe(value2);
-      expect(filtered1.get(1)).toBe(value4);
-      expect(filtered2.size()).toBe(1);
-      expect(filtered2.get(0)).toBe(value4);
-      expect(filtered3.size()).toBe(0);
+    it('can be set the value into middle position', () => {
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
+
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
+        value1,
+        value2,
+        value3
+      ]);
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(1, value4);
+
+      expect(sequence1).toBe(sequence2);
+      expect(sequence1.size()).toBe(3);
+      expect(sequence2.get(0)).toBe(value1);
+      expect(sequence2.get(1)).toBe(value4);
+      expect(sequence2.get(2)).toBe(value3);
+    });
+
+    it('can be set the value into last position', () => {
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+      const value3: MockValueObject<number> = new MockValueObject(3);
+      const value4: MockValueObject<number> = new MockValueObject(4);
+
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
+        value1,
+        value2,
+        value3
+      ]);
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(2, value4);
+
+      expect(sequence1).toBe(sequence2);
+      expect(sequence1.size()).toBe(3);
+      expect(sequence2.get(0)).toBe(value1);
+      expect(sequence2.get(1)).toBe(value2);
+      expect(sequence2.get(2)).toBe(value4);
+    });
+
+    it('returns itself when given key is less than 0', () => {
+      const value: MockValueObject<number> = new MockValueObject(1);
+
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
+      const beforeLength: number = sequence1.size();
+
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(-1, value);
+
+      expect(sequence1).toBe(sequence2);
+      expect(sequence1.size()).toBe(beforeLength);
+    });
+
+    it('returns itself when given key is greater than sequence length', () => {
+      const value: MockValueObject<number> = new MockValueObject(1);
+
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
+      const beforeLength: number = sequence1.size();
+
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(300, value);
+
+      expect(sequence1).toBe(sequence2);
+      expect(sequence1.size()).toBe(beforeLength);
+    });
+
+    it('returns itself when given key is not integer', () => {
+      const value: MockValueObject<number> = new MockValueObject(1);
+
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
+      const beforeLength: number = sequence1.size();
+
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(0.9, value);
+
+      expect(sequence1).toBe(sequence2);
+      expect(sequence1.size()).toBe(beforeLength);
     });
   });
 
@@ -409,24 +427,6 @@ describe('MutableSequence', () => {
       expect(sorted.get(2)?.get()).toBe(3);
       expect(sorted.get(3)).toBe(sequence.get(0));
       expect(sorted.get(3)?.get()).toBe(4);
-    });
-  });
-
-  describe('duplicate', () => {
-    it('returns shallow-copied instance', () => {
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        new MockValueObject(1),
-        new MockValueObject(2),
-        new MockValueObject(3),
-        new MockValueObject(2)
-      ]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.duplicate();
-
-      expect(sequence1.size()).toBe(sequence2.size());
-      expect(sequence1).not.toBe(sequence2);
-      sequence1.forEach((v: MockValueObject<number>, k: number) => {
-        expect(v).toBe(sequence2.get(k));
-      });
     });
   });
 });

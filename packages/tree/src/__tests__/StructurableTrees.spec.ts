@@ -14,6 +14,12 @@ import { TreeError } from '../TreeError';
 import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode';
 
 describe('StructurableTrees', () => {
+  describe('empty', () => {
+    it('does not return singleton instance', () => {
+      expect(StructurableTrees.empty()).not.toBe(StructurableTrees.empty());
+    });
+  });
+
   describe('ofTable', () => {
     it('returns StructurableTrees.empty<MockTreeID, MockTreeObject<MockTreeID>>() when empty ClosureTable<MockTreeID> and empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
       const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
@@ -253,12 +259,6 @@ describe('StructurableTrees', () => {
         }
         i++;
       }
-    });
-  });
-
-  describe('empty', () => {
-    it('does not return singleton instance', () => {
-      expect(StructurableTrees.empty()).not.toBe(StructurableTrees.empty());
     });
   });
 
