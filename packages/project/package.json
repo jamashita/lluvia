@@ -26,7 +26,7 @@
     "clean:others": "rimraf *.log && rimraf tsconfig.build.tsbuildinfo"
   },
   "dependencies": {
-    "@jamashita/anden-object": "2.9.0",
+    "@jamashita/anden-object": "2.10.0",
     "@jamashita/anden-type": "2.5.0",
     "@jamashita/lluvia-collection": "^2.6.0"
   },
@@ -34,8 +34,7 @@
     "@jamashita/anden-error": "2.6.0"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": "npm is not supported"
+    "node": ">=14.0.0"
   },
   "engineStrict": true,
   "publishConfig": {
