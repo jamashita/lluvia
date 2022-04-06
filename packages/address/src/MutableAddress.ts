@@ -1,5 +1,5 @@
-import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
-import { Collection } from '@jamashita/lluvia-collection';
+import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 
 export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
@@ -13,27 +13,21 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
     return MutableAddress.ofSet(set);
   }
 
-  private static ofInternal<V>(address: Map<V | number, V>): MutableAddress<V> {
+  private static ofInternal<V>(address: Map<V | string, V>): MutableAddress<V> {
     return new MutableAddress(address);
   }
 
   public static ofSet<V>(set: ReadonlySet<V>): MutableAddress<V> {
-    const m: Map<V | number, V> = new Map();
+    const m: Map<V | string, V> = new Map();
 
     set.forEach((v: V) => {
-      if (isNominative(v)) {
-        m.set(v.hashCode(), v);
-
-        return;
-      }
-
-      m.set(v, v);
+      m.set(Quantity.genKey(v), v);
     });
 
     return MutableAddress.ofInternal(m);
   }
 
-  protected constructor(address: Map<V | number, V>) {
+  protected constructor(address: Map<V | string, V>) {
     super(address);
   }
 
@@ -42,12 +36,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
       return this;
     }
 
-    if (isNominative(value)) {
-      this.address.set(value.hashCode(), value);
-    }
-    else {
-      this.address.set(value, value);
-    }
+    this.address.set(Quantity.genKey(value), value);
 
     return this;
   }
@@ -72,12 +61,7 @@ export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
       return this;
     }
 
-    if (isNominative(value)) {
-      this.address.delete(value.hashCode());
-    }
-    else {
-      this.address.delete(value);
-    }
+    this.address.delete(Quantity.genKey(value));
 
     return this;
   }

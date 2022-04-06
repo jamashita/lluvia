@@ -1,5 +1,5 @@
-import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
-import { Collection } from '@jamashita/lluvia-collection';
+import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
 export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>> {
@@ -15,7 +15,7 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
     return ImmutableProject.ofMap(map);
   }
 
-  private static ofInternal<K, V>(project: Map<K | number, [K, V]>): ImmutableProject<K, V> {
+  private static ofInternal<K, V>(project: Map<K | string, [K, V]>): ImmutableProject<K, V> {
     if (project.size === 0) {
       return ImmutableProject.empty();
     }
@@ -24,22 +24,16 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
   }
 
   public static ofMap<K, V>(map: ReadonlyMap<K, V>): ImmutableProject<K, V> {
-    const m: Map<K | number, [K, V]> = new Map();
+    const m: Map<K | string, [K, V]> = new Map();
 
     map.forEach((v: V, k: K) => {
-      if (isNominative(k)) {
-        m.set(k.hashCode(), [k, v]);
-
-        return;
-      }
-
-      m.set(k, [k, v]);
+      m.set(Quantity.genKey(k), [k, v]);
     });
 
     return ImmutableProject.ofInternal(m);
   }
 
-  protected constructor(project: Map<K | number, [K, V]>) {
+  protected constructor(project: Map<K | string, [K, V]>) {
     super(project);
   }
 
@@ -75,26 +69,17 @@ export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V
       return this;
     }
 
-    const m: Map<K | number, [K, V]> = new Map(this.project);
-    if (isNominative(key)) {
-      m.delete(key.hashCode());
-    }
-    else {
-      m.delete(key);
-    }
+    const m: Map<K | string, [K, V]> = new Map(this.project);
+
+    m.delete(Quantity.genKey(key));
 
     return ImmutableProject.ofInternal(m);
   }
 
   public set(key: K, value: V): ImmutableProject<K, V> {
-    const m: Map<K | number, [K, V]> = new Map(this.project);
+    const m: Map<K | string, [K, V]> = new Map(this.project);
 
-    if (isNominative(key)) {
-      m.set(key.hashCode(), [key, value]);
-    }
-    else {
-      m.set(key, [key, value]);
-    }
+    m.set(Quantity.genKey(key), [key, value]);
 
     return ImmutableProject.ofInternal(m);
   }

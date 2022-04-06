@@ -1,5 +1,5 @@
-import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
-import { Collection } from '@jamashita/lluvia-collection';
+import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
 export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
@@ -13,27 +13,21 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
     return MutableProject.ofMap(map);
   }
 
-  private static ofInternal<K, V>(project: Map<K | number, [K, V]>): MutableProject<K, V> {
+  private static ofInternal<K, V>(project: Map<K | string, [K, V]>): MutableProject<K, V> {
     return new MutableProject(project);
   }
 
   public static ofMap<K, V>(map: ReadonlyMap<K, V>): MutableProject<K, V> {
-    const m: Map<K | number, [K, V]> = new Map();
+    const m: Map<K | string, [K, V]> = new Map();
 
     map.forEach((v: V, k: K) => {
-      if (isNominative(k)) {
-        m.set(k.hashCode(), [k, v]);
-
-        return;
-      }
-
-      m.set(k, [k, v]);
+      m.set(Quantity.genKey(k), [k, v]);
     });
 
     return MutableProject.ofInternal(m);
   }
 
-  protected constructor(project: Map<K | number, [K, V]>) {
+  protected constructor(project: Map<K | string, [K, V]>) {
     super(project);
   }
 
@@ -57,23 +51,13 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
       return this;
     }
 
-    if (isNominative(key)) {
-      this.project.delete(key.hashCode());
-    }
-    else {
-      this.project.delete(key);
-    }
+    this.project.delete(Quantity.genKey(key));
 
     return this;
   }
 
   public set(key: K, value: V): this {
-    if (isNominative(key)) {
-      this.project.set(key.hashCode(), [key, value]);
-    }
-    else {
-      this.project.set(key, [key, value]);
-    }
+    this.project.set(Quantity.genKey(key), [key, value]);
 
     return this;
   }
