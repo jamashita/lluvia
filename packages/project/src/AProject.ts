@@ -4,9 +4,9 @@ import { Quantity } from '@jamashita/lluvia-collection';
 import { Project } from './Project';
 
 export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quantity<K, V> implements Project<K, V> {
-  protected readonly project: Map<K | number, [K, V]>;
+  protected readonly project: Map<K | string, [K, V]>;
 
-  protected constructor(project: Map<K | number, [K, V]>) {
+  protected constructor(project: Map<K | string, [K, V]>) {
     super();
     this.project = project;
   }
@@ -74,17 +74,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
     return true;
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | number, [K, V]> {
-    const m: Map<K | number, [K, V]> = new Map();
+  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | string, [K, V]> {
+    const m: Map<K | string, [K, V]> = new Map();
 
     this.project.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {
-        if (isNominative(k)) {
-          m.set(k.hashCode(), [k, v]);
-        }
-        else {
-          m.set(k, [k, v]);
-        }
+        m.set(Quantity.genKey(k), [k, v]);
       }
     });
 
@@ -108,15 +103,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public get(key: K): Nullable<V> {
-    // eslint-disable-next-line @typescript-eslint/init-declarations
-    let p: Ambiguous<[K, V]>;
-
-    if (isNominative(key)) {
-      p = this.project.get(key.hashCode());
-    }
-    else {
-      p = this.project.get(key);
-    }
+    const p: Ambiguous<[K, V]> = this.project.get(Quantity.genKey(key));
 
     if (Kind.isUndefined(p)) {
       return null;
@@ -126,11 +113,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
   }
 
   public has(key: K): boolean {
-    if (isNominative(key)) {
-      return this.project.has(key.hashCode());
-    }
-
-    return this.project.has(key);
+    return this.project.has(Quantity.genKey(key));
   }
 
   public override isEmpty(): boolean {
@@ -151,18 +134,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
     return iterable;
   }
 
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | number, [K, W]> {
-    const m: Map<K | number, [K, W]> = new Map();
+  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | string, [K, W]> {
+    const m: Map<K | string, [K, W]> = new Map();
     let i: number = 0;
 
     this.project.forEach(([k, v]: [K, V]) => {
-      if (isNominative(k)) {
-        m.set(k.hashCode(), [k, mapper(v, i)]);
-      }
-      else {
-        m.set(k, [k, mapper(v, i)]);
-      }
-
+      m.set(Quantity.genKey(k), [k, mapper(v, i)]);
       i++;
     });
 

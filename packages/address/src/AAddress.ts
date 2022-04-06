@@ -1,12 +1,12 @@
 import { Objet } from '@jamashita/anden-object';
-import { BinaryPredicate, Catalogue, isNominative, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address';
 
 export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<void, V> implements Address<V> {
-  protected readonly address: Map<V | number, V>;
+  protected readonly address: Map<V | string, V>;
 
-  protected constructor(address: Map<V | number, V>) {
+  protected constructor(address: Map<V | string, V>) {
     super();
     this.address = address;
   }
@@ -22,11 +22,7 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
   public abstract remove(value: V): T;
 
   public contains(value: V): boolean {
-    if (isNominative(value)) {
-      return this.address.has(value.hashCode());
-    }
-
-    return this.address.has(value);
+    return this.address.has(Quantity.genKey(value));
   }
 
   public equals(other: unknown): boolean {
@@ -55,17 +51,12 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
     return true;
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | number, V> {
-    const m: Map<V | number, V> = new Map<V | number, V>();
+  protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | string, V> {
+    const m: Map<V | string, V> = new Map();
 
     this.address.forEach((value: V) => {
       if (predicate(value, undefined)) {
-        if (isNominative(value)) {
-          m.set(value.hashCode(), value);
-        }
-        else {
-          m.set(value, value);
-        }
+        m.set(Quantity.genKey(value), value);
       }
     });
 
@@ -107,20 +98,14 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
     return iterable.values();
   }
 
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<W | number, W> {
-    const m: Map<W | number, W> = new Map<W | number, W>();
+  protected mapInternal<W>(mapper: Mapper<V, W>): Map<W | string, W> {
+    const m: Map<W | string, W> = new Map();
     let i: number = 0;
 
     this.address.forEach((value: V) => {
       const w: W = mapper(value, i);
 
-      if (isNominative(w)) {
-        m.set(w.hashCode(), w);
-      }
-      else {
-        m.set(w, w);
-      }
-
+      m.set(Quantity.genKey(w), w);
       i++;
     });
 

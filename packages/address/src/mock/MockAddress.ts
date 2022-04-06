@@ -1,26 +1,16 @@
 import { UnimplementedError } from '@jamashita/anden-error';
-import { isNominative } from '@jamashita/anden-type';
+import { Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from '../AAddress';
 
 export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
-  private static toMap<V>(set: ReadonlySet<V>): Map<V | number, V> {
-    const m: Map<V | number, V> = new Map();
+  public constructor(set: ReadonlySet<V>) {
+    const map: Map<V | string, V> = new Map();
 
     set.forEach((v: V) => {
-      if (isNominative(v)) {
-        m.set(v.hashCode(), v);
-
-        return;
-      }
-
-      m.set(v, v);
+      map.set(Quantity.genKey(v), v);
     });
 
-    return m;
-  }
-
-  public constructor(set: ReadonlySet<V>) {
-    super(MockAddress.toMap(set));
+    super(map);
   }
 
   public add(): MockAddress<V> {
