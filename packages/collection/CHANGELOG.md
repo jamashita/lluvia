@@ -1,3 +1,12 @@
+# [@jamashita/lluvia-collection-v2.8.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.7.0...@jamashita/lluvia-collection-v2.8.0) (2022-04-06)
+
+
+### Features
+
+* 🎸 packages updated ([b461b58](https://github.com/jamashita/lluvia/commit/b461b58eb8e36a6e116c9e041a99d20a0786b739))
+* 🎸 packages updated ([b728c39](https://github.com/jamashita/lluvia/commit/b728c39dfba992b0fbf7a2515c0ad2c6e144f14c))
+* 🎸 packages updated ([ed50d6a](https://github.com/jamashita/lluvia/commit/ed50d6ab2d5647a243879acfd1f6a42fb66f7842))
+
 # [@jamashita/lluvia-collection-v2.7.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.6.0...@jamashita/lluvia-collection-v2.7.0) (2022-03-31)
 
 
