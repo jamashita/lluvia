@@ -1,5 +1,5 @@
-import { BinaryPredicate, isNominative, Mapper } from '@jamashita/anden-type';
-import { Collection } from '@jamashita/lluvia-collection';
+import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 
 export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
@@ -15,7 +15,7 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
     return ImmutableAddress.ofSet(set);
   }
 
-  private static ofInternal<V>(address: Map<V | number, V>): ImmutableAddress<V> {
+  private static ofInternal<V>(address: Map<V | string, V>): ImmutableAddress<V> {
     if (address.size === 0) {
       return ImmutableAddress.empty();
     }
@@ -24,22 +24,16 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
   }
 
   public static ofSet<V>(set: ReadonlySet<V>): ImmutableAddress<V> {
-    const m: Map<V | number, V> = new Map();
+    const m: Map<V | string, V> = new Map();
 
     set.forEach((v: V) => {
-      if (isNominative(v)) {
-        m.set(v.hashCode(), v);
-
-        return;
-      }
-
-      m.set(v, v);
+      m.set(Quantity.genKey(v), v);
     });
 
     return ImmutableAddress.ofInternal(m);
   }
 
-  protected constructor(address: Map<V | number, V>) {
+  protected constructor(address: Map<V | string, V>) {
     super(address);
   }
 
@@ -48,14 +42,9 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
       return this;
     }
 
-    const m: Map<V | number, V> = new Map(this.address);
+    const m: Map<V | string, V> = new Map(this.address);
 
-    if (isNominative(value)) {
-      m.set(value.hashCode(), value);
-    }
-    else {
-      m.set(value, value);
-    }
+    m.set(Quantity.genKey(value), value);
 
     return ImmutableAddress.ofInternal(m);
   }
@@ -92,14 +81,9 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
       return this;
     }
 
-    const m: Map<V | number, V> = new Map(this.address);
+    const m: Map<V | string, V> = new Map(this.address);
 
-    if (isNominative(value)) {
-      m.delete(value.hashCode());
-    }
-    else {
-      m.delete(value);
-    }
+    m.delete(Quantity.genKey(value));
 
     return ImmutableAddress.ofInternal(m);
   }

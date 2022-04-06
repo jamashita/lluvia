@@ -1,12 +1,12 @@
 import { Kind, Nullable } from '@jamashita/anden-type';
-import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
+import { MutableAddress } from '@jamashita/lluvia-address';
+import { MutableProject } from '@jamashita/lluvia-project';
 import { TreeID } from '../../TreeID';
 import { ClosureTable } from '../ClosureTable';
 import { ClosureTableHierarchy } from '../ClosureTableHierarchy';
 
 export class MockClosureTable<K extends TreeID> extends ClosureTable<K> {
-  private static toProject<K extends TreeID>(hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>): ImmutableProject<K, ReadonlyAddress<K>> {
+  public constructor(...hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>) {
     const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
@@ -24,10 +24,6 @@ export class MockClosureTable<K extends TreeID> extends ClosureTable<K> {
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return ImmutableProject.of(project);
-  }
-
-  public constructor(...hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>) {
-    super(MockClosureTable.toProject(hierarchies));
+    super(project);
   }
 }
