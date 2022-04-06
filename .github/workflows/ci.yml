@@ -5,17 +5,15 @@ on:
       - 'main'
       - 'develop'
     types:
-      - 'assigned'
       - 'opened'
-      - 'synchronize'
       - 'reopened'
+      - 'synchronize'
 jobs:
   ci:
     runs-on: 'ubuntu-latest'
-    timeout-minutes: 15
     steps:
-      - name: 'Check out repository'
-        uses: 'actions/checkout@v2'
+      - name: 'Checkout repository'
+        uses: 'actions/checkout@v3'
         with:
           ref: '${{ github.event.pull_request.head.sha }}'
       - name: 'Use Node.js 16.0'

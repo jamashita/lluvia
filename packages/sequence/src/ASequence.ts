@@ -60,30 +60,16 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
       return false;
     }
 
-    const ti: Iterator<V> = this.values()[Symbol.iterator]();
-    const oi: Iterator<unknown> = other.values()[Symbol.iterator]();
-    let tr: IteratorResult<V> = ti.next();
-    let or: IteratorResult<unknown> = oi.next();
-
-    while (tr.done !== true && or.done !== true) {
-      if (isEqualable(tr.value)) {
-        if (!tr.value.equals(or.value)) {
-          return false;
-        }
-      }
-      else if (tr.value !== or.value) {
-        return false;
-      }
-
-      tr = ti.next();
-      or = oi.next();
-
-      if (tr.done === true && or.done === true) {
+    return this.sequence.every((v: V, i: number) => {
+      if (v === other.sequence[i]) {
         return true;
       }
-    }
+      if (isEqualable(v)) {
+        return v.equals(other.sequence[i]);
+      }
 
-    return false;
+      return false;
+    });
   }
 
   public every(predicate: BinaryPredicate<V, number>): boolean {

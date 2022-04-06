@@ -1,26 +1,16 @@
 import { UnimplementedError } from '@jamashita/anden-error';
-import { isNominative } from '@jamashita/anden-type';
+import { Quantity } from '@jamashita/lluvia-collection';
 import { AProject } from '../AProject';
 
 export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>> {
-  private static toMap<K, V>(project: Map<K, V>): Map<K | number, [K, V]> {
-    const map: Map<K | number, [K, V]> = new Map();
+  public constructor(project: Map<K, V>) {
+    const map: Map<K | string, [K, V]> = new Map();
 
     project.forEach((v: V, k: K) => {
-      if (isNominative(k)) {
-        map.set(k.hashCode(), [k, v]);
-
-        return;
-      }
-
-      map.set(k, [k, v]);
+      map.set(Quantity.genKey(k), [k, v]);
     });
 
-    return map;
-  }
-
-  public constructor(project: Map<K, V>) {
-    super(MockProject.toMap(project));
+    super(map);
   }
 
   public duplicate(): MockProject<K, V> {

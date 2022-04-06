@@ -8,6 +8,16 @@ import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy';
 import { MockTreeIDFactory } from '../mock/MockTreeIDFactory';
 
 describe('ClosureTableHierarchies', () => {
+  describe('empty', () => {
+    it('\'s size is 0', () => {
+      expect(ClosureTableHierarchies.empty().size()).toBe(0);
+    });
+
+    it('returns singleton instance', () => {
+      expect(ClosureTableHierarchies.empty()).toBe(ClosureTableHierarchies.empty());
+    });
+  });
+
   describe('of', () => {
     it('returns flattened ClosureTableHierarchies', () => {
       const project: ImmutableProject<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableProject.ofMap(new Map([
@@ -73,34 +83,6 @@ describe('ClosureTableHierarchies', () => {
       for (let i: number = 0; i < hierarchies.size(); i++) {
         expect(hierarchies.get(i)?.getAncestor().get()).toBe(json[i]?.ancestor);
         expect(hierarchies.get(i)?.getOffspring().get()).toBe(json[i]?.offspring);
-      }
-    });
-  });
-
-  describe('empty', () => {
-    it('\'s size is 0', () => {
-      expect(ClosureTableHierarchies.empty().size()).toBe(0);
-    });
-
-    it('returns singleton instance', () => {
-      expect(ClosureTableHierarchies.empty()).toBe(ClosureTableHierarchies.empty());
-    });
-  });
-
-  describe('iterator', () => {
-    it('returns [void, ClosureTableHierarchy]', () => {
-      const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
-        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
-        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
-        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
-      ];
-
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
-      let i: number = 0;
-
-      for (const [, v] of hierarchies) {
-        expect(v).toBe(array[i]);
-        i++;
       }
     });
   });
@@ -190,6 +172,46 @@ describe('ClosureTableHierarchies', () => {
     });
   });
 
+  describe('filter', () => {
+    it('deletes its retaining address', () => {
+      const fn: jest.Mock = jest.fn();
+
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
+
+      address.filter = fn;
+
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
+      // @ts-expect-error
+      hierarchies.hierarchies = address;
+
+      hierarchies.filter(() => {
+        return true;
+      });
+
+      expect(fn.mock.calls).toHaveLength(1);
+    });
+  });
+
+  describe('find', () => {
+    it('deletes its retaining address', () => {
+      const fn: jest.Mock = jest.fn();
+
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
+
+      address.find = fn;
+
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
+      // @ts-expect-error
+      hierarchies.hierarchies = address;
+
+      hierarchies.find(() => {
+        return true;
+      });
+
+      expect(fn.mock.calls).toHaveLength(1);
+    });
+  });
+
   describe('forEach', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
@@ -246,19 +268,39 @@ describe('ClosureTableHierarchies', () => {
     });
   });
 
-  describe('toString', () => {
+  describe('iterator', () => {
+    it('returns [void, ClosureTableHierarchy]', () => {
+      const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
+        new MockClosureTableHierarchy(new MockTreeID('mock 1'), new MockTreeID('mock 2')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 3'), new MockTreeID('mock 4')),
+        new MockClosureTableHierarchy(new MockTreeID('mock 5'), new MockTreeID('mock 6'))
+      ];
+
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
+      let i: number = 0;
+
+      for (const [, v] of hierarchies) {
+        expect(v).toBe(array[i]);
+        i++;
+      }
+    });
+  });
+
+  describe('map', () => {
     it('deletes its retaining address', () => {
       const fn: jest.Mock = jest.fn();
 
       const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
 
-      address.toString = fn;
+      address.map = fn;
 
       const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
-      hierarchies.toString();
+      hierarchies.map((hierarchy: ClosureTableHierarchy<MockTreeID>) => {
+        return hierarchy;
+      });
 
       expect(fn.mock.calls).toHaveLength(1);
     });
@@ -302,84 +344,6 @@ describe('ClosureTableHierarchies', () => {
     });
   });
 
-  describe('values', () => {
-    it('deletes its retaining address', () => {
-      const fn: jest.Mock = jest.fn();
-
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
-
-      address.values = fn;
-
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
-      // @ts-expect-error
-      hierarchies.hierarchies = address;
-
-      hierarchies.values();
-
-      expect(fn.mock.calls).toHaveLength(1);
-    });
-  });
-
-  describe('filter', () => {
-    it('deletes its retaining address', () => {
-      const fn: jest.Mock = jest.fn();
-
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
-
-      address.filter = fn;
-
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
-      // @ts-expect-error
-      hierarchies.hierarchies = address;
-
-      hierarchies.filter(() => {
-        return true;
-      });
-
-      expect(fn.mock.calls).toHaveLength(1);
-    });
-  });
-
-  describe('find', () => {
-    it('deletes its retaining address', () => {
-      const fn: jest.Mock = jest.fn();
-
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
-
-      address.find = fn;
-
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
-      // @ts-expect-error
-      hierarchies.hierarchies = address;
-
-      hierarchies.find(() => {
-        return true;
-      });
-
-      expect(fn.mock.calls).toHaveLength(1);
-    });
-  });
-
-  describe('map', () => {
-    it('deletes its retaining address', () => {
-      const fn: jest.Mock = jest.fn();
-
-      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
-
-      address.map = fn;
-
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
-      // @ts-expect-error
-      hierarchies.hierarchies = address;
-
-      hierarchies.map((hierarchy: ClosureTableHierarchy<MockTreeID>) => {
-        return hierarchy;
-      });
-
-      expect(fn.mock.calls).toHaveLength(1);
-    });
-  });
-
   describe('toJSON', () => {
     it('returns ReadonlyArray<ClosureTableJSON>', () => {
       const array: Array<MockClosureTableHierarchy<MockTreeID>> = [
@@ -404,6 +368,42 @@ describe('ClosureTableHierarchies', () => {
           offspring: 'mock 6'
         }
       ]);
+    });
+  });
+
+  describe('toString', () => {
+    it('deletes its retaining address', () => {
+      const fn: jest.Mock = jest.fn();
+
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
+
+      address.toString = fn;
+
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
+      // @ts-expect-error
+      hierarchies.hierarchies = address;
+
+      hierarchies.toString();
+
+      expect(fn.mock.calls).toHaveLength(1);
+    });
+  });
+
+  describe('values', () => {
+    it('deletes its retaining address', () => {
+      const fn: jest.Mock = jest.fn();
+
+      const address: MockAddress<ClosureTableHierarchy<MockTreeID>> = new MockAddress(new Set());
+
+      address.values = fn;
+
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.empty();
+      // @ts-expect-error
+      hierarchies.hierarchies = address;
+
+      hierarchies.values();
+
+      expect(fn.mock.calls).toHaveLength(1);
     });
   });
 });
