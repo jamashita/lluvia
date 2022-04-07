@@ -1,4 +1,4 @@
-import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 
@@ -69,8 +69,8 @@ export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
     return super.isEmpty();
   }
 
-  public map<W>(mapper: Mapper<V, W>): ImmutableAddress<W> {
-    return ImmutableAddress.ofInternal(this.mapInternal(mapper));
+  public map<W>(mapping: Mapping<V, W>): ImmutableAddress<W> {
+    return ImmutableAddress.ofInternal(this.mapInternal(mapping));
   }
 
   public remove(value: V): ImmutableAddress<V> {

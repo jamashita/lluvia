@@ -1,4 +1,4 @@
-import { BinaryPredicate, Catalogue, Mapper, Nominative, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, ForEach, Mapping, Nominative, Nullable } from '@jamashita/anden-type';
 
 export interface Collection<K, V> extends Nominative, Iterable<[K, V]> {
   contains(value: V): boolean;
@@ -9,13 +9,13 @@ export interface Collection<K, V> extends Nominative, Iterable<[K, V]> {
 
   find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
-  forEach(catalogue: Catalogue<K, V>): void;
+  forEach(foreach: ForEach<K, V>): void;
 
   get(key: K): Nullable<V>;
 
   isEmpty(): boolean;
 
-  map<W>(mapper: Mapper<V, W>): Collection<K, W>;
+  map<W>(mapping: Mapping<V, W>): Collection<K, W>;
 
   size(): number;
 

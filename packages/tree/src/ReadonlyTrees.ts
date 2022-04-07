@@ -1,6 +1,6 @@
-import { BinaryPredicate, Catalogue, Nominative, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, ForEach, Nominative, Nullable } from '@jamashita/anden-type';
 import { Tree } from './Tree';
-import { TreeNode } from './TreeNode/TreeNode';
+import { TreeNode } from './TreeNode';
 
 export interface ReadonlyTrees<K, V, E extends Tree<V>> extends Nominative {
   contains(value: V): boolean;
@@ -9,7 +9,7 @@ export interface ReadonlyTrees<K, V, E extends Tree<V>> extends Nominative {
 
   find(predicate: BinaryPredicate<V, K>): Nullable<TreeNode<V>>;
 
-  forEach(catalogue: Catalogue<K, V>): void;
+  forEach(foreach: ForEach<K, V>): void;
 
   get(key: K): Nullable<E>;
 

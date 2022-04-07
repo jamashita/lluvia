@@ -3,7 +3,7 @@ import { ImmutableAddress, MutableAddress, ReadonlyAddress } from '@jamashita/ll
 import { ATrees } from './ATrees';
 import { SerializableTree } from './SerializableTree';
 import { SerializableTreeObject } from './SerializableTreeObject';
-import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode';
+import { SerializableTreeNode, TreeNodeJSON } from './TreeNode';
 
 export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
   public static empty<V extends SerializableTreeObject>(): SerializableTrees<V> {

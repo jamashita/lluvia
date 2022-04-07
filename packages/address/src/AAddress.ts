@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { BinaryPredicate, Catalogue, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, ForEach, Mapping, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address';
 
@@ -17,7 +17,7 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
 
   public abstract override filter(predicate: BinaryPredicate<V, void>): T;
 
-  public abstract override map<W>(mapper: Mapper<V, W>): Address<W>;
+  public abstract override map<W>(mapping: Mapping<V, W>): Address<W>;
 
   public abstract remove(value: V): T;
 
@@ -73,9 +73,9 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
     return null;
   }
 
-  public forEach(catalogue: Catalogue<void, V>): void {
+  public forEach(foreach: ForEach<void, V>): void {
     this.address.forEach((v: V) => {
-      catalogue(v);
+      foreach(v);
     });
   }
 
@@ -98,12 +98,12 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
     return iterable.values();
   }
 
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<W | string, W> {
+  protected mapInternal<W>(mapping: Mapping<V, W>): Map<W | string, W> {
     const m: Map<W | string, W> = new Map();
     let i: number = 0;
 
     this.address.forEach((value: V) => {
-      const w: W = mapper(value, i);
+      const w: W = mapping(value, i);
 
       m.set(Quantity.genKey(w), w);
       i++;
