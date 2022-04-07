@@ -1,4 +1,4 @@
-import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
@@ -39,8 +39,8 @@ export class MutableProject<K, V> extends AProject<K, V, MutableProject<K, V>> {
     return MutableProject.ofInternal(this.filterInternal(predicate));
   }
 
-  public map<W>(mapper: Mapper<V, W>): MutableProject<K, W> {
-    return MutableProject.ofInternal(this.mapInternal(mapper));
+  public map<W>(mapping: Mapping<V, W>): MutableProject<K, W> {
+    return MutableProject.ofInternal(this.mapInternal(mapping));
   }
 
   public remove(key: K): this {

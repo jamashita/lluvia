@@ -1,4 +1,4 @@
-import { BinaryPredicate, Cloneable, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 
 export interface ReadonlyAddress<V> extends Collection<void, V>, Cloneable<ReadonlyAddress<V>> {
@@ -6,7 +6,7 @@ export interface ReadonlyAddress<V> extends Collection<void, V>, Cloneable<Reado
 
   iterator(): IterableIterator<[void, V]>;
 
-  map<W>(mapper: Mapper<V, W>): ReadonlyAddress<W>;
+  map<W>(mapping: Mapping<V, W>): ReadonlyAddress<W>;
 
   toSet(): Set<V>;
 }

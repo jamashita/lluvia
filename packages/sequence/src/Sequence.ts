@@ -1,4 +1,4 @@
-import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { ReadonlySequence } from './ReadonlySequence';
 
 export interface Sequence<V> extends ReadonlySequence<V> {
@@ -6,7 +6,7 @@ export interface Sequence<V> extends ReadonlySequence<V> {
 
   filter(predicate: BinaryPredicate<V, number>): Sequence<V>;
 
-  map<W>(mapper: Mapper<V, W>): Sequence<W>;
+  map<W>(mapping: Mapping<V, W>): Sequence<W>;
 
   remove(key: number): Sequence<V>;
 

@@ -3,10 +3,10 @@ import {
   Ambiguous,
   BinaryFunction,
   BinaryPredicate,
-  Catalogue,
+  ForEach,
   isEqualable,
   Kind,
-  Mapper,
+  Mapping,
   Nullable
 } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
@@ -26,7 +26,7 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
 
   public abstract override filter(predicate: BinaryPredicate<V, number>): T;
 
-  public abstract override map<W>(mapper: Mapper<V, W>): Sequence<W>;
+  public abstract override map<W>(mapping: Mapping<V, W>): Sequence<W>;
 
   public abstract remove(key: number): T;
 
@@ -98,8 +98,8 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
     return found;
   }
 
-  public forEach(catalogue: Catalogue<number, V>): void {
-    this.sequence.forEach(catalogue);
+  public forEach(foreach: ForEach<number, V>): void {
+    this.sequence.forEach(foreach);
   }
 
   public get(key: number): Nullable<V> {

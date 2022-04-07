@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { Ambiguous, BinaryPredicate, Catalogue, isNominative, Kind, Mapper, Nullable } from '@jamashita/anden-type';
+import { Ambiguous, BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable } from '@jamashita/anden-type';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Project } from './Project';
 
@@ -15,7 +15,7 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
 
   public abstract override filter(predicate: BinaryPredicate<V, K>): T;
 
-  public abstract override map<W>(mapper: Mapper<V, W>): Project<K, W>;
+  public abstract override map<W>(mapping: Mapping<V, W>): Project<K, W>;
 
   public abstract remove(key: K): T;
 
@@ -96,9 +96,9 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
     return null;
   }
 
-  public forEach(catalogue: Catalogue<K, V>): void {
+  public forEach(foreach: ForEach<K, V>): void {
     this.project.forEach(([k, v]: [K, V]) => {
-      catalogue(v, k);
+      foreach(v, k);
     });
   }
 
@@ -134,12 +134,12 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
     return iterable;
   }
 
-  protected mapInternal<W>(mapper: Mapper<V, W>): Map<K | string, [K, W]> {
+  protected mapInternal<W>(mapping: Mapping<V, W>): Map<K | string, [K, W]> {
     const m: Map<K | string, [K, W]> = new Map();
     let i: number = 0;
 
     this.project.forEach(([k, v]: [K, V]) => {
-      m.set(Quantity.genKey(k), [k, mapper(v, i)]);
+      m.set(Quantity.genKey(k), [k, mapping(v, i)]);
       i++;
     });
 
