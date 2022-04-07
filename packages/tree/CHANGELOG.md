@@ -1,3 +1,11 @@
+# [@jamashita/lluvia-tree-v2.9.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-tree-v2.8.0...@jamashita/lluvia-tree-v2.9.0) (2022-04-07)
+
+
+### Features
+
+* 🎸 args name and types changed ([d7b816c](https://github.com/jamashita/lluvia/commit/d7b816c224792a31f8499f68bf8cef9d910534ed))
+* 🎸 packages updated ([9f3e9ff](https://github.com/jamashita/lluvia/commit/9f3e9ffb11fcbbd37db30b10f2e496f7bb26f639))
+
 # [@jamashita/lluvia-tree-v2.8.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-tree-v2.7.0...@jamashita/lluvia-tree-v2.8.0) (2022-04-06)
 
 
