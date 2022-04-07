@@ -1,4 +1,4 @@
-import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
@@ -37,8 +37,8 @@ export class MutableSequence<V> extends ASequence<V, MutableSequence<V>> {
     return MutableSequence.ofArray(this.filterInternal(predicate));
   }
 
-  public map<W>(mapper: Mapper<V, W>): MutableSequence<W> {
-    return MutableSequence.ofArray(this.sequence.map(mapper));
+  public map<W>(mapping: Mapping<V, W>): MutableSequence<W> {
+    return MutableSequence.ofArray(this.sequence.map(mapping));
   }
 
   public remove(key: number): this {
