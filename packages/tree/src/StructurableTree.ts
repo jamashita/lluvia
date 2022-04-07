@@ -1,10 +1,10 @@
 import { ImmutableAddress, MutableAddress } from '@jamashita/lluvia-address';
 import { MutableProject } from '@jamashita/lluvia-project';
 import { ATree } from './ATree';
-import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies';
+import { ClosureTableHierarchies } from './ClosureTable';
 import { StructurableTreeObject } from './StructurableTreeObject';
 import { TreeID } from './TreeID';
-import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
+import { StructurableTreeNode } from './TreeNode';
 
 export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>> {
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(root: StructurableTreeNode<K, V>): StructurableTree<K, V> {

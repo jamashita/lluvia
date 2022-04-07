@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden-object';
 import { ForEach, Nullable, Predicate } from '@jamashita/anden-type';
 import { Tree } from './Tree';
-import { ATreeNode } from './TreeNode/ATreeNode';
+import { ATreeNode } from './TreeNode';
 
 export abstract class ATree<V, T extends ATreeNode<V, T>> extends Objet implements Tree<V> {
   protected readonly root: T;

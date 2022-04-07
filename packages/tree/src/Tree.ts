@@ -1,5 +1,5 @@
 import { ForEach, Nominative, Nullable, Predicate } from '@jamashita/anden-type';
-import { TreeNode } from './TreeNode/TreeNode';
+import { TreeNode } from './TreeNode';
 
 export interface Tree<V> extends Nominative {
   contains(value: V): boolean;
