@@ -1,4 +1,4 @@
-import { BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { ReadonlyAddress } from './ReadonlyAddress';
 
 export interface Address<V> extends ReadonlyAddress<V> {
@@ -6,7 +6,7 @@ export interface Address<V> extends ReadonlyAddress<V> {
 
   filter(predicate: BinaryPredicate<V, void>): Address<V>;
 
-  map<W>(mapper: Mapper<V, W>): Address<W>;
+  map<W>(mapping: Mapping<V, W>): Address<W>;
 
   remove(value: V): Address<V>;
 }

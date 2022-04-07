@@ -1,4 +1,4 @@
-export * from './mock/MockTreeNode';
+export * from './mock/index';
 export * from './ATreeNode';
 export * from './ReadonlyTreeNode';
 export * from './SerializableTreeNode';

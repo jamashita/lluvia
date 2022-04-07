@@ -3,14 +3,12 @@ import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject, MutableProject, ReadonlyProject } from '@jamashita/lluvia-project';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
 import { ATrees } from './ATrees';
-import { ClosureTable } from './ClosureTable/ClosureTable';
-import { ClosureTableHierarchies } from './ClosureTable/ClosureTableHierarchies';
-import { ClosureTableHierarchy } from './ClosureTable/ClosureTableHierarchy';
+import { ClosureTable, ClosureTableHierarchies, ClosureTableHierarchy } from './ClosureTable';
 import { StructurableTree } from './StructurableTree';
 import { StructurableTreeObject } from './StructurableTreeObject';
 import { TreeError } from './TreeError';
 import { TreeID } from './TreeID';
-import { StructurableTreeNode } from './TreeNode/StructurableTreeNode';
+import { StructurableTreeNode } from './TreeNode';
 
 export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>> {
   public static empty<K extends TreeID, V extends StructurableTreeObject<K>>(): StructurableTrees<K, V> {

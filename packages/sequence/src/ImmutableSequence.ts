@@ -1,4 +1,4 @@
-import { BinaryFunction, BinaryPredicate, Mapper } from '@jamashita/anden-type';
+import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
@@ -53,8 +53,8 @@ export class ImmutableSequence<V> extends ASequence<V, ImmutableSequence<V>> {
     return super.isEmpty();
   }
 
-  public map<W>(mapper: Mapper<V, W>): ImmutableSequence<W> {
-    return ImmutableSequence.ofArray(this.sequence.map(mapper));
+  public map<W>(mapping: Mapping<V, W>): ImmutableSequence<W> {
+    return ImmutableSequence.ofArray(this.sequence.map(mapping));
   }
 
   public remove(key: number): ImmutableSequence<V> {

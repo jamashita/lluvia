@@ -37,11 +37,8 @@ export abstract class ATreeNode<V, T extends ATreeNode<V, T>> extends Objet impl
     if (!this.valueEquals(other.value)) {
       return false;
     }
-    if (!this.children.equals(other.children)) {
-      return false;
-    }
 
-    return true;
+    return this.children.equals(other.children);
   }
 
   public find(predicate: Predicate<V>): Nullable<T> {

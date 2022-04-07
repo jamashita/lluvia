@@ -1,4 +1,4 @@
-import { BinaryPredicate, Catalogue, Kind, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, ForEach, Kind, Mapping, Nullable } from '@jamashita/anden-type';
 import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
@@ -73,8 +73,8 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.find(predicate);
   }
 
-  public forEach(catalogue: Catalogue<K, ReadonlyAddress<K>>): void {
-    this.table.forEach(catalogue);
+  public forEach(foreach: ForEach<K, ReadonlyAddress<K>>): void {
+    this.table.forEach(foreach);
   }
 
   public get(key: K): Nullable<ReadonlyAddress<K>> {
@@ -89,8 +89,8 @@ export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<
     return this.table.iterator();
   }
 
-  public map<W>(mapper: Mapper<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
-    return this.table.map(mapper);
+  public map<W>(mapping: Mapping<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
+    return this.table.map(mapping);
   }
 
   public serialize(): string {

@@ -1,5 +1,5 @@
-import { Catalogue, Nominative, Nullable, Predicate } from '@jamashita/anden-type';
-import { TreeNode } from './TreeNode/TreeNode';
+import { ForEach, Nominative, Nullable, Predicate } from '@jamashita/anden-type';
+import { TreeNode } from './TreeNode';
 
 export interface Tree<V> extends Nominative {
   contains(value: V): boolean;
@@ -8,7 +8,7 @@ export interface Tree<V> extends Nominative {
 
   find(predicate: Predicate<V>): Nullable<TreeNode<V>>;
 
-  forEach(catalogue: Catalogue<unknown, V>): void;
+  forEach(foreach: ForEach<unknown, V>): void;
 
   getRoot(): TreeNode<V>;
 

@@ -1,4 +1,4 @@
-import { BinaryPredicate, Catalogue, JSONable, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, ForEach, JSONable, Mapping, Nullable } from '@jamashita/anden-type';
 import { ReadonlyAddress } from '@jamashita/lluvia-address';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { ReadonlyProject } from '@jamashita/lluvia-project';
@@ -76,8 +76,8 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.find(predicate);
   }
 
-  public forEach(catalogue: Catalogue<number, ClosureTableHierarchy<K>>): void {
-    this.hierarchies.forEach(catalogue);
+  public forEach(foreach: ForEach<number, ClosureTableHierarchy<K>>): void {
+    this.hierarchies.forEach(foreach);
   }
 
   public get(key: number): Nullable<ClosureTableHierarchy<K>> {
@@ -92,8 +92,8 @@ export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, 
     return this.hierarchies.iterator();
   }
 
-  public map<W>(mapper: Mapper<ClosureTableHierarchy<K>, W>): ImmutableSequence<W> {
-    return this.hierarchies.map(mapper);
+  public map<W>(mapping: Mapping<ClosureTableHierarchy<K>, W>): ImmutableSequence<W> {
+    return this.hierarchies.map(mapping);
   }
 
   public serialize(): string {

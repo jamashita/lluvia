@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden-object';
-import { BinaryPredicate, Catalogue, isNominative, Mapper, Nullable } from '@jamashita/anden-type';
+import { BinaryPredicate, ForEach, isNominative, Mapping, Nullable } from '@jamashita/anden-type';
 import { Collection } from './Collection';
 
 export abstract class Quantity<K, V> extends Objet implements Collection<K, V> {
@@ -23,13 +23,13 @@ export abstract class Quantity<K, V> extends Objet implements Collection<K, V> {
 
   public abstract find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
-  public abstract forEach(catalogue: Catalogue<K, V>): void;
+  public abstract forEach(foreach: ForEach<K, V>): void;
 
   public abstract get(key: K): Nullable<V>;
 
   public abstract iterator(): Iterator<[K, V]>;
 
-  public abstract map<W>(mapper: Mapper<V, W>): Collection<K, W>;
+  public abstract map<W>(mapping: Mapping<V, W>): Collection<K, W>;
 
   public abstract size(): number;
 

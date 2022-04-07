@@ -1,7 +1,7 @@
 import { JSONable } from '@jamashita/anden-type';
 import { ATree } from './ATree';
 import { SerializableTreeObject } from './SerializableTreeObject';
-import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/SerializableTreeNode';
+import { SerializableTreeNode, TreeNodeJSON } from './TreeNode';
 
 export class SerializableTree<V extends SerializableTreeObject> extends ATree<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
   public static of<V extends SerializableTreeObject>(root: SerializableTreeNode<V>): SerializableTree<V> {
