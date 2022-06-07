@@ -2,7 +2,7 @@ import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, ForEach, isNominative, Mapping, Nullable } from '@jamashita/anden-type';
 import { Collection } from './Collection';
 
-export abstract class Quantity<K, V> extends Objet implements Collection<K, V> {
+export abstract class Quantity<in out K, in out V> extends Objet implements Collection<K, V> {
   protected static genKey<T>(key: T): T | string {
     if (isNominative(key)) {
       return key.hashCode();

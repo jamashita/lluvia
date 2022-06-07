@@ -12,7 +12,7 @@ import {
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Sequence } from './Sequence';
 
-export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<number, V> implements Sequence<V> {
+export abstract class ASequence<in out V> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
 
   protected constructor(sequence: Array<V>) {
@@ -20,19 +20,19 @@ export abstract class ASequence<V, T extends ASequence<V, T>> extends Quantity<n
     this.sequence = sequence;
   }
 
-  public abstract add(value: V): Sequence<V>;
+  public abstract add(value: V): ASequence<V>;
 
-  public abstract duplicate(): T;
+  public abstract duplicate(): ASequence<V>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, number>): T;
+  public abstract override filter(predicate: BinaryPredicate<V, number>): ASequence<V>;
 
-  public abstract override map<W>(mapping: Mapping<V, W>): Sequence<W>;
+  public abstract override map<W>(mapping: Mapping<V, W>): ASequence<W>;
 
-  public abstract remove(key: number): T;
+  public abstract remove(key: number): ASequence<V>;
 
-  public abstract set(key: number, value: V): T;
+  public abstract set(key: number, value: V): ASequence<V>;
 
-  public abstract sort(comparator: BinaryFunction<V, V, number>): T;
+  public abstract sort(comparator: BinaryFunction<V, V, number>): ASequence<V>;
 
   public contains(value: V): boolean {
     const found: Ambiguous<V> = this.sequence.find((v: V) => {

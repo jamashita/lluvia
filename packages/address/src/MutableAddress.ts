@@ -2,7 +2,7 @@ import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 
-export class MutableAddress<V> extends AAddress<V, MutableAddress<V>> {
+export class MutableAddress<in out V> extends AAddress<V> {
   public static empty<V>(): MutableAddress<V> {
     return MutableAddress.ofInternal<V>(new Map());
   }

@@ -3,7 +3,7 @@ import { Ambiguous, BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nulla
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Project } from './Project';
 
-export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quantity<K, V> implements Project<K, V> {
+export abstract class AProject<in out K, in out V> extends Quantity<K, V> implements Project<K, V> {
   protected readonly project: Map<K | string, [K, V]>;
 
   protected constructor(project: Map<K | string, [K, V]>) {
@@ -11,15 +11,15 @@ export abstract class AProject<K, V, T extends AProject<K, V, T>> extends Quanti
     this.project = project;
   }
 
-  public abstract duplicate(): T;
+  public abstract duplicate(): AProject<K, V>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, K>): T;
+  public abstract override filter(predicate: BinaryPredicate<V, K>): AProject<K, V>;
 
-  public abstract override map<W>(mapping: Mapping<V, W>): Project<K, W>;
+  public abstract override map<W>(mapping: Mapping<V, W>): AProject<K, W>;
 
-  public abstract remove(key: K): T;
+  public abstract remove(key: K): AProject<K, V>;
 
-  public abstract set(key: K, value: V): T;
+  public abstract set(key: K, value: V): AProject<K, V>;
 
   // FIXME O(n)
   public contains(value: V): boolean {
