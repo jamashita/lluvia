@@ -45,7 +45,7 @@
     "lint-staged": "13.0.0",
     "npm-check-updates": "13.1.1",
     "rimraf": "3.0.2",
-    "semantic-release": "19.0.2",
+    "semantic-release": "19.0.3",
     "semantic-release-monorepo": "7.0.5",
     "sort-package-json": "1.57.0",
     "ts-jest": "28.0.4",
