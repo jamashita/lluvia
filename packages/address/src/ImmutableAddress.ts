@@ -2,7 +2,7 @@ import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 
-export class ImmutableAddress<V> extends AAddress<V, ImmutableAddress<V>> {
+export class ImmutableAddress<out V> extends AAddress<V> {
   private static readonly EMPTY: ImmutableAddress<unknown> = new ImmutableAddress(new Map());
 
   public static empty<V>(): ImmutableAddress<V> {

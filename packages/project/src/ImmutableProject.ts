@@ -2,7 +2,7 @@ import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AProject } from './AProject';
 
-export class ImmutableProject<K, V> extends AProject<K, V, ImmutableProject<K, V>> {
+export class ImmutableProject<out K, out V> extends AProject<K, V> {
   private static readonly EMPTY: ImmutableProject<unknown, unknown> = new ImmutableProject(new Map());
 
   public static empty<K, V>(): ImmutableProject<K, V> {

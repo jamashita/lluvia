@@ -1,8 +1,8 @@
 import { UnimplementedError } from '@jamashita/anden-error';
 import { ASequence } from '../ASequence';
 
-export class MockSequence<V> extends ASequence<V, MockSequence<V>> {
-  public constructor(sequence: ReadonlyArray<V>) {
+export class MockSequence<out V> extends ASequence<V> {
+  public constructor(sequence: Array<V>) {
     super([...sequence]);
   }
 

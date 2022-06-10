@@ -5,7 +5,7 @@ import { ATree } from './ATree';
 import { ATreeNode } from './TreeNode';
 import { Trees } from './Trees';
 
-export abstract class ATrees<K, V, T extends ATreeNode<V, T>, E extends ATree<V, T>, C extends Collection<K, E>> extends Objet implements Trees<K, V, E> {
+export abstract class ATrees<out K, out V, T extends ATreeNode<V, T>, E extends ATree<V, T>, C extends Collection<K, E>> extends Objet implements Trees<K, V, E> {
   protected readonly trees: C;
 
   protected constructor(trees: C) {

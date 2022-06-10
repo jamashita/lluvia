@@ -3,7 +3,7 @@ import { BinaryPredicate, ForEach, Mapping, Nullable } from '@jamashita/anden-ty
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address';
 
-export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<void, V> implements Address<V> {
+export abstract class AAddress<out V> extends Quantity<void, V> implements Address<V> {
   protected readonly address: Map<V | string, V>;
 
   protected constructor(address: Map<V | string, V>) {
@@ -11,15 +11,15 @@ export abstract class AAddress<V, T extends AAddress<V, T>> extends Quantity<voi
     this.address = address;
   }
 
-  public abstract add(value: V): T;
+  public abstract add(value: V): AAddress<V>;
 
-  public abstract duplicate(): T;
+  public abstract duplicate(): AAddress<V>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, void>): T;
+  public abstract override filter(predicate: BinaryPredicate<V, void>): AAddress<V>;
 
-  public abstract override map<W>(mapping: Mapping<V, W>): Address<W>;
+  public abstract override map<W>(mapping: Mapping<V, W>): AAddress<W>;
 
-  public abstract remove(value: V): T;
+  public abstract remove(value: V): AAddress<V>;
 
   public contains(value: V): boolean {
     return this.address.has(Quantity.genKey(value));

@@ -1,4 +1,4 @@
-import { ImmutableAddress } from '@jamashita/lluvia-address';
+import { MutableAddress } from '@jamashita/lluvia-address';
 import { MockTreeID } from '../mock/MockTreeID';
 import { MockTreeObject } from '../mock/MockTreeObject';
 import { SerializableTree } from '../SerializableTree';
@@ -17,14 +17,14 @@ describe('SerializableTrees', () => {
     it('add one tree into empty trees', () => {
       const id1: MockTreeID = new MockTreeID('tree id 1');
 
-      const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id1)
         )
       );
 
-      const trees: SerializableTrees<MockTreeObject<MockTreeID>> = SerializableTrees.ofAddress<MockTreeObject<MockTreeID>>(
-        ImmutableAddress.empty<SerializableTree<MockTreeObject<MockTreeID>>>()
+      const trees: SerializableTrees<MockTreeObject<MockTreeID>> = SerializableTrees.ofAddress(
+        MutableAddress.empty()
       );
 
       expect(trees.isEmpty()).toBe(true);
@@ -56,20 +56,20 @@ describe('SerializableTrees', () => {
         id7
       ];
 
-      const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1),
-          ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-            new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id2)
+      const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id1),
+          MutableAddress.ofSet(
+            new Set([
+              SerializableTreeNode.ofValue(
+                new MockTreeObject(id2)
               ),
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3),
-                ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-                  new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-                    SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                      new MockTreeObject<MockTreeID>(id4)
+              SerializableTreeNode.ofValue(
+                new MockTreeObject(id3),
+                MutableAddress.ofSet(
+                  new Set([
+                    SerializableTreeNode.ofValue(
+                      new MockTreeObject(id4)
                     )
                   ])
                 )
@@ -78,27 +78,27 @@ describe('SerializableTrees', () => {
           )
         )
       );
-      const tree2: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id5),
-          ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-            new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id6)
+      const tree2: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id5),
+          MutableAddress.ofSet(
+            new Set([
+              SerializableTreeNode.ofValue(
+                new MockTreeObject(id6)
               )
             ])
           )
         )
       );
-      const tree3: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id7)
+      const tree3: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id7)
         )
       );
 
-      const trees: SerializableTrees<MockTreeObject<MockTreeID>> = SerializableTrees.ofAddress<MockTreeObject<MockTreeID>>(
-        ImmutableAddress.ofSet<SerializableTree<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTree<MockTreeObject<MockTreeID>>>([
+      const trees: SerializableTrees<MockTreeObject<MockTreeID>> = SerializableTrees.ofAddress(
+        MutableAddress.ofSet(
+          new Set([
             tree1,
             tree2
           ])
@@ -128,20 +128,20 @@ describe('SerializableTrees', () => {
       const id6: MockTreeID = new MockTreeID('tree id 6');
       const id7: MockTreeID = new MockTreeID('tree id 7');
 
-      const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1),
-          ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-            new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id2)
+      const tree1: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id1),
+          MutableAddress.ofSet(
+            new Set([
+              SerializableTreeNode.ofValue(
+                new MockTreeObject(id2)
               ),
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3),
-                ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-                  new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-                    SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                      new MockTreeObject<MockTreeID>(id4)
+              SerializableTreeNode.ofValue(
+                new MockTreeObject(id3),
+                MutableAddress.ofSet(
+                  new Set([
+                    SerializableTreeNode.ofValue(
+                      new MockTreeObject(id4)
                     )
                   ])
                 )
@@ -150,27 +150,27 @@ describe('SerializableTrees', () => {
           )
         )
       );
-      const tree2: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id5),
-          ImmutableAddress.ofSet<SerializableTreeNode<MockTreeObject<MockTreeID>>>(
-            new Set<SerializableTreeNode<MockTreeObject<MockTreeID>>>([
-              SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id6)
+      const tree2: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id5),
+          MutableAddress.ofSet(
+            new Set([
+              SerializableTreeNode.ofValue(
+                new MockTreeObject(id6)
               )
             ])
           )
         )
       );
-      const tree3: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(
-        SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id7)
+      const tree3: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(
+        SerializableTreeNode.ofValue(
+          new MockTreeObject(id7)
         )
       );
 
-      const trees: SerializableTrees<MockTreeObject<MockTreeID>> = SerializableTrees.ofAddress<MockTreeObject<MockTreeID>>(
-        ImmutableAddress.ofSet<SerializableTree<MockTreeObject<MockTreeID>>>(
-          new Set<SerializableTree<MockTreeObject<MockTreeID>>>([
+      const trees: SerializableTrees<MockTreeObject<MockTreeID>> = SerializableTrees.ofAddress(
+        MutableAddress.ofSet(
+          new Set([
             tree1,
             tree2,
             tree3
