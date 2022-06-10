@@ -2,7 +2,7 @@ import { BinaryPredicate, ForEach, Nominative, Nullable } from '@jamashita/anden
 import { Tree } from './Tree';
 import { TreeNode } from './TreeNode';
 
-export interface ReadonlyTrees<K, V, E extends Tree<V>> extends Nominative {
+export interface ReadonlyTrees<out K, out V, E extends Tree<V>> extends Nominative {
   contains(value: V): boolean;
 
   every(predicate: BinaryPredicate<V, K>): boolean;

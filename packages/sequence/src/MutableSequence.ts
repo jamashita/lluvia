@@ -2,9 +2,9 @@ import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type'
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
-export class MutableSequence<V> extends ASequence<V, MutableSequence<V>> {
+export class MutableSequence<out V> extends ASequence<V> {
   public static empty<V>(): MutableSequence<V> {
-    return MutableSequence.ofArray([]);
+    return MutableSequence.ofArray([] as Array<V>);
   }
 
   public static of<V>(collection: Collection<number, V>): MutableSequence<V> {

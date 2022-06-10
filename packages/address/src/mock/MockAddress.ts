@@ -2,7 +2,7 @@ import { UnimplementedError } from '@jamashita/anden-error';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from '../AAddress';
 
-export class MockAddress<V> extends AAddress<V, MockAddress<V>> {
+export class MockAddress<out V> extends AAddress<V> {
   public constructor(set: ReadonlySet<V>) {
     const map: Map<V | string, V> = new Map();
 

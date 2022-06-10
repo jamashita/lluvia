@@ -7,7 +7,7 @@ import { TreeID } from '../TreeID';
 import { ClosureTableHierarchies } from './ClosureTableHierarchies';
 import { ClosureTableHierarchy } from './ClosureTableHierarchy';
 
-export class ClosureTable<K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
+export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableProject<K, ReadonlyAddress<K>>;
 
   private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable(ImmutableProject.empty());

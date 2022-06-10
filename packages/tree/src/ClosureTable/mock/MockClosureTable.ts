@@ -5,8 +5,8 @@ import { TreeID } from '../../TreeID';
 import { ClosureTable } from '../ClosureTable';
 import { ClosureTableHierarchy } from '../ClosureTableHierarchy';
 
-export class MockClosureTable<K extends TreeID> extends ClosureTable<K> {
-  public constructor(...hierarchies: ReadonlyArray<ClosureTableHierarchy<K>>) {
+export class MockClosureTable<out K extends TreeID> extends ClosureTable<K> {
+  public constructor(...hierarchies: Array<ClosureTableHierarchy<K>>) {
     const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {

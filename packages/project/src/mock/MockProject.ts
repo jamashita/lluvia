@@ -2,7 +2,7 @@ import { UnimplementedError } from '@jamashita/anden-error';
 import { Quantity } from '@jamashita/lluvia-collection';
 import { AProject } from '../AProject';
 
-export class MockProject<K, V> extends AProject<K, V, MockProject<K, V>> {
+export class MockProject<out K, out V> extends AProject<K, V> {
   public constructor(project: Map<K, V>) {
     const map: Map<K | string, [K, V]> = new Map();
 

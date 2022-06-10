@@ -3,7 +3,7 @@ import { ForEach, Nullable, Predicate } from '@jamashita/anden-type';
 import { Tree } from './Tree';
 import { ATreeNode } from './TreeNode';
 
-export abstract class ATree<V, T extends ATreeNode<V, T>> extends Objet implements Tree<V> {
+export abstract class ATree<out V, in out T extends ATreeNode<V, T>> extends Objet implements Tree<V> {
   protected readonly root: T;
 
   protected constructor(root: T) {

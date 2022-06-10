@@ -1,38 +1,37 @@
 import { JSONable, ObjectLiteral } from '@jamashita/anden-type';
-import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { Address, MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { SerializableTreeObject } from '../SerializableTreeObject';
 import { ATreeNode } from './ATreeNode';
+import { TreeNode } from './TreeNode';
 
 export type TreeNodeJSON = Readonly<{
   value: ObjectLiteral;
   children: ReadonlyArray<ObjectLiteral>;
 }>;
 
-export class SerializableTreeNode<V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
+export class SerializableTreeNode<out V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
   public static of<V extends SerializableTreeObject>(node: SerializableTreeNode<V>): SerializableTreeNode<V> {
     return new SerializableTreeNode(node.getValue(), node.getChildren());
   }
 
-  public static ofValue<V extends SerializableTreeObject>(value: V, children?: ReadonlyAddress<SerializableTreeNode<V>>): SerializableTreeNode<V> {
+  public static ofValue<V extends SerializableTreeObject>(value: V, children: ReadonlyAddress<SerializableTreeNode<V>> = MutableAddress.empty()): SerializableTreeNode<V> {
     return new SerializableTreeNode(value, children);
   }
 
-  protected constructor(value: V, children: ReadonlyAddress<SerializableTreeNode<V>> = ImmutableAddress.empty<SerializableTreeNode<V>>()) {
-    super(value, ImmutableAddress.of(children));
+  protected constructor(value: V, children: ReadonlyAddress<SerializableTreeNode<V>>) {
+    super(value, MutableAddress.of(children));
   }
 
-  public append(node: SerializableTreeNode<V>): this {
-    this.children = this.children.add(node);
-
-    return this;
-  }
-
-  protected forge(node: ATreeNode<V, SerializableTreeNode<V>>): SerializableTreeNode<V> {
+  protected forge(node: TreeNode<V>): SerializableTreeNode<V> {
     if (node instanceof SerializableTreeNode) {
       return node as SerializableTreeNode<V>;
     }
 
-    return SerializableTreeNode.ofValue(node.getValue(), node.getChildren());
+    const children: Address<SerializableTreeNode<V>> = node.getChildren().map((t: TreeNode<V>): SerializableTreeNode<V> => {
+      return this.forge(t);
+    });
+
+    return SerializableTreeNode.ofValue(node.getValue(), children);
   }
 
   public toJSON(): TreeNodeJSON {

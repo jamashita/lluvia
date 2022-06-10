@@ -14,23 +14,23 @@ describe('Trees', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
       tree.contains = fn;
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
-      trees.contains(new MockTreeObject<MockTreeID>(id));
+      trees.contains(new MockTreeObject(id));
 
       expect(fn.mock.calls).toHaveLength(1);
     });
@@ -39,38 +39,38 @@ describe('Trees', () => {
   describe('equals', () => {
     it('returns true when the same instance given', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       expect(trees.equals(trees)).toBe(true);
     });
 
     it('returns false when the different class instance given', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       expect(trees.equals(new MockValueObject('mock'))).toBe(false);
     });
@@ -79,28 +79,28 @@ describe('Trees', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       // @ts-expect-error
       trees.trees = project;
       project.equals = fn;
 
-      trees.equals(new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-          new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
-            [id, new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject<MockTreeID>(id)))]
+      trees.equals(new MockTrees(
+        new MockProject(
+          new Map([
+            [id, new MockTree(new MockTreeNode(new MockTreeObject(id)))]
           ])
         )
       ));
@@ -115,32 +115,32 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       const every: boolean = trees.every((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().toString().includes('tree id');
@@ -154,32 +154,32 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       const every: boolean = trees.every((o: MockTreeObject<MockTreeID>) => {
         return !o.getTreeID().equals(id3);
@@ -195,32 +195,32 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       const obj: Nullable<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = trees.find((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().equals(id3);
@@ -234,32 +234,32 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       const obj: Nullable<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = trees.find((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().toString().includes('idea');
@@ -280,33 +280,33 @@ describe('Trees', () => {
         id3
       ];
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
       let i: number = 0;
 
       trees.forEach((o: MockTreeObject<MockTreeID>) => {
@@ -321,19 +321,19 @@ describe('Trees', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       // @ts-expect-error
       trees.trees = project;
@@ -350,19 +350,19 @@ describe('Trees', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       // @ts-expect-error
       trees.trees = project;
@@ -379,19 +379,19 @@ describe('Trees', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       // @ts-expect-error
       trees.trees = project;
@@ -409,32 +409,32 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       const some: boolean = trees.some((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().equals(id3);
@@ -448,32 +448,32 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       const some: boolean = trees.some((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().toString().includes('idea');
@@ -488,19 +488,19 @@ describe('Trees', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id)
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id)
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
 
       // @ts-expect-error
       trees.trees = project;
@@ -523,32 +523,32 @@ describe('Trees', () => {
         id3
       ];
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id1)
         )
       );
-      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree<MockTreeID, MockTreeObject<MockTreeID>>(
-        new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id2),
-          new MockAddress<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
+      const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
+        new MockTreeNode(
+          new MockTreeObject(id2),
+          new MockAddress(
             new Set([
-              new MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3)
+              new MockTreeNode(
+                new MockTreeObject(id3)
               )
             ])
           )
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-        new Map<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+        new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees<MockTreeID, MockTreeObject<MockTreeID>>(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
       let i: number = 0;
 
       for (const o of trees.values()) {
