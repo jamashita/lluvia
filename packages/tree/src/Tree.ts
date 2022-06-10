@@ -1,7 +1,7 @@
 import { ForEach, Nominative, Nullable, Predicate } from '@jamashita/anden-type';
 import { TreeNode } from './TreeNode';
 
-export interface Tree<V> extends Nominative {
+export interface Tree<out V> extends Nominative {
   contains(value: V): boolean;
 
   every(predicate: Predicate<V>): boolean;

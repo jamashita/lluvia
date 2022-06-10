@@ -6,7 +6,7 @@ import { StructurableTreeObject } from './StructurableTreeObject';
 import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode';
 
-export class StructurableTree<K extends TreeID, V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>> {
+export class StructurableTree<out K extends TreeID, out V extends StructurableTreeObject<K>> extends ATree<V, StructurableTreeNode<K, V>> {
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(root: StructurableTreeNode<K, V>): StructurableTree<K, V> {
     return new StructurableTree(root);
   }

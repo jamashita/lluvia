@@ -1,7 +1,7 @@
 import { BinaryFunction, BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 
-export interface ReadonlySequence<V> extends Collection<number, V>, Cloneable<ReadonlySequence<V>> {
+export interface ReadonlySequence<out V> extends Collection<number, V>, Cloneable<ReadonlySequence<V>> {
   filter(predicate: BinaryPredicate<V, number>): ReadonlySequence<V>;
 
   iterator(): IterableIterator<[number, V]>;

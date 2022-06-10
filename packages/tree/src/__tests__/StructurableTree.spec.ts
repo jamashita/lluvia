@@ -1,4 +1,4 @@
-import { ImmutableAddress } from '@jamashita/lluvia-address';
+import { MutableAddress } from '@jamashita/lluvia-address';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
 import { MockTreeID } from '../mock/MockTreeID';
 import { MockTreeObject } from '../mock/MockTreeObject';
@@ -10,11 +10,11 @@ describe('StructurableTree', () => {
     it('delegates its root instance', () => {
       const fn: jest.Mock = jest.fn();
 
-      const root: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject<MockTreeID>(new MockTreeID('mock')));
+      const root: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock')));
 
       root.getTreeID = fn;
 
-      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(root);
+      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(root);
 
       tree.getTreeID();
 
@@ -24,31 +24,31 @@ describe('StructurableTree', () => {
 
   describe('has', () => {
     it('returns true when the value is contained in the tree node', () => {
-      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
           new MockTreeObject(new MockTreeID('mock 1')),
-          ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-            new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+          MutableAddress.ofSet(
+            new Set([
+              StructurableTreeNode.ofValue(
                 new MockTreeObject(new MockTreeID('mock 2')),
-                ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                  new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+                MutableAddress.ofSet(
+                  new Set([
+                    StructurableTreeNode.ofValue(
                       new MockTreeObject(new MockTreeID('mock 3')),
-                      ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                        new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                          StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 4')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-                          StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 5')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+                      MutableAddress.ofSet(
+                        new Set([
+                          StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4'))),
+                          StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 5')))
                         ])
                       )
                     ),
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 6')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 7')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+                    StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 6'))),
+                    StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 7')))
                   ])
                 )
               ),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 8')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 9')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 8'))),
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 9')))
             ])
           )
         )
@@ -66,31 +66,31 @@ describe('StructurableTree', () => {
     });
 
     it('returns false when the value is not contained in the tree node', () => {
-      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
           new MockTreeObject(new MockTreeID('mock 1')),
-          ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-            new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+          MutableAddress.ofSet(
+            new Set([
+              StructurableTreeNode.ofValue(
                 new MockTreeObject(new MockTreeID('mock 2')),
-                ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                  new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+                MutableAddress.ofSet(
+                  new Set([
+                    StructurableTreeNode.ofValue(
                       new MockTreeObject(new MockTreeID('mock 3')),
-                      ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                        new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                          StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 4')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-                          StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 5')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+                      MutableAddress.ofSet(
+                        new Set([
+                          StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4'))),
+                          StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 5')))
                         ])
                       )
                     ),
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 6')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 7')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+                    StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 6'))),
+                    StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 7')))
                   ])
                 )
               ),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 8')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 9')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 8'))),
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 9')))
             ])
           )
         )
@@ -103,8 +103,8 @@ describe('StructurableTree', () => {
 
   describe('toHierarchies', () => {
     it('returns one-length array when no no-children tree given', () => {
-      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 1')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')))
       );
 
       const hierarchies: ClosureTableHierarchies<MockTreeID> = tree.toHierarchies();
@@ -115,13 +115,13 @@ describe('StructurableTree', () => {
     });
 
     it('returns simpler array when simplest Tree given', () => {
-      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
           new MockTreeObject(new MockTreeID('mock 1')),
-          ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-            new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 2')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 3')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+          MutableAddress.ofSet(
+            new Set([
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2'))),
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
             ])
           )
         )
@@ -143,31 +143,31 @@ describe('StructurableTree', () => {
     });
 
     it('returns closure table array when complex Tree given', () => {
-      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+      const tree: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
           new MockTreeObject(new MockTreeID('mock 1')),
-          ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-            new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+          MutableAddress.ofSet(
+            new Set([
+              StructurableTreeNode.ofValue(
                 new MockTreeObject(new MockTreeID('mock 2')),
-                ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                  new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
+                MutableAddress.ofSet(
+                  new Set([
+                    StructurableTreeNode.ofValue(
                       new MockTreeObject(new MockTreeID('mock 3')),
-                      ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                        new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                          StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 4')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-                          StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 5')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+                      MutableAddress.ofSet(
+                        new Set([
+                          StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4'))),
+                          StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 5')))
                         ])
                       )
                     ),
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 6')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 7')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+                    StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 6'))),
+                    StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 7')))
                   ])
                 )
               ),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 8')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>()),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock 9')), ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>())
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 8'))),
+              StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 9')))
             ])
           )
         )
