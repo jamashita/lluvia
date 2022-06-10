@@ -1,7 +1,7 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { ReadonlyProject } from './ReadonlyProject';
 
-export interface Project<in out K, in out V> extends ReadonlyProject<K, V> {
+export interface Project<out K, out V> extends ReadonlyProject<K, V> {
   filter(predicate: BinaryPredicate<V, K>): Project<K, V>;
 
   map<W>(mapping: Mapping<V, W>): Project<K, W>;

@@ -1,7 +1,7 @@
 import { Nullable } from '@jamashita/anden-type';
 import { ImmutableAddress } from '@jamashita/lluvia-address';
 import { ImmutableProject } from '@jamashita/lluvia-project';
-import { ImmutableSequence } from '@jamashita/lluvia-sequence';
+import { MutableSequence } from '@jamashita/lluvia-sequence';
 import { ClosureTable } from '../ClosureTable/ClosureTable';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
 import { MockClosureTableHierarchies } from '../ClosureTable/mock/MockClosureTableHierarchies';
@@ -21,41 +21,41 @@ describe('StructurableTrees', () => {
   });
 
   describe('ofTable', () => {
-    it('returns StructurableTrees.empty<MockTreeID, MockTreeObject<MockTreeID>>() when empty ClosureTable<MockTreeID> and empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.empty<MockTreeObject<MockTreeID>>();
+    it('returns StructurableTrees.empty() when empty ClosureTable<MockTreeID> and empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.empty();
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       expect(trees.size()).toBe(0);
-      expect(trees).not.toBe(StructurableTrees.empty<MockTreeID, MockTreeObject<MockTreeID>>());
+      expect(trees).not.toBe(StructurableTrees.empty());
     });
 
     it('throws TreeError when empty ClosureTable<MockTreeID> given', () => {
       const id: MockTreeID = new MockTreeID('id 1');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.empty<MockTreeID>();
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id)
+      const table: ClosureTable<MockTreeID> = ClosureTable.empty();
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id)
       ]);
 
       expect(() => {
-        StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+        StructurableTrees.ofTable(table, values);
       }).toThrow(TreeError);
     });
 
     it('throws TreeError when empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
       const id: MockTreeID = new MockTreeID('id 1');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id, id)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id, id)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.empty<MockTreeObject<MockTreeID>>();
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.empty();
 
       expect(() => {
-        StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+        StructurableTrees.ofTable(table, values);
       }).toThrow(TreeError);
     });
 
@@ -63,33 +63,33 @@ describe('StructurableTrees', () => {
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id1, id1)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id1, id1)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id2)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id2)
       ]);
 
       expect(() => {
-        StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+        StructurableTrees.ofTable(table, values);
       }).toThrow(TreeError);
     });
 
     it('returns one simplest flat Tree', () => {
       const id: MockTreeID = new MockTreeID('id 1');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id, id)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id, id)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id)
       ]);
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       expect(trees.size()).toBe(1);
 
@@ -105,18 +105,18 @@ describe('StructurableTrees', () => {
       const id1: MockTreeID = new MockTreeID('id 1');
       const id2: MockTreeID = new MockTreeID('id 2');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id1, id1),
-          new MockClosureTableHierarchy<MockTreeID>(id2, id2)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id1, id1),
+          new MockClosureTableHierarchy(id2, id2)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id1),
-        new MockTreeObject<MockTreeID>(id2)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id1),
+        new MockTreeObject(id2)
       ]);
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       expect(trees.size()).toBe(2);
 
@@ -144,34 +144,34 @@ describe('StructurableTrees', () => {
       const id6: MockTreeID = new MockTreeID('id 6');
       const id7: MockTreeID = new MockTreeID('id 7');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id1, id1),
-          new MockClosureTableHierarchy<MockTreeID>(id2, id2),
-          new MockClosureTableHierarchy<MockTreeID>(id3, id3),
-          new MockClosureTableHierarchy<MockTreeID>(id4, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id2),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id3),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id3, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id5, id5),
-          new MockClosureTableHierarchy<MockTreeID>(id6, id6),
-          new MockClosureTableHierarchy<MockTreeID>(id7, id7),
-          new MockClosureTableHierarchy<MockTreeID>(id5, id6),
-          new MockClosureTableHierarchy<MockTreeID>(id5, id7)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id1, id1),
+          new MockClosureTableHierarchy(id2, id2),
+          new MockClosureTableHierarchy(id3, id3),
+          new MockClosureTableHierarchy(id4, id4),
+          new MockClosureTableHierarchy(id1, id2),
+          new MockClosureTableHierarchy(id1, id3),
+          new MockClosureTableHierarchy(id1, id4),
+          new MockClosureTableHierarchy(id3, id4),
+          new MockClosureTableHierarchy(id5, id5),
+          new MockClosureTableHierarchy(id6, id6),
+          new MockClosureTableHierarchy(id7, id7),
+          new MockClosureTableHierarchy(id5, id6),
+          new MockClosureTableHierarchy(id5, id7)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id1),
-        new MockTreeObject<MockTreeID>(id2),
-        new MockTreeObject<MockTreeID>(id3),
-        new MockTreeObject<MockTreeID>(id4),
-        new MockTreeObject<MockTreeID>(id5),
-        new MockTreeObject<MockTreeID>(id6),
-        new MockTreeObject<MockTreeID>(id7)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id1),
+        new MockTreeObject(id2),
+        new MockTreeObject(id3),
+        new MockTreeObject(id4),
+        new MockTreeObject(id5),
+        new MockTreeObject(id6),
+        new MockTreeObject(id7)
       ]);
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       expect(trees.size()).toBe(2);
 
@@ -266,14 +266,14 @@ describe('StructurableTrees', () => {
     it('add one tree into empty trees', () => {
       const id1: MockTreeID = new MockTreeID('tree id 1');
 
-      const tree1: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1)
+      const tree1: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
+          new MockTreeObject(id1)
         )
       );
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofProject<MockTreeID, MockTreeObject<MockTreeID>>(
-        ImmutableProject.empty<MockTreeID, StructurableTree<MockTreeID, MockTreeObject<MockTreeID>>>()
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofProject(
+        ImmutableProject.empty()
       );
 
       expect(trees.isEmpty()).toBe(true);
@@ -305,20 +305,20 @@ describe('StructurableTrees', () => {
         id7
       ];
 
-      const tree1: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id1),
-          ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-            new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id2)
+      const tree1: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
+          new MockTreeObject(id1),
+          ImmutableAddress.ofSet(
+            new Set([
+              StructurableTreeNode.ofValue(
+                new MockTreeObject(id2)
               ),
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id3),
-                ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-                  new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-                    StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-                      new MockTreeObject<MockTreeID>(id4)
+              StructurableTreeNode.ofValue(
+                new MockTreeObject(id3),
+                ImmutableAddress.ofSet(
+                  new Set([
+                    StructurableTreeNode.ofValue(
+                      new MockTreeObject(id4)
                     )
                   ])
                 )
@@ -327,27 +327,27 @@ describe('StructurableTrees', () => {
           )
         )
       );
-      const tree2: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id5),
-          ImmutableAddress.ofSet<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>(
-            new Set<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>([
-              StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-                new MockTreeObject<MockTreeID>(id6)
+      const tree2: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
+          new MockTreeObject(id5),
+          ImmutableAddress.ofSet(
+            new Set([
+              StructurableTreeNode.ofValue(
+                new MockTreeObject(id6)
               )
             ])
           )
         )
       );
-      const tree3: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of<MockTreeID, MockTreeObject<MockTreeID>>(
-        StructurableTreeNode.ofValue<MockTreeID, MockTreeObject<MockTreeID>>(
-          new MockTreeObject<MockTreeID>(id7)
+      const tree3: StructurableTree<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTree.of(
+        StructurableTreeNode.ofValue(
+          new MockTreeObject(id7)
         )
       );
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofProject<MockTreeID, MockTreeObject<MockTreeID>>(
-        ImmutableProject.ofMap<MockTreeID, StructurableTree<MockTreeID, MockTreeObject<MockTreeID>>>(
-          new Map<MockTreeID, StructurableTree<MockTreeID, MockTreeObject<MockTreeID>>>([
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofProject(
+        ImmutableProject.ofMap(
+          new Map([
             [tree1.getTreeID(), tree1],
             [tree2.getTreeID(), tree2]
           ])
@@ -376,28 +376,28 @@ describe('StructurableTrees', () => {
       const id5: MockTreeID = new MockTreeID('id 5');
       const id6: MockTreeID = new MockTreeID('id 6');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id1, id1),
-          new MockClosureTableHierarchy<MockTreeID>(id2, id2),
-          new MockClosureTableHierarchy<MockTreeID>(id3, id3),
-          new MockClosureTableHierarchy<MockTreeID>(id4, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id2),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id3),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id3, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id5, id5)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id1, id1),
+          new MockClosureTableHierarchy(id2, id2),
+          new MockClosureTableHierarchy(id3, id3),
+          new MockClosureTableHierarchy(id4, id4),
+          new MockClosureTableHierarchy(id1, id2),
+          new MockClosureTableHierarchy(id1, id3),
+          new MockClosureTableHierarchy(id1, id4),
+          new MockClosureTableHierarchy(id3, id4),
+          new MockClosureTableHierarchy(id5, id5)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id1),
-        new MockTreeObject<MockTreeID>(id2),
-        new MockTreeObject<MockTreeID>(id3),
-        new MockTreeObject<MockTreeID>(id4),
-        new MockTreeObject<MockTreeID>(id5)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id1),
+        new MockTreeObject(id2),
+        new MockTreeObject(id3),
+        new MockTreeObject(id4),
+        new MockTreeObject(id5)
       ]);
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       expect(trees.has(id1)).toBe(true);
       expect(trees.has(id2)).toBe(true);
@@ -412,15 +412,15 @@ describe('StructurableTrees', () => {
     it('returns one-length array when no no-children one tree given', () => {
       const id1: MockTreeID = new MockTreeID('id 1');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id1, id1)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id1, id1)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id1)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id1)
       ]);
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       const hierarchies: ClosureTableHierarchies<MockTreeID> = trees.toHierarchies();
 
@@ -436,27 +436,27 @@ describe('StructurableTrees', () => {
       const id4: MockTreeID = new MockTreeID('id 4');
       const id5: MockTreeID = new MockTreeID('id 5');
 
-      const table: ClosureTable<MockTreeID> = ClosureTable.of<MockTreeID>(
-        new MockClosureTableHierarchies<MockTreeID>(
-          new MockClosureTableHierarchy<MockTreeID>(id1, id1),
-          new MockClosureTableHierarchy<MockTreeID>(id2, id2),
-          new MockClosureTableHierarchy<MockTreeID>(id3, id3),
-          new MockClosureTableHierarchy<MockTreeID>(id4, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id2),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id3),
-          new MockClosureTableHierarchy<MockTreeID>(id1, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id3, id4),
-          new MockClosureTableHierarchy<MockTreeID>(id5, id5)
+      const table: ClosureTable<MockTreeID> = ClosureTable.of(
+        new MockClosureTableHierarchies(
+          new MockClosureTableHierarchy(id1, id1),
+          new MockClosureTableHierarchy(id2, id2),
+          new MockClosureTableHierarchy(id3, id3),
+          new MockClosureTableHierarchy(id4, id4),
+          new MockClosureTableHierarchy(id1, id2),
+          new MockClosureTableHierarchy(id1, id3),
+          new MockClosureTableHierarchy(id1, id4),
+          new MockClosureTableHierarchy(id3, id4),
+          new MockClosureTableHierarchy(id5, id5)
         )
       );
-      const values: ImmutableSequence<MockTreeObject<MockTreeID>> = ImmutableSequence.ofArray<MockTreeObject<MockTreeID>>([
-        new MockTreeObject<MockTreeID>(id1),
-        new MockTreeObject<MockTreeID>(id2),
-        new MockTreeObject<MockTreeID>(id3),
-        new MockTreeObject<MockTreeID>(id4),
-        new MockTreeObject<MockTreeID>(id5)
+      const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.ofArray([
+        new MockTreeObject(id1),
+        new MockTreeObject(id2),
+        new MockTreeObject(id3),
+        new MockTreeObject(id4),
+        new MockTreeObject(id5)
       ]);
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable<MockTreeID, MockTreeObject<MockTreeID>>(table, values);
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofTable(table, values);
 
       const hierarchies: ClosureTableHierarchies<MockTreeID> = trees.toHierarchies();
 

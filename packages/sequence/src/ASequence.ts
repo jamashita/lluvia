@@ -12,7 +12,7 @@ import {
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Sequence } from './Sequence';
 
-export abstract class ASequence<in out V> extends Quantity<number, V> implements Sequence<V> {
+export abstract class ASequence<out V> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
 
   protected constructor(sequence: Array<V>) {

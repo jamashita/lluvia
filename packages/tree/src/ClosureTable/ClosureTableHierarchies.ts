@@ -7,7 +7,7 @@ import { TreeID } from '../TreeID';
 import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy';
 import { TreeIDFactory } from './TreeIDFactory';
 
-export class ClosureTableHierarchies<K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
+export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
   private readonly hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>;
 
   private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies(ImmutableSequence.empty());

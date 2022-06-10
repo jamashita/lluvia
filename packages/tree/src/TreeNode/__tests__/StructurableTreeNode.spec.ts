@@ -1,16 +1,16 @@
-import { ImmutableAddress, MockAddress, MutableAddress } from '@jamashita/lluvia-address';
+import { MockAddress, MutableAddress } from '@jamashita/lluvia-address';
 import { MockTreeID } from '../../mock/MockTreeID';
 import { MockTreeObject } from '../../mock/MockTreeObject';
 import { StructurableTreeNode } from '../StructurableTreeNode';
 
 describe('StructurableTreeNode', () => {
   describe('of', () => {
-    it('returns ImmutableAddress.empty() when empty children given', () => {
+    it('returns MutableAddress.empty() when empty children given', () => {
       const node01: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')), MutableAddress.empty());
       const node02: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')), new MockAddress(new Set()));
 
-      expect(node01.getChildren()).toBe(ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>());
-      expect(node02.getChildren()).toBe(ImmutableAddress.empty<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>>());
+      expect(node01.getChildren().isEmpty()).toBe(true);
+      expect(node02.getChildren().isEmpty()).toBe(true);
     });
   });
 
@@ -18,10 +18,10 @@ describe('StructurableTreeNode', () => {
     it('copies shallowly', () => {
       const node01: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -45,7 +45,7 @@ describe('StructurableTreeNode', () => {
 
       const node01: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(id1),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(id2))
           ])
@@ -53,7 +53,7 @@ describe('StructurableTreeNode', () => {
       );
       const node02: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(id3),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(id4))
           ])
@@ -64,7 +64,7 @@ describe('StructurableTreeNode', () => {
 
       expect(node01.size()).toBe(4);
 
-      const children: ImmutableAddress<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = node01.getChildren();
+      const children: MutableAddress<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = node01.getChildren();
       let i: number = 0;
 
       expect(children.size()).toBe(2);
@@ -100,7 +100,7 @@ describe('StructurableTreeNode', () => {
       );
       const node02: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(id3),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(id4))
           ])
@@ -111,7 +111,7 @@ describe('StructurableTreeNode', () => {
 
       expect(node01.size()).toBe(3);
 
-      const children: ImmutableAddress<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = node01.getChildren();
+      const children: MutableAddress<StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = node01.getChildren();
       let i: number = 0;
 
       expect(children.size()).toBe(1);
@@ -137,10 +137,10 @@ describe('StructurableTreeNode', () => {
     it('returns the value itself when the TreeNode value matches', () => {
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -157,10 +157,10 @@ describe('StructurableTreeNode', () => {
     it('returns children\'s value when the TreeNode\'s children value matches', () => {
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -180,10 +180,10 @@ describe('StructurableTreeNode', () => {
     it('returns null when the TreeNode does not have such value', () => {
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -202,9 +202,9 @@ describe('StructurableTreeNode', () => {
     it('returns value\'s TreeID', () => {
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(new Set([
+        MutableAddress.ofSet(new Set([
           StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-            ImmutableAddress.ofSet(new Set([
+            MutableAddress.ofSet(new Set([
               StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
             ]))),
           StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4')))
@@ -219,9 +219,9 @@ describe('StructurableTreeNode', () => {
     it('returns true when the value is contained in the tree node', () => {
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(new Set([
+        MutableAddress.ofSet(new Set([
           StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-            ImmutableAddress.ofSet(new Set([
+            MutableAddress.ofSet(new Set([
               StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
             ]))),
           StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4')))
@@ -237,9 +237,9 @@ describe('StructurableTreeNode', () => {
     it('returns false when the value is not contained in the tree node', () => {
       const node: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(new Set([
+        MutableAddress.ofSet(new Set([
           StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-            ImmutableAddress.ofSet(new Set([
+            MutableAddress.ofSet(new Set([
               StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
             ]))),
           StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4')))

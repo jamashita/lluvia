@@ -4,7 +4,7 @@ import { SerializableTreeObject } from '../SerializableTreeObject';
 import { StructurableTreeObject } from '../StructurableTreeObject';
 import { TreeID } from '../TreeID';
 
-export class MockTreeObject<K extends TreeID> extends ValueObject implements StructurableTreeObject<K>, SerializableTreeObject {
+export class MockTreeObject<out K extends TreeID> extends ValueObject implements StructurableTreeObject<K>, SerializableTreeObject {
   private readonly id: K;
 
   public constructor(id: K) {

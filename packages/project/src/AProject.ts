@@ -3,7 +3,7 @@ import { Ambiguous, BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nulla
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Project } from './Project';
 
-export abstract class AProject<in out K, in out V> extends Quantity<K, V> implements Project<K, V> {
+export abstract class AProject<out K, out V> extends Quantity<K, V> implements Project<K, V> {
   protected readonly project: Map<K | string, [K, V]>;
 
   protected constructor(project: Map<K | string, [K, V]>) {

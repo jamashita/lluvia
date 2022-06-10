@@ -1,4 +1,4 @@
-import { ImmutableAddress } from '@jamashita/lluvia-address';
+import { MutableAddress } from '@jamashita/lluvia-address';
 import { MockTreeID } from '../../mock/MockTreeID';
 import { MockTreeObject } from '../../mock/MockTreeObject';
 import { MockTreeNode } from '../mock/MockTreeNode';
@@ -8,10 +8,10 @@ describe('ATreeNode', () => {
     it('returns true if TreeNode itself has the value', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -26,10 +26,10 @@ describe('ATreeNode', () => {
     it('returns true if TreeNode\'s children have the value', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -45,10 +45,10 @@ describe('ATreeNode', () => {
     it('returns true if TreeNode does not contain such value', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -66,7 +66,7 @@ describe('ATreeNode', () => {
       const node01: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')));
       const node02: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))
           ])
@@ -89,7 +89,7 @@ describe('ATreeNode', () => {
       const node03: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')));
       const node04: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))
           ])
@@ -97,7 +97,7 @@ describe('ATreeNode', () => {
       );
       const node05: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 3')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))
           ])
@@ -105,7 +105,7 @@ describe('ATreeNode', () => {
       );
       const node06: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 4')))
           ])
@@ -113,7 +113,7 @@ describe('ATreeNode', () => {
       );
       const node07: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2'))),
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
@@ -122,7 +122,7 @@ describe('ATreeNode', () => {
       );
       const node08: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))
           ])
@@ -147,10 +147,10 @@ describe('ATreeNode', () => {
     it('returns the value itself when the TreeNode value matches', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -167,10 +167,10 @@ describe('ATreeNode', () => {
     it('returns children\'s value when the TreeNode\'s children value matches', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -190,10 +190,10 @@ describe('ATreeNode', () => {
     it('returns null when the TreeNode does not have such value', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -212,7 +212,7 @@ describe('ATreeNode', () => {
     it('returns false if it owns children', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))
           ])
@@ -241,10 +241,10 @@ describe('ATreeNode', () => {
     it('returns self + all children\'s number if TreeNode have children', () => {
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
                 ])
@@ -262,7 +262,7 @@ describe('ATreeNode', () => {
       const node01: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')));
       const node02: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))
           ])
@@ -270,9 +270,9 @@ describe('ATreeNode', () => {
       );
       const node03: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         new MockTreeObject(new MockTreeID('mock 1')),
-        ImmutableAddress.ofSet(new Set([
+        MutableAddress.ofSet(new Set([
           new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')),
-            ImmutableAddress.ofSet(new Set([
+            MutableAddress.ofSet(new Set([
               new MockTreeNode(new MockTreeObject(new MockTreeID('mock 3')))
             ])))
         ]))
@@ -307,10 +307,10 @@ describe('ATreeNode', () => {
 
       const node: MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = new MockTreeNode(
         value1,
-        ImmutableAddress.ofSet(
+        MutableAddress.ofSet(
           new Set([
             new MockTreeNode(value2,
-              ImmutableAddress.ofSet(
+              MutableAddress.ofSet(
                 new Set([
                   new MockTreeNode(value3)
                 ])

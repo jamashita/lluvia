@@ -5,7 +5,7 @@ import { SerializableTree } from './SerializableTree';
 import { SerializableTreeObject } from './SerializableTreeObject';
 import { SerializableTreeNode, TreeNodeJSON } from './TreeNode';
 
-export class SerializableTrees<V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
+export class SerializableTrees<out V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
   public static empty<V extends SerializableTreeObject>(): SerializableTrees<V> {
     return SerializableTrees.ofAddress(ImmutableAddress.empty());
   }

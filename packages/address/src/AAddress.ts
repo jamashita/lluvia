@@ -3,7 +3,7 @@ import { BinaryPredicate, ForEach, Mapping, Nullable } from '@jamashita/anden-ty
 import { Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address';
 
-export abstract class AAddress<in out V> extends Quantity<void, V> implements Address<V> {
+export abstract class AAddress<out V> extends Quantity<void, V> implements Address<V> {
   protected readonly address: Map<V | string, V>;
 
   protected constructor(address: Map<V | string, V>) {

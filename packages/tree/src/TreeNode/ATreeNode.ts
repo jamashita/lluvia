@@ -1,21 +1,23 @@
 import { Objet } from '@jamashita/anden-object';
 import { isEqualable, Kind, Nullable, Predicate } from '@jamashita/anden-type';
-import { ImmutableAddress } from '@jamashita/lluvia-address';
+import { MutableAddress } from '@jamashita/lluvia-address';
 import { TreeNode } from './TreeNode';
 
-export abstract class ATreeNode<V, T extends ATreeNode<V, T>> extends Objet implements TreeNode<V> {
+export abstract class ATreeNode<out V, in out T extends ATreeNode<V, T>> extends Objet implements TreeNode<V> {
   protected readonly value: V;
-  protected children: ImmutableAddress<T>;
+  protected children: MutableAddress<T>;
 
-  protected constructor(value: V, children: ImmutableAddress<T>) {
+  protected constructor(value: V, children: MutableAddress<T>) {
     super();
     this.value = value;
     this.children = children;
   }
 
-  public abstract append(node: T): T;
+  protected abstract forge(node: TreeNode<V>): T;
 
-  protected abstract forge(node: ATreeNode<V, T>): T;
+  public append(node: T): void {
+    this.children.add(node);
+  }
 
   public contains(value: V): boolean {
     if (this.valueEquals(value)) {
@@ -57,7 +59,7 @@ export abstract class ATreeNode<V, T extends ATreeNode<V, T>> extends Objet impl
     return null;
   }
 
-  public getChildren(): ImmutableAddress<T> {
+  public getChildren(): MutableAddress<T> {
     return this.children;
   }
 
@@ -117,7 +119,7 @@ export abstract class ATreeNode<V, T extends ATreeNode<V, T>> extends Objet impl
   private valuesInternal(values: Array<V>): void {
     values.push(this.value);
 
-    this.getChildren().forEach((child: T) => {
+    this.children.forEach((child: T) => {
       child.valuesInternal(values);
     });
   }

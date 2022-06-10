@@ -1,25 +1,28 @@
-import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { Address, MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { SerializableTreeObject } from '../../SerializableTreeObject';
 import { StructurableTreeObject } from '../../StructurableTreeObject';
 import { TreeID } from '../../TreeID';
 import { ATreeNode } from '../ATreeNode';
+import { TreeNode } from '../TreeNode';
 
-interface MockTreeObject<K extends TreeID> extends StructurableTreeObject<K>, SerializableTreeObject {
+interface MockTreeObject<out K extends TreeID> extends StructurableTreeObject<K>, SerializableTreeObject {
   // NOOP
 }
 
-export class MockTreeNode<K extends TreeID, V extends MockTreeObject<K>> extends ATreeNode<V, MockTreeNode<K, V>> {
-  public constructor(value: V, children: ReadonlyAddress<MockTreeNode<K, V>> = ImmutableAddress.empty()) {
-    super(value, ImmutableAddress.of(children));
+export class MockTreeNode<out K extends TreeID, in out V extends MockTreeObject<K>> extends ATreeNode<V, MockTreeNode<K, V>> {
+  public constructor(value: V, children: ReadonlyAddress<MockTreeNode<K, V>> = MutableAddress.empty()) {
+    super(value, MutableAddress.of(children));
   }
 
-  public append(node: MockTreeNode<K, V>): this {
-    this.children = this.children.add(node);
+  protected forge(node: TreeNode<V>): MockTreeNode<K, V> {
+    if (node instanceof MockTreeNode) {
+      return node as MockTreeNode<K, V>;
+    }
 
-    return this;
-  }
+    const children: Address<MockTreeNode<K, V>> = node.getChildren().map((t: TreeNode<V>): MockTreeNode<K, V> => {
+      return this.forge(t);
+    });
 
-  protected forge(node: ATreeNode<V, MockTreeNode<K, V>>): MockTreeNode<K, V> {
-    return new MockTreeNode(node.getValue(), node.getChildren());
+    return new MockTreeNode(node.getValue(), children);
   }
 }

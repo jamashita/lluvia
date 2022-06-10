@@ -10,7 +10,7 @@ import { TreeError } from './TreeError';
 import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode';
 
-export class StructurableTrees<K extends TreeID, V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>> {
+export class StructurableTrees<out K extends TreeID, out V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>> {
   public static empty<K extends TreeID, V extends StructurableTreeObject<K>>(): StructurableTrees<K, V> {
     return StructurableTrees.ofProject(ImmutableProject.empty());
   }

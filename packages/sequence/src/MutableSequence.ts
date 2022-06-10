@@ -2,7 +2,7 @@ import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type'
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 
-export class MutableSequence<in out V> extends ASequence<V> {
+export class MutableSequence<out V> extends ASequence<V> {
   public static empty<V>(): MutableSequence<V> {
     return MutableSequence.ofArray([] as Array<V>);
   }

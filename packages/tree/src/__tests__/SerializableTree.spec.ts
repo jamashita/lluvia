@@ -8,11 +8,11 @@ describe('SerializableTree', () => {
     it('delegates its root instance', () => {
       const fn: jest.Mock = jest.fn();
 
-      const root: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue<MockTreeObject<MockTreeID>>(new MockTreeObject(new MockTreeID('mock')));
+      const root: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock')));
 
       root.toJSON = fn;
 
-      const tree: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of<MockTreeObject<MockTreeID>>(root);
+      const tree: SerializableTree<MockTreeObject<MockTreeID>> = SerializableTree.of(root);
 
       tree.toJSON();
 

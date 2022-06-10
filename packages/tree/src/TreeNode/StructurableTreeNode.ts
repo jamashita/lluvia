@@ -1,33 +1,32 @@
-import { ImmutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
+import { Address, MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { StructurableTreeObject } from '../StructurableTreeObject';
 import { TreeID } from '../TreeID';
 import { ATreeNode } from './ATreeNode';
+import { TreeNode } from './TreeNode';
 
-export class StructurableTreeNode<K extends TreeID, V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>> {
+export class StructurableTreeNode<out K extends TreeID, out V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>> {
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
     return StructurableTreeNode.ofValue<K, V>(node.getValue(), node.getChildren());
   }
 
-  public static ofValue<K extends TreeID, V extends StructurableTreeObject<K>>(value: V, children?: ReadonlyAddress<StructurableTreeNode<K, V>>): StructurableTreeNode<K, V> {
+  public static ofValue<K extends TreeID, V extends StructurableTreeObject<K>>(value: V, children: ReadonlyAddress<StructurableTreeNode<K, V>> = MutableAddress.empty()): StructurableTreeNode<K, V> {
     return new StructurableTreeNode(value, children);
   }
 
-  protected constructor(value: V, children: ReadonlyAddress<StructurableTreeNode<K, V>> = ImmutableAddress.empty<StructurableTreeNode<K, V>>()) {
-    super(value, ImmutableAddress.of(children));
+  protected constructor(value: V, children: ReadonlyAddress<StructurableTreeNode<K, V>>) {
+    super(value, MutableAddress.of(children));
   }
 
-  public append(node: StructurableTreeNode<K, V>): this {
-    this.children = this.children.add(node);
-
-    return this;
-  }
-
-  protected forge(node: ATreeNode<V, StructurableTreeNode<K, V>>): StructurableTreeNode<K, V> {
+  protected forge(node: TreeNode<V>): StructurableTreeNode<K, V> {
     if (node instanceof StructurableTreeNode) {
       return node as StructurableTreeNode<K, V>;
     }
 
-    return StructurableTreeNode.ofValue(node.getValue(), node.getChildren());
+    const children: Address<StructurableTreeNode<K, V>> = node.getChildren().map((t: TreeNode<V>): StructurableTreeNode<K, V> => {
+      return this.forge(t);
+    });
+
+    return StructurableTreeNode.ofValue(node.getValue(), children);
   }
 
   public getTreeID(): K {
