@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-sequence-v2.14.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.13.0...@jamashita/lluvia-sequence-v2.14.0) (2022-06-10)
+
+
+### Features
+
+* 🎸 packages updated ([2f26399](https://github.com/jamashita/lluvia/commit/2f263996d9e1944113e493742bde40662d8e5244))
+
 # [@jamashita/lluvia-sequence-v2.13.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.12.0...@jamashita/lluvia-sequence-v2.13.0) (2022-06-10)
 
 
