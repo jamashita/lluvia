@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/lluvia-sequence",
-  "version": "2.13.0",
+  "version": "2.15.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -20,21 +20,18 @@
     "build": "yarn clean && concurrently \"npm:build:*\"",
     "build:cjs": "tsc -b tsconfig.cjs.json",
     "build:esm": "tsc -b tsconfig.esm.json",
-    "clean": "concurrently \"npm:clean:*\"",
-    "clean:coverage": "rimraf coverage",
-    "clean:dist": "rimraf dist",
-    "clean:others": "rimraf *.log && rimraf tsconfig.build.tsbuildinfo"
+    "clean": "rimraf dist"
   },
   "dependencies": {
-    "@jamashita/anden-object": "2.19.0",
-    "@jamashita/anden-type": "2.10.0",
+    "@jamashita/anden-object": "2.20.0",
+    "@jamashita/anden-type": "2.11.0",
     "@jamashita/lluvia-collection": "^2.13.0"
   },
   "devDependencies": {
-    "@jamashita/anden-error": "2.16.0"
+    "@jamashita/anden-error": "2.17.0"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "engineStrict": true,
   "publishConfig": {
