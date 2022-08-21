@@ -1,3 +1,11 @@
+# [@jamashita/lluvia-sequence-v2.15.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.14.0...@jamashita/lluvia-sequence-v2.15.0) (2022-06-24)
+
+
+### Features
+
+* 🎸 packages updated ([feed05a](https://github.com/jamashita/lluvia/commit/feed05a1ecfe44d537ba28adecc465273bc58c95))
+* 🎸 remove converage scripts ([665b385](https://github.com/jamashita/lluvia/commit/665b385e9e72f9f9f4ae94dcba862dc87fb5733e))
+
 # [@jamashita/lluvia-sequence-v2.14.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.13.0...@jamashita/lluvia-sequence-v2.14.0) (2022-06-10)
 
 
