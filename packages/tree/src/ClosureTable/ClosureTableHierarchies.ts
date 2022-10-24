@@ -1,7 +1,7 @@
 import { BinaryPredicate, ForEach, JSONable, Mapping, Nullable } from '@jamashita/anden-type';
 import { ReadonlyAddress } from '@jamashita/lluvia-address';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
-import { ReadonlyProject } from '@jamashita/lluvia-project';
+import { ReadonlyDictionary } from '@jamashita/lluvia-dictionary';
 import { ImmutableSequence } from '@jamashita/lluvia-sequence';
 import { TreeID } from '../TreeID';
 import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy';
@@ -16,7 +16,7 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
     return ClosureTableHierarchies.EMPTY as ClosureTableHierarchies<K>;
   }
 
-  public static of<K extends TreeID>(hierarchies: ReadonlyProject<K, ReadonlyAddress<K>>): ClosureTableHierarchies<K> {
+  public static of<K extends TreeID>(hierarchies: ReadonlyDictionary<K, ReadonlyAddress<K>>): ClosureTableHierarchies<K> {
     const array: Array<ClosureTableHierarchy<K>> = [];
 
     hierarchies.forEach((offsprings: ReadonlyAddress<K>, ancestor: K) => {

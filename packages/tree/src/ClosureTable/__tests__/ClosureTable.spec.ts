@@ -1,5 +1,5 @@
 import { MockAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { MockProject, Project } from '@jamashita/lluvia-project';
+import { Dictionary, MockDictionary } from '@jamashita/lluvia-dictionary';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
 import { MockTreeID } from '../../mock/MockTreeID';
 import { ClosureTable } from '../ClosureTable';
@@ -28,7 +28,7 @@ describe('ClosureTable', () => {
   describe('contains', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.contains = fn;
 
@@ -57,7 +57,7 @@ describe('ClosureTable', () => {
 
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.equals = fn;
 
@@ -74,7 +74,7 @@ describe('ClosureTable', () => {
   describe('every', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.every = fn;
 
@@ -93,7 +93,7 @@ describe('ClosureTable', () => {
   describe('filter', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.filter = fn;
 
@@ -112,7 +112,7 @@ describe('ClosureTable', () => {
   describe('find', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.find = fn;
 
@@ -131,7 +131,7 @@ describe('ClosureTable', () => {
   describe('forEach', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.forEach = fn;
 
@@ -150,7 +150,7 @@ describe('ClosureTable', () => {
   describe('get', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.get = fn;
 
@@ -167,7 +167,7 @@ describe('ClosureTable', () => {
   describe('isEmpty', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.isEmpty = fn;
 
@@ -231,7 +231,7 @@ describe('ClosureTable', () => {
   describe('map', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.map = fn;
 
@@ -250,7 +250,7 @@ describe('ClosureTable', () => {
   describe('size', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.size = fn;
 
@@ -267,7 +267,7 @@ describe('ClosureTable', () => {
   describe('some', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.some = fn;
 
@@ -307,7 +307,7 @@ describe('ClosureTable', () => {
   describe('toString', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.toString = fn;
 
@@ -324,7 +324,7 @@ describe('ClosureTable', () => {
   describe('values', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const project: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
       project.values = fn;
 

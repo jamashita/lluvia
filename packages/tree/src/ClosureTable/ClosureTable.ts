@@ -1,16 +1,16 @@
 import { BinaryPredicate, ForEach, Kind, Mapping, Nullable } from '@jamashita/anden-type';
 import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
 import { Quantity } from '@jamashita/lluvia-collection';
-import { ImmutableProject, MutableProject } from '@jamashita/lluvia-project';
+import { ImmutableDictionary, MutableDictionary } from '@jamashita/lluvia-dictionary';
 import { ImmutableSequence } from '@jamashita/lluvia-sequence';
 import { TreeID } from '../TreeID';
 import { ClosureTableHierarchies } from './ClosureTableHierarchies';
 import { ClosureTableHierarchy } from './ClosureTableHierarchy';
 
 export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
-  private readonly table: ImmutableProject<K, ReadonlyAddress<K>>;
+  private readonly table: ImmutableDictionary<K, ReadonlyAddress<K>>;
 
-  private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable(ImmutableProject.empty());
+  private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable(ImmutableDictionary.empty());
 
   public static empty<K extends TreeID>(): ClosureTable<K> {
     return ClosureTable.EMPTY as ClosureTable<K>;
@@ -21,7 +21,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
       return ClosureTable.empty();
     }
 
-    const project: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
+    const project: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
       const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
@@ -38,10 +38,10 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return new ClosureTable(ImmutableProject.of(project));
+    return new ClosureTable(ImmutableDictionary.of(project));
   }
 
-  protected constructor(table: ImmutableProject<K, ReadonlyAddress<K>>) {
+  protected constructor(table: ImmutableDictionary<K, ReadonlyAddress<K>>) {
     super();
     this.table = table;
   }
@@ -65,7 +65,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
     return this.table.every(predicate);
   }
 
-  public filter(predicate: BinaryPredicate<ReadonlyAddress<K>, K>): ImmutableProject<K, ReadonlyAddress<K>> {
+  public filter(predicate: BinaryPredicate<ReadonlyAddress<K>, K>): ImmutableDictionary<K, ReadonlyAddress<K>> {
     return this.table.filter(predicate);
   }
 
@@ -89,7 +89,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
     return this.table.iterator();
   }
 
-  public map<W>(mapping: Mapping<ReadonlyAddress<K>, W>): ImmutableProject<K, W> {
+  public map<W>(mapping: Mapping<ReadonlyAddress<K>, W>): ImmutableDictionary<K, W> {
     return this.table.map(mapping);
   }
 

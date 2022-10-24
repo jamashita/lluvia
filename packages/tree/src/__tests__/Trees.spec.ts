@@ -1,7 +1,7 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable } from '@jamashita/anden-type';
 import { MockAddress } from '@jamashita/lluvia-address';
-import { MockProject } from '@jamashita/lluvia-project';
+import { MockDictionary } from '@jamashita/lluvia-dictionary';
 import { MockTree } from '../mock/MockTree';
 import { MockTreeID } from '../mock/MockTreeID';
 import { MockTreeObject } from '../mock/MockTreeObject';
@@ -20,7 +20,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -45,7 +45,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -64,7 +64,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -75,7 +75,7 @@ describe('Trees', () => {
       expect(trees.equals(new MockValueObject('mock'))).toBe(false);
     });
 
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -85,7 +85,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -98,7 +98,7 @@ describe('Trees', () => {
       project.equals = fn;
 
       trees.equals(new MockTrees(
-        new MockProject(
+        new MockDictionary(
           new Map([
             [id, new MockTree(new MockTreeNode(new MockTreeObject(id)))]
           ])
@@ -133,7 +133,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -172,7 +172,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -213,7 +213,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -252,7 +252,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -298,7 +298,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -317,7 +317,7 @@ describe('Trees', () => {
   });
 
   describe('get', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -327,7 +327,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -346,7 +346,7 @@ describe('Trees', () => {
   });
 
   describe('isEmpty', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -356,7 +356,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -375,7 +375,7 @@ describe('Trees', () => {
   });
 
   describe('size', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -385,7 +385,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -427,7 +427,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -466,7 +466,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -484,7 +484,7 @@ describe('Trees', () => {
   });
 
   describe('toString', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -494,7 +494,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -541,7 +541,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const project: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
