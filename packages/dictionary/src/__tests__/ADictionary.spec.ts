@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { BinaryPredicate, Nullable } from '@jamashita/anden-type';
-import { MockProject } from '../mock/MockProject';
+import { MockDictionary } from '../mock/MockDictionary';
 
 describe('AProject', () => {
   describe('contains', () => {
@@ -10,11 +10,11 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
 
-      expect(project.contains(value2)).toBe(false);
+      expect(dictionary.contains(value2)).toBe(false);
     });
 
     it('returns true if the value exists', () => {
@@ -23,12 +23,12 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
 
-      expect(project.contains(value1)).toBe(true);
-      expect(project.contains(value2)).toBe(true);
+      expect(dictionary.contains(value1)).toBe(true);
+      expect(dictionary.contains(value2)).toBe(true);
     });
   });
 
@@ -38,11 +38,11 @@ describe('AProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key, value]])
       );
 
-      expect(project.equals(project)).toBe(true);
+      expect(dictionary.equals(dictionary)).toBe(true);
     });
 
     it('returns false if the size is different', () => {
@@ -52,25 +52,25 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
 
-      expect(project1.equals(project2)).toBe(false);
+      expect(dictionary1.equals(dictionary2)).toBe(false);
     });
 
     it('returns false when the different class instance given', () => {
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary<MockValueObject<number>, MockValueObject<number>>(
         new Map()
       );
 
-      expect(project.equals(new MockValueObject('mock'))).toBe(false);
+      expect(dictionary.equals(new MockValueObject('mock'))).toBe(false);
     });
 
     it('returns false if the values are different', () => {
@@ -80,20 +80,20 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value1]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
 
-      expect(project1.equals(project2)).toBe(false);
+      expect(dictionary1.equals(dictionary2)).toBe(false);
     });
 
     it('returns false if the keys are different', () => {
@@ -104,20 +104,20 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key3, value2]
         ])
       );
 
-      expect(project1.equals(project2)).toBe(false);
+      expect(dictionary1.equals(dictionary2)).toBe(false);
     });
 
     it('returns true even if the order is different', () => {
@@ -127,20 +127,20 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key2, value2],
           [key1, value1]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
 
-      expect(project1.equals(project2)).toBe(true);
+      expect(dictionary1.equals(dictionary2)).toBe(true);
     });
 
     it('returns true if the same and the order is the same', () => {
@@ -150,20 +150,20 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
 
-      expect(project1.equals(project2)).toBe(true);
+      expect(dictionary1.equals(dictionary2)).toBe(true);
     });
   });
 
@@ -183,14 +183,14 @@ describe('AProject', () => {
         [key3, value3]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map(kv)
       );
 
-      const every1: boolean = project.every((_: MockValueObject<number>, key: MockValueObject<number>) => {
+      const every1: boolean = dictionary.every((_: MockValueObject<number>, key: MockValueObject<number>) => {
         return key.get() % 3 === 0;
       });
-      const every2: boolean = project.every((value: MockValueObject<number>) => {
+      const every2: boolean = dictionary.every((value: MockValueObject<number>) => {
         return value.get() % 2 === 0;
       });
 
@@ -210,7 +210,7 @@ describe('AProject', () => {
       const value4: MockValueObject<number> = new MockValueObject(8);
       const value5: MockValueObject<number> = new MockValueObject(3);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2],
@@ -218,7 +218,7 @@ describe('AProject', () => {
           [key4, value4]
         ])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value2],
           [key2, value1],
@@ -226,7 +226,7 @@ describe('AProject', () => {
           [key4, value4]
         ])
       );
-      const project3: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary3: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value2],
           [key2, value3],
@@ -234,7 +234,7 @@ describe('AProject', () => {
           [key4, value4]
         ])
       );
-      const project4: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary4: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value2],
           [key2, value3],
@@ -242,7 +242,7 @@ describe('AProject', () => {
           [key4, value1]
         ])
       );
-      const project5: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary5: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value5],
@@ -250,7 +250,7 @@ describe('AProject', () => {
           [key4, value4]
         ])
       );
-      const project6: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary6: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2],
@@ -265,12 +265,12 @@ describe('AProject', () => {
         return value.get() % 2 === 0;
       };
 
-      const every1: boolean = project1.every(predicate);
-      const every2: boolean = project2.every(predicate);
-      const every3: boolean = project3.every(predicate);
-      const every4: boolean = project4.every(predicate);
-      const every5: boolean = project5.every(predicate);
-      const every6: boolean = project6.every(predicate);
+      const every1: boolean = dictionary1.every(predicate);
+      const every2: boolean = dictionary2.every(predicate);
+      const every3: boolean = dictionary3.every(predicate);
+      const every4: boolean = dictionary4.every(predicate);
+      const every5: boolean = dictionary5.every(predicate);
+      const every6: boolean = dictionary6.every(predicate);
 
       expect(every1).toBe(false);
       expect(every2).toBe(false);
@@ -293,26 +293,26 @@ describe('AProject', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(new Map([
+      const dictionary: MockDictionary<MockValueObject<string>, MockValueObject<number>> = new MockDictionary(new Map([
         [key1, value1],
         [key2, value2],
         [key3, value3],
         [key4, value4]
       ]));
 
-      const found1: Nullable<MockValueObject<number>> = project.find((v: MockValueObject<number>) => {
+      const found1: Nullable<MockValueObject<number>> = dictionary.find((v: MockValueObject<number>) => {
         return v.get() === 1;
       });
-      const found2: Nullable<MockValueObject<number>> = project.find((v: MockValueObject<number>) => {
+      const found2: Nullable<MockValueObject<number>> = dictionary.find((v: MockValueObject<number>) => {
         return v.get() === 2;
       });
-      const found3: Nullable<MockValueObject<number>> = project.find((v: MockValueObject<number>) => {
+      const found3: Nullable<MockValueObject<number>> = dictionary.find((v: MockValueObject<number>) => {
         return v.get() % 2 === 0;
       });
-      const found4: Nullable<MockValueObject<number>> = project.find((v: MockValueObject<number>) => {
+      const found4: Nullable<MockValueObject<number>> = dictionary.find((v: MockValueObject<number>) => {
         return v.get() > 1000;
       });
-      const found5: Nullable<MockValueObject<number>> = project.find((_v: MockValueObject<number>, k: MockValueObject<string>) => {
+      const found5: Nullable<MockValueObject<number>> = dictionary.find((_v: MockValueObject<number>, k: MockValueObject<string>) => {
         return k.get().length === 1;
       });
 
@@ -337,13 +337,13 @@ describe('AProject', () => {
         [key2, value2]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map(kv)
       );
       let i: number = 0;
 
-      expect(project.size()).toBe(kv.length);
-      project.forEach((value: MockValueObject<number>, key: MockValueObject<number>) => {
+      expect(dictionary.size()).toBe(kv.length);
+      dictionary.forEach((value: MockValueObject<number>, key: MockValueObject<number>) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const [k, v]: [MockValueObject<number>, MockValueObject<number>] = kv[i]!;
 
@@ -361,13 +361,13 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
 
-      expect(project.size()).toBe(1);
-      expect(project.get(key1)).toBe(value1);
-      expect(project.get(key2)).toBe(value1);
+      expect(dictionary.size()).toBe(1);
+      expect(dictionary.get(key1)).toBe(value1);
+      expect(dictionary.get(key2)).toBe(value1);
     });
 
     it('returns null at incorrect keys', () => {
@@ -376,12 +376,12 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
 
-      expect(project.size()).toBe(1);
-      expect(project.get(key2)).toBeNull();
+      expect(dictionary.size()).toBe(1);
+      expect(dictionary.get(key2)).toBeNull();
     });
   });
 
@@ -392,11 +392,11 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
 
-      expect(project.has(key2)).toBe(false);
+      expect(dictionary.has(key2)).toBe(false);
     });
 
     it('returns true if the key exists', () => {
@@ -405,12 +405,12 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(3);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
 
-      expect(project.has(key1)).toBe(true);
-      expect(project.has(key2)).toBe(true);
+      expect(dictionary.has(key1)).toBe(true);
+      expect(dictionary.has(key2)).toBe(true);
     });
   });
 
@@ -419,15 +419,15 @@ describe('AProject', () => {
       const key1: MockValueObject<number> = new MockValueObject(1);
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([[key1, value1]])
       );
-      const project2: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject<MockValueObject<number>, MockValueObject<number>>(
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary<MockValueObject<number>, MockValueObject<number>>(
         new Map()
       );
 
-      expect(project1.isEmpty()).toBe(false);
-      expect(project2.isEmpty()).toBe(true);
+      expect(dictionary1.isEmpty()).toBe(false);
+      expect(dictionary2.isEmpty()).toBe(true);
     });
   });
 
@@ -441,7 +441,7 @@ describe('AProject', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const values: Array<MockValueObject<number>> = [value1, value2];
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<string>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
@@ -450,7 +450,7 @@ describe('AProject', () => {
 
       let i: number = 0;
 
-      for (const [k, v] of project) {
+      for (const [k, v] of dictionary) {
         expect(k).toBe(keys[i]);
         expect(v).toBe(values[i]);
         i++;
@@ -467,7 +467,7 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<string>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
@@ -476,7 +476,7 @@ describe('AProject', () => {
 
       let i: number = 0;
 
-      for (const key of project.keys()) {
+      for (const key of dictionary.keys()) {
         expect(key).toBe(keys[i]);
         i++;
       }
@@ -499,7 +499,7 @@ describe('AProject', () => {
         [key3, value3]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map(kv)
       );
 
@@ -507,7 +507,7 @@ describe('AProject', () => {
         return value.get() % 2 === 0;
       };
 
-      const some: boolean = project.some(predicate);
+      const some: boolean = dictionary.some(predicate);
 
       expect(some).toBe(true);
     });
@@ -523,7 +523,7 @@ describe('AProject', () => {
       const value3: MockValueObject<number> = new MockValueObject(6);
       const value4: MockValueObject<number> = new MockValueObject(8);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2],
@@ -536,7 +536,7 @@ describe('AProject', () => {
         return value.get() % 2 === 1;
       };
 
-      const some: boolean = project.some(predicate);
+      const some: boolean = dictionary.some(predicate);
 
       expect(some).toBe(false);
     });
@@ -554,14 +554,14 @@ describe('AProject', () => {
         [key2, value2]
       ];
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map(kv)
       );
-      const map: Map<MockValueObject<number>, MockValueObject<number>> = project.toMap();
+      const map: Map<MockValueObject<number>, MockValueObject<number>> = dictionary.toMap();
       let i: number = 0;
 
-      expect(project.size()).toBe(map.size);
-      project.forEach((value: MockValueObject<number>, key: MockValueObject<number>) => {
+      expect(dictionary.size()).toBe(map.size);
+      dictionary.forEach((value: MockValueObject<number>, key: MockValueObject<number>) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const [k, v]: [MockValueObject<number>, MockValueObject<number>] = kv[i]!;
 
@@ -580,14 +580,14 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project: MockProject<MockValueObject<number>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
 
-      expect(project.toString()).toBe('{1: 2}, {3: 4}');
+      expect(dictionary.toString()).toBe('{1: 2}, {3: 4}');
     });
   });
 
@@ -600,7 +600,7 @@ describe('AProject', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const values: Array<MockValueObject<number>> = [value1, value2];
 
-      const project: MockProject<MockValueObject<string>, MockValueObject<number>> = new MockProject(
+      const dictionary: MockDictionary<MockValueObject<string>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
           [key2, value2]
@@ -609,7 +609,7 @@ describe('AProject', () => {
 
       let i: number = 0;
 
-      for (const key of project.values()) {
+      for (const key of dictionary.values()) {
         expect(key).toBe(values[i]);
         i++;
       }

@@ -1,5 +1,5 @@
 import { ImmutableAddress, MutableAddress } from '@jamashita/lluvia-address';
-import { MutableProject } from '@jamashita/lluvia-project';
+import { MutableDictionary } from '@jamashita/lluvia-dictionary';
 import { ATree } from './ATree';
 import { ClosureTableHierarchies } from './ClosureTable';
 import { StructurableTreeObject } from './StructurableTreeObject';
@@ -23,7 +23,7 @@ export class StructurableTree<out K extends TreeID, out V extends StructurableTr
     return this.root.has(key);
   }
 
-  private retrieve(node: StructurableTreeNode<K, V>, hierarchies: MutableProject<K, MutableAddress<K>>): void {
+  private retrieve(node: StructurableTreeNode<K, V>, hierarchies: MutableDictionary<K, MutableAddress<K>>): void {
     const offsprings: MutableAddress<K> = MutableAddress.empty();
 
     offsprings.add(node.getTreeID());
@@ -34,7 +34,7 @@ export class StructurableTree<out K extends TreeID, out V extends StructurableTr
     }
   }
 
-  private retrieveChildren(node: StructurableTreeNode<K, V>, children: ImmutableAddress<StructurableTreeNode<K, V>>, hierarchies: MutableProject<K, MutableAddress<K>>): void {
+  private retrieveChildren(node: StructurableTreeNode<K, V>, children: ImmutableAddress<StructurableTreeNode<K, V>>, hierarchies: MutableDictionary<K, MutableAddress<K>>): void {
     children.forEach((child: StructurableTreeNode<K, V>) => {
       hierarchies.get(node.getTreeID())?.add(child.getTreeID());
 
@@ -47,7 +47,7 @@ export class StructurableTree<out K extends TreeID, out V extends StructurableTr
   }
 
   public toHierarchies(): ClosureTableHierarchies<K> {
-    const hierarchies: MutableProject<K, MutableAddress<K>> = MutableProject.empty();
+    const hierarchies: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
 
     this.retrieve(this.root, hierarchies);
 
