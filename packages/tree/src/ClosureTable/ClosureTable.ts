@@ -21,16 +21,16 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
       return ClosureTable.empty();
     }
 
-    const project: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
+    const dictionary: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
-      const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
+      const offsprings: Nullable<MutableAddress<K>> = dictionary.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
         const address: MutableAddress<K> = MutableAddress.empty();
 
         address.add(hierarchy.getOffspring());
-        project.set(hierarchy.getAncestor(), address);
+        dictionary.set(hierarchy.getAncestor(), address);
 
         return;
       }
@@ -38,7 +38,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
       offsprings.add(hierarchy.getOffspring());
     });
 
-    return new ClosureTable(ImmutableDictionary.of(project));
+    return new ClosureTable(ImmutableDictionary.of(dictionary));
   }
 
   protected constructor(table: ImmutableDictionary<K, ReadonlyAddress<K>>) {

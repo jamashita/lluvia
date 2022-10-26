@@ -3,10 +3,10 @@ import { Quantity } from '@jamashita/lluvia-collection';
 import { ADictionary } from '../ADictionary';
 
 export class MockDictionary<out K, out V> extends ADictionary<K, V> {
-  public constructor(project: Map<K, V>) {
+  public constructor(dictionary: Map<K, V>) {
     const map: Map<K | string, [K, V]> = new Map();
 
-    project.forEach((v: V, k: K) => {
+    dictionary.forEach((v: V, k: K) => {
       map.set(Quantity.genKey(k), [k, v]);
     });
 

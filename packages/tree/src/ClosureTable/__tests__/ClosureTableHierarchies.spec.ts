@@ -20,7 +20,7 @@ describe('ClosureTableHierarchies', () => {
 
   describe('of', () => {
     it('returns flattened ClosureTableHierarchies', () => {
-      const project: ImmutableDictionary<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableDictionary.ofMap(new Map([
+      const dictionary: ImmutableDictionary<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableDictionary.ofMap(new Map([
         [new MockTreeID('mock 1'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 1'), new MockTreeID('mock 2'), new MockTreeID('mock 3'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))],
         [new MockTreeID('mock 2'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 2'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))],
         [new MockTreeID('mock 3'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 3')]))],
@@ -28,7 +28,7 @@ describe('ClosureTableHierarchies', () => {
         [new MockTreeID('mock 5'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 5')]))]
       ]));
 
-      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.of(project);
+      const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.of(dictionary);
 
       expect(hierarchies.size()).toBe(11);
       expect(hierarchies.get(0)?.getAncestor().get()).toBe('mock 1');

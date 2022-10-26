@@ -4,11 +4,11 @@ import { Quantity } from '@jamashita/lluvia-collection';
 import { Dictionary } from './Dictionary';
 
 export abstract class ADictionary<out K, out V> extends Quantity<K, V> implements Dictionary<K, V> {
-  protected readonly project: Map<K | string, [K, V]>;
+  protected readonly dictionary: Map<K | string, [K, V]>;
 
-  protected constructor(project: Map<K | string, [K, V]>) {
+  protected constructor(dictionary: Map<K | string, [K, V]>) {
     super();
-    this.project = project;
+    this.dictionary = dictionary;
   }
 
   public abstract duplicate(): ADictionary<K, V>;
@@ -23,7 +23,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
 
   // FIXME O(n)
   public contains(value: V): boolean {
-    for (const [, [, v]] of this.project) {
+    for (const [, [, v]] of this.dictionary) {
       if (value === v) {
         return true;
       }
@@ -65,7 +65,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public every(predicate: BinaryPredicate<V, K>): boolean {
-    for (const [, [k, v]] of this.project) {
+    for (const [, [k, v]] of this.dictionary) {
       if (!predicate(v, k)) {
         return false;
       }
@@ -77,7 +77,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | string, [K, V]> {
     const m: Map<K | string, [K, V]> = new Map();
 
-    this.project.forEach(([k, v]: [K, V]) => {
+    this.dictionary.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {
         m.set(Quantity.genKey(k), [k, v]);
       }
@@ -87,7 +87,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
-    for (const [, [k, v]] of this.project) {
+    for (const [, [k, v]] of this.dictionary) {
       if (predicate(v, k)) {
         return v;
       }
@@ -97,13 +97,13 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public forEach(foreach: ForEach<K, V>): void {
-    this.project.forEach(([k, v]: [K, V]) => {
+    this.dictionary.forEach(([k, v]: [K, V]) => {
       foreach(v, k);
     });
   }
 
   public get(key: K): Nullable<V> {
-    const p: Ambiguous<[K, V]> = this.project.get(Quantity.genKey(key));
+    const p: Ambiguous<[K, V]> = this.dictionary.get(Quantity.genKey(key));
 
     if (Kind.isUndefined(p)) {
       return null;
@@ -113,7 +113,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public has(key: K): boolean {
-    return this.project.has(Quantity.genKey(key));
+    return this.dictionary.has(Quantity.genKey(key));
   }
 
   public override isEmpty(): boolean {
@@ -121,7 +121,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public iterator(): IterableIterator<[K, V]> {
-    return this.project.values();
+    return this.dictionary.values();
   }
 
   public keys(): Iterable<K> {
@@ -138,7 +138,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     const m: Map<K | string, [K, W]> = new Map();
     let i: number = 0;
 
-    this.project.forEach(([k, v]: [K, V]) => {
+    this.dictionary.forEach(([k, v]: [K, V]) => {
       m.set(Quantity.genKey(k), [k, mapping(v, i)]);
       i++;
     });
@@ -157,11 +157,11 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public size(): number {
-    return this.project.size;
+    return this.dictionary.size;
   }
 
   public some(predicate: BinaryPredicate<V, K>): boolean {
-    for (const [, [k, v]] of this.project) {
+    for (const [, [k, v]] of this.dictionary) {
       if (predicate(v, k)) {
         return true;
       }

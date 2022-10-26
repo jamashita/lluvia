@@ -14,43 +14,43 @@ describe('MutableProject', () => {
 
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      const project: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([
           [new MockValueObject(1), new MockValueObject(2)],
           [new MockValueObject(3), new MockValueObject(4)]
         ])
       );
-      const copied: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.of(project);
+      const copied: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.of(dictionary);
 
-      expect(project.size()).toBe(copied.size());
-      expect(project.get(new MockValueObject(1))).not.toBeNull();
-      expect(project.get(new MockValueObject(1))).toBe(copied.get(new MockValueObject(1)));
-      expect(project.get(new MockValueObject(3))).not.toBeNull();
-      expect(project.get(new MockValueObject(3))).toBe(copied.get(new MockValueObject(3)));
+      expect(dictionary.size()).toBe(copied.size());
+      expect(dictionary.get(new MockValueObject(1))).not.toBeNull();
+      expect(dictionary.get(new MockValueObject(1))).toBe(copied.get(new MockValueObject(1)));
+      expect(dictionary.get(new MockValueObject(3))).not.toBeNull();
+      expect(dictionary.get(new MockValueObject(3))).toBe(copied.get(new MockValueObject(3)));
 
-      project.set(new MockValueObject(5), new MockValueObject(6));
+      dictionary.set(new MockValueObject(5), new MockValueObject(6));
 
-      expect(project.size()).not.toBe(copied.size());
+      expect(dictionary.size()).not.toBe(copied.size());
     });
   });
 
   describe('ofMap', () => {
     it('returns MutableAddress.empty() when set size is 0', () => {
-      const project: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([])
       );
 
-      expect(project.isEmpty()).toBe(true);
+      expect(dictionary.isEmpty()).toBe(true);
     });
 
     it('returns instance', () => {
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([
           [new MockValueObject(1), new MockValueObject(2)],
           [new MockValueObject(5), new MockValueObject(6)]
         ])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([
           [new MockValueObject(3), new MockValueObject(4)],
           [new MockValueObject(7), new MockValueObject(8)],
@@ -58,8 +58,8 @@ describe('MutableProject', () => {
         ])
       );
 
-      expect(project1.size()).toBe(2);
-      expect(project2.size()).toBe(3);
+      expect(dictionary1.size()).toBe(2);
+      expect(dictionary2.size()).toBe(3);
     });
   });
 
@@ -73,20 +73,20 @@ describe('MutableProject', () => {
       const value2: MockValueObject<number> = new MockValueObject(4);
       const value3: MockValueObject<number> = new MockValueObject(6);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.duplicate();
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.duplicate();
 
-      expect(project1.size()).toBe(project2.size());
-      expect(project1).not.toBe(project2);
-      expect(project2).toBe(project2.set(key3, value3));
-      project1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
-        expect(project2.has(k)).toBe(true);
-        expect(project2.contains(v)).toBe(true);
+      expect(dictionary1.size()).toBe(dictionary2.size());
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary2).toBe(dictionary2.set(key3, value3));
+      dictionary1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
+        expect(dictionary2.has(k)).toBe(true);
+        expect(dictionary2.contains(v)).toBe(true);
       });
     });
   });
@@ -104,7 +104,7 @@ describe('MutableProject', () => {
       const value4: MockValueObject<string> = new MockValueObject('aaaa');
       const value5: MockValueObject<string> = new MockValueObject('aaaaa');
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = MutableDictionary.ofMap(
         new Map<MockValueObject<number>, MockValueObject<string>>([
           [key1, value1],
           [key2, value2],
@@ -112,13 +112,13 @@ describe('MutableProject', () => {
           [key4, value4]
         ])
       );
-      const filtered1: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
+      const filtered1: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((v: MockValueObject<string>) => {
         return v.get().length % 2 === 0;
       });
-      const filtered2: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((_v: MockValueObject<string>, k: MockValueObject<number>) => {
+      const filtered2: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((_v: MockValueObject<string>, k: MockValueObject<number>) => {
         return k.get() % 2 === 1;
       });
-      const filtered3: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
+      const filtered3: MutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((v: MockValueObject<string>) => {
         return v === value5;
       });
 
@@ -138,15 +138,15 @@ describe('MutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([[key1, value]])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([])
       );
 
-      expect(project1.isEmpty()).toBe(false);
-      expect(project2.isEmpty()).toBe(true);
+      expect(dictionary1.isEmpty()).toBe(false);
+      expect(dictionary2.isEmpty()).toBe(true);
     });
   });
 
@@ -158,20 +158,20 @@ describe('MutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.map((v: MockValueObject<number>): MockValueObject<number> => {
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.map((v: MockValueObject<number>): MockValueObject<number> => {
         return new MockValueObject(v.get() + 10);
       });
 
-      expect(project1.size()).toBe(project2.size());
-      expect(project1).not.toBe(project2);
-      project1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
-        expect(project2.get(k)?.get()).toBe(v.get() + 10);
+      expect(dictionary1.size()).toBe(dictionary2.size());
+      expect(dictionary1).not.toBe(dictionary2);
+      dictionary1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
+        expect(dictionary2.get(k)?.get()).toBe(v.get() + 10);
       });
     });
   });
@@ -182,13 +182,13 @@ describe('MutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([[key, value]])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.remove(key);
 
-      expect(project1).toBe(project2);
-      expect(project2.size()).toBe(0);
+      expect(dictionary1).toBe(dictionary2);
+      expect(dictionary2.size()).toBe(0);
     });
 
     it('does nothing when there is no such key', () => {
@@ -197,19 +197,19 @@ describe('MutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([[key1, value]])
       );
-      const beforeLength: number = project.size();
+      const beforeLength: number = dictionary.size();
 
-      expect(project.remove(key2)).toBe(project);
-      expect(project.size()).toBe(beforeLength);
+      expect(dictionary.remove(key2)).toBe(dictionary);
+      expect(dictionary.size()).toBe(beforeLength);
     });
 
     it('does nothing when the dictionary is empty', () => {
-      const project: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.empty();
+      const dictionary: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.empty();
 
-      expect(project.remove(new MockValueObject(1))).toBe(project);
+      expect(dictionary.remove(new MockValueObject(1))).toBe(dictionary);
     });
 
     it('returns the removed Dictionary', () => {
@@ -218,13 +218,13 @@ describe('MutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([[key1, value]])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.remove(key3);
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.remove(key3);
 
-      expect(project1).toBe(project2);
-      expect(project1.size()).toBe(0);
+      expect(dictionary1).toBe(dictionary2);
+      expect(dictionary1.size()).toBe(0);
     });
   });
 
@@ -236,21 +236,21 @@ describe('MutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.empty();
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.empty();
 
-      expect(project1.size()).toBe(0);
+      expect(dictionary1.size()).toBe(0);
 
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value1);
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.set(key1, value1);
 
-      expect(project1).toBe(project2);
-      expect(project1.size()).toBe(1);
+      expect(dictionary1).toBe(dictionary2);
+      expect(dictionary1.size()).toBe(1);
 
-      const project3: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project2.set(key2, value2);
+      const dictionary3: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary2.set(key2, value2);
 
-      expect(project1).toBe(project2);
-      expect(project2).toBe(project3);
-      expect(project3).toBe(project1);
-      expect(project1.size()).toBe(2);
+      expect(dictionary1).toBe(dictionary2);
+      expect(dictionary2).toBe(dictionary3);
+      expect(dictionary3).toBe(dictionary1);
+      expect(dictionary1.size()).toBe(2);
     });
 
     it('overwrites when the keys are already contained', () => {
@@ -259,14 +259,14 @@ describe('MutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([[key1, value1]])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value2);
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.set(key1, value2);
 
-      expect(project1).toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.get(key1)).toBe(value2);
+      expect(dictionary1).toBe(dictionary2);
+      expect(dictionary1.size()).toBe(1);
+      expect(dictionary2.get(key1)).toBe(value2);
     });
 
     it('also can overwrite when the other same key value objects are already contained', () => {
@@ -276,15 +276,15 @@ describe('MutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const project1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
+      const dictionary1: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = MutableDictionary.ofMap(
         new Map([[key1, value1]])
       );
-      const project2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.set(key2, value2);
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.set(key2, value2);
 
-      expect(project1).toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.get(key1)).toBe(value2);
-      expect(project2.get(key2)).toBe(value2);
+      expect(dictionary1).toBe(dictionary2);
+      expect(dictionary1.size()).toBe(1);
+      expect(dictionary2.get(key1)).toBe(value2);
+      expect(dictionary2.get(key2)).toBe(value2);
     });
   });
 });

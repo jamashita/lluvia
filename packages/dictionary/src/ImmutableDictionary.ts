@@ -15,12 +15,12 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
     return ImmutableDictionary.ofMap(map);
   }
 
-  private static ofInternal<K, V>(project: Map<K | string, [K, V]>): ImmutableDictionary<K, V> {
-    if (project.size === 0) {
+  private static ofInternal<K, V>(dictionary: Map<K | string, [K, V]>): ImmutableDictionary<K, V> {
+    if (dictionary.size === 0) {
       return ImmutableDictionary.empty();
     }
 
-    return new ImmutableDictionary(project);
+    return new ImmutableDictionary(dictionary);
   }
 
   public static ofMap<K, V>(map: ReadonlyMap<K, V>): ImmutableDictionary<K, V> {
@@ -33,8 +33,8 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
     return ImmutableDictionary.ofInternal(m);
   }
 
-  protected constructor(project: Map<K | string, [K, V]>) {
-    super(project);
+  protected constructor(dictionary: Map<K | string, [K, V]>) {
+    super(dictionary);
   }
 
   public duplicate(): ImmutableDictionary<K, V> {
@@ -42,7 +42,7 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
       return ImmutableDictionary.empty();
     }
 
-    return ImmutableDictionary.ofInternal(new Map(this.project));
+    return ImmutableDictionary.ofInternal(new Map(this.dictionary));
   }
 
   public filter(predicate: BinaryPredicate<V, K>): ImmutableDictionary<K, V> {
@@ -69,7 +69,7 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
       return this;
     }
 
-    const m: Map<K | string, [K, V]> = new Map(this.project);
+    const m: Map<K | string, [K, V]> = new Map(this.dictionary);
 
     m.delete(Quantity.genKey(key));
 
@@ -77,7 +77,7 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
   }
 
   public set(key: K, value: V): ImmutableDictionary<K, V> {
-    const m: Map<K | string, [K, V]> = new Map(this.project);
+    const m: Map<K | string, [K, V]> = new Map(this.dictionary);
 
     m.set(Quantity.genKey(key), [key, value]);
 

@@ -13,8 +13,8 @@ export class MutableDictionary<out K, out V> extends ADictionary<K, V> {
     return MutableDictionary.ofMap(map);
   }
 
-  private static ofInternal<K, V>(project: Map<K | string, [K, V]>): MutableDictionary<K, V> {
-    return new MutableDictionary(project);
+  private static ofInternal<K, V>(dictionary: Map<K | string, [K, V]>): MutableDictionary<K, V> {
+    return new MutableDictionary(dictionary);
   }
 
   public static ofMap<K, V>(map: ReadonlyMap<K, V>): MutableDictionary<K, V> {
@@ -27,12 +27,12 @@ export class MutableDictionary<out K, out V> extends ADictionary<K, V> {
     return MutableDictionary.ofInternal(m);
   }
 
-  protected constructor(project: Map<K | string, [K, V]>) {
-    super(project);
+  protected constructor(dictionary: Map<K | string, [K, V]>) {
+    super(dictionary);
   }
 
   public duplicate(): MutableDictionary<K, V> {
-    return MutableDictionary.ofInternal(new Map(this.project));
+    return MutableDictionary.ofInternal(new Map(this.dictionary));
   }
 
   public filter(predicate: BinaryPredicate<V, K>): MutableDictionary<K, V> {
@@ -51,13 +51,13 @@ export class MutableDictionary<out K, out V> extends ADictionary<K, V> {
       return this;
     }
 
-    this.project.delete(Quantity.genKey(key));
+    this.dictionary.delete(Quantity.genKey(key));
 
     return this;
   }
 
   public set(key: K, value: V): this {
-    this.project.set(Quantity.genKey(key), [key, value]);
+    this.dictionary.set(Quantity.genKey(key), [key, value]);
 
     return this;
   }

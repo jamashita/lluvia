@@ -8,52 +8,52 @@ describe('ImmutableProject', () => {
     });
 
     it('always returns 0-size map', () => {
-      const project: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.empty();
+      const dictionary: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.empty();
 
-      expect(project.size()).toBe(0);
+      expect(dictionary.size()).toBe(0);
     });
   });
 
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      const project: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([
           [new MockValueObject(1), new MockValueObject(2)],
           [new MockValueObject(3), new MockValueObject(4)]
         ])
       );
-      const copied: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.of(project);
+      const copied: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.of(dictionary);
 
-      expect(project.size()).toBe(copied.size());
-      project.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
+      expect(dictionary.size()).toBe(copied.size());
+      dictionary.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
         expect(copied.has(k)).toBe(true);
         expect(copied.contains(v)).toBe(true);
       });
 
-      project.set(new MockValueObject(5), new MockValueObject(6));
+      dictionary.set(new MockValueObject(5), new MockValueObject(6));
 
-      expect(project.size()).toBe(copied.size());
+      expect(dictionary.size()).toBe(copied.size());
     });
   });
 
   describe('ofMap', () => {
     it('returns ImmutableDictionary.empty() when the size is 0', () => {
-      const project: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap<MockValueObject<number>, MockValueObject<number>>(
+      const dictionary: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap<MockValueObject<number>, MockValueObject<number>>(
         new Map()
       );
 
-      expect(project.isEmpty()).toBe(true);
-      expect(project).toBe(ImmutableDictionary.empty());
+      expect(dictionary.isEmpty()).toBe(true);
+      expect(dictionary).toBe(ImmutableDictionary.empty());
     });
 
     it('returns instance', () => {
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([
           [new MockValueObject(1), new MockValueObject(2)],
           [new MockValueObject(5), new MockValueObject(6)]
         ])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([
           [new MockValueObject(3), new MockValueObject(4)],
           [new MockValueObject(7), new MockValueObject(8)],
@@ -61,18 +61,18 @@ describe('ImmutableProject', () => {
         ])
       );
 
-      expect(project1.size()).toBe(2);
-      expect(project2.size()).toBe(3);
+      expect(dictionary1.size()).toBe(2);
+      expect(dictionary2.size()).toBe(3);
     });
   });
 
   describe('duplicate', () => {
     it('returns ImmutableDictionary.empty() when there are no key-value pairs', () => {
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([])
       );
 
-      expect(project1.duplicate()).toBe(ImmutableDictionary.empty());
+      expect(dictionary1.duplicate()).toBe(ImmutableDictionary.empty());
     });
 
     it('returns shallow-copied instance', () => {
@@ -84,20 +84,20 @@ describe('ImmutableProject', () => {
       const value2: MockValueObject<number> = new MockValueObject(4);
       const value3: MockValueObject<number> = new MockValueObject(6);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.duplicate();
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.duplicate();
 
-      expect(project1.size()).toBe(project2.size());
-      expect(project1).not.toBe(project2);
-      expect(project2).not.toBe(project2.set(key3, value3));
-      project1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
-        expect(project2.has(k)).toBe(true);
-        expect(project2.contains(v)).toBe(true);
+      expect(dictionary1.size()).toBe(dictionary2.size());
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary2).not.toBe(dictionary2.set(key3, value3));
+      dictionary1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
+        expect(dictionary2.has(k)).toBe(true);
+        expect(dictionary2.contains(v)).toBe(true);
       });
     });
   });
@@ -115,7 +115,7 @@ describe('ImmutableProject', () => {
       const value4: MockValueObject<string> = new MockValueObject('aaaa');
       const value5: MockValueObject<string> = new MockValueObject('aaaaa');
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = ImmutableDictionary.ofMap(
         new Map([
           [key1, value1],
           [key2, value2],
@@ -123,13 +123,13 @@ describe('ImmutableProject', () => {
           [key4, value4]
         ])
       );
-      const filtered1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
+      const filtered1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((v: MockValueObject<string>) => {
         return v.get().length % 2 === 0;
       });
-      const filtered2: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((_v: MockValueObject<string>, k: MockValueObject<number>) => {
+      const filtered2: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((_v: MockValueObject<string>, k: MockValueObject<number>) => {
         return k.get() % 2 === 1;
       });
-      const filtered3: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
+      const filtered3: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((v: MockValueObject<string>) => {
         return v === value5;
       });
 
@@ -153,7 +153,7 @@ describe('ImmutableProject', () => {
       const value3: MockValueObject<string> = new MockValueObject('aaa');
       const value4: MockValueObject<string> = new MockValueObject('aaaa');
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = ImmutableDictionary.ofMap(
         new Map([
           [key1, value1],
           [key2, value2],
@@ -161,7 +161,7 @@ describe('ImmutableProject', () => {
           [key4, value4]
         ])
       );
-      const filtered: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = project1.filter((v: MockValueObject<string>) => {
+      const filtered: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.filter((v: MockValueObject<string>) => {
         return v.get() === 'aaaaa';
       });
 
@@ -176,15 +176,15 @@ describe('ImmutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key, value]])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([])
       );
 
-      expect(project1.isEmpty()).toBe(false);
-      expect(project2.isEmpty()).toBe(true);
+      expect(dictionary1.isEmpty()).toBe(false);
+      expect(dictionary2.isEmpty()).toBe(true);
     });
   });
 
@@ -196,20 +196,20 @@ describe('ImmutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([
           [key1, value1],
           [key2, value2]
         ])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.map((v: MockValueObject<number>): MockValueObject<number> => {
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.map((v: MockValueObject<number>): MockValueObject<number> => {
         return new MockValueObject(v.get() + 10);
       });
 
-      expect(project1.size()).toBe(project2.size());
-      expect(project1).not.toBe(project2);
-      project1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
-        expect(project2.get(k)?.get()).toBe(v.get() + 10);
+      expect(dictionary1.size()).toBe(dictionary2.size());
+      expect(dictionary1).not.toBe(dictionary2);
+      dictionary1.forEach((v: MockValueObject<number>, k: MockValueObject<number>) => {
+        expect(dictionary2.get(k)?.get()).toBe(v.get() + 10);
       });
     });
   });
@@ -220,13 +220,13 @@ describe('ImmutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key, value]])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.remove(key);
 
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(0);
+      expect(dictionary1.size()).toBe(1);
+      expect(dictionary2.size()).toBe(0);
     });
 
     it('does nothing when there is no such key', () => {
@@ -235,19 +235,19 @@ describe('ImmutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key1, value]])
       );
-      const beforeLength: number = project.size();
+      const beforeLength: number = dictionary.size();
 
-      expect(project.remove(key2)).toBe(project);
-      expect(project.size()).toBe(beforeLength);
+      expect(dictionary.remove(key2)).toBe(dictionary);
+      expect(dictionary.size()).toBe(beforeLength);
     });
 
     it('does nothing when the dictionary is empty', () => {
-      const project: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.empty();
+      const dictionary: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.empty();
 
-      expect(project.remove(new MockValueObject(1))).toBe(project);
+      expect(dictionary.remove(new MockValueObject(1))).toBe(dictionary);
     });
 
     it('returns the removed Dictionary', () => {
@@ -256,14 +256,14 @@ describe('ImmutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key1, value]])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.remove(key2);
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.remove(key2);
 
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(0);
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary1.size()).toBe(1);
+      expect(dictionary2.size()).toBe(0);
     });
 
     it('returns ImmutableDictionary.empty() when the size will be 0', () => {
@@ -271,12 +271,12 @@ describe('ImmutableProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key, value]])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.remove(key);
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.remove(key);
 
-      expect(project2).toBe(ImmutableDictionary.empty());
+      expect(dictionary2).toBe(ImmutableDictionary.empty());
     });
   });
 
@@ -288,24 +288,24 @@ describe('ImmutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.empty();
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.empty();
 
-      expect(project1.size()).toBe(0);
+      expect(dictionary1.size()).toBe(0);
 
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value1);
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.set(key1, value1);
 
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(0);
-      expect(project2.size()).toBe(1);
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary1.size()).toBe(0);
+      expect(dictionary2.size()).toBe(1);
 
-      const project3: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project2.set(key2, value2);
+      const dictionary3: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary2.set(key2, value2);
 
-      expect(project1).not.toBe(project2);
-      expect(project2).not.toBe(project3);
-      expect(project3).not.toBe(project1);
-      expect(project1.size()).toBe(0);
-      expect(project2.size()).toBe(1);
-      expect(project3.size()).toBe(2);
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary2).not.toBe(dictionary3);
+      expect(dictionary3).not.toBe(dictionary1);
+      expect(dictionary1.size()).toBe(0);
+      expect(dictionary2.size()).toBe(1);
+      expect(dictionary3.size()).toBe(2);
     });
 
     it('overwrites when the keys are already contained', () => {
@@ -314,15 +314,15 @@ describe('ImmutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key1, value1]])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.set(key1, value2);
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.set(key1, value2);
 
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(1);
-      expect(project2.get(key1)).toBe(value2);
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary1.size()).toBe(1);
+      expect(dictionary2.size()).toBe(1);
+      expect(dictionary2.get(key1)).toBe(value2);
     });
 
     it('stores key-value when the keys are not contained yet', () => {
@@ -332,16 +332,16 @@ describe('ImmutableProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const project1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = ImmutableDictionary.ofMap(
         new Map([[key1, value1]])
       );
-      const project2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = project1.set(key2, value2);
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.set(key2, value2);
 
-      expect(project1).not.toBe(project2);
-      expect(project1.size()).toBe(1);
-      expect(project2.size()).toBe(2);
-      expect(project2.get(key1)).toBe(value1);
-      expect(project2.get(key2)).toBe(value2);
+      expect(dictionary1).not.toBe(dictionary2);
+      expect(dictionary1.size()).toBe(1);
+      expect(dictionary2.size()).toBe(2);
+      expect(dictionary2.get(key1)).toBe(value1);
+      expect(dictionary2.get(key2)).toBe(value2);
     });
   });
 });

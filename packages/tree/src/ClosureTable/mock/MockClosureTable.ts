@@ -7,16 +7,16 @@ import { ClosureTableHierarchy } from '../ClosureTableHierarchy';
 
 export class MockClosureTable<out K extends TreeID> extends ClosureTable<K> {
   public constructor(...hierarchies: Array<ClosureTableHierarchy<K>>) {
-    const project: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
+    const dictionary: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
 
     hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
-      const offsprings: Nullable<MutableAddress<K>> = project.get(hierarchy.getAncestor());
+      const offsprings: Nullable<MutableAddress<K>> = dictionary.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
         const address: MutableAddress<K> = MutableAddress.empty();
 
         address.add(hierarchy.getOffspring());
-        project.set(hierarchy.getAncestor(), address);
+        dictionary.set(hierarchy.getAncestor(), address);
 
         return;
       }
@@ -24,6 +24,6 @@ export class MockClosureTable<out K extends TreeID> extends ClosureTable<K> {
       offsprings.add(hierarchy.getOffspring());
     });
 
-    super(project);
+    super(dictionary);
   }
 }

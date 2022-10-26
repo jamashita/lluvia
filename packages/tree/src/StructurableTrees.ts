@@ -61,12 +61,12 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
     return StructurableTrees.ofDictionary(trees.trees);
   }
 
-  public static ofDictionary<K extends TreeID, V extends StructurableTreeObject<K>>(project: ReadonlyDictionary<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
-    return StructurableTrees.ofInternal(project);
+  public static ofDictionary<K extends TreeID, V extends StructurableTreeObject<K>>(dictionary: ReadonlyDictionary<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
+    return StructurableTrees.ofInternal(dictionary);
   }
 
-  public static ofInternal<K extends TreeID, V extends StructurableTreeObject<K>>(project: ReadonlyDictionary<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
-    return new StructurableTrees(MutableDictionary.of(project));
+  public static ofInternal<K extends TreeID, V extends StructurableTreeObject<K>>(dictionary: ReadonlyDictionary<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
+    return new StructurableTrees(MutableDictionary.of(dictionary));
   }
 
   public static ofTable<K extends TreeID, V extends StructurableTreeObject<K>>(table: ClosureTable<K>, values: ReadonlySequence<V>): StructurableTrees<K, V> {
@@ -97,13 +97,13 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
   }
 
   private static toDictionary<K extends TreeID, V extends StructurableTreeObject<K>>(sequence: ReadonlySequence<V>): ReadonlyDictionary<K, V> {
-    const project: MutableDictionary<K, V> = MutableDictionary.empty();
+    const dictionary: MutableDictionary<K, V> = MutableDictionary.empty();
 
     sequence.forEach((v: V) => {
-      project.set(v.getTreeID(), v);
+      dictionary.set(v.getTreeID(), v);
     });
 
-    return project;
+    return dictionary;
   }
 
   protected constructor(trees: MutableDictionary<K, StructurableTree<K, V>>) {
