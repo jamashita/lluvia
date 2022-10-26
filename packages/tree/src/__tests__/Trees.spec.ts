@@ -1,7 +1,7 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { Nullable } from '@jamashita/anden-type';
 import { MockAddress } from '@jamashita/lluvia-address';
-import { MockProject } from '@jamashita/lluvia-project';
+import { MockDictionary } from '@jamashita/lluvia-dictionary';
 import { MockTree } from '../mock/MockTree';
 import { MockTreeID } from '../mock/MockTreeID';
 import { MockTreeObject } from '../mock/MockTreeObject';
@@ -20,7 +20,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
@@ -28,7 +28,7 @@ describe('Trees', () => {
 
       tree.contains = fn;
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       trees.contains(new MockTreeObject(id));
 
@@ -45,13 +45,13 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       expect(trees.equals(trees)).toBe(true);
     });
@@ -64,18 +64,18 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       expect(trees.equals(new MockValueObject('mock'))).toBe(false);
     });
 
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -85,20 +85,20 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       // @ts-expect-error
-      trees.trees = project;
-      project.equals = fn;
+      trees.trees = dictionary;
+      dictionary.equals = fn;
 
       trees.equals(new MockTrees(
-        new MockProject(
+        new MockDictionary(
           new Map([
             [id, new MockTree(new MockTreeNode(new MockTreeObject(id)))]
           ])
@@ -133,14 +133,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       const every: boolean = trees.every((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().toString().includes('tree id');
@@ -172,14 +172,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       const every: boolean = trees.every((o: MockTreeObject<MockTreeID>) => {
         return !o.getTreeID().equals(id3);
@@ -213,14 +213,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       const obj: Nullable<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = trees.find((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().equals(id3);
@@ -252,14 +252,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       const obj: Nullable<MockTreeNode<MockTreeID, MockTreeObject<MockTreeID>>> = trees.find((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().toString().includes('idea');
@@ -298,7 +298,7 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
@@ -306,7 +306,7 @@ describe('Trees', () => {
       );
 
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
       let i: number = 0;
 
       trees.forEach((o: MockTreeObject<MockTreeID>) => {
@@ -317,7 +317,7 @@ describe('Trees', () => {
   });
 
   describe('get', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -327,17 +327,17 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       // @ts-expect-error
-      trees.trees = project;
-      project.get = fn;
+      trees.trees = dictionary;
+      dictionary.get = fn;
 
       trees.get(new MockTreeID('tree id 1010'));
 
@@ -346,7 +346,7 @@ describe('Trees', () => {
   });
 
   describe('isEmpty', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -356,17 +356,17 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       // @ts-expect-error
-      trees.trees = project;
-      project.isEmpty = fn;
+      trees.trees = dictionary;
+      dictionary.isEmpty = fn;
 
       trees.isEmpty();
 
@@ -375,7 +375,7 @@ describe('Trees', () => {
   });
 
   describe('size', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -385,17 +385,17 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       // @ts-expect-error
-      trees.trees = project;
-      project.size = fn;
+      trees.trees = dictionary;
+      dictionary.size = fn;
 
       trees.size();
 
@@ -427,14 +427,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       const some: boolean = trees.some((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().equals(id3);
@@ -466,14 +466,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       const some: boolean = trees.some((o: MockTreeObject<MockTreeID>) => {
         return o.getTreeID().toString().includes('idea');
@@ -484,7 +484,7 @@ describe('Trees', () => {
   });
 
   describe('toString', () => {
-    it('delegates its retaining project', () => {
+    it('delegates its retaining dictionary', () => {
       const fn: jest.Mock = jest.fn();
 
       const id: MockTreeID = new MockTreeID('tree id');
@@ -494,17 +494,17 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id, tree]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
       // @ts-expect-error
-      trees.trees = project;
-      project.toString = fn;
+      trees.trees = dictionary;
+      dictionary.toString = fn;
 
       trees.toString();
 
@@ -541,14 +541,14 @@ describe('Trees', () => {
         )
       );
 
-      const project: MockProject<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockProject(
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
         new Map([
           [id1, tree1],
           [id2, tree2]
         ])
       );
 
-      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(project);
+      const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
       let i: number = 0;
 
       for (const o of trees.values()) {

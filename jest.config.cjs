@@ -11,7 +11,7 @@ module.exports = {
     'dist'
   ],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+    '^.+\\.tsx?$': '@swc/jest'
   },
   moduleNameMapper: {
     '^@jamashita/lluvia-(.*)$': '<rootDir>/packages/$1/src/index'

@@ -15,7 +15,7 @@
 
 Alias for `Array`. implements `Collection`.
 
-#### `Project`
+#### `Dictionary`
 
 Alias for `Map`. implements `Collection`.
 
@@ -34,12 +34,12 @@ new `Sequence` with an added element.
 
 As usual collection, it can add elements in this without creating a new instance.
 
-### `ImmutableProject`
+### `ImmutableDictionary`
 
 It does not change itself and its containing elements even if the element is going to be added or changed, will return
-new `Project` with an added element.
+new `Dictionary` with an added element.
 
-### `MutableProject`
+### `MutableDictionary`
 
 As usual collection, it can add elements in this without creating a new instance.
 
