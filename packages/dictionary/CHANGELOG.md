@@ -1,3 +1,11 @@
+# @jamashita/lluvia-dictionary-v1.0.0 (2022-10-26)
+
+
+### Features
+
+* 🎸 packages updated ([6f88a17](https://github.com/jamashita/lluvia/commit/6f88a17b4e40208a00f798d8ca14be5f3bc6be2b))
+* 🎸 project -> dictionary ([a58a875](https://github.com/jamashita/lluvia/commit/a58a875a0cc6f4ad14e4ca5b6e0cb3b1fd6afad9))
+
 # [@jamashita/lluvia-project-v2.16.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-project-v2.15.0...@jamashita/lluvia-project-v2.16.0) (2022-08-21)
 
 
