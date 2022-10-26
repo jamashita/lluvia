@@ -1,3 +1,13 @@
+# [@jamashita/lluvia-tree-v2.16.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-tree-v2.15.0...@jamashita/lluvia-tree-v2.16.0) (2022-10-26)
+
+
+### Features
+
+* 🎸 packages updated ([6f88a17](https://github.com/jamashita/lluvia/commit/6f88a17b4e40208a00f798d8ca14be5f3bc6be2b))
+* 🎸 packages updated ([a0ffe0d](https://github.com/jamashita/lluvia/commit/a0ffe0d26364a9d1ef9d724882237612dc2003c8))
+* 🎸 packages updated ([381f45b](https://github.com/jamashita/lluvia/commit/381f45bb9b65b78cc0df8e183f01cebfb39c50a0))
+* 🎸 project -> dictionary ([a58a875](https://github.com/jamashita/lluvia/commit/a58a875a0cc6f4ad14e4ca5b6e0cb3b1fd6afad9))
+
 # [@jamashita/lluvia-tree-v2.15.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-tree-v2.14.0...@jamashita/lluvia-tree-v2.15.0) (2022-08-21)
 
 
