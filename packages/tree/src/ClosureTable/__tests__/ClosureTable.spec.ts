@@ -1,5 +1,5 @@
 import { MockAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { MockProject, Project } from '@jamashita/lluvia-project';
+import { Dictionary, MockDictionary } from '@jamashita/lluvia-dictionary';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
 import { MockTreeID } from '../../mock/MockTreeID';
 import { ClosureTable } from '../ClosureTable';
@@ -28,13 +28,13 @@ describe('ClosureTable', () => {
   describe('contains', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.contains = fn;
+      dictionary.contains = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.contains(new MockAddress<MockTreeID>(new Set([new MockTreeID('mock')])));
 
@@ -57,13 +57,13 @@ describe('ClosureTable', () => {
 
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.equals = fn;
+      dictionary.equals = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.equals(new MockClosureTable());
 
@@ -74,13 +74,13 @@ describe('ClosureTable', () => {
   describe('every', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.every = fn;
+      dictionary.every = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.every(() => {
         return true;
@@ -93,13 +93,13 @@ describe('ClosureTable', () => {
   describe('filter', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.filter = fn;
+      dictionary.filter = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.filter(() => {
         return true;
@@ -112,13 +112,13 @@ describe('ClosureTable', () => {
   describe('find', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.find = fn;
+      dictionary.find = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.find(() => {
         return true;
@@ -131,13 +131,13 @@ describe('ClosureTable', () => {
   describe('forEach', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.forEach = fn;
+      dictionary.forEach = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.forEach(() => {
         // NOOP
@@ -150,13 +150,13 @@ describe('ClosureTable', () => {
   describe('get', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.get = fn;
+      dictionary.get = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.get(new MockTreeID('mock'));
 
@@ -167,13 +167,13 @@ describe('ClosureTable', () => {
   describe('isEmpty', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.isEmpty = fn;
+      dictionary.isEmpty = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.isEmpty();
 
@@ -231,13 +231,13 @@ describe('ClosureTable', () => {
   describe('map', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.map = fn;
+      dictionary.map = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.map((offsprings: ReadonlyAddress<MockTreeID>) => {
         return offsprings;
@@ -250,13 +250,13 @@ describe('ClosureTable', () => {
   describe('size', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.size = fn;
+      dictionary.size = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.size();
 
@@ -267,13 +267,13 @@ describe('ClosureTable', () => {
   describe('some', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.some = fn;
+      dictionary.some = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.some(() => {
         return true;
@@ -307,13 +307,13 @@ describe('ClosureTable', () => {
   describe('toString', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.toString = fn;
+      dictionary.toString = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.toString();
 
@@ -324,13 +324,13 @@ describe('ClosureTable', () => {
   describe('values', () => {
     it('delegates its inner collection object', () => {
       const fn: jest.Mock = jest.fn();
-      const project: Project<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockProject(new Map());
+      const dictionary: Dictionary<MockTreeID, ReadonlyAddress<MockTreeID>> = new MockDictionary(new Map());
 
-      project.values = fn;
+      dictionary.values = fn;
 
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       // @ts-expect-error
-      table.table = project;
+      table.table = dictionary;
 
       table.values();
 

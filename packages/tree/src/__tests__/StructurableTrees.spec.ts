@@ -1,6 +1,6 @@
 import { Nullable } from '@jamashita/anden-type';
 import { ImmutableAddress } from '@jamashita/lluvia-address';
-import { ImmutableProject } from '@jamashita/lluvia-project';
+import { ImmutableDictionary } from '@jamashita/lluvia-dictionary';
 import { MutableSequence } from '@jamashita/lluvia-sequence';
 import { ClosureTable } from '../ClosureTable/ClosureTable';
 import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies';
@@ -21,7 +21,7 @@ describe('StructurableTrees', () => {
   });
 
   describe('ofTable', () => {
-    it('returns StructurableTrees.empty() when empty ClosureTable<MockTreeID> and empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
+    it('returns StructurableTrees.empty() when empty ClosureTable<MockTreeID> and empty Dictionary<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
       const table: ClosureTable<MockTreeID> = ClosureTable.empty();
       const values: MutableSequence<MockTreeObject<MockTreeID>> = MutableSequence.empty();
 
@@ -44,7 +44,7 @@ describe('StructurableTrees', () => {
       }).toThrow(TreeError);
     });
 
-    it('throws TreeError when empty Project<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
+    it('throws TreeError when empty Dictionary<MockTreeID, MockTreeObject<MockTreeID>> given', () => {
       const id: MockTreeID = new MockTreeID('id 1');
 
       const table: ClosureTable<MockTreeID> = ClosureTable.of(
@@ -272,8 +272,8 @@ describe('StructurableTrees', () => {
         )
       );
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofProject(
-        ImmutableProject.empty()
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofDictionary(
+        ImmutableDictionary.empty()
       );
 
       expect(trees.isEmpty()).toBe(true);
@@ -345,8 +345,8 @@ describe('StructurableTrees', () => {
         )
       );
 
-      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofProject(
-        ImmutableProject.ofMap(
+      const trees: StructurableTrees<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTrees.ofDictionary(
+        ImmutableDictionary.ofMap(
           new Map([
             [tree1.getTreeID(), tree1],
             [tree2.getTreeID(), tree2]

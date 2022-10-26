@@ -1,4 +1,4 @@
-# Lluvia/Project
+# Lluvia/Dictionary
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
@@ -7,17 +7,17 @@
 
 ## Interfaces
 
-#### `Project`
+#### `Dictionary`
 
 Alias for `Map`. implements `Collection`.
 
 ## Classes
 
-### `ImmutableProject`
+### `ImmutableDictionary`
 
 It does not change itself and its containing elements even if the element is going to be added or changed, will return
-new `Project` with an added element.
+new `Dictionary` with an added element.
 
-### `MutableProject`
+### `MutableDictionary`
 
 As usual collection, it can add elements in this without creating a new instance.

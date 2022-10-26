@@ -13,7 +13,7 @@
       "path": "../collection/tsconfig.cjs.json"
     },
     {
-      "path": "../project/tsconfig.cjs.json"
+      "path": "../dictionary/tsconfig.cjs.json"
     },
     {
       "path": "../sequence/tsconfig.cjs.json"

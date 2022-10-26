@@ -1,6 +1,6 @@
 import { Kind, Nullable } from '@jamashita/anden-type';
 import { MutableAddress, ReadonlyAddress } from '@jamashita/lluvia-address';
-import { ImmutableProject, MutableProject, ReadonlyProject } from '@jamashita/lluvia-project';
+import { ImmutableDictionary, MutableDictionary, ReadonlyDictionary } from '@jamashita/lluvia-dictionary';
 import { ReadonlySequence } from '@jamashita/lluvia-sequence';
 import { ATrees } from './ATrees';
 import { ClosureTable, ClosureTableHierarchies, ClosureTableHierarchy } from './ClosureTable';
@@ -10,12 +10,12 @@ import { TreeError } from './TreeError';
 import { TreeID } from './TreeID';
 import { StructurableTreeNode } from './TreeNode';
 
-export class StructurableTrees<out K extends TreeID, out V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableProject<K, StructurableTree<K, V>>> {
+export class StructurableTrees<out K extends TreeID, out V extends StructurableTreeObject<K>> extends ATrees<K, V, StructurableTreeNode<K, V>, StructurableTree<K, V>, MutableDictionary<K, StructurableTree<K, V>>> {
   public static empty<K extends TreeID, V extends StructurableTreeObject<K>>(): StructurableTrees<K, V> {
-    return StructurableTrees.ofProject(ImmutableProject.empty());
+    return StructurableTrees.ofDictionary(ImmutableDictionary.empty());
   }
 
-  private static forgeInternal<K extends TreeID, V extends StructurableTreeObject<K>>(key: K, values: ReadonlyProject<K, V>, table: ClosureTable<K>, pool: MutableProject<K, StructurableTreeNode<K, V>>, used: MutableAddress<K>): StructurableTreeNode<K, V> {
+  private static forgeInternal<K extends TreeID, V extends StructurableTreeObject<K>>(key: K, values: ReadonlyDictionary<K, V>, table: ClosureTable<K>, pool: MutableDictionary<K, StructurableTreeNode<K, V>>, used: MutableAddress<K>): StructurableTreeNode<K, V> {
     const value: Nullable<V> = values.get(key);
 
     if (Kind.isNull(value)) {
@@ -58,15 +58,15 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
   }
 
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(trees: StructurableTrees<K, V>): StructurableTrees<K, V> {
-    return StructurableTrees.ofProject(trees.trees);
+    return StructurableTrees.ofDictionary(trees.trees);
   }
 
-  public static ofInternal<K extends TreeID, V extends StructurableTreeObject<K>>(project: ReadonlyProject<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
-    return new StructurableTrees(MutableProject.of(project));
+  public static ofDictionary<K extends TreeID, V extends StructurableTreeObject<K>>(dictionary: ReadonlyDictionary<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
+    return StructurableTrees.ofInternal(dictionary);
   }
 
-  public static ofProject<K extends TreeID, V extends StructurableTreeObject<K>>(project: ReadonlyProject<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
-    return StructurableTrees.ofInternal(project);
+  public static ofInternal<K extends TreeID, V extends StructurableTreeObject<K>>(dictionary: ReadonlyDictionary<K, StructurableTree<K, V>>): StructurableTrees<K, V> {
+    return new StructurableTrees(MutableDictionary.of(dictionary));
   }
 
   public static ofTable<K extends TreeID, V extends StructurableTreeObject<K>>(table: ClosureTable<K>, values: ReadonlySequence<V>): StructurableTrees<K, V> {
@@ -81,32 +81,32 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
       throw new TreeError('VALUES ARE EMPTY');
     }
 
-    const vs: ReadonlyProject<K, V> = StructurableTrees.toProject<K, V>(values);
-    const pool: MutableProject<K, StructurableTreeNode<K, V>> = MutableProject.empty();
+    const vs: ReadonlyDictionary<K, V> = StructurableTrees.toDictionary<K, V>(values);
+    const pool: MutableDictionary<K, StructurableTreeNode<K, V>> = MutableDictionary.empty();
     const used: MutableAddress<K> = MutableAddress.empty();
 
     table.sort().toArray().forEach((key: K) => {
       StructurableTrees.forgeInternal(key, vs, table, pool, used);
     });
 
-    const trees: MutableProject<K, StructurableTree<K, V>> = pool.map((node: StructurableTreeNode<K, V>): StructurableTree<K, V> => {
+    const trees: MutableDictionary<K, StructurableTree<K, V>> = pool.map((node: StructurableTreeNode<K, V>): StructurableTree<K, V> => {
       return StructurableTree.of<K, V>(node);
     });
 
-    return StructurableTrees.ofProject<K, V>(trees);
+    return StructurableTrees.ofDictionary<K, V>(trees);
   }
 
-  private static toProject<K extends TreeID, V extends StructurableTreeObject<K>>(sequence: ReadonlySequence<V>): ReadonlyProject<K, V> {
-    const project: MutableProject<K, V> = MutableProject.empty();
+  private static toDictionary<K extends TreeID, V extends StructurableTreeObject<K>>(sequence: ReadonlySequence<V>): ReadonlyDictionary<K, V> {
+    const dictionary: MutableDictionary<K, V> = MutableDictionary.empty();
 
     sequence.forEach((v: V) => {
-      project.set(v.getTreeID(), v);
+      dictionary.set(v.getTreeID(), v);
     });
 
-    return project;
+    return dictionary;
   }
 
-  protected constructor(trees: MutableProject<K, StructurableTree<K, V>>) {
+  protected constructor(trees: MutableDictionary<K, StructurableTree<K, V>>) {
     super(trees);
   }
 

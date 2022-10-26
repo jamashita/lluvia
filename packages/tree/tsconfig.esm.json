@@ -13,7 +13,7 @@
       "path": "../collection/tsconfig.esm.json"
     },
     {
-      "path": "../project/tsconfig.esm.json"
+      "path": "../dictionary/tsconfig.esm.json"
     },
     {
       "path": "../sequence/tsconfig.esm.json"
