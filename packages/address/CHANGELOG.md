@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-address-v2.19.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-address-v2.18.0...@jamashita/lluvia-address-v2.19.0) (2022-11-29)
+
+
+### Features
+
+* 🎸 packages updated ([f32d6b4](https://github.com/jamashita/lluvia/commit/f32d6b4470fbf80b7dc3515f9c443014f88c2bab))
+
 # [@jamashita/lluvia-address-v2.18.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-address-v2.17.0...@jamashita/lluvia-address-v2.18.0) (2022-10-26)
 
 
