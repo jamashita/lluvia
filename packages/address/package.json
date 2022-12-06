@@ -25,7 +25,7 @@
   "dependencies": {
     "@jamashita/anden-object": "2.24.0",
     "@jamashita/anden-type": "2.12.1",
-    "@jamashita/lluvia-collection": "^2.18.0"
+    "@jamashita/lluvia-collection": "^2.19.0"
   },
   "devDependencies": {
     "@jamashita/anden-error": "2.19.0"
