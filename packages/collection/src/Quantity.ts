@@ -27,7 +27,7 @@ export abstract class Quantity<out K, out V> extends Objet implements Collection
 
   public abstract get(key: K): Nullable<V>;
 
-  public abstract iterator(): Iterator<[K, V]>;
+  public abstract iterator(): IterableIterator<[K, V]>;
 
   public abstract map<W>(mapping: Mapping<V, W>): Collection<K, W>;
 
@@ -37,7 +37,7 @@ export abstract class Quantity<out K, out V> extends Objet implements Collection
 
   public abstract values(): Iterable<V>;
 
-  public [Symbol.iterator](): Iterator<[K, V]> {
+  public [Symbol.iterator](): IterableIterator<[K, V]> {
     return this.iterator();
   }
 
