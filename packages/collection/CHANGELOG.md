@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-collection-v2.19.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.18.0...@jamashita/lluvia-collection-v2.19.0) (2022-12-06)
+
+
+### Features
+
+* 🎸 Iterable -> IterablteIterator ([0dcbc11](https://github.com/jamashita/lluvia/commit/0dcbc11627e23a9977bb21ed405fa6792db194f8))
+
 # [@jamashita/lluvia-collection-v2.18.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.17.0...@jamashita/lluvia-collection-v2.18.0) (2022-11-29)
 
 
