@@ -587,6 +587,14 @@
     eslint-plugin-react "7.31.11"
     eslint-plugin-react-hooks "4.6.0"
 
+"@jamashita/lluvia-collection@^2.19.0":
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/@jamashita/lluvia-collection/-/lluvia-collection-2.19.0.tgz#37443333e9e7e507a19bb5bf41f9d8647e8b0633"
+  integrity sha512-VkCV7EElLceqwvVBh9JE42FVLMz4384zn/S0m6MtTDUwwo9TCaEZmUrlDfAR0NgOyNMx5lCf2901IXb9gc4GRg==
+  dependencies:
+    "@jamashita/anden-object" "2.24.0"
+    "@jamashita/anden-type" "2.12.1"
+
 "@jest/console@^29.3.1":
   version "29.3.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-29.3.1.tgz#3e3f876e4e47616ea3b1464b9fbda981872e9583"
