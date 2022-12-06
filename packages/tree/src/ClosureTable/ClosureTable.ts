@@ -85,7 +85,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
     return this.table.isEmpty();
   }
 
-  public iterator(): Iterator<[K, ReadonlyAddress<K>]> {
+  public iterator(): IterableIterator<[K, ReadonlyAddress<K>]> {
     return this.table.iterator();
   }
 

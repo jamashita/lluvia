@@ -88,7 +88,7 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
     return this.hierarchies.isEmpty();
   }
 
-  public iterator(): Iterator<[number, ClosureTableHierarchy<K>]> {
+  public iterator(): IterableIterator<[number, ClosureTableHierarchy<K>]> {
     return this.hierarchies.iterator();
   }
 
