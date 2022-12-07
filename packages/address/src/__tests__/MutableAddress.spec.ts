@@ -2,6 +2,12 @@ import { MockValueObject } from '@jamashita/anden-object';
 import { MutableAddress } from '../MutableAddress';
 
 describe('MutableAddress', () => {
+  describe('await', () => {
+    it('returns resolved MutableAddress', async () => {
+      await expect(MutableAddress.await(MutableAddress.empty<Promise<unknown>>())).resolves.toBeInstanceOf(MutableAddress);
+    });
+  });
+
   describe('empty', () => {
     it('does not return singleton instance', () => {
       expect(MutableAddress.empty()).not.toBe(MutableAddress.empty());

@@ -1,8 +1,16 @@
 import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
+import { ReadonlySequence } from './ReadonlySequence';
+import { SequenceUtil } from './SequenceUtil';
 
 export class MutableSequence<out V> extends ASequence<V> {
+  public static await<V>(sequence: ReadonlySequence<PromiseLike<V>>): Promise<MutableSequence<V>> {
+    return SequenceUtil.await(sequence, (values: Array<V>) => {
+      return MutableSequence.ofArray(values);
+    });
+  }
+
   public static empty<V>(): MutableSequence<V> {
     return MutableSequence.ofArray([] as Array<V>);
   }
