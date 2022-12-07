@@ -3,6 +3,12 @@ import { Nullable } from '@jamashita/anden-type';
 import { ImmutableSequence } from '../ImmutableSequence';
 
 describe('ImmutableSequence', () => {
+  describe('await', () => {
+    it('returns resolved ImmutableSequence', async () => {
+      await expect(ImmutableSequence.await(ImmutableSequence.empty<Promise<unknown>>())).resolves.toBeInstanceOf(ImmutableSequence);
+    });
+  });
+
   describe('empty', () => {
     it('returns singleton instance', () => {
       expect(ImmutableSequence.empty()).toBe(ImmutableSequence.empty());
