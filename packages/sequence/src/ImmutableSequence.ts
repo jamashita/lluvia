@@ -1,9 +1,17 @@
 import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
+import { ReadonlySequence } from './ReadonlySequence';
+import { SequenceUtil } from './SequenceUtil';
 
 export class ImmutableSequence<out V> extends ASequence<V> {
   private static readonly EMPTY: ImmutableSequence<unknown> = new ImmutableSequence<unknown>([]);
+
+  public static await<V>(sequence: ReadonlySequence<PromiseLike<V>>): Promise<ImmutableSequence<V>> {
+    return SequenceUtil.await(sequence, (values: Array<V>) => {
+      return ImmutableSequence.ofArray(values);
+    });
+  }
 
   public static empty<V>(): ImmutableSequence<V> {
     return ImmutableSequence.EMPTY as ImmutableSequence<V>;
