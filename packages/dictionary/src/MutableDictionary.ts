@@ -1,8 +1,16 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { ADictionary } from './ADictionary';
+import { DictionaryUtil } from './DictionaryUtil';
+import { ReadonlyDictionary } from './ReadonlyDictionary';
 
 export class MutableDictionary<out K, out V> extends ADictionary<K, V> {
+  public static await<K, V>(dictionary: ReadonlyDictionary<K, PromiseLike<V>>): Promise<MutableDictionary<K, V>> {
+    return DictionaryUtil.await(dictionary, (values: Map<K, V>) => {
+      return MutableDictionary.ofMap(values);
+    });
+  }
+
   public static empty<K, V>(): MutableDictionary<K, V> {
     return MutableDictionary.ofInternal<K, V>(new Map());
   }

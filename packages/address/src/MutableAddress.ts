@@ -1,8 +1,16 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
+import { AddressUtil } from './AddressUtil';
+import { ReadonlyAddress } from './ReadonlyAddress';
 
 export class MutableAddress<out V> extends AAddress<V> {
+  public static await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<MutableAddress<V>> {
+    return AddressUtil.await(address, (values: Set<V>) => {
+      return MutableAddress.ofSet(values);
+    });
+  }
+
   public static empty<V>(): MutableAddress<V> {
     return MutableAddress.ofInternal<V>(new Map());
   }

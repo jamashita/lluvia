@@ -1,9 +1,17 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { ADictionary } from './ADictionary';
+import { DictionaryUtil } from './DictionaryUtil';
+import { ReadonlyDictionary } from './ReadonlyDictionary';
 
 export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
   private static readonly EMPTY: ImmutableDictionary<unknown, unknown> = new ImmutableDictionary(new Map());
+
+  public static await<K, V>(dictionary: ReadonlyDictionary<K, PromiseLike<V>>): Promise<ImmutableDictionary<K, V>> {
+    return DictionaryUtil.await(dictionary, (values: Map<K, V>) => {
+      return ImmutableDictionary.ofMap(values);
+    });
+  }
 
   public static empty<K, V>(): ImmutableDictionary<K, V> {
     return ImmutableDictionary.EMPTY as ImmutableDictionary<K, V>;

@@ -1,7 +1,13 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { MutableDictionary } from '../MutableDictionary';
 
-describe('MutableProject', () => {
+describe('MutableDictionary', () => {
+  describe('await', () => {
+    it('returns resolved MutableDictionary', async () => {
+      await expect(MutableDictionary.await(MutableDictionary.empty<unknown, Promise<unknown>>())).resolves.toBeInstanceOf(MutableDictionary);
+    });
+  });
+
   describe('empty', () => {
     it('does not return singleton instance', () => {
       expect(MutableDictionary.empty()).not.toBe(MutableDictionary.empty());
