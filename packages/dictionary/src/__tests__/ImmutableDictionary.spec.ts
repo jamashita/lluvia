@@ -1,7 +1,13 @@
 import { MockValueObject } from '@jamashita/anden-object';
 import { ImmutableDictionary } from '../ImmutableDictionary';
 
-describe('ImmutableProject', () => {
+describe('ImmutableDictionary', () => {
+  describe('await', () => {
+    it('returns resolved ImmutableDictionary', async () => {
+      await expect(ImmutableDictionary.await(ImmutableDictionary.empty<unknown, Promise<unknown>>())).resolves.toBeInstanceOf(ImmutableDictionary);
+    });
+  });
+
   describe('empty', () => {
     it('returns singleton singleton instance', () => {
       expect(ImmutableDictionary.empty()).toBe(ImmutableDictionary.empty());

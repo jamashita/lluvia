@@ -1,9 +1,17 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
 import { Collection, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
+import { AddressUtil } from './AddressUtil';
+import { ReadonlyAddress } from './ReadonlyAddress';
 
 export class ImmutableAddress<out V> extends AAddress<V> {
   private static readonly EMPTY: ImmutableAddress<unknown> = new ImmutableAddress(new Map());
+
+  public static await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<ImmutableAddress<V>> {
+    return AddressUtil.await(address, (values: Set<V>) => {
+      return ImmutableAddress.ofSet(values);
+    });
+  }
 
   public static empty<V>(): ImmutableAddress<V> {
     return ImmutableAddress.EMPTY as ImmutableAddress<V>;
