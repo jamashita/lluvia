@@ -1,3 +1,11 @@
+# [@jamashita/lluvia-sequence-v2.23.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.22.0...@jamashita/lluvia-sequence-v2.23.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 filter supports narrowing ([b60408d](https://github.com/jamashita/lluvia/commit/b60408d2d844a8c59cc8de32fe1254ffd1fdaef3))
+* 🎸 interface overload ordering ([6c26a0e](https://github.com/jamashita/lluvia/commit/6c26a0e2b6e45c939dfa0f3a1e73a65ee3c1c0ec))
+
 # [@jamashita/lluvia-sequence-v2.22.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.21.0...@jamashita/lluvia-sequence-v2.22.0) (2022-12-09)
 
 
