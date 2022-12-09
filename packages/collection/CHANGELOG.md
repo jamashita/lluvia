@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-collection-v2.23.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.22.0...@jamashita/lluvia-collection-v2.23.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 filter supports narrowing ([b60408d](https://github.com/jamashita/lluvia/commit/b60408d2d844a8c59cc8de32fe1254ffd1fdaef3))
+
 # [@jamashita/lluvia-collection-v2.22.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.21.0...@jamashita/lluvia-collection-v2.22.0) (2022-12-09)
 
 
