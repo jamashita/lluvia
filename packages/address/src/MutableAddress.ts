@@ -53,6 +53,8 @@ export class MutableAddress<out V> extends AAddress<V> {
     return MutableAddress.ofInternal(new Map(this.address));
   }
 
+  public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V>;
+  public filter<W extends V>(predicate: BinaryPredicate<W, void>): MutableAddress<W>;
   public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
     return MutableAddress.ofInternal(this.filterInternal(predicate));
   }

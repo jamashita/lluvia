@@ -14,6 +14,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   public abstract duplicate(): ADictionary<K, V>;
 
   public abstract override filter(predicate: BinaryPredicate<V, K>): ADictionary<K, V>;
+  public abstract override filter<W extends V>(predicate: BinaryPredicate<W, K>): ADictionary<K, W>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): ADictionary<K, W>;
 
