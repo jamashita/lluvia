@@ -11,6 +11,7 @@ export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
 
   filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
 
+  find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Nullable<W>;
 
   find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
