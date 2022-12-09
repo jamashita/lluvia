@@ -1,6 +1,6 @@
 import { Objet } from '@jamashita/anden-object';
 import { Ambiguous, BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable } from '@jamashita/anden-type';
-import { Quantity } from '@jamashita/lluvia-collection';
+import { NarrowingBinaryPredicate, Quantity } from '@jamashita/lluvia-collection';
 import { Dictionary } from './Dictionary';
 
 export abstract class ADictionary<out K, out V> extends Quantity<K, V> implements Dictionary<K, V> {
@@ -14,7 +14,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   public abstract duplicate(): ADictionary<K, V>;
 
   public abstract override filter(predicate: BinaryPredicate<V, K>): ADictionary<K, V>;
-  public abstract override filter<W extends V>(predicate: BinaryPredicate<W, K>): ADictionary<K, W>;
+  public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): ADictionary<K, W>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): ADictionary<K, W>;
 
@@ -75,8 +75,8 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     return true;
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, K>): Map<K | string, [K, V]> {
-    const m: Map<K | string, [K, V]> = new Map();
+  protected filterInternal<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, K>): Map<K | string, [K, W]> {
+    const m: Map<K | string, [K, W]> = new Map();
 
     this.dictionary.forEach(([k, v]: [K, V]) => {
       if (predicate(v, k)) {

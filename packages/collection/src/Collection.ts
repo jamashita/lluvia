@@ -1,5 +1,7 @@
 import { BinaryPredicate, ForEach, Mapping, Nominative, Nullable } from '@jamashita/anden-type';
 
+export type NarrowingBinaryPredicate<A1, B1 extends A1, A2> = (arg1: A1, arg2: A2) => arg1 is B1;
+
 export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
   contains(value: V): boolean;
 
@@ -7,7 +9,7 @@ export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
 
   filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
 
-  filter<W extends V>(predicate: BinaryPredicate<W, K>): Collection<K, W>;
+  filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Collection<K, W>;
 
   find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 

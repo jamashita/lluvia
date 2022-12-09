@@ -1,10 +1,10 @@
 import { BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden-type';
-import { Collection } from '@jamashita/lluvia-collection';
+import { Collection, NarrowingBinaryPredicate } from '@jamashita/lluvia-collection';
 
 export interface ReadonlyAddress<out V> extends Collection<void, V>, Cloneable<ReadonlyAddress<V>> {
   filter(predicate: BinaryPredicate<V, void>): ReadonlyAddress<V>;
 
-  filter<W extends V>(predicate: BinaryPredicate<W, void>): ReadonlyAddress<W>;
+  filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): ReadonlyAddress<W>;
 
   iterator(): IterableIterator<[void, V]>;
 

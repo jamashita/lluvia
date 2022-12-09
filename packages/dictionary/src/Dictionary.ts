@@ -1,10 +1,11 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
+import { NarrowingBinaryPredicate } from '@jamashita/lluvia-collection';
 import { ReadonlyDictionary } from './ReadonlyDictionary';
 
 export interface Dictionary<out K, out V> extends ReadonlyDictionary<K, V> {
   filter(predicate: BinaryPredicate<V, K>): Dictionary<K, V>;
 
-  filter<W extends V>(predicate: BinaryPredicate<W, K>): Dictionary<K, W>;
+  filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Dictionary<K, W>;
 
   map<W>(mapping: Mapping<V, W>): Dictionary<K, W>;
 
