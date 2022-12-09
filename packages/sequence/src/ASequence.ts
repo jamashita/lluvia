@@ -24,8 +24,8 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   public abstract duplicate(): ASequence<V>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, number>): ASequence<V>;
   public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ASequence<W>;
+  public abstract override filter(predicate: BinaryPredicate<V, number>): ASequence<V>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): ASequence<W>;
 

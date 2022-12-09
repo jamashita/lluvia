@@ -53,8 +53,8 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
     return ImmutableDictionary.ofInternal(new Map(this.dictionary));
   }
 
-  public filter(predicate: BinaryPredicate<V, K>): ImmutableDictionary<K, V>;
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): ImmutableDictionary<K, W>;
+  public filter(predicate: BinaryPredicate<V, K>): ImmutableDictionary<K, V>;
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, K>): ImmutableDictionary<K, W> {
     return ImmutableDictionary.ofInternal(this.filterInternal(predicate));
   }

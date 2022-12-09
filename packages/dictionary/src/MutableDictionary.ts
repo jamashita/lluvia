@@ -43,8 +43,8 @@ export class MutableDictionary<out K, out V> extends ADictionary<K, V> {
     return MutableDictionary.ofInternal(new Map(this.dictionary));
   }
 
-  public filter(predicate: BinaryPredicate<V, K>): MutableDictionary<K, V>;
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): MutableDictionary<K, W>;
+  public filter(predicate: BinaryPredicate<V, K>): MutableDictionary<K, V>;
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, K>): MutableDictionary<K, W> {
     return MutableDictionary.ofInternal(this.filterInternal(predicate));
   }
