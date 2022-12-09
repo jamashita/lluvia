@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-collection-v2.22.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.21.0...@jamashita/lluvia-collection-v2.22.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 interface overload ordering ([6c26a0e](https://github.com/jamashita/lluvia/commit/6c26a0e2b6e45c939dfa0f3a1e73a65ee3c1c0ec))
+
 # [@jamashita/lluvia-collection-v2.21.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-collection-v2.20.0...@jamashita/lluvia-collection-v2.21.0) (2022-12-09)
 
 
