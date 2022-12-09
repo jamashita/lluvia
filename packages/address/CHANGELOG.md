@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-address-v2.22.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-address-v2.21.0...@jamashita/lluvia-address-v2.22.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 filter signature overload ([4dcf063](https://github.com/jamashita/lluvia/commit/4dcf06391f6d84c035f6a96c9fa91b456c2cb049))
+
 # [@jamashita/lluvia-address-v2.21.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-address-v2.20.0...@jamashita/lluvia-address-v2.21.0) (2022-12-07)
 
 
