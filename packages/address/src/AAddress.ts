@@ -64,7 +64,9 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
     return m;
   }
 
-  public find(predicate: BinaryPredicate<V, void>): Nullable<V> {
+  public find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): Nullable<W>;
+  public find(predicate: BinaryPredicate<V, void>): Nullable<V>;
+  public find<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, void>): Nullable<W> {
     for (const [, v] of this.address) {
       if (predicate(v)) {
         return v;
