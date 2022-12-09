@@ -89,8 +89,10 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
     return arr;
   }
 
-  public find(predicate: BinaryPredicate<V, number>): Nullable<V> {
-    const found: Ambiguous<V> = this.sequence.find(predicate);
+  public find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): Nullable<W>;
+  public find(predicate: BinaryPredicate<V, number>): Nullable<V>;
+  public find<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): Nullable<W> {
+    const found: Ambiguous<W> = this.sequence.find(predicate);
 
     if (Kind.isUndefined(found)) {
       return null;

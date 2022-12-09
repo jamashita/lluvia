@@ -1,6 +1,6 @@
 import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, ForEach, isNominative, Mapping, Nullable } from '@jamashita/anden-type';
-import { Collection } from './Collection';
+import { Collection, NarrowingBinaryPredicate } from './Collection';
 
 export abstract class Quantity<out K, out V> extends Objet implements Collection<K, V> {
   protected static genKey<T>(key: T): T | string {
@@ -19,9 +19,10 @@ export abstract class Quantity<out K, out V> extends Objet implements Collection
 
   public abstract every(predicate: BinaryPredicate<V, K>): boolean;
 
-  public abstract filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
   public abstract filter<W extends V>(predicate: BinaryPredicate<W, K>): Collection<K, W>;
+  public abstract filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
 
+  public abstract find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Nullable<W>;
   public abstract find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
   public abstract forEach(foreach: ForEach<K, V>): void;
