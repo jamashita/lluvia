@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-dictionary-v1.4.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-dictionary-v1.3.0...@jamashita/lluvia-dictionary-v1.4.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 filter signature overload ([4dcf063](https://github.com/jamashita/lluvia/commit/4dcf06391f6d84c035f6a96c9fa91b456c2cb049))
+
 # [@jamashita/lluvia-dictionary-v1.3.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-dictionary-v1.2.0...@jamashita/lluvia-dictionary-v1.3.0) (2022-12-07)
 
 
