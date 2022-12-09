@@ -65,8 +65,8 @@ export class ImmutableAddress<out V> extends AAddress<V> {
     return ImmutableAddress.ofInternal(new Map(this.address));
   }
 
-  public filter(predicate: BinaryPredicate<V, void>): ImmutableAddress<V>;
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): ImmutableAddress<W>;
+  public filter(predicate: BinaryPredicate<V, void>): ImmutableAddress<V>;
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, void>): ImmutableAddress<W> {
     return ImmutableAddress.ofInternal(this.filterInternal(predicate));
   }

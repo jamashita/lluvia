@@ -7,9 +7,10 @@ export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
 
   every(predicate: BinaryPredicate<V, K>): boolean;
 
+  filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Collection<K, W>;
+
   filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
 
-  filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Collection<K, W>;
 
   find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
