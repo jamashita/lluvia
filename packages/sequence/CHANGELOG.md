@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-sequence-v2.20.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.19.0...@jamashita/lluvia-sequence-v2.20.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 util.await() ([89255e9](https://github.com/jamashita/lluvia/commit/89255e919ca8973e69dac850d865613ea0b76b07))
+
 # [@jamashita/lluvia-sequence-v2.19.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-sequence-v2.18.0...@jamashita/lluvia-sequence-v2.19.0) (2022-12-06)
 
 
