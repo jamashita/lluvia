@@ -87,7 +87,9 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     return m;
   }
 
-  public find(predicate: BinaryPredicate<V, K>): Nullable<V> {
+  public find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Nullable<W>;
+  public find(predicate: BinaryPredicate<V, K>): Nullable<V>;
+  public find<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, K>): Nullable<W> {
     for (const [, [k, v]] of this.dictionary) {
       if (predicate(v, k)) {
         return v;
