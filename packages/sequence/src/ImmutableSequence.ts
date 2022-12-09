@@ -49,8 +49,8 @@ export class ImmutableSequence<out V> extends ASequence<V> {
     return ImmutableSequence.ofArray([...this.sequence]);
   }
 
-  public filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<V>;
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ImmutableSequence<W>;
+  public filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<V>;
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): ImmutableSequence<W> {
     return ImmutableSequence.ofArray(this.filterInternal(predicate));
   }

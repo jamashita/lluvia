@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-address-v2.23.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-address-v2.22.0...@jamashita/lluvia-address-v2.23.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 filter narrowing ([e51b448](https://github.com/jamashita/lluvia/commit/e51b448ca631ad02cf9281c7cb761c15d2ccc3f6))
+
 # [@jamashita/lluvia-address-v2.22.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-address-v2.21.0...@jamashita/lluvia-address-v2.22.0) (2022-12-09)
 
 

@@ -15,8 +15,8 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
 
   public abstract duplicate(): AAddress<V>;
 
-  public abstract override filter(predicate: BinaryPredicate<V, void>): AAddress<V>;
   public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): AAddress<W>;
+  public abstract override filter(predicate: BinaryPredicate<V, void>): AAddress<V>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): AAddress<W>;
 

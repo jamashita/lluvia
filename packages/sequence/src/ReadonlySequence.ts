@@ -2,9 +2,9 @@ import { BinaryFunction, BinaryPredicate, Cloneable, Mapping } from '@jamashita/
 import { Collection, NarrowingBinaryPredicate } from '@jamashita/lluvia-collection';
 
 export interface ReadonlySequence<out V> extends Collection<number, V>, Cloneable<ReadonlySequence<V>> {
-  filter(predicate: BinaryPredicate<V, number>): ReadonlySequence<V>;
-
   filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ReadonlySequence<W>;
+
+  filter(predicate: BinaryPredicate<V, number>): ReadonlySequence<V>;
 
   iterator(): IterableIterator<[number, V]>;
 

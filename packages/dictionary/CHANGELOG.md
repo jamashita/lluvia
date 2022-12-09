@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-dictionary-v1.5.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-dictionary-v1.4.0...@jamashita/lluvia-dictionary-v1.5.0) (2022-12-09)
+
+
+### Features
+
+* 🎸 filter narrowing ([e51b448](https://github.com/jamashita/lluvia/commit/e51b448ca631ad02cf9281c7cb761c15d2ccc3f6))
+
 # [@jamashita/lluvia-dictionary-v1.4.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-dictionary-v1.3.0...@jamashita/lluvia-dictionary-v1.4.0) (2022-12-09)
 
 

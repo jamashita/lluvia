@@ -41,8 +41,8 @@ export class MutableSequence<out V> extends ASequence<V> {
     return MutableSequence.ofArray([...this.sequence]);
   }
 
-  public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V>;
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W>;
+  public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V>;
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W> {
     return MutableSequence.ofArray(this.filterInternal(predicate));
   }
