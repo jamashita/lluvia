@@ -1,5 +1,5 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
-import { Collection, Quantity } from '@jamashita/lluvia-collection';
+import { Collection, NarrowingBinaryPredicate, Quantity } from '@jamashita/lluvia-collection';
 import { AAddress } from './AAddress';
 import { AddressUtil } from './AddressUtil';
 import { ReadonlyAddress } from './ReadonlyAddress';
@@ -55,7 +55,7 @@ export class MutableAddress<out V> extends AAddress<V> {
 
   public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V>;
   public filter<W extends V>(predicate: BinaryPredicate<W, void>): MutableAddress<W>;
-  public filter(predicate: BinaryPredicate<V, void>): MutableAddress<V> {
+  public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, void>): MutableAddress<V> {
     return MutableAddress.ofInternal(this.filterInternal(predicate));
   }
 

@@ -1,6 +1,6 @@
 import { Objet } from '@jamashita/anden-object';
 import { BinaryPredicate, ForEach, Mapping, Nullable } from '@jamashita/anden-type';
-import { Quantity } from '@jamashita/lluvia-collection';
+import { NarrowingBinaryPredicate, Quantity } from '@jamashita/lluvia-collection';
 import { Address } from './Address';
 
 export abstract class AAddress<out V> extends Quantity<void, V> implements Address<V> {
@@ -16,6 +16,7 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
   public abstract duplicate(): AAddress<V>;
 
   public abstract override filter(predicate: BinaryPredicate<V, void>): AAddress<V>;
+  public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): AAddress<W>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): AAddress<W>;
 
@@ -51,8 +52,8 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
     return true;
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, void>): Map<V | string, V> {
-    const m: Map<V | string, V> = new Map();
+  protected filterInternal<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, void>): Map<W | string, W> {
+    const m: Map<W | string, W> = new Map();
 
     this.address.forEach((value: V) => {
       if (predicate(value, undefined)) {
