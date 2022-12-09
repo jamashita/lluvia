@@ -1,3 +1,10 @@
+# [@jamashita/lluvia-dictionary-v1.3.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-dictionary-v1.2.0...@jamashita/lluvia-dictionary-v1.3.0) (2022-12-07)
+
+
+### Features
+
+* 🎸 util.await() ([89255e9](https://github.com/jamashita/lluvia/commit/89255e919ca8973e69dac850d865613ea0b76b07))
+
 # [@jamashita/lluvia-dictionary-v1.2.0](https://github.com/jamashita/lluvia/compare/@jamashita/lluvia-dictionary-v1.1.0...@jamashita/lluvia-dictionary-v1.2.0) (2022-12-06)
 
 
