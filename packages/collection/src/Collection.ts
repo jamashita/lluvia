@@ -7,6 +7,8 @@ export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
 
   filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
 
+  filter<W extends V>(predicate: BinaryPredicate<W, K>): Collection<K, W>;
+
   find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
   forEach(foreach: ForEach<K, V>): void;
