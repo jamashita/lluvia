@@ -1,5 +1,5 @@
 import { BinaryPredicate, Mapping } from '@jamashita/anden-type';
-import { Collection, Quantity } from '@jamashita/lluvia-collection';
+import { Collection, NarrowingBinaryPredicate, Quantity } from '@jamashita/lluvia-collection';
 import { ADictionary } from './ADictionary';
 import { DictionaryUtil } from './DictionaryUtil';
 import { ReadonlyDictionary } from './ReadonlyDictionary';
@@ -54,8 +54,8 @@ export class ImmutableDictionary<out K, out V> extends ADictionary<K, V> {
   }
 
   public filter(predicate: BinaryPredicate<V, K>): ImmutableDictionary<K, V>;
-  public filter<W extends V>(predicate: BinaryPredicate<W, K>): ImmutableDictionary<K, W>;
-  public filter(predicate: BinaryPredicate<V, K>): ImmutableDictionary<K, V> {
+  public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): ImmutableDictionary<K, W>;
+  public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, K>): ImmutableDictionary<K, W> {
     return ImmutableDictionary.ofInternal(this.filterInternal(predicate));
   }
 
