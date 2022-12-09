@@ -9,7 +9,7 @@ import {
   Mapping,
   Nullable
 } from '@jamashita/anden-type';
-import { Quantity } from '@jamashita/lluvia-collection';
+import { NarrowingBinaryPredicate, Quantity } from '@jamashita/lluvia-collection';
 import { Sequence } from './Sequence';
 
 export abstract class ASequence<out V> extends Quantity<number, V> implements Sequence<V> {
@@ -25,7 +25,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   public abstract duplicate(): ASequence<V>;
 
   public abstract override filter(predicate: BinaryPredicate<V, number>): ASequence<V>;
-  public abstract override filter<W extends V>(predicate: BinaryPredicate<W, number>): ASequence<W>;
+  public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ASequence<W>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): ASequence<W>;
 
@@ -77,8 +77,8 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
     return this.sequence.every(predicate);
   }
 
-  protected filterInternal(predicate: BinaryPredicate<V, number>): Array<V> {
-    const arr: Array<V> = [];
+  protected filterInternal<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): Array<W> {
+    const arr: Array<W> = [];
 
     this.sequence.forEach((v: V, i: number) => {
       if (predicate(v, i)) {

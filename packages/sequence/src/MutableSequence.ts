@@ -1,5 +1,5 @@
 import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden-type';
-import { Collection } from '@jamashita/lluvia-collection';
+import { Collection, NarrowingBinaryPredicate } from '@jamashita/lluvia-collection';
 import { ASequence } from './ASequence';
 import { ReadonlySequence } from './ReadonlySequence';
 import { SequenceUtil } from './SequenceUtil';
@@ -42,8 +42,8 @@ export class MutableSequence<out V> extends ASequence<V> {
   }
 
   public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V>;
-  public filter<W extends V>(predicate: BinaryPredicate<W, number>): MutableSequence<W>;
-  public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V> {
+  public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W>;
+  public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W> {
     return MutableSequence.ofArray(this.filterInternal(predicate));
   }
 
