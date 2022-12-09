@@ -20,6 +20,7 @@ export abstract class Quantity<out K, out V> extends Objet implements Collection
   public abstract every(predicate: BinaryPredicate<V, K>): boolean;
 
   public abstract filter(predicate: BinaryPredicate<V, K>): Collection<K, V>;
+  public abstract filter<W extends V>(predicate: BinaryPredicate<W, K>): Collection<K, W>;
 
   public abstract find(predicate: BinaryPredicate<V, K>): Nullable<V>;
 
