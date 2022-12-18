@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/jamashita/lluvia/compare/v1.0.2...v1.1.0) (2022-12-18)
+
+
+### Features
+
+* 🎸 Iterable -> IterableIterator ([32d7727](https://github.com/jamashita/lluvia/commit/32d772797f4f2364237d712cff9c9892fa988ece))
+* 🎸 Iterable -> IterableIterator ([7a5a1f0](https://github.com/jamashita/lluvia/commit/7a5a1f04c844851a874fd8c36d7bfeb5cbbe7bcb))
+
 ## [1.0.2](https://github.com/jamashita/lluvia/compare/v1.0.1...v1.0.2) (2022-12-18)
 
 

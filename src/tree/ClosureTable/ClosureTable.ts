@@ -115,7 +115,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
     return ImmutableSequence.ofArray(keys);
   }
 
-  public values(): Iterable<ReadonlyAddress<K>> {
+  public values(): IterableIterator<ReadonlyAddress<K>> {
     return this.table.values();
   }
 }
