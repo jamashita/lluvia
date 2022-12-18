@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jamashita/lluvia/compare/v1.0.0...v1.0.1) (2022-12-18)
+
+
+### Bug Fixes
+
+* 🐛 export path ([0575560](https://github.com/jamashita/lluvia/commit/05755609e34108bd3a9293e0064694a87091b4a4))
+
 # 1.0.0 (2022-12-18)
 
 
