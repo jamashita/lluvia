@@ -116,7 +116,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public iterator(): IterableIterator<[number, V]> {
-    return this.sequence.map<[number, V]>((e: V, i: number) => {
+    return this.sequence.map((e: V, i: number): [number, V] => {
       return [i, e];
     }).values();
   }
@@ -169,7 +169,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
     return [...this.sequence];
   }
 
-  public values(): Iterable<V> {
-    return this.toArray();
+  public values(): IterableIterator<V> {
+    return this.sequence.values();
   }
 }

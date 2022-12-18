@@ -37,7 +37,7 @@ export abstract class Quantity<out K, out V> extends Objet implements Collection
 
   public abstract some(predicate: BinaryPredicate<V, K>): boolean;
 
-  public abstract values(): Iterable<V>;
+  public abstract values(): IterableIterator<V>;
 
   public [Symbol.iterator](): IterableIterator<[K, V]> {
     return this.iterator();

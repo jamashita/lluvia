@@ -3,6 +3,8 @@ import { BinaryPredicate, ForEach, Mapping, Nominative, Nullable } from '@jamash
 export type NarrowingBinaryPredicate<A1, B1 extends A1, A2> = (arg1: A1, arg2: A2) => arg1 is B1;
 
 export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
+  [Symbol.iterator](): IterableIterator<[K, V]>;
+
   contains(value: V): boolean;
 
   every(predicate: BinaryPredicate<V, K>): boolean;
@@ -27,5 +29,5 @@ export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
 
   some(predicate: BinaryPredicate<V, K>): boolean;
 
-  values(): Iterable<V>;
+  values(): IterableIterator<V>;
 }
