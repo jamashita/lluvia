@@ -127,14 +127,14 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     return this.dictionary.values();
   }
 
-  public keys(): Iterable<K> {
+  public keys(): IterableIterator<K> {
     const iterable: Array<K> = [];
 
     this.forEach((_: V, k: K) => {
       iterable.push(k);
     });
 
-    return iterable;
+    return iterable.values();
   }
 
   protected mapInternal<W>(mapping: Mapping<V, W>): Map<K | string, [K, W]> {
@@ -183,14 +183,14 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     return map;
   }
 
-  public values(): Iterable<V> {
+  public values(): IterableIterator<V> {
     const iterable: Array<V> = [];
 
     this.forEach((v: V) => {
       iterable.push(v);
     });
 
-    return iterable;
+    return iterable.values();
   }
 }
 

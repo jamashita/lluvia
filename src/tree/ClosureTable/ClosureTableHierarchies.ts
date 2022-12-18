@@ -114,7 +114,7 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
     });
   }
 
-  public values(): Iterable<ClosureTableHierarchy<K>> {
+  public values(): IterableIterator<ClosureTableHierarchy<K>> {
     return this.hierarchies.values();
   }
 }

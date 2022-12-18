@@ -10,7 +10,7 @@ export interface ReadonlyDictionary<out K, out V> extends Collection<K, V>, Clon
 
   iterator(): IterableIterator<[K, V]>;
 
-  keys(): Iterable<K>;
+  keys(): IterableIterator<K>;
 
   map<W>(mapping: Mapping<V, W>): ReadonlyDictionary<K, W>;
 
