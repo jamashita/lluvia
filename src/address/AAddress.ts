@@ -87,15 +87,10 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
   }
 
   public iterator(): IterableIterator<[void, V]> {
-    const iterator: IterableIterator<V> = this.address.values();
     const iterable: Array<[void, V]> = [];
 
-    let res: IteratorResult<V> = iterator.next();
-
-    while (res.done !== true) {
-      iterable.push([undefined, res.value]);
-
-      res = iterator.next();
+    for (const [, v] of this.address) {
+      iterable.push([undefined, v]);
     }
 
     return iterable.values();
@@ -143,18 +138,7 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
     return new Set<V>(this.address.values());
   }
 
-  public values(): Iterable<V> {
-    const iterator: IterableIterator<V> = this.address.values();
-    const iterable: Array<V> = [];
-
-    let res: IteratorResult<V> = iterator.next();
-
-    while (res.done !== true) {
-      iterable.push(res.value);
-
-      res = iterator.next();
-    }
-
-    return iterable;
+  public values(): IterableIterator<V> {
+    return this.address.values();
   }
 }
