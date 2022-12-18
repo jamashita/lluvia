@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/jamashita/lluvia/compare/v1.0.1...v1.0.2) (2022-12-18)
+
+
+### Bug Fixes
+
+* 🐛 file ([c73dedd](https://github.com/jamashita/lluvia/commit/c73dedde747cb5a21346d85036ef5430316bef65))
+
 ## [1.0.1](https://github.com/jamashita/lluvia/compare/v1.0.0...v1.0.1) (2022-12-18)
 
 
