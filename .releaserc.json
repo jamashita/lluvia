@@ -1,7 +1,6 @@
 {
   "branches": "release",
   "repositoryUrl": "https://github.com/jamashita/lluvia",
-  "extends": "semantic-release-monorepo",
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
