@@ -10,6 +10,47 @@
   "author": "jamashita <jamashita@arachnid.xyz>",
   "sideEffects": false,
   "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./address": {
+      "import": {
+        "types": "./dist/address/index.d.ts",
+        "default": "./dist/address/index.js"
+      }
+    },
+    "./collection": {
+      "import": {
+        "types": "./dist/collection/index.d.ts",
+        "default": "./dist/collection/index.js"
+      }
+    },
+    "./dictionary": {
+      "import": {
+        "types": "./dist/dictionary/index.d.ts",
+        "default": "./dist/dictionary/index.js"
+      }
+    },
+    "./sequence": {
+      "import": {
+        "types": "./dist/sequence/index.d.ts",
+        "default": "./dist/sequence/index.js"
+      }
+    },
+    "./tree": {
+      "import": {
+        "types": "./dist/tree/index.d.ts",
+        "default": "./dist/tree/index.js"
+      }
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "yarn clean && tsc -b tsconfig.compilation.json",
     "clean": "rimraf dist",
@@ -22,10 +63,13 @@
     "update:install": "yarn install && yarn upgrade && yarn audit fix --force",
     "update:upgrade": "ncu --packageManager yarn --deep --upgrade"
   },
+  "dependencies": {
+    "@jamashita/anden": "1.1.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "17.3.0",
     "@commitlint/config-conventional": "17.3.0",
-    "@jamashita/eslint-plugin": "1.78.0",
+    "@jamashita/eslint-plugin": "1.79.0",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
@@ -37,7 +81,7 @@
     "husky": "8.0.2",
     "is-ci": "3.0.1",
     "lint-staged": "13.1.0",
-    "npm-check-updates": "16.5.5",
+    "npm-check-updates": "16.6.0",
     "rimraf": "3.0.2",
     "semantic-release": "19.0.5",
     "sort-package-json": "2.1.0",
