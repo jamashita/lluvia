@@ -22,7 +22,6 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
 
   public abstract set(key: K, value: V): ADictionary<K, V>;
 
-  // FIXME O(n)
   public contains(value: V): boolean {
     for (const [, [, v]] of this.dictionary) {
       if (value === v) {
@@ -117,6 +116,10 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
 
   public has(key: K): boolean {
     return this.dictionary.has(Quantity.genKey(key));
+  }
+
+  public override hashCode(): string {
+    return Objet.genHashCode(this.dictionary);
   }
 
   public override isEmpty(): boolean {

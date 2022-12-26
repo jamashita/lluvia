@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden/object';
-import { isEqualable, Kind, Nullable, Predicate } from '@jamashita/anden/type';
+import { isEquatable, Kind, Nullable, Predicate } from '@jamashita/anden/type';
 import { MutableAddress } from '../../address/index.js';
 import { TreeNode } from './TreeNode.js';
 
@@ -97,7 +97,7 @@ export abstract class ATreeNode<out V, in out T extends ATreeNode<V, T>> extends
     if (this.value === other) {
       return true;
     }
-    if (isEqualable(this.value)) {
+    if (isEquatable(this.value)) {
       return this.value.equals(other);
     }
 
