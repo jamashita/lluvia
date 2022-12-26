@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jamashita/lluvia/compare/v1.1.0...v1.2.0) (2022-12-26)
+
+
+### Features
+
+* 🎸 hashCode() ([e6935a5](https://github.com/jamashita/lluvia/commit/e6935a58c923b91dc0cc181039c632a94cdc3f5c))
+
 # [1.1.0](https://github.com/jamashita/lluvia/compare/v1.0.2...v1.1.0) (2022-12-18)
 
 
