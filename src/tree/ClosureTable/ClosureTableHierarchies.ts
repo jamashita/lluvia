@@ -9,7 +9,6 @@ import { TreeIDFactory } from './TreeIDFactory.js';
 
 export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
   private readonly hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>;
-
   private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies(ImmutableSequence.empty());
 
   public static empty<K extends TreeID>(): ClosureTableHierarchies<K> {
@@ -82,6 +81,10 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
 
   public get(key: number): Nullable<ClosureTableHierarchy<K>> {
     return this.hierarchies.get(key);
+  }
+
+  public override hashCode(): string {
+    return this.hierarchies.hashCode();
   }
 
   public override isEmpty(): boolean {
