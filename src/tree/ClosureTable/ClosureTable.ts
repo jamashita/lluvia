@@ -9,7 +9,6 @@ import { ClosureTableHierarchy } from './ClosureTableHierarchy.js';
 
 export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableDictionary<K, ReadonlyAddress<K>>;
-
   private static readonly EMPTY: ClosureTable<TreeID> = new ClosureTable(ImmutableDictionary.empty());
 
   public static empty<K extends TreeID>(): ClosureTable<K> {
@@ -81,6 +80,10 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
     return this.table.get(key);
   }
 
+  public override hashCode(): string {
+    throw this.table.hashCode();
+  }
+
   public override isEmpty(): boolean {
     return this.table.isEmpty();
   }
@@ -108,7 +111,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
   public sort(): ImmutableSequence<K> {
     const keys: Array<K> = [...this.table].sort(([, v1]: [K, ReadonlyAddress<K>], [, v2]: [K, ReadonlyAddress<K>]) => {
       return v1.size() - v2.size();
-    }).map<K>(([k]: [K, ReadonlyAddress<K>]) => {
+    }).map(([k]: [K, ReadonlyAddress<K>]): K => {
       return k;
     });
 

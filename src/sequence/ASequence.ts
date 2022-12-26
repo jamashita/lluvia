@@ -4,7 +4,7 @@ import {
   BinaryFunction,
   BinaryPredicate,
   ForEach,
-  isEqualable,
+  isEquatable,
   Kind,
   Mapping,
   Nullable
@@ -40,7 +40,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
       if (v === value) {
         return true;
       }
-      if (isEqualable(v)) {
+      if (isEquatable(v)) {
         return v.equals(value);
       }
 
@@ -65,7 +65,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
       if (v === other.sequence[i]) {
         return true;
       }
-      if (isEqualable(v)) {
+      if (isEquatable(v)) {
         return v.equals(other.sequence[i]);
       }
 
@@ -90,7 +90,9 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): Nullable<W>;
+
   public find(predicate: BinaryPredicate<V, number>): Nullable<V>;
+
   public find<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): Nullable<W> {
     const found: Ambiguous<W> = this.sequence.find(predicate);
 
@@ -113,6 +115,10 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
     }
 
     return v;
+  }
+
+  public override hashCode(): string {
+    return Objet.genHashCode(this.sequence);
   }
 
   public iterator(): IterableIterator<[number, V]> {
@@ -141,7 +147,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public serialize(): string {
-    return this.sequence.map<string>((v: V) => {
+    return this.sequence.map((v: V): string => {
       return Objet.identify(v);
     }).join(', ');
   }
