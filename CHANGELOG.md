@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/jamashita/lluvia/compare/v1.2.0...v1.3.0) (2022-12-27)
+
+
+### Features
+
+* 🎸 package updated ([f2cf799](https://github.com/jamashita/lluvia/commit/f2cf799c35580f5a4da0f4403a3a51bf153f71fb))
+* 🎸 remove hashCode() ([846276f](https://github.com/jamashita/lluvia/commit/846276fdf1b1c07ecfa41aa4904367bbe418ea4d))
+
 # [1.2.0](https://github.com/jamashita/lluvia/compare/v1.1.0...v1.2.0) (2022-12-26)
 
 
