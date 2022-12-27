@@ -176,6 +176,27 @@ describe('ImmutableDictionary', () => {
     });
   });
 
+  describe('hashCode', () => {
+    it('returns different hash when retaining value is added', () => {
+      const key1: MockValueObject<number> = new MockValueObject(1);
+      const key2: MockValueObject<number> = new MockValueObject(2);
+
+      const value1: MockValueObject<string> = new MockValueObject('a');
+      const value2: MockValueObject<string> = new MockValueObject('aa');
+
+      const dictionary1: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = ImmutableDictionary.ofMap(
+        new Map([
+          [key1, value1]
+        ])
+      );
+      const hashCode1: string = dictionary1.hashCode();
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<string>> = dictionary1.set(key2, value2);
+      const hashCode2: string = dictionary2.hashCode();
+
+      expect(hashCode1).not.toBe(hashCode2);
+    });
+  });
+
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
       const key: MockValueObject<number> = new MockValueObject(1);
