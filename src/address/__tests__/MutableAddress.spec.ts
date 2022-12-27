@@ -157,6 +157,22 @@ describe('MutableAddress', () => {
     });
   });
 
+  describe('hashCode', () => {
+    it('returns different hash when retaining value is added', () => {
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
+        new Set([value1])
+      );
+      const hashCode1: string = address1.hashCode();
+      const address2: MutableAddress<MockValueObject<number>> = address1.add(value2);
+      const hashCode2: string = address2.hashCode();
+
+      expect(hashCode1).not.toBe(hashCode2);
+    });
+  });
+
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);

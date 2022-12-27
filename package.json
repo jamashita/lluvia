@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/lluvia",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -73,7 +73,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.3.0",
     "@commitlint/config-conventional": "17.3.0",
-    "@jamashita/eslint-plugin": "1.80.0",
+    "@jamashita/eslint-plugin": "1.81.0",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
