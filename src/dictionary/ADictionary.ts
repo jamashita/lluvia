@@ -118,10 +118,6 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     return this.dictionary.has(Quantity.genKey(key));
   }
 
-  public override hashCode(): string {
-    return Objet.genHashCode(this.dictionary);
-  }
-
   public override isEmpty(): boolean {
     return this.size() === 0;
   }
