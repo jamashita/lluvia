@@ -146,6 +146,20 @@ describe('MutableSequence', () => {
     });
   });
 
+  describe('hashCode', () => {
+    it('returns different hash when retaining value is added', () => {
+      const value1: MockValueObject<number> = new MockValueObject(1);
+      const value2: MockValueObject<number> = new MockValueObject(2);
+
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1]);
+      const hashCode1: string = sequence1.hashCode();
+      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.add(value2);
+      const hashCode2: string = sequence2.hashCode();
+
+      expect(hashCode1).not.toBe(hashCode2);
+    });
+  });
+
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([

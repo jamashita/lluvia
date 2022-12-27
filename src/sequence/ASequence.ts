@@ -117,10 +117,6 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
     return v;
   }
 
-  public override hashCode(): string {
-    return Objet.genHashCode(this.sequence);
-  }
-
   public iterator(): IterableIterator<[number, V]> {
     return this.sequence.map((e: V, i: number): [number, V] => {
       return [i, e];
