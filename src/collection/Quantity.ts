@@ -31,8 +31,6 @@ export abstract class Quantity<out K, out V> extends Objet implements Collection
 
   public abstract get(key: K): Nullable<V>;
 
-  public abstract override hashCode(): string;
-
   public abstract iterator(): IterableIterator<[K, V]>;
 
   public abstract map<W>(mapping: Mapping<V, W>): Collection<K, W>;
