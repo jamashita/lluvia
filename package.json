@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/lluvia",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -68,12 +68,12 @@
     "update:upgrade": "ncu --packageManager yarn --deep --upgrade"
   },
   "dependencies": {
-    "@jamashita/anden": "1.4.1"
+    "@jamashita/anden": "1.6.0"
   },
   "devDependencies": {
     "@commitlint/cli": "17.3.0",
     "@commitlint/config-conventional": "17.3.0",
-    "@jamashita/eslint-plugin": "1.81.0",
+    "@jamashita/eslint-plugin": "1.82.1",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
@@ -90,7 +90,7 @@
     "semantic-release": "19.0.5",
     "sort-package-json": "2.1.0",
     "typescript": "4.9.4",
-    "vitest": "0.26.2"
+    "vitest": "0.26.3"
   },
   "engines": {
     "node": ">=16.0.0"
