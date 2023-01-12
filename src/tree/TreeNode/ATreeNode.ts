@@ -29,7 +29,7 @@ export abstract class ATreeNode<out V, in out T extends ATreeNode<V, T>> extends
     });
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }

@@ -50,7 +50,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
     return !Kind.isUndefined(found);
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }

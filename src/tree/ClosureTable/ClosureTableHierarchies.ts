@@ -1,4 +1,4 @@
-import { BinaryPredicate, ForEach, JSONable, Mapping, Nullable } from '@jamashita/anden/type';
+import { BinaryPredicate, ForEach, JSONifiable, Mapping, Nullable } from '@jamashita/anden/type';
 import { ReadonlyAddress } from '../../address/index.js';
 import { Collection, Quantity } from '../../collection/index.js';
 import { ReadonlyDictionary } from '../../dictionary/index.js';
@@ -7,7 +7,7 @@ import { TreeID } from '../TreeID.js';
 import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy.js';
 import { TreeIDFactory } from './TreeIDFactory.js';
 
-export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONable<ReadonlyArray<ClosureTableJSON>> {
+export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONifiable<ReadonlyArray<ClosureTableJSON>> {
   private readonly hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>;
   private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies(ImmutableSequence.empty());
 
@@ -52,7 +52,7 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
     return this.hierarchies.contains(value);
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }
