@@ -186,7 +186,7 @@ Returns the collection of filtered items which satisfy the given `predicate`.
 
 ### `collection.find(predicate: BinaryPredicate<V, K>): Nulable<V>`
 
-Returns the value which satisfies the given `predicate` first. if there is no items that satisfy, return `null`.
+Returns the value which satisfies the given `predicate` first. If there is no items that satisfy, returns `null`.
 
 ### `collection.forEach(foreach: ForEach<V, K>): void`
 
