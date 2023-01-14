@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/jamashita/lluvia/compare/v1.4.0...v1.5.0) (2023-01-14)
+
+
+### Features
+
+* 🎸 packages updated ([f47464d](https://github.com/jamashita/lluvia/commit/f47464d4d127695a9777dbbe7cc9f7b0fa19198a))
+* 🎸 readonlyAddress.has() ([e2a874b](https://github.com/jamashita/lluvia/commit/e2a874b4640f636ad9d3f47a7f55d33671ddcfe3))
+
 # [1.4.0](https://github.com/jamashita/lluvia/compare/v1.3.0...v1.4.0) (2023-01-03)
 
 
