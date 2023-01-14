@@ -30,10 +30,9 @@ git cz
 
 ## (interface) Address\<V\>
 
-This interface represents a collection `Set<V>`. It means, Unique value can be stored in this collection instance.
-If the value implements `hasCode()` method from `@jamashita/anden`, the value will be able to stored by its
-hash code. In case of hash codes conflict, the previous value will be overwritten. This interface
-extends `ReadonlyAddress<V>`.
+This interface represents a collection `Set<V>`. It means, Unique values can be stored in this collection instance. If
+the value implements the `hashCode()` method from `@jamashita/anden`, the value will be stored by its hash code. In case
+of hash code conflicts, the previous value will be overwritten. This interface extends the `ReadonlyAddress<V>`.
 
 ### `address.add(value: V): Address<V>`
 
@@ -55,11 +54,13 @@ Removes the value that matches the given `value` from the collection.
 
 ## ImmutableAddress<V>
 
-This is an immutable class that implements `Address<V>`.
+This is an immutable class that implements ｀Address<V>`. It does not allow adding or removing values from the
+collection directly, but instead returns a new instance of the collection with the added or removed values.
 
 ### `ImmutableAddress.await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<ImmutableAddress<V>>`
 
-Takes a `ReadonlyAddress<PromiseLike<V>>` and return a single `Promise<ImmutableAddress<V>>`.
+Takes a `ReadonlyAddress<PromiseLike<V>>` and returns a single `Promise<ImmutableAddress<V>>` that resolves with a new
+instance of `ImmutableAddress<V>` containing the resolved values.
 
 ### `ImmutableAddress.empty<V>(): ImmutableAddress<V>`
 
@@ -90,16 +91,17 @@ This is an overridden version of the `address.map(mapping)`.
 
 ### `immutableAddress.remove(value: V): ImmutableAddress<V>`
 
-Creates a new instance of `ImmutableAddress<V>` by removing the value that matches the given `value` from the
-current collection instance and then returns the new instance.
+Creates a new instance of `ImmutableAddress<V>` by removing the value that matches the given value from the current
+collection instance and then returns the new instance.
 
 ## MutableAddress<V>
 
-This is an mutable class that implements `Address<V>`.
+This is a mutable class that implements Address<V>. It allows adding and removing values from the collection.
 
 ### `MutableAddress.await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<MutableAddress<V>>`
 
-Takes a `ReadonlyAddress<PromiseLike<V>>` and return a single `Promise<MutableAddress<V>>`.
+Takes a `ReadonlyAddress<PromiseLike<V>>` and returns a single `Promise<MutableAddress<V>>` that resolves with a new
+instance of `MutableAddress<V>` containing the resolved values.
 
 ### `MutableAddress.empty<V>(): MutableAddress<V>`
 
@@ -129,14 +131,14 @@ This is an overridden version of the `address.map(mapping)`.
 
 ### `mutableAddress.remove(value: V): this`
 
-Removes value that matches the given `value` from the collection and returns the current instance itself.
+Removes the value that matches the given `value` from the collection and returns the current instance itself.
 
 ## (interface) ReadonlyAddress\<V\>
 
-This interface represents a readonly version of a `Set<V>` collection, which means that values cannot be added or
-modified within the collection instance. If the value implements `hasCode()` method from `@jamashita/anden`, the value
-will be able to stored by its hash code. In case of hash codes conflict, the previous value will be overwritten. This
-interface `Collection<void, V>` interface.
+This interface represents a read-only version of a `Set<V>` collection, meaning that values cannot be added or modified
+within the collection instance. If the value implements the `hashCode()` method from `@jamashita/anden`, the value will
+be stored based on its hash code. In case of hash code conflicts, the previous value will be overwritten. This interface
+extends `Collection<void, V>`.
 
 ### (override) `readonlyAddress.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): ReadonlyAddress<W>`
 
@@ -162,31 +164,34 @@ Returns a new `Set<V>` containing all the values in the collection.
 
 The common interface for `Sequence<V>`, `Dictionary<K, V>` and `Address<V>`. This interface provides common methods for
 manipulating multiple data. `K` represents the key of the collection and `V` represents the value of the collection.
-This interface also extends `Iterable<[K, V]>`
+This interface also extends `Iterable<[K, V]>`.
 
 ### (override) `collection[Symbol.iterator](): IterableIterator<[K, V]>`
 
-This is invoked by `for-of` syntax. Iterate through the key-value pair as a tuple.
+This method is invoked by the `for-of` loop. It allows iteration through the key-value pairs of the collection as
+tuples.
 
 ### `collection.contains(value: V): boolean`
 
-Returns `true` if the given value is contained in this collection instance.
+Returns `true` if the given `value` is contained within this collection instance.
 
 ### `collection.every(predicate: Predicate<V, K>): boolean`
 
-Returns `true` if each item of collection satisfied the given `predicate`.
+Returns `true` if every item in the collection satisfies the given `predicate`.
 
 ### `collection.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Collection<K, W>`
 
 ### `collection.filter(predicate: BinaryPredicate<V, K>): Collection<K, V>`
 
-Returns the collection of filtered items which satisfy the given `predicate`.
+Returns a new collection containing only the items that satisfy the given `predicate`. The type of items in the new
+collection depends on whether the `predicate` is narrowing or not.
 
 ### `collection.find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Nulable<W>`
 
 ### `collection.find(predicate: BinaryPredicate<V, K>): Nulable<V>`
 
-Returns the value which satisfies the given `predicate` first. If there is no items that satisfy, returns `null`.
+Returns the first value that satisfies the given `predicate`. If there are no items that satisfy the `predicate`,
+returns `null`.
 
 ### `collection.forEach(foreach: ForEach<V, K>): void`
 
@@ -210,15 +215,15 @@ Applies the provided `mapping` to every item and updates the values to the retur
 
 ### `collection.size(): number`
 
-Returns the number of elements in the collection.
+Returns the number of items in the collection.
 
 ### `collection.some(predicate: BinaryPredicate<V, K>): boolean`
 
-Returns `true` whether at least one item in the collection satisfies the given `predicate`.
+Returns `true` if at least one item in the collection satisfies the given `predicate`.
 
 ### `collection.values(): IterableIterator<V>`
 
-Returns an iterator for the values in the collection.
+Returns an iterator that iterates over the values in the collection.
 
 # Dictionary classes
 
