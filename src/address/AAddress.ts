@@ -26,7 +26,7 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
     return this.address.has(Quantity.genKey(value));
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }
@@ -84,6 +84,10 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
 
   public get(): Nullable<V> {
     return null;
+  }
+
+  public has(value: V): boolean {
+    return this.address.has(Quantity.genKey(value));
   }
 
   public iterator(): IterableIterator<[void, V]> {

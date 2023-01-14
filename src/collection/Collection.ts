@@ -23,6 +23,8 @@ export interface Collection<out K, out V> extends Nominative, Iterable<[K, V]> {
 
   isEmpty(): boolean;
 
+  iterator(): IterableIterator<[K, V]>;
+
   map<W>(mapping: Mapping<V, W>): Collection<K, W>;
 
   size(): number;

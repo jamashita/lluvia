@@ -12,7 +12,7 @@ export class MockTreeObject<out K extends TreeID> extends ValueObject implements
     this.id = id;
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }

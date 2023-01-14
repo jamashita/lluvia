@@ -15,7 +15,7 @@ export abstract class ATree<out V, in out T extends ATreeNode<V, T>> extends Obj
     return this.root.contains(value);
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }
