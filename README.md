@@ -32,12 +32,12 @@ git cz
 
 This interface represents a collection `Set<V>`. It means, Unique value can be stored in this collection instance.
 If the value implements `hasCode()` method from `@jamashita/anden`, the value will be able to stored by its
-hashcode. In case of hashcodes conflict, the previous value will be overwritten. This interface
+hash code. In case of hash codes conflict, the previous value will be overwritten. This interface
 extends `ReadonlyAddress<V>`.
 
 ### `address.add(value: V): Address<V>`
 
-Add the given `value` to the collection.
+Adds the given `value` to the collection.
 
 ### (override) `address.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): Address<W>`
 
@@ -51,7 +51,7 @@ This is an overridden version of the `readonlyAddress.map(mapping)`.
 
 ### `address.remove(value: V): Address<V>`
 
-Remove the value that matches the given `value` from the collection.
+Removes the value that matches the given `value` from the collection.
 
 ## ImmutableAddress<V>
 
@@ -59,23 +59,23 @@ This is an immutable class that implements `Address<V>`.
 
 ### `ImmutableAddress.await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<ImmutableAddress<V>>`
 
-Take a `ReadonlyAddress<PromiseLike<V>>` and return a single `Promise<ImmutableAddress<V>>`.
+Takes a `ReadonlyAddress<PromiseLike<V>>` and return a single `Promise<ImmutableAddress<V>>`.
 
 ### `ImmutableAddress.empty<V>(): ImmutableAddress<V>`
 
-Return an empty `ImmutableAddress<V>`.
+Returns an empty `ImmutableAddress<V>`.
 
 ### `ImmutableAdress.of<V>(collection: Collection<unknown, V>): ImmutableAddress<V>`
 
-Generate a new instance of `ImmutableAddress<V>` from the given `collection`.
+Generates a new instance of `ImmutableAddress<V>` from the given `collection`.
 
 ### `ImmutableAdress.ofSet<V>(set: ReadonlySet<V>): ImmutableAddress<V>`
 
-Generate a new instance of `ImmutableAddress<V>` from the given `set`.
+Generates a new instance of `ImmutableAddress<V>` from the given `set`.
 
 ### `immutableAddress.add(value: V): ImmutableAddress<V>`
 
-Add the given `value` to a new instance of `ImmutableAddress<V>`, instead of the current collection instance, and then
+Adds the given `value` to a new instance of `ImmutableAddress<V>`, instead of the current collection instance, and then
 returns the new instance.
 
 ### (override) `immutableAddress.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): ImmutableAddress<W>`
@@ -90,7 +90,7 @@ This is an overridden version of the `address.map(mapping)`.
 
 ### `immutableAddress.remove(value: V): ImmutableAddress<V>`
 
-Create a new instance of `ImmutableAddress<V>` by removing the value that matches the given `value` from the
+Creates a new instance of `ImmutableAddress<V>` by removing the value that matches the given `value` from the
 current collection instance and then returns the new instance.
 
 ## MutableAddress<V>
@@ -99,23 +99,23 @@ This is an mutable class that implements `Address<V>`.
 
 ### `MutableAddress.await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<MutableAddress<V>>`
 
-Take a `ReadonlyAddress<PromiseLike<V>>` and return a single `Promise<MutableAddress<V>>`.
+Takes a `ReadonlyAddress<PromiseLike<V>>` and return a single `Promise<MutableAddress<V>>`.
 
 ### `MutableAddress.empty<V>(): MutableAddress<V>`
 
-Return an empty `MutableAddress<V>`.
+Returns an empty `MutableAddress<V>`.
 
 ### `MutableAdress.of<V>(collection: Collection<unknown, V>): MutableAddress<V>`
 
-Generate a new instance of `MutableAddress<V>` from the given `collection`.
+Generates a new instance of `MutableAddress<V>` from the given `collection`.
 
 ### `MutableAdress.ofSet<V>(set: ReadonlySet<V>): MutableAddress<V>`
 
-Generate a new instance of `MutableAddress<V>` from the given `set`.
+Generates a new instance of `MutableAddress<V>` from the given `set`.
 
 ### `mutableAddress.add(value: V): this`
 
-Add the given `value` to the current collection instance and returns the current instance itself.
+Adds the given `value` to the current collection instance and returns the current instance itself.
 
 ### (override) `mutableAddress.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): MutableAddress<W>`
 
@@ -129,14 +129,13 @@ This is an overridden version of the `address.map(mapping)`.
 
 ### `mutableAddress.remove(value: V): this`
 
-Remove value that matches the given `value` from the collection and returns the current instance itself.
+Removes value that matches the given `value` from the collection and returns the current instance itself.
 
 ## (interface) ReadonlyAddress\<V\>
 
 This interface represents a readonly version of a `Set<V>` collection, which means that values cannot be added or
-modified
-within the collection instance. If the value implements `hasCode()` method from `@jamashita/anden`, the value will be
-able to stored by its hashcode. In case of hashcodes conflict, the previous value will be overwritten. This
+modified within the collection instance. If the value implements `hasCode()` method from `@jamashita/anden`, the value
+will be able to stored by its hash code. In case of hash codes conflict, the previous value will be overwritten. This
 interface `Collection<void, V>` interface.
 
 ### (override) `readonlyAddress.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): ReadonlyAddress<W>`
@@ -151,20 +150,19 @@ This is an overridden version of the `collection.map(mapping)`.
 
 ### `readonlyAddress.has(value: :V): boolean`
 
-Return `true` if the given `value` is contained in the collection.
+Returns `true` if the given `value` is contained in the collection.
 
 ### `readonlyAddress.toSet(): Set<V>`
 
-Return a new `Set<V>` containing all the values in the collection.
+Returns a new `Set<V>` containing all the values in the collection.
 
 # Collection classes
 
 ## (interface) Collection<K, V>
 
 The common interface for `Sequence<V>`, `Dictionary<K, V>` and `Address<V>`. This interface provides common methods for
-manipulating
-multiple data. `K` represents the key of the collection and `V` represents the value of the collection. This interface
-also extends `Iterable<[K, V]>`
+manipulating multiple data. `K` represents the key of the collection and `V` represents the value of the collection.
+This interface also extends `Iterable<[K, V]>`
 
 ### (override) `collection[Symbol.iterator](): IterableIterator<[K, V]>`
 
@@ -172,17 +170,17 @@ This is invoked by `for-of` syntax. Iterate through the key-value pair as a tupl
 
 ### `collection.contains(value: V): boolean`
 
-Return `true` if the given value is contained in this collection instance.
+Returns `true` if the given value is contained in this collection instance.
 
 ### `collection.every(predicate: Predicate<V, K>): boolean`
 
-Return `true` if each item of collection satisfied the given `predicate`.
+Returns `true` if each item of collection satisfied the given `predicate`.
 
 ### `collection.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Collection<K, W>`
 
 ### `collection.filter(predicate: BinaryPredicate<V, K>): Collection<K, V>`
 
-Return the collection of filtered items which satisfy the given `predicate`.
+Returns the collection of filtered items which satisfy the given `predicate`.
 
 ### `collection.find<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Nulable<W>`
 
@@ -196,15 +194,15 @@ Iterates through each item and applies the provided `foreach` once.
 
 ### `collection.get(key: K): Nullable<V>`
 
-Return the value of the specified `key`. If there is no value, return `null`.
+Returns the value of the specified `key`. If there is no value, return `null`.
 
 ### `collection.isEmpty(): boolean`
 
-Return `true` if this collection has no items.
+Returns `true` if this collection has no items.
 
 ### `collection.iterator(): IterableIterator<[K, V]>`
 
-Return an iterator that iterates over the key-value pairs in the collection.
+Returns an iterator that iterates over the key-value pairs in the collection.
 
 ### `collection.map<W>(mapping: Mapping<V, W>): Collection<K, W>`
 
@@ -212,23 +210,23 @@ Applies the provided `mapping` to every item and updates the values to the retur
 
 ### `collection.size(): number`
 
-Return the number of elements in the collection.
+Returns the number of elements in the collection.
 
 ### `collection.some(predicate: BinaryPredicate<V, K>): boolean`
 
-Return `true` whether at least one item in the collection satisfies the given `predicate`.
+Returns `true` whether at least one item in the collection satisfies the given `predicate`.
 
 ### `collection.values(): IterableIterator<V>`
 
-Return an iterator for the values in the collection.
+Returns an iterator for the values in the collection.
 
 # Dictionary classes
 
 ## (interface) Dictionary\<K, V\>
 
 This interface represents a collection `Map<K, V>`. If the key implements `hasCode()` method
-from `@jamashita/anden`, the value will be able to stored by its hashcode.
-In case of hashcodes conflict, the previous value will be overwritten. This interface extends `ReadonlyDictionary<V>`.
+from `@jamashita/anden`, the value will be able to stored by its hash code.
+In case of hash codes conflict, the previous value will be overwritten. This interface extends `ReadonlyDictionary<V>`.
 
 ### (override) `dictionary.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Dictionary<K, W>`
 
@@ -242,11 +240,11 @@ This is an overridden version of the `readonlyDictionary.map(mapping)`.
 
 ### `dictionary.remove(key: K): Dictionary<K, V>`
 
-Remove the value that matches the given `key` from the collection.
+Removes the value that matches the given `key` from the collection.
 
 ### `dictionary.set(key: K, value: V): Dictionary<K, V>`
 
-Set or update the given `value` to the specified `key` in the collection.
+Sets or updates the given `value` to the specified `key` in the collection.
 
 ## ImmutableDictionary\<K, V\>
 
@@ -254,19 +252,19 @@ This is an immutable class that implements `Dictionary<K, V>`.
 
 ### `ImmutableDictionary.await<K, V>(dictionary: ReadonlyDictionary<K, PromiseLike<V>>): Promise<ImmutableDictionary<K, V>>`
 
-Take a `ReadonlyDictionary<PromiseLike<K, V>>` and return a single `Promise<ImmutableDictionary<K, V>>`.
+Takes a `ReadonlyDictionary<PromiseLike<K, V>>` and return a single `Promise<ImmutableDictionary<K, V>>`.
 
 ### `ImmutableDictionary.empty<K, V>(): ImmutableDictionary<K, V>`
 
-Return an empty `ImmutableDictionary<K, V>`.
+Returns an empty `ImmutableDictionary<K, V>`.
 
 ### `ImmutableDictionary.of<K, V>(collection: Collection<K, V>): ImmutableDictionary<K, V>`
 
-Generate a new instance of `ImmutableDictionary<K, V>` from the given `collection`.
+Generates a new instance of `ImmutableDictionary<K, V>` from the given `collection`.
 
 ### `ImmutableAdress.ofMap<K, V>(map: ReadonlyMap<K, V>): ImmutableDictionary<K, V>`
 
-Generate a new instance of `ImmutableDictionary<K, V>` from the given `map`.
+Generates a new instance of `ImmutableDictionary<K, V>` from the given `map`.
 
 ### (override) `immutableDictionary.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): ImmutableDictionary<K, W>`
 
@@ -280,12 +278,13 @@ This is an overridden version of the `dictionary.map(mapping)`.
 
 ### `immutableDictionary.remove(key: K): ImmutableDictionary<K, V>`
 
-Create a new instance of `ImmutableDictionary<K, V>` by removing the entry that matches the given `key` from the
+Creates a new instance of `ImmutableDictionary<K, V>` by removing the entry that matches the given `key` from the
 current collection instance and then returns the new instance.
 
 ### `immutableDictionary.set(key: K, value: V): ImmutableDictionary<K, V>`
 
-Set or update the given `value` for the specified `key` in a new instance of `ImmutableDictionary<K, V>` instead of the
+Sets or updates the given `value` for the specified `key` in a new instance of `ImmutableDictionary<K, V>` instead of
+the
 
 ## MutableDictionary\<K, V\>
 
@@ -293,19 +292,19 @@ This is an mutable class that implements `Dictionary<K, V>`.
 
 ### `MutableDictionary.await<K, V>(dictionary: ReadonlyDictionary<K, PromiseLike<V>>): Promise<MutableDictionary<K, V>>`
 
-Take a `ReadonlyDictionary<PromiseLike<K, V>>` and return a single `Promise<MutableDictionary<K, V>>`.
+Takes a `ReadonlyDictionary<PromiseLike<K, V>>` and return a single `Promise<MutableDictionary<K, V>>`.
 
 ### `MutableDictionary.empty<K, V>(): MutableDictionary<K, V>`
 
-Return an empty `MutableDictionary<K, V>`.
+Returns an empty `MutableDictionary<K, V>`.
 
 ### `MutableDictionary.of<K, V>(collection: Collection<K, V>): MutableDictionary<K, V>`
 
-Generate a new instance of `MutableDictionary<K, V>` from the given `collection`.
+Generates a new instance of `MutableDictionary<K, V>` from the given `collection`.
 
 ### `MutableAdress.ofMap<K, V>(map: ReadonlyMap<K, V>): MutableDictionary<K, V>`
 
-Generate a new instance of `MutableDictionary<K, V>` from the given `map`.
+Generates a new instance of `MutableDictionary<K, V>` from the given `map`.
 
 ### (override) `mutableDictionary.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): MutableDictionary<K, W>`
 
@@ -319,19 +318,19 @@ This is an overridden version of the `dictionary.map(mapping)`.
 
 ### `mutableDictionary.remove(key: K): MutableDictionary<K, V>`
 
-Remove entry that matches the given `key` from the collection and returns the current instance itself.
+Removes entry that matches the given `key` from the collection and returns the current instance itself.
 
 ### `mutableDictionary.set(key: K, value: V): MutableDictionary<K, V>`
 
-Set or update the given `value` for the specified `key` to the current collection instance and returns the current
+Sets or updates the given `value` for the specified `key` to the current collection instance and returns the current
 instance itself.
 
 ### (interface) ReadonlyDictionary\<K, V\>
 
 This interface represents a readonly version of a `Map<K, V>` collection, which means that values cannot be added or
-modified
-within the collection instance. If the value implements `hasCode()` method from `@jamashita/anden`, the entry will be
-able to stored by its hashcode. In case of hashcodes conflict, the previous entry will be overwritten. This
+modified within the collection instance. If the value implements `hasCode()` method from `@jamashita/anden`, the entry
+will be
+able to stored by its hash code. In case of hash codes conflict, the previous entry will be overwritten. This
 interface `Collection<K, V>` interface.
 
 ### (override) `readonlyDictionary.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, void>): ReadonlyDictionary<K, W>`
@@ -342,11 +341,11 @@ This is an overridden version of the `collection.filter(predicate)`.
 
 ### `readonlyDictionary.has(key: K): boolean`
 
-Return `true` if the given `key` is contained in the collection.
+Returns `true` if the given `key` is contained in the collection.
 
 ### `readonlyDictionary.keys(): IterableIterator<K>`
 
-Return an iterator for the keys in the collection.
+Returns an iterator for the keys in the collection.
 
 ### (override) `readonlyDictionary.map<W>(mapping: Mapping<V, W>): ReadonlyDictionary<K, W>`
 
@@ -354,21 +353,7 @@ This is an overridden version of the `collection.map(mapping)`.
 
 ### `readonlyDictionary.toMap(): Map<K, V>`
 
-Return a new `Map<K, V>` containing all the entries in the collection.
-
-## Classes
-
-# Sequence
-
-## Interfaces
-
-### Sequence
-
-Alias for `Array`. implements `Collection`.
-
-### ReadonlySequence
-
-Alias for `ReadonlyArray`. implements `Collection`.
+Returns a new `Map<K, V>` containing all the entries in the collection.
 
 # Sequence classes
 
@@ -378,43 +363,43 @@ This is an immutable class that implements `Sequence<V>`.
 
 ### `ImmutableSequecne.await<V>(sequence: ReadonlySequence<PromiseLike<V>>): Promise<ImmutableSequence<V>>`
 
-Take a `ReadonlySequence<PromiseLike<V>>` and return a single `Promise<ImmutableSequence<V>>`.
+Takes a `ReadonlySequence<PromiseLike<V>>` and return a single `Promise<ImmutableSequence<V>>`.
 
 ### `ImmutableSequence.empty<V>(): ImmutableSequence<V>`
 
-Return an empty `ImmutableSequence<V>`.
+Returns an empty `ImmutableSequence<V>`.
 
 ### `ImmutableSequence.of<V>(collection: Collection<number, V>): ImmutableSequence<V>`
 
-Generate a new instance of `ImmutableSequence<V>` from the given `collection`.
+Generates a new instance of `ImmutableSequence<V>` from the given `collection`.
 
 ### `ImmutableSequence.ofArray<V>(array: ReadonlyArray<V>): ImmutableSequence<V>`
 
-Generate a new instance of `MutableSequence<V>` from the given `array`.
+Generates a new instance of `MutableSequence<V>` from the given `array`.
 
 ### `immutableSequence.add(value: V): ImmutableSequence<V>`
 
-Add the given `value` to a new instance of `ImmutableSequence<V>`, instead of the current collection instance, and then
+Adds the given `value` to a new instance of `ImmutableSequence<V>`, instead of the current collection instance, and then
 returns the new instance.
 
-### `immutableSequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ImmutableSequence<W>`
+### (override) `immutableSequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ImmutableSequence<W>`
 
-### `immutableSequence.filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<W>`
+### (override) `immutableSequence.filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<W>`
 
 This is an overridden version of the `sequence.filter(predicate)`.
 
-### `immutableSequence.map<W>(mapping: Mapping<V, W>): ImmutableSequence<W>`
+### (override) `immutableSequence.map<W>(mapping: Mapping<V, W>): ImmutableSequence<W>`
 
 This is an overridden version of the `sequence.map(mapping)`.
 
 ### `immutableSequence.remove(key: number): ImmutableSequence<V>`
 
-Create a new instance of `ImmutableSequence<V>` by removing the value that matches the given `key` from the
+Creates a new instance of `ImmutableSequence<V>` by removing the value that matches the given `key` from the
 current collection instance and then returns the new instance.
 
 ### `immutableSequecne.set(key, number, value: V): ImmutableSequence<V>`
 
-Set or update the given `value` for the specified `key` in a new instance of `ImmutableSequence<V>` instead of the
+Sets or updates the given `value` for the specified `key` in a new instance of `ImmutableSequence<V>` instead of the
 
 ## MutableSequence\<V\>
 
@@ -422,41 +407,41 @@ This is an mutable class that implements `Sequence<V>`.
 
 ### `MutableSequecne.await<V>(sequence: ReadonlySequence<PromiseLike<V>>): Promise<MutableSequence<V>>`
 
-Take a `ReadonlySequence<PromiseLike<V>>` and return a single `Promise<MutableSequence<V>>`.
+Takes a `ReadonlySequence<PromiseLike<V>>` and return a single `Promise<MutableSequence<V>>`.
 
 ### `MutableSequence.empty<V>(): MutableSequence<V>`
 
-Return an empty `MutableSequence<V>`.
+Returns an empty `MutableSequence<V>`.
 
 ### `MutableSequence.of<V>(collection: Collection<number, V>): MutableSequence<V>`
 
-Generate a new instance of `MutableSequence<V>` from the given `collection`.
+Generates a new instance of `MutableSequence<V>` from the given `collection`.
 
 ### `MutableSequence.ofArray<V>(array: ReadonlyArray<V>): MutableSequence<V>`
 
-Generate a new instance of `MutableSequence<V>` from the given `array`.
+Generates a new instance of `MutableSequence<V>` from the given `array`.
 
 ### `mutableSequence.add(value: V): this`
 
-Add the given `value` to the current collection instance and returns the current instance itself.
+Adds the given `value` to the current collection instance and returns the current instance itself.
 
-### `mutableSequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W>`
+### (override) `mutableSequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W>`
 
-### `mutableSequence.filter(predicate: BinaryPredicate<V, number>): MutableSequence<W>`
+### (override) `mutableSequence.filter(predicate: BinaryPredicate<V, number>): MutableSequence<W>`
 
 This is an overridden version of the `sequence.filter(predicate)`.
 
-### `mutableSequence.map<W>(mapping: Mapping<V, W>): MutableSequence<W>`
+### (override) `mutableSequence.map<W>(mapping: Mapping<V, W>): MutableSequence<W>`
 
 This is an overridden version of the `sequence.map(mapping)`.
 
 ### `mutableSequence.remove(key: number): this`
 
-Remove value that matches the given `value` from the collection and returns the current instance itself.
+Removes value that matches the given `value` from the collection and returns the current instance itself.
 
 ### `mutableSequecne.set(key, number, value: V): MutableSequence<V>`
 
-Set or update the given `value` for the specified `key` to the current collection instance and returns the current
+Sets or updates the given `value` for the specified `key` to the current collection instance and returns the current
 instance itself.
 
 ## (interface) ReadonlySequence\<V\>
@@ -464,13 +449,13 @@ instance itself.
 This interface represents a readonly version of a `Array<V>` collection, which means that values cannot be added or
 modified within the collection instance. This interface `Collection<number, V>` interface.
 
-### `readonlySequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ReadonlySequence<W>`
+### (override) `readonlySequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ReadonlySequence<W>`
 
-### `readonlySequence.filter(predicate: BinaryPredicate<V, number>): ReadonlySequence<W>`
+### (override) `readonlySequence.filter(predicate: BinaryPredicate<V, number>): ReadonlySequence<W>`
 
 This is an overridden version of the `collection.filter(predicate)`.
 
-### `readonlySequence.map<W>(mapping: Mapping<V, W>): ReadonlySequence<W>`
+### (override) `readonlySequence.map<W>(mapping: Mapping<V, W>): ReadonlySequence<W>`
 
 This is an overridden version of the `collection.map(mapping)`.
 
@@ -491,23 +476,23 @@ This interface represents a collection `Array<V>`. This interface extends `Reado
 
 ### `sequence.add(value: V): Sequence<V>`
 
-### `sequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): Sequence<W>`
+### (override) `sequence.filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): Sequence<W>`
 
-### `sequence.filter(predicate: BinaryPredicate<V, number>): Sequence<W>`
+### (override) `sequence.filter(predicate: BinaryPredicate<V, number>): Sequence<W>`
 
 This is an overridden version of the `readonlySequence.filter(predicate)`.
 
-### `sequence.map<W>(mapping: Mapping<V, W>): Sequence<W>`
+### (override) `sequence.map<W>(mapping: Mapping<V, W>): Sequence<W>`
 
 This is an overridden version of the `readonlySequence.map(mapping)`.
 
 ### `sequence.remove(key: number): Sequence<V>`
 
-Remove the value that matches the given `key` from the collection.
+Removes the value that matches the given `key` from the collection.
 
 ### `sequecne.set(key, number, value: V): Sequence<V>`
 
-Set or update the given `value` to the specified `key` in the collection.
+Sets or updates the given `value` to the specified `key` in the collection.
 
 # Tree
 
