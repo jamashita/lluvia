@@ -1,5 +1,5 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { JSONable, Primitive } from '@jamashita/anden/type';
+import { JSONifiable, Primitive } from '@jamashita/anden/type';
 import { TreeID } from '../TreeID.js';
 import { TreeIDFactory } from './TreeIDFactory.js';
 
@@ -8,7 +8,7 @@ export type ClosureTableJSON = Readonly<{
   offspring: Primitive;
 }>;
 
-export class ClosureTableHierarchy<out K extends TreeID> extends ValueObject implements JSONable<ClosureTableJSON> {
+export class ClosureTableHierarchy<out K extends TreeID> extends ValueObject implements JSONifiable<ClosureTableJSON> {
   private readonly ancestor: K;
   private readonly offspring: K;
 
@@ -29,7 +29,7 @@ export class ClosureTableHierarchy<out K extends TreeID> extends ValueObject imp
     this.offspring = offspring;
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }

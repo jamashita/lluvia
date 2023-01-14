@@ -49,7 +49,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
     return this.table.contains(value);
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }

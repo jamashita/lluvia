@@ -1,5 +1,5 @@
-import { JSONable, Nominative } from '@jamashita/anden/type';
+import { JSONifiable, Nominative } from '@jamashita/anden/type';
 
-export interface SerializableTreeObject extends Nominative, JSONable {
+export interface SerializableTreeObject extends Nominative, JSONifiable {
   // NOOP
 }

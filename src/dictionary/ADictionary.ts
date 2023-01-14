@@ -37,7 +37,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
     return false;
   }
 
-  public equals(other: unknown): boolean {
+  public override equals(other: unknown): boolean {
     if (this === other) {
       return true;
     }
