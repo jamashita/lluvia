@@ -1,4 +1,4 @@
-import { JSONable, ObjectLiteral } from '@jamashita/anden/type';
+import { JSONifiable, ObjectLiteral } from '@jamashita/anden/type';
 import { Address, MutableAddress, ReadonlyAddress } from '../../address/index.js';
 import { SerializableTreeObject } from '../SerializableTreeObject.js';
 import { ATreeNode } from './ATreeNode.js';
@@ -9,7 +9,7 @@ export type TreeNodeJSON = Readonly<{
   children: ReadonlyArray<ObjectLiteral>;
 }>;
 
-export class SerializableTreeNode<out V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONable<TreeNodeJSON> {
+export class SerializableTreeNode<out V extends SerializableTreeObject> extends ATreeNode<V, SerializableTreeNode<V>> implements JSONifiable<TreeNodeJSON> {
   public static of<V extends SerializableTreeObject>(node: SerializableTreeNode<V>): SerializableTreeNode<V> {
     return new SerializableTreeNode(node.getValue(), node.getChildren());
   }

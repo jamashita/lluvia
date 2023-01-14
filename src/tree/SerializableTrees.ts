@@ -1,11 +1,11 @@
-import { JSONable } from '@jamashita/anden/type';
+import { JSONifiable } from '@jamashita/anden/type';
 import { ImmutableAddress, MutableAddress, ReadonlyAddress } from '../address/index.js';
 import { ATrees } from './ATrees.js';
 import { SerializableTree } from './SerializableTree.js';
 import { SerializableTreeObject } from './SerializableTreeObject.js';
 import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/index.js';
 
-export class SerializableTrees<out V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONable<ReadonlyArray<TreeNodeJSON>> {
+export class SerializableTrees<out V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONifiable<ReadonlyArray<TreeNodeJSON>> {
   public static empty<V extends SerializableTreeObject>(): SerializableTrees<V> {
     return SerializableTrees.ofAddress(ImmutableAddress.empty());
   }
