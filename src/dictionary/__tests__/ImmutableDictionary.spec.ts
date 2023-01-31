@@ -229,7 +229,7 @@ describe('ImmutableDictionary', () => {
           [key2, value2]
         ])
       );
-      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.map((v: MockValueObject<number>): MockValueObject<number> => {
+      const dictionary2: ImmutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.map((v: MockValueObject<number>) => {
         return new MockValueObject(v.get() + 10);
       });
 

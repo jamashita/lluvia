@@ -111,7 +111,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
   public sort(): ImmutableSequence<K> {
     const keys: Array<K> = [...this.table].sort(([, v1]: [K, ReadonlyAddress<K>], [, v2]: [K, ReadonlyAddress<K>]) => {
       return v1.size() - v2.size();
-    }).map(([k]: [K, ReadonlyAddress<K>]): K => {
+    }).map(([k]: [K, ReadonlyAddress<K>]) => {
       return k;
     });
 
