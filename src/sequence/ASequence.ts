@@ -143,7 +143,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public serialize(): string {
-    return this.sequence.map((v: V): string => {
+    return this.sequence.map((v: V) => {
       return Objet.identify(v);
     }).join(', ');
   }

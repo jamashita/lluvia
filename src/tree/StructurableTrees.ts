@@ -89,7 +89,7 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
       StructurableTrees.forgeInternal(key, vs, table, pool, used);
     });
 
-    const trees: MutableDictionary<K, StructurableTree<K, V>> = pool.map((node: StructurableTreeNode<K, V>): StructurableTree<K, V> => {
+    const trees: MutableDictionary<K, StructurableTree<K, V>> = pool.map((node: StructurableTreeNode<K, V>) => {
       return StructurableTree.of<K, V>(node);
     });
 
