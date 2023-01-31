@@ -191,7 +191,7 @@ describe('MutableDictionary', () => {
           [key2, value2]
         ])
       );
-      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.map((v: MockValueObject<number>): MockValueObject<number> => {
+      const dictionary2: MutableDictionary<MockValueObject<number>, MockValueObject<number>> = dictionary1.map((v: MockValueObject<number>) => {
         return new MockValueObject(v.get() + 10);
       });
 

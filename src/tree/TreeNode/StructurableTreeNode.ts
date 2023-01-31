@@ -22,7 +22,7 @@ export class StructurableTreeNode<out K extends TreeID, out V extends Structurab
       return node as StructurableTreeNode<K, V>;
     }
 
-    const children: Address<StructurableTreeNode<K, V>> = node.getChildren().map((t: TreeNode<V>): StructurableTreeNode<K, V> => {
+    const children: Address<StructurableTreeNode<K, V>> = node.getChildren().map((t: TreeNode<V>) => {
       return this.forge(t);
     });
 
