@@ -36,7 +36,7 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
   }
 
   public static ofJSON<K extends TreeID>(json: ReadonlyArray<ClosureTableJSON>, factory: TreeIDFactory<K>): ClosureTableHierarchies<K> {
-    const hierarchies: Array<ClosureTableHierarchy<K>> = json.map((j: ClosureTableJSON): ClosureTableHierarchy<K> => {
+    const hierarchies: Array<ClosureTableHierarchy<K>> = json.map((j: ClosureTableJSON) => {
       return ClosureTableHierarchy.ofJSON(j, factory);
     });
 
@@ -112,7 +112,7 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
   }
 
   public toJSON(): ReadonlyArray<ClosureTableJSON> {
-    return this.hierarchies.toArray().map((hierarchy: ClosureTableHierarchy<K>): ClosureTableJSON => {
+    return this.hierarchies.toArray().map((hierarchy: ClosureTableHierarchy<K>) => {
       return hierarchy.toJSON();
     });
   }

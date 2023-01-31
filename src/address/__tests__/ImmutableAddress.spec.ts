@@ -233,7 +233,7 @@ describe('ImmutableAddress', () => {
       const address1: ImmutableAddress<MockValueObject<number>> = ImmutableAddress.ofSet(
         new Set([value1, value2, value3, value4])
       );
-      const address2: ImmutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>): MockValueObject<number> => {
+      const address2: ImmutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>) => {
         return new MockValueObject(v.get() * 2);
       });
 

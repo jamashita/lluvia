@@ -27,7 +27,7 @@ export class SerializableTreeNode<out V extends SerializableTreeObject> extends 
       return node as SerializableTreeNode<V>;
     }
 
-    const children: Address<SerializableTreeNode<V>> = node.getChildren().map((t: TreeNode<V>): SerializableTreeNode<V> => {
+    const children: Address<SerializableTreeNode<V>> = node.getChildren().map((t: TreeNode<V>) => {
       return this.forge(t);
     });
 

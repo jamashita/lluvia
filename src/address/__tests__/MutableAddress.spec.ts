@@ -200,7 +200,7 @@ describe('MutableAddress', () => {
       const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
         new Set([value1, value2, value3, value4])
       );
-      const address2: MutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>): MockValueObject<number> => {
+      const address2: MutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>) => {
         return new MockValueObject(v.get() * 2);
       });
 

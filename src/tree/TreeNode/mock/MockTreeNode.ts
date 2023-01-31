@@ -19,7 +19,7 @@ export class MockTreeNode<out K extends TreeID, in out V extends MockTreeObject<
       return node as MockTreeNode<K, V>;
     }
 
-    const children: Address<MockTreeNode<K, V>> = node.getChildren().map((t: TreeNode<V>): MockTreeNode<K, V> => {
+    const children: Address<MockTreeNode<K, V>> = node.getChildren().map((t: TreeNode<V>) => {
       return this.forge(t);
     });
 

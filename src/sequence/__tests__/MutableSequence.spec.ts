@@ -180,13 +180,11 @@ describe('MutableSequence', () => {
         new MockValueObject(2),
         new MockValueObject(3)
       ]);
-      const sequence2: MutableSequence<MockValueObject<string>> = sequence1.map(
-        (value: MockValueObject<number>): MockValueObject<string> => {
-          const num: number = value.get();
+      const sequence2: MutableSequence<MockValueObject<string>> = sequence1.map((value: MockValueObject<number>) => {
+        const num: number = value.get();
 
-          return new MockValueObject<string>(`${num ** 2}`);
-        }
-      );
+        return new MockValueObject<string>(`${num ** 2}`);
+      });
 
       expect(sequence1.size()).toBe(sequence2.size());
       expect(sequence1).not.toBe(sequence2);
