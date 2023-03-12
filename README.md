@@ -7,6 +7,12 @@ Collections.
 
 [![CI](https://github.com/jamashita/lluvia/actions/workflows/ci.yml/badge.svg)](https://github.com/jamashita/lluvia/actions/workflows/ci.yml)
 
+## Install
+
+```text
+yarn add @jamashita/lluvia
+```
+
 ## Requisite
 
 ```
