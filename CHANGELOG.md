@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/jamashita/lluvia/compare/v1.6.0...v1.7.0) (2023-03-04)
+
+
+### Features
+
+* 🎸 packagesup date ([1f5a58d](https://github.com/jamashita/lluvia/commit/1f5a58d397ca8097203ce4ae340c74cdd9e90f3d))
+* 🎸 update ([3134402](https://github.com/jamashita/lluvia/commit/3134402151b6419baa66617631de9efddc853cfe))
+* 🎸 yarn install ([fb252a1](https://github.com/jamashita/lluvia/commit/fb252a194c3147bac6bbf3d9a0386ed6f45837a7))
+
 # [1.6.0](https://github.com/jamashita/lluvia/compare/v1.5.0...v1.6.0) (2023-01-31)
 
 
