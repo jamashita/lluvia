@@ -13,7 +13,7 @@ Collections.
 yarn add @jamashita/lluvia
 ```
 
-## Requisite
+## Prerequisite
 
 ```
 > node -v
