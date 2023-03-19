@@ -19,7 +19,7 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
     const value: Nullable<V> = values.get(key);
 
     if (Kind.isNull(value)) {
-      throw new TreeError(`THIS KEY DOES NOT HAVE VALUE. GIVEN: ${key.toString()}`);
+      throw new TreeError(`THIS KEY DOES NOT HAVE VALUE: ${key.toString()}`);
     }
 
     const n: Nullable<StructurableTreeNode<K, V>> = pool.get(key);
@@ -34,7 +34,7 @@ export class StructurableTrees<out K extends TreeID, out V extends StructurableT
     const children: Nullable<ReadonlyAddress<K>> = table.get(key);
 
     if (Kind.isNull(children)) {
-      throw new TreeError(`CLOSURE TABLE DOES NOT CONTAIN THIS KEY. GIVEN: ${key.toString()}`);
+      throw new TreeError(`CLOSURE TABLE DOES NOT CONTAIN THIS KEY: ${key.toString()}`);
     }
 
     const address: MutableAddress<StructurableTreeNode<K, V>> = MutableAddress.empty();
