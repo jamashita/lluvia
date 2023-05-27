@@ -1,6 +1,6 @@
 {
   "name": "@jamashita/lluvia",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -68,29 +68,29 @@
     "update:upgrade": "ncu --packageManager yarn --deep --upgrade"
   },
   "dependencies": {
-    "@jamashita/anden": "1.15.0"
+    "@jamashita/anden": "1.16.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.1",
-    "@commitlint/config-conventional": "17.6.1",
+    "@commitlint/cli": "17.6.3",
+    "@commitlint/config-conventional": "17.6.3",
     "@jamashita/eslint-plugin": "1.87.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "8.0.7",
     "@semantic-release/npm": "10.0.3",
-    "@semantic-release/release-notes-generator": "10.0.3",
-    "@types/node": "18.16.0",
+    "@semantic-release/release-notes-generator": "11.0.1",
+    "@types/node": "20.2.5",
     "git-cz": "4.9.0",
     "husky": "8.0.3",
     "is-ci": "3.0.1",
-    "lint-staged": "13.2.1",
-    "npm-check-updates": "16.10.9",
-    "rimraf": "5.0.0",
-    "semantic-release": "21.0.1",
+    "lint-staged": "13.2.2",
+    "npm-check-updates": "16.10.12",
+    "rimraf": "5.0.1",
+    "semantic-release": "21.0.2",
     "sort-package-json": "2.4.1",
     "typescript": "5.0.4",
-    "vitest": "0.30.1"
+    "vitest": "0.31.1"
   },
   "engines": {
     "node": ">=16.0.0"
