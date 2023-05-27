@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/jamashita/lluvia/compare/v1.10.0...v1.11.0) (2023-05-27)
+
+
+### Features
+
+* 🎸 packages updated ([849e42d](https://github.com/jamashita/lluvia/commit/849e42d8c6a773854c15648b78557b397111a828))
+
 # [1.10.0](https://github.com/jamashita/lluvia/compare/v1.9.0...v1.10.0) (2023-04-23)
 
 
