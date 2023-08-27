@@ -1,5 +1,5 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { ObjectLiteral } from '@jamashita/anden/type';
+import { Equatable, ObjectLiteral, Primitive } from '@jamashita/anden/type';
 import { SerializableTreeObject } from '../SerializableTreeObject.js';
 import { StructurableTreeObject } from '../StructurableTreeObject.js';
 import { TreeID } from '../TreeID.js';
@@ -12,15 +12,12 @@ export class MockTreeObject<out K extends TreeID> extends ValueObject implements
     this.id = id;
   }
 
-  public override equals(other: unknown): boolean {
-    if (this === other) {
-      return true;
-    }
-    if (!(other instanceof MockTreeObject)) {
-      return false;
-    }
+  protected getEquatableProperties(): Array<Equatable> {
+    return [this.id];
+  }
 
-    return this.id.equals(other.id);
+  protected getPrimitiveProperties(): Array<Primitive> {
+    return [];
   }
 
   public getTreeID(): K {

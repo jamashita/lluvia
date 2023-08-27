@@ -1,5 +1,5 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { JSONifiable, Primitive } from '@jamashita/anden/type';
+import { Equatable, JSONifiable, Primitive } from '@jamashita/anden/type';
 import { TreeID } from '../TreeID.js';
 import { TreeIDFactory } from './TreeIDFactory.js';
 
@@ -29,29 +29,20 @@ export class ClosureTableHierarchy<out K extends TreeID> extends ValueObject imp
     this.offspring = offspring;
   }
 
-  public override equals(other: unknown): boolean {
-    if (this === other) {
-      return true;
-    }
-    if (!(other instanceof ClosureTableHierarchy)) {
-      return false;
-    }
-    if (!this.ancestor.equals(other.ancestor)) {
-      return false;
-    }
-    if (!this.offspring.equals(other.offspring)) {
-      return false;
-    }
-
-    return true;
-  }
-
   public getAncestor(): K {
     return this.ancestor;
   }
 
+  protected getEquatableProperties(): Array<Equatable> {
+    return [this.ancestor, this.offspring];
+  }
+
   public getOffspring(): K {
     return this.offspring;
+  }
+
+  protected getPrimitiveProperties(): Array<Primitive> {
+    return [];
   }
 
   public serialize(): string {
