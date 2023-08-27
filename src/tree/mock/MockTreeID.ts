@@ -1,5 +1,5 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { Primitive } from '@jamashita/anden/type';
+import { Equatable, Primitive } from '@jamashita/anden/type';
 import { TreeID } from '../TreeID.js';
 
 export class MockTreeID extends ValueObject implements TreeID {
@@ -10,19 +10,16 @@ export class MockTreeID extends ValueObject implements TreeID {
     this.id = id;
   }
 
-  public override equals(other: unknown): boolean {
-    if (this === other) {
-      return true;
-    }
-    if (!(other instanceof MockTreeID)) {
-      return false;
-    }
-
-    return this.id === other.id;
-  }
-
   public get(): Primitive {
     return this.id;
+  }
+
+  protected getEquatableProperties(): Array<Equatable> {
+    return [];
+  }
+
+  protected getPrimitiveProperties(): Array<Primitive> {
+    return [this.id];
   }
 
   public serialize(): string {
