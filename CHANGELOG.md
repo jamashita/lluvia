@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/jamashita/lluvia/compare/v1.12.0...v1.13.0) (2023-08-27)
+
+
+### Features
+
+* 🎸 applied new equals() logic ([f670315](https://github.com/jamashita/lluvia/commit/f67031565df02ac180af10596a89896ab9966a80))
+* 🎸 packagesup dated ([e1b8eec](https://github.com/jamashita/lluvia/commit/e1b8eec9114c6f32821429eae81c3835b177e455))
+
 # [1.12.0](https://github.com/jamashita/lluvia/compare/v1.11.0...v1.12.0) (2023-07-15)
 
 
