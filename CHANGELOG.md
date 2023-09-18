@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/jamashita/lluvia/compare/v1.14.0...v1.14.1) (2023-09-18)
+
+
+### Bug Fixes
+
+* 🐛 required version downgraded ([5ca6ef3](https://github.com/jamashita/lluvia/commit/5ca6ef324dd6ae22697c556d81cc562e3aba6b4c))
+
 # [1.14.0](https://github.com/jamashita/lluvia/compare/v1.13.0...v1.14.0) (2023-09-18)
 
 

@@ -387,10 +387,10 @@
   resolved "https://registry.yarnpkg.com/@isaacs/string-locale-compare/-/string-locale-compare-1.1.0.tgz#291c227e93fd407a96ecd59879a35809120e432b"
   integrity sha512-SQ7Kzhh9+D+ZW9MA0zkYv3VXhIDNx+LzM6EJ+/65I3QY+enU6Itte7E5XX7EWrqLW2FN4n06GWzBnPoC3th2aQ==
 
-"@jamashita/anden@2.2.0":
-  version "2.2.0"
-  resolved "https://npm.pkg.github.com/download/@jamashita/anden/2.2.0/95dd0620926853da26a2343751b4abc250e01e36#95dd0620926853da26a2343751b4abc250e01e36"
-  integrity sha512-XGbpJogpYBytcEWYzDDtiUrJNjIdQwPC3OkvGwIC9tCC3d6nfjeqfRBtGfGdmI2Zecb5/xnkNTepBmMMc/0p/w==
+"@jamashita/anden@2.2.1":
+  version "2.2.1"
+  resolved "https://npm.pkg.github.com/download/@jamashita/anden/2.2.1/8d2b5b63b16df33c0049746558e7a7eab22d003a#8d2b5b63b16df33c0049746558e7a7eab22d003a"
+  integrity sha512-0rSYt4uf0mYVQAmuGu705O/N8ibwikeGPTK8n5EP8OvAOpZwPwOreUHdeoNqQyBu5kMYRe8GfFzX2Y1QdI99wA==
   dependencies:
     dayjs "1.11.9"
     object-hash "3.0.0"
