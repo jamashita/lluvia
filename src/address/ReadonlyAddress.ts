@@ -6,6 +6,8 @@ export interface ReadonlyAddress<out V> extends Collection<void, V>, Cloneable<R
 
   filter(predicate: BinaryPredicate<V, void>): ReadonlyAddress<V>;
 
+  get(): null;
+
   has(value: V): boolean;
 
   map<W>(mapping: Mapping<V, W>): ReadonlyAddress<W>;

@@ -82,7 +82,7 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
     });
   }
 
-  public get(): Nullable<V> {
+  public get(): null {
     return null;
   }
 
