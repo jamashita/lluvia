@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden/object';
-import { BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable, Undefina ble } from '@jamashita/anden/type';
+import { BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable, Undefinable } from '@jamashita/anden/type';
 import { NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import { Dictionary } from './Dictionary.js';
 
