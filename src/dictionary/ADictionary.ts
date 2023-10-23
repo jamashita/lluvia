@@ -1,5 +1,5 @@
 import { Objet } from '@jamashita/anden/object';
-import { Ambiguous, BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable } from '@jamashita/anden/type';
+import { BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable, Undefina ble } from '@jamashita/anden/type';
 import { NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import { Dictionary } from './Dictionary.js';
 
@@ -105,7 +105,7 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public get(key: K): Nullable<V> {
-    const p: Ambiguous<[K, V]> = this.dictionary.get(Quantity.genKey(key));
+    const p: Undefinable<[K, V]> = this.dictionary.get(Quantity.genKey(key));
 
     if (Kind.isUndefined(p)) {
       return null;
