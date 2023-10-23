@@ -1,14 +1,5 @@
 import { Objet } from '@jamashita/anden/object';
-import {
-  Ambiguous,
-  BinaryFunction,
-  BinaryPredicate,
-  ForEach,
-  isEquatable,
-  Kind,
-  Mapping,
-  Nullable
-} from '@jamashita/anden/type';
+import { BinaryFunction, BinaryPredicate, ForEach, isEquatable, Kind, Mapping, Nullable, Undefinable } from '@jamashita/anden/type';
 import { NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import { Sequence } from './Sequence.js';
 
@@ -36,7 +27,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   public abstract sort(comparator: BinaryFunction<V, V, number>): ASequence<V>;
 
   public contains(value: V): boolean {
-    const found: Ambiguous<V> = this.sequence.find((v: V) => {
+    const found: Undefinable<V> = this.sequence.find((v: V) => {
       if (v === value) {
         return true;
       }
@@ -94,7 +85,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   public find(predicate: BinaryPredicate<V, number>): Nullable<V>;
 
   public find<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): Nullable<W> {
-    const found: Ambiguous<W> = this.sequence.find(predicate);
+    const found: Undefinable<W> = this.sequence.find(predicate);
 
     if (Kind.isUndefined(found)) {
       return null;
@@ -108,7 +99,7 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public get(key: number): Nullable<V> {
-    const v: Ambiguous<V> = this.sequence[key];
+    const v: Undefinable<V> = this.sequence[key];
 
     if (Kind.isUndefined(v)) {
       return null;
