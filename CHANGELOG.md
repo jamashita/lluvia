@@ -1,3 +1,16 @@
+# [1.16.0](https://github.com/jamashita/lluvia/compare/v1.15.0...v1.16.0) (2023-10-23)
+
+
+### Bug Fixes
+
+* 🐛 remove a space ([a38397f](https://github.com/jamashita/lluvia/commit/a38397ff2736db1d2d31d0eae3e2c6e97509bb3b))
+
+
+### Features
+
+* 🎸 Ambiguous -> Undefinable ([97a0613](https://github.com/jamashita/lluvia/commit/97a06133691aa3891dc830db741d039c77dc1b1d))
+* 🎸 packages updated ([dfdbe58](https://github.com/jamashita/lluvia/commit/dfdbe584f47143edb356afb19d1d49034862713f))
+
 # [1.15.0](https://github.com/jamashita/lluvia/compare/v1.14.1...v1.15.0) (2023-10-08)
 
 
