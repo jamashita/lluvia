@@ -81,7 +81,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
   }
 
   public override hashCode(): string {
-    throw this.table.hashCode();
+    return this.table.hashCode();
   }
 
   public override isEmpty(): boolean {

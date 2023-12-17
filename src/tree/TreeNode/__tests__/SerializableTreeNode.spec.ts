@@ -77,7 +77,7 @@ describe('SerializableTreeNode', () => {
             break;
           }
           default: {
-            fail();
+            throw new Error('test failed');
           }
         }
 
@@ -119,7 +119,7 @@ describe('SerializableTreeNode', () => {
             break;
           }
           default: {
-            fail();
+            throw new Error('test failed');
           }
         }
 
