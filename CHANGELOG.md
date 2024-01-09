@@ -1,3 +1,15 @@
+# [1.18.0](https://github.com/jamashita/lluvia/compare/v1.17.0...v1.18.0) (2024-01-09)
+
+
+### Bug Fixes
+
+* 🐛 ignore rules ([37f11a1](https://github.com/jamashita/lluvia/commit/37f11a10f455cf0917676a415291e0914a442368))
+
+
+### Features
+
+* 🎸 packages updated ([4515358](https://github.com/jamashita/lluvia/commit/4515358192c8a502a1fdee55b3ef5238988ce5f7))
+
 # [1.17.0](https://github.com/jamashita/lluvia/compare/v1.16.0...v1.17.0) (2023-12-17)
 
 
