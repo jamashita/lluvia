@@ -2,6 +2,7 @@ import { Reject, Resolve, UnaryFunction } from '@jamashita/anden/type';
 import { Address } from './Address.js';
 import { ReadonlyAddress } from './ReadonlyAddress.js';
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AddressUtil {
   public static await<V, A extends Address<V>>(address: ReadonlyAddress<PromiseLike<V>>, callback: UnaryFunction<Set<V>, A>): Promise<A> {
     if (address.isEmpty()) {
