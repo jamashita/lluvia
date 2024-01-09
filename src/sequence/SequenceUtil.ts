@@ -2,6 +2,7 @@ import { Reject, Resolve, UnaryFunction } from '@jamashita/anden/type';
 import { ReadonlySequence } from './ReadonlySequence.js';
 import { Sequence } from './Sequence.js';
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class SequenceUtil {
   public static await<V, S extends Sequence<V>>(sequence: ReadonlySequence<PromiseLike<V>>, callback: UnaryFunction<Array<V>, S>): Promise<S> {
     if (sequence.isEmpty()) {
