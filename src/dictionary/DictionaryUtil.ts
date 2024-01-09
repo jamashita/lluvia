@@ -2,6 +2,7 @@ import { Reject, Resolve, UnaryFunction } from '@jamashita/anden/type';
 import { Dictionary } from './Dictionary.js';
 import { ReadonlyDictionary } from './ReadonlyDictionary.js';
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DictionaryUtil {
   public static await<K, V, D extends Dictionary<K, V>>(dictionary: ReadonlyDictionary<K, PromiseLike<V>>, callback: UnaryFunction<Map<K, V>, D>): Promise<D> {
     if (dictionary.isEmpty()) {
