@@ -57,6 +57,7 @@
   ],
   "scripts": {
     "build": "yarn clean && tsc -b tsconfig.compilation.json",
+    "check": "tsc --noEmit",
     "clean": "rimraf dist",
     "commit": "git cz",
     "format": "eslint --fix 'src/**/*.{ts,tsx}'",
