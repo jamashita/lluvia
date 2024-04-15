@@ -72,6 +72,7 @@
     "@jamashita/anden": "2.7.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.4",
     "@commitlint/cli": "18.4.4",
     "@commitlint/config-conventional": "18.4.4",
     "@jamashita/eslint-plugin": "1.99.0",
