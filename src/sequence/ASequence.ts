@@ -1,7 +1,16 @@
 import { Objet } from '@jamashita/anden/object';
-import { BinaryFunction, BinaryPredicate, ForEach, isEquatable, Kind, Mapping, Nullable, Undefinable } from '@jamashita/anden/type';
-import { NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
-import { Sequence } from './Sequence.js';
+import {
+  type BinaryFunction,
+  type BinaryPredicate,
+  type ForEach,
+  isEquatable,
+  Kind,
+  type Mapping,
+  type Nullable,
+  type Undefinable
+} from '@jamashita/anden/type';
+import { type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
+import type { Sequence } from './Sequence.js';
 
 export abstract class ASequence<out V> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
@@ -109,9 +118,11 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public iterator(): IterableIterator<[number, V]> {
-    return this.sequence.map((e: V, i: number): [number, V] => {
-      return [i, e];
-    }).values();
+    return this.sequence
+      .map((e: V, i: number): [number, V] => {
+        return [i, e];
+      })
+      .values();
   }
 
   public reduce(reducer: BinaryFunction<V, V, V>, initialValue?: V): V {
@@ -134,9 +145,11 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
   }
 
   public serialize(): string {
-    return this.sequence.map((v: V) => {
-      return Objet.identify(v);
-    }).join(', ');
+    return this.sequence
+      .map((v: V) => {
+        return Objet.identify(v);
+      })
+      .join(', ');
   }
 
   protected setInternal(key: number, value: V): Array<V> {

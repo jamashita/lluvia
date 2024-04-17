@@ -1,4 +1,4 @@
 {
-  "packages/**/src/**/*.{ts,tsx}": "eslint --fix --quiet",
+  "src/**/*.{ts,tsx}": "yarn format && yarn lint",
   "package.json": "sort-package-json"
 }

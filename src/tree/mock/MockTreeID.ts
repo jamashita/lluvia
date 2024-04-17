@@ -1,6 +1,6 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { Equatable, Primitive } from '@jamashita/anden/type';
-import { TreeID } from '../TreeID.js';
+import type { Equatable, Primitive } from '@jamashita/anden/type';
+import type { TreeID } from '../TreeID.js';
 
 export class MockTreeID extends ValueObject implements TreeID {
   private readonly id: string;

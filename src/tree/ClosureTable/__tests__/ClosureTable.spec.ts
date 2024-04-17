@@ -1,7 +1,7 @@
-import { SpyInstance } from 'vitest';
-import { MockAddress, ReadonlyAddress } from '../../../address/index.js';
-import { Dictionary, MockDictionary } from '../../../dictionary/index.js';
-import { ReadonlySequence } from '../../../sequence/index.js';
+import type { SpyInstance } from 'vitest';
+import { MockAddress, type ReadonlyAddress } from '../../../address/index.js';
+import { type Dictionary, MockDictionary } from '../../../dictionary/index.js';
+import type { ReadonlySequence } from '../../../sequence/index.js';
 import { MockTreeID } from '../../mock/MockTreeID.js';
 import { ClosureTable } from '../ClosureTable.js';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
@@ -15,7 +15,7 @@ describe('ClosureTable', () => {
       expect(ClosureTable.empty()).toBe(ClosureTable.empty());
     });
 
-    it('\'s size is 0', () => {
+    it("'s size is 0", () => {
       expect(ClosureTable.empty().size()).toBe(0);
     });
   });
@@ -137,6 +137,7 @@ describe('ClosureTable', () => {
       // @ts-expect-error
       table.table = dictionary;
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       table.forEach(() => {
         // NOOP
       });
@@ -190,7 +191,7 @@ describe('ClosureTable', () => {
       );
 
       const table: ClosureTable<MockTreeID> = ClosureTable.of(hierarchies);
-      let i: number = 0;
+      let i = 0;
 
       for (const [, v] of table) {
         switch (i) {

@@ -6,9 +6,9 @@ export class MockAddress<out V> extends AAddress<V> {
   public constructor(set: ReadonlySet<V>) {
     const map: Map<V | string, V> = new Map();
 
-    set.forEach((v: V) => {
+    for (const v of set) {
       map.set(Quantity.genKey(v), v);
-    });
+    }
 
     super(map);
   }

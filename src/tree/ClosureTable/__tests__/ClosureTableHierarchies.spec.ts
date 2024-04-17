@@ -1,16 +1,16 @@
 import { MockValueObject } from '@jamashita/anden/object';
-import { SpyInstance } from 'vitest';
+import type { SpyInstance } from 'vitest';
 import { ImmutableAddress, MockAddress } from '../../../address/index.js';
 import { ImmutableDictionary } from '../../../dictionary/index.js';
 import { MockTreeID } from '../../mock/MockTreeID.js';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
-import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy.js';
+import type { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy.js';
 import { MockClosureTableHierarchy } from '../mock/MockClosureTableHierarchy.js';
 import { MockTreeIDFactory } from '../mock/MockTreeIDFactory.js';
 
 describe('ClosureTableHierarchies', () => {
   describe('empty', () => {
-    it('\'s size is 0', () => {
+    it("'s size is 0", () => {
       expect(ClosureTableHierarchies.empty().size()).toBe(0);
     });
 
@@ -21,13 +21,29 @@ describe('ClosureTableHierarchies', () => {
 
   describe('of', () => {
     it('returns flattened ClosureTableHierarchies', () => {
-      const dictionary: ImmutableDictionary<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableDictionary.ofMap(new Map([
-        [new MockTreeID('mock 1'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 1'), new MockTreeID('mock 2'), new MockTreeID('mock 3'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))],
-        [new MockTreeID('mock 2'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 2'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))],
-        [new MockTreeID('mock 3'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 3')]))],
-        [new MockTreeID('mock 4'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 4')]))],
-        [new MockTreeID('mock 5'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 5')]))]
-      ]));
+      const dictionary: ImmutableDictionary<MockTreeID, ImmutableAddress<MockTreeID>> = ImmutableDictionary.ofMap(
+        new Map([
+          [
+            new MockTreeID('mock 1'),
+            ImmutableAddress.ofSet<MockTreeID>(
+              new Set<MockTreeID>([
+                new MockTreeID('mock 1'),
+                new MockTreeID('mock 2'),
+                new MockTreeID('mock 3'),
+                new MockTreeID('mock 4'),
+                new MockTreeID('mock 5')
+              ])
+            )
+          ],
+          [
+            new MockTreeID('mock 2'),
+            ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 2'), new MockTreeID('mock 4'), new MockTreeID('mock 5')]))
+          ],
+          [new MockTreeID('mock 3'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 3')]))],
+          [new MockTreeID('mock 4'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 4')]))],
+          [new MockTreeID('mock 5'), ImmutableAddress.ofSet<MockTreeID>(new Set<MockTreeID>([new MockTreeID('mock 5')]))]
+        ])
+      );
 
       const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.of(dictionary);
 
@@ -81,7 +97,7 @@ describe('ClosureTableHierarchies', () => {
       const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofJSON(json, factory);
 
       expect(hierarchies.size()).toBe(json.length);
-      for (let i: number = 0; i < hierarchies.size(); i++) {
+      for (let i = 0; i < hierarchies.size(); i++) {
         expect(hierarchies.get(i)?.getAncestor().get()).toBe(json[i]?.ancestor);
         expect(hierarchies.get(i)?.getOffspring().get()).toBe(json[i]?.offspring);
       }
@@ -217,6 +233,7 @@ describe('ClosureTableHierarchies', () => {
       // @ts-expect-error
       hierarchies.hierarchies = address;
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       hierarchies.forEach(() => {
         // NOOP
       });
@@ -266,7 +283,7 @@ describe('ClosureTableHierarchies', () => {
       ];
 
       const hierarchies: ClosureTableHierarchies<MockTreeID> = ClosureTableHierarchies.ofArray(array);
-      let i: number = 0;
+      let i = 0;
 
       for (const [, v] of hierarchies) {
         expect(v).toBe(array[i]);

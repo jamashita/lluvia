@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden/object';
-import { isEquatable, Kind, Nullable, Predicate } from '@jamashita/anden/type';
-import { MutableAddress } from '../../address/index.js';
-import { TreeNode } from './TreeNode.js';
+import { isEquatable, Kind, type Nullable, type Predicate } from '@jamashita/anden/type';
+import type { MutableAddress } from '../../address/index.js';
+import type { TreeNode } from './TreeNode.js';
 
 export abstract class ATreeNode<out V, in out T extends ATreeNode<V, T>> extends Objet implements TreeNode<V> {
   protected readonly value: V;
@@ -84,11 +84,11 @@ export abstract class ATreeNode<out V, in out T extends ATreeNode<V, T>> extends
       return 1;
     }
 
-    let size: number = 1;
+    let size = 1;
 
-    this.children.forEach((child: T) => {
+    for (const child of this.children.values()) {
       size += child.size();
-    });
+    }
 
     return size;
   }
@@ -119,8 +119,8 @@ export abstract class ATreeNode<out V, in out T extends ATreeNode<V, T>> extends
   private valuesInternal(values: Array<V>): void {
     values.push(this.value);
 
-    this.children.forEach((child: T) => {
+    for (const child of this.children.values()) {
       child.valuesInternal(values);
-    });
+    }
   }
 }

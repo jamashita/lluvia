@@ -1,5 +1,5 @@
 import { MockValueObject } from '@jamashita/anden/object';
-import { BinaryPredicate, Nullable } from '@jamashita/anden/type';
+import type { BinaryPredicate, Nullable } from '@jamashita/anden/type';
 import { MockDictionary } from '../mock/MockDictionary.js';
 
 describe('AProject', () => {
@@ -10,9 +10,7 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(3);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
 
       expect(dictionary.contains(value2)).toBe(false);
     });
@@ -23,9 +21,7 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
 
       expect(dictionary.contains(value1)).toBe(true);
       expect(dictionary.contains(value2)).toBe(true);
@@ -38,9 +34,7 @@ describe('AProject', () => {
 
       const value: MockValueObject<number> = new MockValueObject(2);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key, value]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key, value]]));
 
       expect(dictionary.equals(dictionary)).toBe(true);
     });
@@ -52,9 +46,7 @@ describe('AProject', () => {
       const value1: MockValueObject<number> = new MockValueObject(2);
       const value2: MockValueObject<number> = new MockValueObject(4);
 
-      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
       const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
         new Map([
           [key1, value1],
@@ -66,9 +58,10 @@ describe('AProject', () => {
     });
 
     it('returns false when the different class instance given', () => {
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary<MockValueObject<number>, MockValueObject<number>>(
-        new Map()
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary<
+        MockValueObject<number>,
+        MockValueObject<number>
+      >(new Map());
 
       expect(dictionary.equals(new MockValueObject('mock'))).toBe(false);
     });
@@ -183,9 +176,7 @@ describe('AProject', () => {
         [key3, value3]
       ];
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map(kv)
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map(kv));
 
       const every1: boolean = dictionary.every((_: MockValueObject<number>, key: MockValueObject<number>) => {
         return key.get() % 3 === 0;
@@ -259,9 +250,7 @@ describe('AProject', () => {
         ])
       );
 
-      const predicate: BinaryPredicate<MockValueObject<number>, MockValueObject<number>> = (
-        value: MockValueObject<number>
-      ) => {
+      const predicate: BinaryPredicate<MockValueObject<number>, MockValueObject<number>> = (value: MockValueObject<number>) => {
         return value.get() % 2 === 0;
       };
 
@@ -293,12 +282,14 @@ describe('AProject', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const dictionary: MockDictionary<MockValueObject<string>, MockValueObject<number>> = new MockDictionary(new Map([
-        [key1, value1],
-        [key2, value2],
-        [key3, value3],
-        [key4, value4]
-      ]));
+      const dictionary: MockDictionary<MockValueObject<string>, MockValueObject<number>> = new MockDictionary(
+        new Map([
+          [key1, value1],
+          [key2, value2],
+          [key3, value3],
+          [key4, value4]
+        ])
+      );
 
       const found1: Nullable<MockValueObject<number>> = dictionary.find((v: MockValueObject<number>) => {
         return v.get() === 1;
@@ -337,14 +328,12 @@ describe('AProject', () => {
         [key2, value2]
       ];
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map(kv)
-      );
-      let i: number = 0;
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map(kv));
+      let i = 0;
 
       expect(dictionary.size()).toBe(kv.length);
       dictionary.forEach((value: MockValueObject<number>, key: MockValueObject<number>) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
         const [k, v]: [MockValueObject<number>, MockValueObject<number>] = kv[i]!;
 
         expect(key).toBe(k);
@@ -361,9 +350,7 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
 
       expect(dictionary.size()).toBe(1);
       expect(dictionary.get(key1)).toBe(value1);
@@ -376,9 +363,7 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
 
       expect(dictionary.size()).toBe(1);
       expect(dictionary.get(key2)).toBeNull();
@@ -392,9 +377,7 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
 
       expect(dictionary.has(key2)).toBe(false);
     });
@@ -405,9 +388,7 @@ describe('AProject', () => {
 
       const value1: MockValueObject<number> = new MockValueObject(3);
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
 
       expect(dictionary.has(key1)).toBe(true);
       expect(dictionary.has(key2)).toBe(true);
@@ -419,12 +400,11 @@ describe('AProject', () => {
       const key1: MockValueObject<number> = new MockValueObject(1);
       const value1: MockValueObject<number> = new MockValueObject(2);
 
-      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map([[key1, value1]])
-      );
-      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary<MockValueObject<number>, MockValueObject<number>>(
-        new Map()
-      );
+      const dictionary1: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map([[key1, value1]]));
+      const dictionary2: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary<
+        MockValueObject<number>,
+        MockValueObject<number>
+      >(new Map());
 
       expect(dictionary1.isEmpty()).toBe(false);
       expect(dictionary2.isEmpty()).toBe(true);
@@ -448,7 +428,7 @@ describe('AProject', () => {
         ])
       );
 
-      let i: number = 0;
+      let i = 0;
 
       for (const [k, v] of dictionary) {
         expect(k).toBe(keys[i]);
@@ -474,7 +454,7 @@ describe('AProject', () => {
         ])
       );
 
-      let i: number = 0;
+      let i = 0;
 
       for (const key of dictionary.keys()) {
         expect(key).toBe(keys[i]);
@@ -499,9 +479,7 @@ describe('AProject', () => {
         [key3, value3]
       ];
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map(kv)
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map(kv));
 
       const predicate: BinaryPredicate<MockValueObject<number>, MockValueObject<number>> = (value: MockValueObject<number>) => {
         return value.get() % 2 === 0;
@@ -554,15 +532,13 @@ describe('AProject', () => {
         [key2, value2]
       ];
 
-      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(
-        new Map(kv)
-      );
+      const dictionary: MockDictionary<MockValueObject<number>, MockValueObject<number>> = new MockDictionary(new Map(kv));
       const map: Map<MockValueObject<number>, MockValueObject<number>> = dictionary.toMap();
-      let i: number = 0;
+      let i = 0;
 
       expect(dictionary.size()).toBe(map.size);
       dictionary.forEach((value: MockValueObject<number>, key: MockValueObject<number>) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
         const [k, v]: [MockValueObject<number>, MockValueObject<number>] = kv[i]!;
 
         expect(key).toBe(k);
@@ -607,7 +583,7 @@ describe('AProject', () => {
         ])
       );
 
-      let i: number = 0;
+      let i = 0;
 
       for (const key of dictionary.values()) {
         expect(key).toBe(values[i]);

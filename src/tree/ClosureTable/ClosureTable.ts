@@ -1,11 +1,10 @@
-import { BinaryPredicate, ForEach, Kind, Mapping, Nullable } from '@jamashita/anden/type';
-import { MutableAddress, ReadonlyAddress } from '../../address/index.js';
+import { type BinaryPredicate, type ForEach, Kind, type Mapping, type Nullable } from '@jamashita/anden/type';
+import { MutableAddress, type ReadonlyAddress } from '../../address/index.js';
 import { Quantity } from '../../collection/index.js';
 import { ImmutableDictionary, MutableDictionary } from '../../dictionary/index.js';
 import { ImmutableSequence } from '../../sequence/index.js';
-import { TreeID } from '../TreeID.js';
-import { ClosureTableHierarchies } from './ClosureTableHierarchies.js';
-import { ClosureTableHierarchy } from './ClosureTableHierarchy.js';
+import type { TreeID } from '../TreeID.js';
+import type { ClosureTableHierarchies } from './ClosureTableHierarchies.js';
 
 export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableDictionary<K, ReadonlyAddress<K>>;
@@ -22,7 +21,7 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
 
     const dictionary: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
 
-    hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
+    for (const [, hierarchy] of hierarchies) {
       const offsprings: Nullable<MutableAddress<K>> = dictionary.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
@@ -31,11 +30,11 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
         address.add(hierarchy.getOffspring());
         dictionary.set(hierarchy.getAncestor(), address);
 
-        return;
+        continue;
       }
 
       offsprings.add(hierarchy.getOffspring());
-    });
+    }
 
     return new ClosureTable(ImmutableDictionary.of(dictionary));
   }
@@ -109,11 +108,13 @@ export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddr
   }
 
   public sort(): ImmutableSequence<K> {
-    const keys: Array<K> = [...this.table].sort(([, v1]: [K, ReadonlyAddress<K>], [, v2]: [K, ReadonlyAddress<K>]) => {
-      return v1.size() - v2.size();
-    }).map(([k]: [K, ReadonlyAddress<K>]) => {
-      return k;
-    });
+    const keys: Array<K> = [...this.table]
+      .sort(([, v1]: [K, ReadonlyAddress<K>], [, v2]: [K, ReadonlyAddress<K>]) => {
+        return v1.size() - v2.size();
+      })
+      .map(([k]: [K, ReadonlyAddress<K>]) => {
+        return k;
+      });
 
     return ImmutableSequence.ofArray(keys);
   }
