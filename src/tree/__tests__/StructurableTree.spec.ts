@@ -1,6 +1,6 @@
-import { SpyInstance } from 'vitest';
+import type { SpyInstance } from 'vitest';
 import { MutableAddress } from '../../address/index.js';
-import { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies.js';
+import type { ClosureTableHierarchies } from '../ClosureTable/ClosureTableHierarchies.js';
 import { MockTreeID } from '../mock/MockTreeID.js';
 import { MockTreeObject } from '../mock/MockTreeObject.js';
 import { StructurableTree } from '../StructurableTree.js';
@@ -9,7 +9,9 @@ import { StructurableTreeNode } from '../TreeNode/StructurableTreeNode.js';
 describe('StructurableTree', () => {
   describe('getTreeID', () => {
     it('delegates its root instance', () => {
-      const root: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock')));
+      const root: StructurableTreeNode<MockTreeID, MockTreeObject<MockTreeID>> = StructurableTreeNode.ofValue(
+        new MockTreeObject(new MockTreeID('mock'))
+      );
 
       const spy: SpyInstance = vi.spyOn(root, 'getTreeID');
 

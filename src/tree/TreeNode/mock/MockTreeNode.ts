@@ -1,9 +1,9 @@
-import { Address, MutableAddress, ReadonlyAddress } from '../../../address/index.js';
-import { SerializableTreeObject } from '../../SerializableTreeObject.js';
-import { StructurableTreeObject } from '../../StructurableTreeObject.js';
-import { TreeID } from '../../TreeID.js';
+import { type Address, MutableAddress, type ReadonlyAddress } from '../../../address/index.js';
+import type { SerializableTreeObject } from '../../SerializableTreeObject.js';
+import type { StructurableTreeObject } from '../../StructurableTreeObject.js';
+import type { TreeID } from '../../TreeID.js';
 import { ATreeNode } from '../ATreeNode.js';
-import { TreeNode } from '../TreeNode.js';
+import type { TreeNode } from '../TreeNode.js';
 
 interface MockTreeObject<out K extends TreeID> extends StructurableTreeObject<K>, SerializableTreeObject {
   // NOOP

@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden/object';
-import { BinaryPredicate, ForEach, isNominative, Kind, Mapping, Nullable, Undefinable } from '@jamashita/anden/type';
-import { NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
-import { Dictionary } from './Dictionary.js';
+import { type BinaryPredicate, type ForEach, isNominative, Kind, type Mapping, type Nullable, type Undefinable } from '@jamashita/anden/type';
+import { type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
+import type { Dictionary } from './Dictionary.js';
 
 export abstract class ADictionary<out K, out V> extends Quantity<K, V> implements Dictionary<K, V> {
   protected readonly dictionary: Map<K | string, [K, V]>;
@@ -77,11 +77,11 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   protected filterInternal<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, K>): Map<K | string, [K, W]> {
     const m: Map<K | string, [K, W]> = new Map();
 
-    this.dictionary.forEach(([k, v]: [K, V]) => {
+    for (const [, [k, v]] of this.dictionary) {
       if (predicate(v, k)) {
         m.set(Quantity.genKey(k), [k, v]);
       }
-    });
+    }
 
     return m;
   }
@@ -99,9 +99,9 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   }
 
   public forEach(foreach: ForEach<K, V>): void {
-    this.dictionary.forEach(([k, v]: [K, V]) => {
+    for (const [, [k, v]] of this.dictionary) {
       foreach(v, k);
-    });
+    }
   }
 
   public get(key: K): Nullable<V> {
@@ -138,12 +138,12 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
 
   protected mapInternal<W>(mapping: Mapping<V, W>): Map<K | string, [K, W]> {
     const m: Map<K | string, [K, W]> = new Map();
-    let i: number = 0;
+    let i = 0;
 
-    this.dictionary.forEach(([k, v]: [K, V]) => {
+    for (const [, [k, v]] of this.dictionary) {
       m.set(Quantity.genKey(k), [k, mapping(v, i)]);
       i++;
-    });
+    }
 
     return m;
   }
@@ -185,12 +185,10 @@ export abstract class ADictionary<out K, out V> extends Quantity<K, V> implement
   public values(): IterableIterator<V> {
     const iterable: Array<V> = [];
 
-    this.forEach((v: V) => {
+    for (const [, [, v]] of this.dictionary) {
       iterable.push(v);
-    });
+    }
 
     return iterable.values();
   }
 }
-
-

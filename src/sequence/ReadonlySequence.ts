@@ -1,5 +1,5 @@
-import { BinaryFunction, BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden/type';
-import { Collection, NarrowingBinaryPredicate } from '../collection/index.js';
+import type { BinaryFunction, BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden/type';
+import type { Collection, NarrowingBinaryPredicate } from '../collection/index.js';
 
 export interface ReadonlySequence<out V> extends Collection<number, V>, Cloneable<ReadonlySequence<V>> {
   filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ReadonlySequence<W>;

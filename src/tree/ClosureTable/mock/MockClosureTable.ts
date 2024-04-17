@@ -1,15 +1,15 @@
-import { Kind, Nullable } from '@jamashita/anden/type';
+import { Kind, type Nullable } from '@jamashita/anden/type';
 import { MutableAddress } from '../../../address/index.js';
 import { MutableDictionary } from '../../../dictionary/index.js';
-import { TreeID } from '../../TreeID.js';
+import type { TreeID } from '../../TreeID.js';
 import { ClosureTable } from '../ClosureTable.js';
-import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
+import type { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
 
 export class MockClosureTable<out K extends TreeID> extends ClosureTable<K> {
   public constructor(...hierarchies: Array<ClosureTableHierarchy<K>>) {
     const dictionary: MutableDictionary<K, MutableAddress<K>> = MutableDictionary.empty();
 
-    hierarchies.forEach((hierarchy: ClosureTableHierarchy<K>) => {
+    for (const hierarchy of hierarchies) {
       const offsprings: Nullable<MutableAddress<K>> = dictionary.get(hierarchy.getAncestor());
 
       if (Kind.isNull(offsprings)) {
@@ -18,11 +18,11 @@ export class MockClosureTable<out K extends TreeID> extends ClosureTable<K> {
         address.add(hierarchy.getOffspring());
         dictionary.set(hierarchy.getAncestor(), address);
 
-        return;
+        continue;
       }
 
       offsprings.add(hierarchy.getOffspring());
-    });
+    }
 
     super(dictionary);
   }

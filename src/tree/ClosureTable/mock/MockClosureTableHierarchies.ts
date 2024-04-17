@@ -1,7 +1,7 @@
 import { ImmutableSequence } from '../../../sequence/index.js';
-import { TreeID } from '../../TreeID.js';
+import type { TreeID } from '../../TreeID.js';
 import { ClosureTableHierarchies } from '../ClosureTableHierarchies.js';
-import { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
+import type { ClosureTableHierarchy } from '../ClosureTableHierarchy.js';
 
 export class MockClosureTableHierarchies<out K extends TreeID> extends ClosureTableHierarchies<K> {
   public constructor(...hierarchies: Array<ClosureTableHierarchy<K>>) {

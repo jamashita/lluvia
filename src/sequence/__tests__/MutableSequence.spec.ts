@@ -1,5 +1,5 @@
 import { MockValueObject } from '@jamashita/anden/object';
-import { Nullable } from '@jamashita/anden/type';
+import type { Nullable } from '@jamashita/anden/type';
 import { MutableSequence } from '../MutableSequence.js';
 
 describe('MutableSequence', () => {
@@ -21,13 +21,11 @@ describe('MutableSequence', () => {
 
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        new MockValueObject(1),
-        new MockValueObject(2)
-      ]);
+      const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([new MockValueObject(1), new MockValueObject(2)]);
       const copied: MutableSequence<MockValueObject<number>> = MutableSequence.of(sequence);
 
       expect(sequence.size()).toBe(copied.size());
+      // biome-ignore lint/complexity/noForEach: <explanation>
       sequence.forEach((v: MockValueObject<number>) => {
         expect(copied.contains(v)).toBe(true);
       });
@@ -46,10 +44,7 @@ describe('MutableSequence', () => {
     });
 
     it('returns instance', () => {
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        new MockValueObject(1),
-        new MockValueObject(3)
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([new MockValueObject(1), new MockValueObject(3)]);
       const sequence2: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
         new MockValueObject(2),
         new MockValueObject(4),
@@ -120,12 +115,7 @@ describe('MutableSequence', () => {
       const value4: MockValueObject<number> = new MockValueObject(2);
       const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3,
-        value4
-      ]);
+      const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3, value4]);
 
       const filtered1: MutableSequence<MockValueObject<number>> = sequence.filter((v: MockValueObject<number>) => {
         return v.get() % 2 === 0;
@@ -162,10 +152,7 @@ describe('MutableSequence', () => {
 
   describe('isEmpty', () => {
     it('returns true if the value size is 0', () => {
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        new MockValueObject(1),
-        new MockValueObject(2)
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([new MockValueObject(1), new MockValueObject(2)]);
       const sequence2: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
 
       expect(sequence1.isEmpty()).toBe(false);
@@ -206,11 +193,7 @@ describe('MutableSequence', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(0);
 
       expect(sequence1).toBe(sequence2);
@@ -222,11 +205,7 @@ describe('MutableSequence', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(1);
 
       expect(sequence1).toBe(sequence2);
@@ -240,11 +219,7 @@ describe('MutableSequence', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(2);
 
       expect(sequence1).toBe(sequence2);
@@ -258,11 +233,7 @@ describe('MutableSequence', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(3);
 
       expect(sequence1).toBe(sequence2);
@@ -273,11 +244,7 @@ describe('MutableSequence', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(-1);
 
       expect(sequence1).toBe(sequence2);
@@ -288,11 +255,7 @@ describe('MutableSequence', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(0.9);
 
       expect(sequence1).toBe(sequence2);
@@ -306,11 +269,7 @@ describe('MutableSequence', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(0, value4);
 
       expect(sequence1).toBe(sequence2);
@@ -326,11 +285,7 @@ describe('MutableSequence', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(1, value4);
 
       expect(sequence1).toBe(sequence2);
@@ -346,11 +301,7 @@ describe('MutableSequence', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([
-        value1,
-        value2,
-        value3
-      ]);
+      const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
       const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(2, value4);
 
       expect(sequence1).toBe(sequence2);
@@ -409,9 +360,7 @@ describe('MutableSequence', () => {
     });
 
     it('when the size is 1, just copy a sequence shallowly', () => {
-      const arr: Array<MockValueObject<number>> = [
-        new MockValueObject(2)
-      ];
+      const arr: Array<MockValueObject<number>> = [new MockValueObject(2)];
       const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray(arr);
       const sorted: MutableSequence<MockValueObject<number>> = sequence.sort(() => {
         return 1;
@@ -423,12 +372,7 @@ describe('MutableSequence', () => {
     });
 
     it('returns like an array', () => {
-      const arr: Array<MockValueObject<number>> = [
-        new MockValueObject(4),
-        new MockValueObject(2),
-        new MockValueObject(3),
-        new MockValueObject(1)
-      ];
+      const arr: Array<MockValueObject<number>> = [new MockValueObject(4), new MockValueObject(2), new MockValueObject(3), new MockValueObject(1)];
       const sequence: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray(arr);
       const sorted: MutableSequence<MockValueObject<number>> = sequence.sort((m1: MockValueObject<number>, m2: MockValueObject<number>) => {
         return m1.get() - m2.get();

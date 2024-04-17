@@ -1,14 +1,14 @@
 import { MockValueObject } from '@jamashita/anden/object';
-import { Dictionary } from '../Dictionary.js';
+import type { Dictionary } from '../Dictionary.js';
 import { DictionaryUtil } from '../DictionaryUtil.js';
 import { ImmutableDictionary } from '../ImmutableDictionary.js';
 
 describe('DictionaryUtil', () => {
-  describe('await', () => {
+  describe('wait', () => {
     it('returns empty map when given dictionary is empty', async () => {
       const dic: Dictionary<MockValueObject<string>, Promise<MockValueObject<number>>> = ImmutableDictionary.empty();
 
-      await DictionaryUtil.await(dic, (values: Map<MockValueObject<string>, MockValueObject<number>>) => {
+      await DictionaryUtil.wait(dic, (values: Map<MockValueObject<string>, MockValueObject<number>>) => {
         expect(values.size).toBe(0);
 
         return ImmutableDictionary.ofMap(values);
@@ -33,7 +33,7 @@ describe('DictionaryUtil', () => {
         ])
       );
 
-      await DictionaryUtil.await(dic, (values: Map<MockValueObject<string>, MockValueObject<number>>) => {
+      await DictionaryUtil.wait(dic, (values: Map<MockValueObject<string>, MockValueObject<number>>) => {
         expect(values.size).toBe(dic.size());
         expect(values.get(key1)).toBe(mock1);
         expect(values.get(key2)).toBe(mock2);
@@ -55,9 +55,11 @@ describe('DictionaryUtil', () => {
         ])
       );
 
-      await expect(DictionaryUtil.await(dic, (values: Map<MockValueObject<string>, MockValueObject<number>>) => {
-        return ImmutableDictionary.ofMap(values);
-      })).rejects.toThrow(err);
+      await expect(
+        DictionaryUtil.wait(dic, (values: Map<MockValueObject<string>, MockValueObject<number>>) => {
+          return ImmutableDictionary.ofMap(values);
+        })
+      ).rejects.toThrow(err);
     });
   });
 });

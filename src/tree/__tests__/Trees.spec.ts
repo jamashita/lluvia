@@ -1,6 +1,6 @@
 import { MockValueObject } from '@jamashita/anden/object';
-import { Nullable } from '@jamashita/anden/type';
-import { SpyInstance } from 'vitest';
+import type { Nullable } from '@jamashita/anden/type';
+import type { SpyInstance } from 'vitest';
 import { MockAddress } from '../../address/index.js';
 import { MockDictionary } from '../../dictionary/index.js';
 import { MockTree } from '../mock/MockTree.js';
@@ -13,17 +13,9 @@ describe('Trees', () => {
   describe('contains', () => {
     it('delegates its retaining tree', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const spy: SpyInstance = vi.spyOn(tree, 'contains');
 
@@ -38,17 +30,9 @@ describe('Trees', () => {
   describe('equals', () => {
     it('returns true when the same instance given', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
@@ -57,17 +41,9 @@ describe('Trees', () => {
 
     it('returns false when the different class instance given', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
@@ -76,17 +52,9 @@ describe('Trees', () => {
 
     it('delegates its retaining dictionary', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
@@ -95,13 +63,7 @@ describe('Trees', () => {
 
       const spy: SpyInstance = vi.spyOn(dictionary, 'equals');
 
-      trees.equals(new MockTrees(
-        new MockDictionary(
-          new Map([
-            [id, new MockTree(new MockTreeNode(new MockTreeObject(id)))]
-          ])
-        )
-      ));
+      trees.equals(new MockTrees(new MockDictionary(new Map([[id, new MockTree(new MockTreeNode(new MockTreeObject(id)))]]))));
 
       expect(spy.mock.calls).toHaveLength(1);
     });
@@ -113,22 +75,9 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -152,22 +101,9 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -193,22 +129,9 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -232,22 +155,9 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -272,28 +182,11 @@ describe('Trees', () => {
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
-      const ids: Array<MockTreeID> = [
-        id1,
-        id2,
-        id3
-      ];
+      const ids: Array<MockTreeID> = [id1, id2, id3];
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -303,10 +196,10 @@ describe('Trees', () => {
         ])
       );
 
-
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
-      let i: number = 0;
+      let i = 0;
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       trees.forEach((o: MockTreeObject<MockTreeID>) => {
         expect(o.getTreeID()).toBe(ids[i]);
         i++;
@@ -317,17 +210,9 @@ describe('Trees', () => {
   describe('get', () => {
     it('delegates its retaining dictionary', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
@@ -345,17 +230,9 @@ describe('Trees', () => {
   describe('isEmpty', () => {
     it('delegates its retaining dictionary', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
@@ -373,17 +250,9 @@ describe('Trees', () => {
   describe('size', () => {
     it('delegates its retaining dictionary', () => {
       const id: MockTreeID = new MockTreeID('tree id');
-      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id)
-        )
-      );
+      const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id)));
 
-      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
-        new Map([
-          [id, tree]
-        ])
-      );
+      const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(new Map([[id, tree]]));
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
 
@@ -404,22 +273,9 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -443,22 +299,9 @@ describe('Trees', () => {
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -483,28 +326,11 @@ describe('Trees', () => {
       const id1: MockTreeID = new MockTreeID('tree id 1');
       const id2: MockTreeID = new MockTreeID('tree id 2');
       const id3: MockTreeID = new MockTreeID('tree id 3');
-      const ids: Array<MockTreeID> = [
-        id1,
-        id2,
-        id3
-      ];
+      const ids: Array<MockTreeID> = [id1, id2, id3];
 
-      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id1)
-        )
-      );
+      const tree1: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(new MockTreeObject(id1)));
       const tree2: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
-        new MockTreeNode(
-          new MockTreeObject(id2),
-          new MockAddress(
-            new Set([
-              new MockTreeNode(
-                new MockTreeObject(id3)
-              )
-            ])
-          )
-        )
+        new MockTreeNode(new MockTreeObject(id2), new MockAddress(new Set([new MockTreeNode(new MockTreeObject(id3))])))
       );
 
       const dictionary: MockDictionary<MockTreeID, MockTree<MockTreeID, MockTreeObject<MockTreeID>>> = new MockDictionary(
@@ -515,7 +341,7 @@ describe('Trees', () => {
       );
 
       const trees: MockTrees<MockTreeID, MockTreeObject<MockTreeID>> = new MockTrees(dictionary);
-      let i: number = 0;
+      let i = 0;
 
       for (const o of trees.values()) {
         expect(o.getTreeID()).toBe(ids[i]);

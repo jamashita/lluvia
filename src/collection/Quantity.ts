@@ -1,6 +1,6 @@
 import { Objet } from '@jamashita/anden/object';
-import { BinaryPredicate, ForEach, isNominative, Mapping, Nullable } from '@jamashita/anden/type';
-import { Collection, NarrowingBinaryPredicate } from './Collection.js';
+import { type BinaryPredicate, type ForEach, isNominative, type Mapping, type Nullable } from '@jamashita/anden/type';
+import type { Collection, NarrowingBinaryPredicate } from './Collection.js';
 
 export abstract class Quantity<out K, out V> extends Objet implements Collection<K, V> {
   protected static genKey<T>(key: T): T | string {

@@ -1,12 +1,12 @@
-import { BinaryPredicate, Mapping } from '@jamashita/anden/type';
-import { Collection, NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
+import type { BinaryPredicate, Mapping } from '@jamashita/anden/type';
+import { type Collection, type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import { ADictionary } from './ADictionary.js';
 import { DictionaryUtil } from './DictionaryUtil.js';
-import { ReadonlyDictionary } from './ReadonlyDictionary.js';
+import type { ReadonlyDictionary } from './ReadonlyDictionary.js';
 
 export class MutableDictionary<out K, out V> extends ADictionary<K, V> {
   public static await<K, V>(dictionary: ReadonlyDictionary<K, PromiseLike<V>>): Promise<MutableDictionary<K, V>> {
-    return DictionaryUtil.await(dictionary, (values: Map<K, V>) => {
+    return DictionaryUtil.wait(dictionary, (values: Map<K, V>) => {
       return MutableDictionary.ofMap(values);
     });
   }
