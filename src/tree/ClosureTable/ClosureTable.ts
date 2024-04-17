@@ -5,7 +5,6 @@ import { ImmutableDictionary, MutableDictionary } from '../../dictionary/index.j
 import { ImmutableSequence } from '../../sequence/index.js';
 import type { TreeID } from '../TreeID.js';
 import type { ClosureTableHierarchies } from './ClosureTableHierarchies.js';
-import type { ClosureTableHierarchy } from './ClosureTableHierarchy.js';
 
 export class ClosureTable<out K extends TreeID> extends Quantity<K, ReadonlyAddress<K>> {
   private readonly table: ImmutableDictionary<K, ReadonlyAddress<K>>;
