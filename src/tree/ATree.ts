@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden/object';
-import { ForEach, Nullable, Predicate } from '@jamashita/anden/type';
-import { Tree } from './Tree.js';
-import { ATreeNode } from './TreeNode/index.js';
+import type { ForEach, Nullable, Predicate } from '@jamashita/anden/type';
+import type { Tree } from './Tree.js';
+import type { ATreeNode } from './TreeNode/index.js';
 
 export abstract class ATree<out V, in out T extends ATreeNode<V, T>> extends Objet implements Tree<V> {
   protected readonly root: T;

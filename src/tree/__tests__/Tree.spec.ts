@@ -1,9 +1,9 @@
-import { SpyInstance } from 'vitest';
+import type { SpyInstance } from 'vitest';
 import { MutableAddress } from '../../address/index.js';
+import { MockTreeNode } from '../TreeNode/mock/MockTreeNode.js';
 import { MockTree } from '../mock/MockTree.js';
 import { MockTreeID } from '../mock/MockTreeID.js';
 import { MockTreeObject } from '../mock/MockTreeObject.js';
-import { MockTreeNode } from '../TreeNode/mock/MockTreeNode.js';
 
 describe('Tree', () => {
   describe('contains', () => {
@@ -40,41 +40,31 @@ describe('Tree', () => {
       const tree04: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
         new MockTreeNode(
           new MockTreeObject(new MockTreeID('mock 1')),
-          MutableAddress.ofSet(
-            new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')))])
-          )
+          MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')))]))
         )
       );
       const tree05: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
         new MockTreeNode(
           new MockTreeObject(new MockTreeID('mock 1')),
-          MutableAddress.ofSet(
-            new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))])
-          )
+          MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))]))
         )
       );
       const tree06: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
         new MockTreeNode(
           new MockTreeObject(new MockTreeID('mock 2')),
-          MutableAddress.ofSet(
-            new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')))])
-          )
+          MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')))]))
         )
       );
       const tree07: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
         new MockTreeNode(
           new MockTreeObject(new MockTreeID('mock 2')),
-          MutableAddress.ofSet(
-            new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))])
-          )
+          MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2')))]))
         )
       );
       const tree08: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
         new MockTreeNode(
           new MockTreeObject(new MockTreeID('mock 1')),
-          MutableAddress.ofSet(
-            new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')))])
-          )
+          MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 1')))]))
         )
       );
 
@@ -119,32 +109,20 @@ describe('Tree', () => {
           new MockTreeObject(new MockTreeID('mock 1')),
           MutableAddress.ofSet(
             new Set([
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mock 2'))
-              ),
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2'))),
               new MockTreeNode(
                 new MockTreeObject(new MockTreeID('mock 3')),
                 MutableAddress.ofSet(
                   new Set([
                     new MockTreeNode(
                       new MockTreeObject(new MockTreeID('mock 5')),
-                      MutableAddress.ofSet(
-                        new Set([
-                          new MockTreeNode(
-                            new MockTreeObject(new MockTreeID('mock 7'))
-                          )
-                        ])
-                      )
+                      MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 7')))]))
                     ),
-                    new MockTreeNode(
-                      new MockTreeObject(new MockTreeID('mock 6'))
-                    )
+                    new MockTreeNode(new MockTreeObject(new MockTreeID('mock 6')))
                   ])
                 )
               ),
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mock 4'))
-              )
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mock 4')))
             ])
           )
         )
@@ -163,32 +141,20 @@ describe('Tree', () => {
           new MockTreeObject(new MockTreeID('mock 1')),
           MutableAddress.ofSet(
             new Set([
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mock 2'))
-              ),
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2'))),
               new MockTreeNode(
                 new MockTreeObject(new MockTreeID('mocc 3')),
                 MutableAddress.ofSet(
                   new Set([
                     new MockTreeNode(
                       new MockTreeObject(new MockTreeID('mock 5')),
-                      MutableAddress.ofSet(
-                        new Set([
-                          new MockTreeNode(
-                            new MockTreeObject(new MockTreeID('mock 7'))
-                          )
-                        ])
-                      )
+                      MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 7')))]))
                     ),
-                    new MockTreeNode(
-                      new MockTreeObject(new MockTreeID('mock 6'))
-                    )
+                    new MockTreeNode(new MockTreeObject(new MockTreeID('mock 6')))
                   ])
                 )
               ),
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mock 4'))
-              )
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mock 4')))
             ])
           )
         )
@@ -219,10 +185,11 @@ describe('Tree', () => {
   });
 
   describe('forEach', () => {
-    it('iterates root\'s value when the tree only has root', () => {
+    it("iterates root's value when the tree only has root", () => {
       const obj: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 1'));
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(new MockTreeNode(obj));
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       tree.forEach((v: MockTreeObject<MockTreeID>) => {
         expect(v).toBe(obj);
       });
@@ -237,54 +204,29 @@ describe('Tree', () => {
       const obj6: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 6'));
       const obj7: MockTreeObject<MockTreeID> = new MockTreeObject(new MockTreeID('mock 7'));
 
-      const objs: Array<MockTreeObject<MockTreeID>> = [
-        obj1,
-        obj2,
-        obj3,
-        obj5,
-        obj7,
-        obj6,
-        obj4
-      ];
+      const objs: Array<MockTreeObject<MockTreeID>> = [obj1, obj2, obj3, obj5, obj7, obj6, obj4];
 
       const tree: MockTree<MockTreeID, MockTreeObject<MockTreeID>> = new MockTree(
         new MockTreeNode(
           obj1,
           MutableAddress.ofSet(
             new Set([
-              new MockTreeNode(
-                obj2
-              ),
+              new MockTreeNode(obj2),
               new MockTreeNode(
                 obj3,
                 MutableAddress.ofSet(
-                  new Set([
-                    new MockTreeNode(
-                      obj5,
-                      MutableAddress.ofSet(
-                        new Set([
-                          new MockTreeNode(
-                            obj7
-                          )
-                        ])
-                      )
-                    ),
-                    new MockTreeNode(
-                      obj6
-                    )
-                  ])
+                  new Set([new MockTreeNode(obj5, MutableAddress.ofSet(new Set([new MockTreeNode(obj7)]))), new MockTreeNode(obj6)])
                 )
               ),
-              new MockTreeNode(
-                obj4
-              )
+              new MockTreeNode(obj4)
             ])
           )
         )
       );
 
-      let i: number = 0;
+      let i = 0;
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       tree.forEach((v: MockTreeObject<MockTreeID>) => {
         expect(v).toBe(objs[i]);
         i++;
@@ -342,32 +284,20 @@ describe('Tree', () => {
           new MockTreeObject(new MockTreeID('mock 1')),
           MutableAddress.ofSet(
             new Set([
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mock 2'))
-              ),
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mock 2'))),
               new MockTreeNode(
                 new MockTreeObject(new MockTreeID('mock 3')),
                 MutableAddress.ofSet(
                   new Set([
                     new MockTreeNode(
                       new MockTreeObject(new MockTreeID('mock 5')),
-                      MutableAddress.ofSet(
-                        new Set([
-                          new MockTreeNode(
-                            new MockTreeObject(new MockTreeID('mock 7'))
-                          )
-                        ])
-                      )
+                      MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mock 7')))]))
                     ),
-                    new MockTreeNode(
-                      new MockTreeObject(new MockTreeID('mock 6'))
-                    )
+                    new MockTreeNode(new MockTreeObject(new MockTreeID('mock 6')))
                   ])
                 )
               ),
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mock 4'))
-              )
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mock 4')))
             ])
           )
         )
@@ -386,32 +316,20 @@ describe('Tree', () => {
           new MockTreeObject(new MockTreeID('mocc 1')),
           MutableAddress.ofSet(
             new Set([
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mocc 2'))
-              ),
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mocc 2'))),
               new MockTreeNode(
                 new MockTreeObject(new MockTreeID('mocc 3')),
                 MutableAddress.ofSet(
                   new Set([
                     new MockTreeNode(
                       new MockTreeObject(new MockTreeID('mocc 5')),
-                      MutableAddress.ofSet(
-                        new Set([
-                          new MockTreeNode(
-                            new MockTreeObject(new MockTreeID('mocc 7'))
-                          )
-                        ])
-                      )
+                      MutableAddress.ofSet(new Set([new MockTreeNode(new MockTreeObject(new MockTreeID('mocc 7')))]))
                     ),
-                    new MockTreeNode(
-                      new MockTreeObject(new MockTreeID('mocc 6'))
-                    )
+                    new MockTreeNode(new MockTreeObject(new MockTreeID('mocc 6')))
                   ])
                 )
               ),
-              new MockTreeNode(
-                new MockTreeObject(new MockTreeID('mocc 4'))
-              )
+              new MockTreeNode(new MockTreeObject(new MockTreeID('mocc 4')))
             ])
           )
         )

@@ -8,11 +8,7 @@ describe('SerializableTreeNode', () => {
     it('copies shallowly', () => {
       const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        MutableAddress.ofSet(
-          new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')))
-          ])
-        )
+        MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')))]))
       );
       const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.of(node01);
 
@@ -23,8 +19,14 @@ describe('SerializableTreeNode', () => {
 
   describe('ofValue', () => {
     it('returns MutableAddress.empty() when empty children given', () => {
-      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')), MutableAddress.empty());
-      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 1')), new MockAddress(new Set()));
+      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
+        new MockTreeObject(new MockTreeID('mock 1')),
+        MutableAddress.empty()
+      );
+      const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
+        new MockTreeObject(new MockTreeID('mock 1')),
+        new MockAddress(new Set())
+      );
 
       expect(node01.getChildren().isEmpty()).toBe(true);
       expect(node02.getChildren().isEmpty()).toBe(true);
@@ -40,19 +42,11 @@ describe('SerializableTreeNode', () => {
 
       const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id1),
-        MutableAddress.ofSet(
-          new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(id2))
-          ])
-        )
+        MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(id2))]))
       );
       const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id3),
-        MutableAddress.ofSet(
-          new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(id4))
-          ])
-        )
+        MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(id4))]))
       );
 
       node01.append(node02);
@@ -60,10 +54,11 @@ describe('SerializableTreeNode', () => {
       expect(node01.size()).toBe(4);
 
       const children: MutableAddress<SerializableTreeNode<MockTreeObject<MockTreeID>>> = node01.getChildren();
-      let i: number = 0;
+      let i = 0;
 
       expect(children.size()).toBe(2);
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       children.forEach((child: SerializableTreeNode<MockTreeObject<MockTreeID>>) => {
         switch (i) {
           case 0: {
@@ -90,16 +85,10 @@ describe('SerializableTreeNode', () => {
       const id3: MockTreeID = new MockTreeID('mock 3');
       const id4: MockTreeID = new MockTreeID('mock 4');
 
-      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
-        new MockTreeObject(id1)
-      );
+      const node01: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(new MockTreeObject(id1));
       const node02: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(id3),
-        MutableAddress.ofSet(
-          new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(id4))
-          ])
-        )
+        MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(id4))]))
       );
 
       node01.append(node02);
@@ -107,10 +96,11 @@ describe('SerializableTreeNode', () => {
       expect(node01.size()).toBe(3);
 
       const children: MutableAddress<SerializableTreeNode<MockTreeObject<MockTreeID>>> = node01.getChildren();
-      let i: number = 0;
+      let i = 0;
 
       expect(children.size()).toBe(1);
 
+      // biome-ignore lint/complexity/noForEach: <explanation>
       children.forEach((child: SerializableTreeNode<MockTreeObject<MockTreeID>>) => {
         switch (i) {
           case 0: {
@@ -134,42 +124,56 @@ describe('SerializableTreeNode', () => {
         new MockTreeObject(new MockTreeID('mock 1')),
         MutableAddress.ofSet(
           new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              MutableAddress.ofSet(
-                new Set([
-                  SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
-                ])
-              ))
+            SerializableTreeNode.ofValue(
+              new MockTreeObject(new MockTreeID('mock 2')),
+              MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))]))
+            )
           ])
         )
       );
 
-      expect(node.find((v: MockTreeObject<MockTreeID>) => {
-        return v.getTreeID().equals(new MockTreeID('mock 1'));
-      })?.getValue().getTreeID().equals(new MockTreeID('mock 1'))).toBe(true);
+      expect(
+        node
+          .find((v: MockTreeObject<MockTreeID>) => {
+            return v.getTreeID().equals(new MockTreeID('mock 1'));
+          })
+          ?.getValue()
+          .getTreeID()
+          .equals(new MockTreeID('mock 1'))
+      ).toBe(true);
     });
 
-    it('returns children\'s value when the TreeNode\'s children value matches', () => {
+    it("returns children's value when the TreeNode's children value matches", () => {
       const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
         MutableAddress.ofSet(
           new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              MutableAddress.ofSet(
-                new Set([
-                  SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
-                ])
-              ))
+            SerializableTreeNode.ofValue(
+              new MockTreeObject(new MockTreeID('mock 2')),
+              MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))]))
+            )
           ])
         )
       );
 
-      expect(node.find((v: MockTreeObject<MockTreeID>) => {
-        return v.getTreeID().equals(new MockTreeID('mock 2'));
-      })?.getValue().getTreeID().equals(new MockTreeID('mock 2'))).toBe(true);
-      expect(node.find((v: MockTreeObject<MockTreeID>) => {
-        return v.getTreeID().equals(new MockTreeID('mock 3'));
-      })?.getValue().getTreeID().equals(new MockTreeID('mock 3'))).toBe(true);
+      expect(
+        node
+          .find((v: MockTreeObject<MockTreeID>) => {
+            return v.getTreeID().equals(new MockTreeID('mock 2'));
+          })
+          ?.getValue()
+          .getTreeID()
+          .equals(new MockTreeID('mock 2'))
+      ).toBe(true);
+      expect(
+        node
+          .find((v: MockTreeObject<MockTreeID>) => {
+            return v.getTreeID().equals(new MockTreeID('mock 3'));
+          })
+          ?.getValue()
+          .getTreeID()
+          .equals(new MockTreeID('mock 3'))
+      ).toBe(true);
     });
 
     it('returns null when the TreeNode does not have such value', () => {
@@ -177,19 +181,19 @@ describe('SerializableTreeNode', () => {
         new MockTreeObject(new MockTreeID('mock 1')),
         MutableAddress.ofSet(
           new Set([
-            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-              MutableAddress.ofSet(
-                new Set([
-                  SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
-                ])
-              ))
+            SerializableTreeNode.ofValue(
+              new MockTreeObject(new MockTreeID('mock 2')),
+              MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))]))
+            )
           ])
         )
       );
 
-      expect(node.find((v: MockTreeObject<MockTreeID>) => {
-        return v.getTreeID().equals(new MockTreeID('mock 4'));
-      })).toBeNull();
+      expect(
+        node.find((v: MockTreeObject<MockTreeID>) => {
+          return v.getTreeID().equals(new MockTreeID('mock 4'));
+        })
+      ).toBeNull();
     });
   });
 
@@ -197,13 +201,15 @@ describe('SerializableTreeNode', () => {
     it('returns SerializableTreeNodeJSON', () => {
       const node: SerializableTreeNode<MockTreeObject<MockTreeID>> = SerializableTreeNode.ofValue(
         new MockTreeObject(new MockTreeID('mock 1')),
-        MutableAddress.ofSet(new Set([
-          SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 2')),
-            MutableAddress.ofSet(new Set([
-              SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))
-            ]))),
-          SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4')))
-        ]))
+        MutableAddress.ofSet(
+          new Set([
+            SerializableTreeNode.ofValue(
+              new MockTreeObject(new MockTreeID('mock 2')),
+              MutableAddress.ofSet(new Set([SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 3')))]))
+            ),
+            SerializableTreeNode.ofValue(new MockTreeObject(new MockTreeID('mock 4')))
+          ])
+        )
       );
 
       expect(node.toJSON()).toStrictEqual({

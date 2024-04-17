@@ -1,8 +1,8 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { Equatable, ObjectLiteral, Primitive } from '@jamashita/anden/type';
-import { SerializableTreeObject } from '../SerializableTreeObject.js';
-import { StructurableTreeObject } from '../StructurableTreeObject.js';
-import { TreeID } from '../TreeID.js';
+import type { Equatable, ObjectLiteral, Primitive } from '@jamashita/anden/type';
+import type { SerializableTreeObject } from '../SerializableTreeObject.js';
+import type { StructurableTreeObject } from '../StructurableTreeObject.js';
+import type { TreeID } from '../TreeID.js';
 
 export class MockTreeObject<out K extends TreeID> extends ValueObject implements StructurableTreeObject<K>, SerializableTreeObject {
   private readonly id: K;

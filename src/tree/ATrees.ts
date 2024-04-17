@@ -1,11 +1,14 @@
 import { Objet } from '@jamashita/anden/object';
-import { BinaryPredicate, ForEach, Kind, Nullable } from '@jamashita/anden/type';
-import { Collection } from '../collection/index.js';
-import { ATree } from './ATree.js';
-import { ATreeNode } from './TreeNode/index.js';
-import { Trees } from './Trees.js';
+import { type BinaryPredicate, type ForEach, Kind, type Nullable } from '@jamashita/anden/type';
+import type { Collection } from '../collection/index.js';
+import type { ATree } from './ATree.js';
+import type { ATreeNode } from './TreeNode/index.js';
+import type { Trees } from './Trees.js';
 
-export abstract class ATrees<out K, out V, T extends ATreeNode<V, T>, E extends ATree<V, T>, C extends Collection<K, E>> extends Objet implements Trees<K, V, E> {
+export abstract class ATrees<out K, out V, T extends ATreeNode<V, T>, E extends ATree<V, T>, C extends Collection<K, E>>
+  extends Objet
+  implements Trees<K, V, E>
+{
   protected readonly trees: C;
 
   protected constructor(trees: C) {
@@ -56,9 +59,9 @@ export abstract class ATrees<out K, out V, T extends ATreeNode<V, T>, E extends 
 
   public forEach(foreach: ForEach<K, V>): void {
     this.trees.forEach((tree: E, key: K) => {
-      tree.forEach((value: V) => {
+      for (const value of tree.values()) {
         foreach(value, key);
-      });
+      }
     });
   }
 
@@ -89,9 +92,9 @@ export abstract class ATrees<out K, out V, T extends ATreeNode<V, T>, E extends 
   public values(): Iterable<V> {
     const values: Array<V> = [];
 
-    this.trees.forEach((v: E) => {
+    for (const v of this.trees.values()) {
       values.push(...v.values());
-    });
+    }
 
     return values;
   }

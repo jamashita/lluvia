@@ -1,11 +1,14 @@
-import { JSONifiable } from '@jamashita/anden/type';
-import { ImmutableAddress, MutableAddress, ReadonlyAddress } from '../address/index.js';
+import type { JSONifiable } from '@jamashita/anden/type';
+import { ImmutableAddress, MutableAddress, type ReadonlyAddress } from '../address/index.js';
 import { ATrees } from './ATrees.js';
-import { SerializableTree } from './SerializableTree.js';
-import { SerializableTreeObject } from './SerializableTreeObject.js';
-import { SerializableTreeNode, TreeNodeJSON } from './TreeNode/index.js';
+import type { SerializableTree } from './SerializableTree.js';
+import type { SerializableTreeObject } from './SerializableTreeObject.js';
+import type { SerializableTreeNode, TreeNodeJSON } from './TreeNode/index.js';
 
-export class SerializableTrees<out V extends SerializableTreeObject> extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>> implements JSONifiable<ReadonlyArray<TreeNodeJSON>> {
+export class SerializableTrees<out V extends SerializableTreeObject>
+  extends ATrees<void, V, SerializableTreeNode<V>, SerializableTree<V>, MutableAddress<SerializableTree<V>>>
+  implements JSONifiable<ReadonlyArray<TreeNodeJSON>>
+{
   public static empty<V extends SerializableTreeObject>(): SerializableTrees<V> {
     return SerializableTrees.ofAddress(ImmutableAddress.empty());
   }
@@ -35,9 +38,9 @@ export class SerializableTrees<out V extends SerializableTreeObject> extends ATr
   public toJSON(): ReadonlyArray<TreeNodeJSON> {
     const json: Array<TreeNodeJSON> = [];
 
-    this.trees.forEach((tree: SerializableTree<V>) => {
+    for (const [, tree] of this.trees) {
       json.push(tree.toJSON());
-    });
+    }
 
     return json;
   }

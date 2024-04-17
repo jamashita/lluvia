@@ -1,15 +1,18 @@
-import { Address, MutableAddress, ReadonlyAddress } from '../../address/index.js';
-import { StructurableTreeObject } from '../StructurableTreeObject.js';
-import { TreeID } from '../TreeID.js';
+import { type Address, MutableAddress, type ReadonlyAddress } from '../../address/index.js';
+import type { StructurableTreeObject } from '../StructurableTreeObject.js';
+import type { TreeID } from '../TreeID.js';
 import { ATreeNode } from './ATreeNode.js';
-import { TreeNode } from './TreeNode.js';
+import type { TreeNode } from './TreeNode.js';
 
 export class StructurableTreeNode<out K extends TreeID, out V extends StructurableTreeObject<K>> extends ATreeNode<V, StructurableTreeNode<K, V>> {
   public static of<K extends TreeID, V extends StructurableTreeObject<K>>(node: StructurableTreeNode<K, V>): StructurableTreeNode<K, V> {
     return StructurableTreeNode.ofValue<K, V>(node.getValue(), node.getChildren());
   }
 
-  public static ofValue<K extends TreeID, V extends StructurableTreeObject<K>>(value: V, children: ReadonlyAddress<StructurableTreeNode<K, V>> = MutableAddress.empty()): StructurableTreeNode<K, V> {
+  public static ofValue<K extends TreeID, V extends StructurableTreeObject<K>>(
+    value: V,
+    children: ReadonlyAddress<StructurableTreeNode<K, V>> = MutableAddress.empty()
+  ): StructurableTreeNode<K, V> {
     return new StructurableTreeNode(value, children);
   }
 

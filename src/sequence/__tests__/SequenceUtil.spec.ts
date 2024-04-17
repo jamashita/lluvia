@@ -1,14 +1,14 @@
 import { MockValueObject } from '@jamashita/anden/object';
 import { ImmutableSequence } from '../ImmutableSequence.js';
-import { Sequence } from '../Sequence.js';
+import type { Sequence } from '../Sequence.js';
 import { SequenceUtil } from '../SequenceUtil.js';
 
 describe('SequenceUtil', () => {
-  describe('await', () => {
+  describe('wait', () => {
     it('returns empty array when given sequence is empty', async () => {
       const seq: Sequence<Promise<MockValueObject<number>>> = ImmutableSequence.empty();
 
-      await SequenceUtil.await(seq, (values: Array<MockValueObject<number>>) => {
+      await SequenceUtil.wait(seq, (values: Array<MockValueObject<number>>) => {
         expect(values).toHaveLength(0);
 
         return ImmutableSequence.ofArray(values);
@@ -27,7 +27,7 @@ describe('SequenceUtil', () => {
         Promise.resolve(mock4)
       ]);
 
-      await SequenceUtil.await(seq, (values: Array<MockValueObject<number>>) => {
+      await SequenceUtil.wait(seq, (values: Array<MockValueObject<number>>) => {
         expect(values).toHaveLength(seq.size());
         expect(values[0]).toBe(mock1);
         expect(values[1]).toBe(mock2);
@@ -47,9 +47,11 @@ describe('SequenceUtil', () => {
         Promise.resolve(new MockValueObject(4))
       ]);
 
-      await expect(SequenceUtil.await(seq, (values: Array<MockValueObject<number>>) => {
-        return ImmutableSequence.ofArray(values);
-      })).rejects.toThrow(err);
+      await expect(
+        SequenceUtil.wait(seq, (values: Array<MockValueObject<number>>) => {
+          return ImmutableSequence.ofArray(values);
+        })
+      ).rejects.toThrow(err);
     });
   });
 });

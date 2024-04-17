@@ -1,14 +1,14 @@
 import { MockValueObject } from '@jamashita/anden/object';
-import { Address } from '../Address.js';
+import type { Address } from '../Address.js';
 import { AddressUtil } from '../AddressUtil.js';
 import { ImmutableAddress } from '../ImmutableAddress.js';
 
 describe('AddressUtil', () => {
-  describe('await', () => {
+  describe('wait', () => {
     it('returns empty set when given address is empty', async () => {
       const add: Address<Promise<MockValueObject<number>>> = ImmutableAddress.empty();
 
-      await AddressUtil.await(add, (values: Set<MockValueObject<number>>) => {
+      await AddressUtil.wait(add, (values: Set<MockValueObject<number>>) => {
         expect(values.size).toBe(0);
 
         return ImmutableAddress.ofSet(values);
@@ -21,15 +21,10 @@ describe('AddressUtil', () => {
       const mock3: MockValueObject<number> = new MockValueObject(3);
       const mock4: MockValueObject<number> = new MockValueObject(4);
       const add: Address<Promise<MockValueObject<number>>> = ImmutableAddress.ofSet(
-        new Set([
-          Promise.resolve(mock1),
-          Promise.resolve(mock2),
-          Promise.resolve(mock3),
-          Promise.resolve(mock4)
-        ])
+        new Set([Promise.resolve(mock1), Promise.resolve(mock2), Promise.resolve(mock3), Promise.resolve(mock4)])
       );
 
-      await AddressUtil.await(add, (values: Set<MockValueObject<number>>) => {
+      await AddressUtil.wait(add, (values: Set<MockValueObject<number>>) => {
         expect(values.size).toBe(add.size());
         expect(values.has(mock1)).toBe(true);
         expect(values.has(mock2)).toBe(true);
@@ -51,9 +46,11 @@ describe('AddressUtil', () => {
         ])
       );
 
-      await expect(AddressUtil.await(add, (values: Set<MockValueObject<number>>) => {
-        return ImmutableAddress.ofSet(values);
-      })).rejects.toThrow(err);
+      await expect(
+        AddressUtil.wait(add, (values: Set<MockValueObject<number>>) => {
+          return ImmutableAddress.ofSet(values);
+        })
+      ).rejects.toThrow(err);
     });
   });
 });

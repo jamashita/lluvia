@@ -1,14 +1,14 @@
-import { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden/type';
-import { Collection, NarrowingBinaryPredicate } from '../collection/index.js';
+import type { BinaryFunction, BinaryPredicate, Mapping } from '@jamashita/anden/type';
+import type { Collection, NarrowingBinaryPredicate } from '../collection/index.js';
 import { ASequence } from './ASequence.js';
-import { ReadonlySequence } from './ReadonlySequence.js';
+import type { ReadonlySequence } from './ReadonlySequence.js';
 import { SequenceUtil } from './SequenceUtil.js';
 
 export class ImmutableSequence<out V> extends ASequence<V> {
   private static readonly EMPTY: ImmutableSequence<unknown> = new ImmutableSequence<unknown>([]);
 
   public static await<V>(sequence: ReadonlySequence<PromiseLike<V>>): Promise<ImmutableSequence<V>> {
-    return SequenceUtil.await(sequence, (values: Array<V>) => {
+    return SequenceUtil.wait(sequence, (values: Array<V>) => {
       return ImmutableSequence.ofArray(values);
     });
   }

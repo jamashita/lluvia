@@ -1,7 +1,7 @@
 import { Objet } from '@jamashita/anden/object';
-import { BinaryPredicate, ForEach, Mapping, Nullable } from '@jamashita/anden/type';
-import { NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
-import { Address } from './Address.js';
+import type { BinaryPredicate, ForEach, Mapping, Nullable } from '@jamashita/anden/type';
+import { type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
+import type { Address } from './Address.js';
 
 export abstract class AAddress<out V> extends Quantity<void, V> implements Address<V> {
   protected readonly address: Map<V | string, V>;
@@ -55,11 +55,11 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
   protected filterInternal<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, void>): Map<W | string, W> {
     const m: Map<W | string, W> = new Map();
 
-    this.address.forEach((value: V) => {
-      if (predicate(value, undefined)) {
-        m.set(Quantity.genKey(value), value);
+    for (const [, v] of this.address) {
+      if (predicate(v, undefined)) {
+        m.set(Quantity.genKey(v), v);
       }
-    });
+    }
 
     return m;
   }
@@ -77,9 +77,9 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
   }
 
   public forEach(foreach: ForEach<void, V>): void {
-    this.address.forEach((v: V) => {
+    for (const [, v] of this.address) {
       foreach(v);
-    });
+    }
   }
 
   public get(): null {
@@ -90,7 +90,9 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
     return this.address.has(Quantity.genKey(value));
   }
 
+  // biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
   public iterator(): IterableIterator<[void, V]> {
+    // biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
     const iterable: Array<[void, V]> = [];
 
     for (const [, v] of this.address) {
@@ -102,14 +104,14 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
 
   protected mapInternal<W>(mapping: Mapping<V, W>): Map<W | string, W> {
     const m: Map<W | string, W> = new Map();
-    let i: number = 0;
+    let i = 0;
 
-    this.address.forEach((value: V) => {
-      const w: W = mapping(value, i);
+    for (const [, v] of this.address) {
+      const w: W = mapping(v, i);
 
       m.set(Quantity.genKey(w), w);
       i++;
-    });
+    }
 
     return m;
   }
@@ -117,9 +119,9 @@ export abstract class AAddress<out V> extends Quantity<void, V> implements Addre
   public serialize(): string {
     const props: Array<string> = [];
 
-    this.forEach((element: V) => {
-      props.push(Objet.identify(element));
-    });
+    for (const [, v] of this.address) {
+      props.push(Objet.identify(v));
+    }
 
     return props.join(', ');
   }
