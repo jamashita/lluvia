@@ -1,5 +1,5 @@
-import { BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden/type';
-import { Collection, NarrowingBinaryPredicate } from '../collection/index.js';
+import type { BinaryPredicate, Cloneable, Mapping } from '@jamashita/anden/type';
+import type { Collection, NarrowingBinaryPredicate } from '../collection/index.js';
 
 export interface ReadonlyDictionary<out K, out V> extends Collection<K, V>, Cloneable<ReadonlyDictionary<K, V>> {
   filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): ReadonlyDictionary<K, W>;

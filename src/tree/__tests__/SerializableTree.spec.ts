@@ -1,4 +1,4 @@
-import { SpyInstance } from 'vitest';
+import type { SpyInstance } from 'vitest';
 import { MockTreeID } from '../mock/MockTreeID.js';
 import { MockTreeObject } from '../mock/MockTreeObject.js';
 import { SerializableTree } from '../SerializableTree.js';

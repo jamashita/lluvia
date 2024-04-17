@@ -1,5 +1,5 @@
 import { MockTreeID } from '../../mock/MockTreeID.js';
-import { ClosureTableHierarchy, ClosureTableJSON } from '../ClosureTableHierarchy.js';
+import { ClosureTableHierarchy, type ClosureTableJSON } from '../ClosureTableHierarchy.js';
 import { MockTreeIDFactory } from '../mock/MockTreeIDFactory.js';
 
 describe('ClosureTableHierarchy', () => {

@@ -1,13 +1,16 @@
-import { BinaryPredicate, ForEach, JSONifiable, Mapping, Nullable } from '@jamashita/anden/type';
-import { ReadonlyAddress } from '../../address/index.js';
-import { Collection, Quantity } from '../../collection/index.js';
-import { ReadonlyDictionary } from '../../dictionary/index.js';
+import type { BinaryPredicate, ForEach, JSONifiable, Mapping, Nullable } from '@jamashita/anden/type';
+import type { ReadonlyAddress } from '../../address/index.js';
+import { type Collection, Quantity } from '../../collection/index.js';
+import type { ReadonlyDictionary } from '../../dictionary/index.js';
 import { ImmutableSequence } from '../../sequence/index.js';
-import { TreeID } from '../TreeID.js';
-import { ClosureTableHierarchy, ClosureTableJSON } from './ClosureTableHierarchy.js';
-import { TreeIDFactory } from './TreeIDFactory.js';
+import type { TreeID } from '../TreeID.js';
+import { ClosureTableHierarchy, type ClosureTableJSON } from './ClosureTableHierarchy.js';
+import type { TreeIDFactory } from './TreeIDFactory.js';
 
-export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<number, ClosureTableHierarchy<K>> implements JSONifiable<ReadonlyArray<ClosureTableJSON>> {
+export class ClosureTableHierarchies<out K extends TreeID>
+  extends Quantity<number, ClosureTableHierarchy<K>>
+  implements JSONifiable<ReadonlyArray<ClosureTableJSON>>
+{
   private readonly hierarchies: ImmutableSequence<ClosureTableHierarchy<K>>;
   private static readonly EMPTY: ClosureTableHierarchies<TreeID> = new ClosureTableHierarchies(ImmutableSequence.empty());
 
@@ -18,11 +21,11 @@ export class ClosureTableHierarchies<out K extends TreeID> extends Quantity<numb
   public static of<K extends TreeID>(hierarchies: ReadonlyDictionary<K, ReadonlyAddress<K>>): ClosureTableHierarchies<K> {
     const array: Array<ClosureTableHierarchy<K>> = [];
 
-    hierarchies.forEach((offsprings: ReadonlyAddress<K>, ancestor: K) => {
-      offsprings.forEach((offspring: K) => {
-        array.push(ClosureTableHierarchy.of(ancestor, offspring));
-      });
-    });
+    for (const [ancestor, offsprings] of hierarchies) {
+      for (const [, offspring] of offsprings) {
+        array.push(ClosureTableHierarchy.of<K>(ancestor, offspring));
+      }
+    }
 
     return ClosureTableHierarchies.ofArray(array);
   }

@@ -1,5 +1,5 @@
-import { Nominative, Nullable, Predicate } from '@jamashita/anden/type';
-import { Address } from '../../address/index.js';
+import type { Nominative, Nullable, Predicate } from '@jamashita/anden/type';
+import type { Address } from '../../address/index.js';
 
 export interface TreeNode<out V> extends Nominative {
   append(node: TreeNode<V>): void;

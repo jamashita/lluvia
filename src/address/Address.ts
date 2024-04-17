@@ -1,6 +1,6 @@
-import { BinaryPredicate, Mapping } from '@jamashita/anden/type';
-import { NarrowingBinaryPredicate } from '../collection/index.js';
-import { ReadonlyAddress } from './ReadonlyAddress.js';
+import type { BinaryPredicate, Mapping } from '@jamashita/anden/type';
+import type { NarrowingBinaryPredicate } from '../collection/index.js';
+import type { ReadonlyAddress } from './ReadonlyAddress.js';
 
 export interface Address<out V> extends ReadonlyAddress<V> {
   add(value: V): Address<V>;

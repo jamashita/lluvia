@@ -1,6 +1,6 @@
-import { BinaryPredicate, ForEach, Nominative, Nullable } from '@jamashita/anden/type';
-import { Tree } from './Tree.js';
-import { TreeNode } from './TreeNode/index.js';
+import type { BinaryPredicate, ForEach, Nominative, Nullable } from '@jamashita/anden/type';
+import type { Tree } from './Tree.js';
+import type { TreeNode } from './TreeNode/index.js';
 
 export interface ReadonlyTrees<out K, out V, E extends Tree<V>> extends Nominative {
   contains(value: V): boolean;

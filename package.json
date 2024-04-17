@@ -57,10 +57,11 @@
   ],
   "scripts": {
     "build": "yarn clean && tsc -b tsconfig.compilation.json",
-    "check": "tsc --noEmit",
+    "check": "biome check --apply src/*",
     "clean": "rimraf dist",
     "commit": "git cz",
-    "format": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "format": "biome format --write src/*",
+    "lint": "biome lint --apply src/*",
     "prepare": "is-ci || husky install",
     "release": "semantic-release",
     "test": "vitest",
@@ -72,9 +73,9 @@
     "@jamashita/anden": "2.7.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.4",
     "@commitlint/cli": "18.4.4",
     "@commitlint/config-conventional": "18.4.4",
-    "@jamashita/eslint-plugin": "1.99.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",
     "@semantic-release/git": "10.0.1",

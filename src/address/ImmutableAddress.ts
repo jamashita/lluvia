@@ -1,14 +1,14 @@
-import { BinaryPredicate, Mapping } from '@jamashita/anden/type';
-import { Collection, NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
+import type { BinaryPredicate, Mapping } from '@jamashita/anden/type';
+import { type Collection, type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import { AAddress } from './AAddress.js';
 import { AddressUtil } from './AddressUtil.js';
-import { ReadonlyAddress } from './ReadonlyAddress.js';
+import type { ReadonlyAddress } from './ReadonlyAddress.js';
 
 export class ImmutableAddress<out V> extends AAddress<V> {
   private static readonly EMPTY: ImmutableAddress<unknown> = new ImmutableAddress(new Map());
 
   public static await<V>(address: ReadonlyAddress<PromiseLike<V>>): Promise<ImmutableAddress<V>> {
-    return AddressUtil.await(address, (values: Set<V>) => {
+    return AddressUtil.wait(address, (values: Set<V>) => {
       return ImmutableAddress.ofSet(values);
     });
   }
@@ -34,9 +34,9 @@ export class ImmutableAddress<out V> extends AAddress<V> {
   public static ofSet<V>(set: ReadonlySet<V>): ImmutableAddress<V> {
     const m: Map<V | string, V> = new Map();
 
-    set.forEach((v: V) => {
+    for (const v of set) {
       m.set(Quantity.genKey(v), v);
-    });
+    }
 
     return ImmutableAddress.ofInternal(m);
   }

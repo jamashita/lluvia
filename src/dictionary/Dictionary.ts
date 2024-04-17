@@ -1,6 +1,6 @@
-import { BinaryPredicate, Mapping } from '@jamashita/anden/type';
-import { NarrowingBinaryPredicate } from '../collection/index.js';
-import { ReadonlyDictionary } from './ReadonlyDictionary.js';
+import type { BinaryPredicate, Mapping } from '@jamashita/anden/type';
+import type { NarrowingBinaryPredicate } from '../collection/index.js';
+import type { ReadonlyDictionary } from './ReadonlyDictionary.js';
 
 export interface Dictionary<out K, out V> extends ReadonlyDictionary<K, V> {
   filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, K>): Dictionary<K, W>;

@@ -1,7 +1,7 @@
 import { ValueObject } from '@jamashita/anden/object';
-import { Equatable, JSONifiable, Primitive } from '@jamashita/anden/type';
-import { TreeID } from '../TreeID.js';
-import { TreeIDFactory } from './TreeIDFactory.js';
+import type { Equatable, JSONifiable, Primitive } from '@jamashita/anden/type';
+import type { TreeID } from '../TreeID.js';
+import type { TreeIDFactory } from './TreeIDFactory.js';
 
 export type ClosureTableJSON = Readonly<{
   ancestor: Primitive;

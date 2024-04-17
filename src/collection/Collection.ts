@@ -1,4 +1,4 @@
-import { BinaryPredicate, ForEach, Mapping, Nominative, Nullable } from '@jamashita/anden/type';
+import type { BinaryPredicate, ForEach, Mapping, Nominative, Nullable } from '@jamashita/anden/type';
 
 export type NarrowingBinaryPredicate<A1, B1 extends A1, A2> = (arg1: A1, arg2: A2) => arg1 is B1;
 

@@ -20,15 +20,11 @@ describe('MutableAddress', () => {
 
   describe('of', () => {
     it('returns copied collection, does not use the same one', () => {
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([
-          new MockValueObject(1),
-          new MockValueObject(2)
-        ])
-      );
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([new MockValueObject(1), new MockValueObject(2)]));
       const copied: MutableAddress<MockValueObject<number>> = MutableAddress.of(address);
 
       expect(address.size()).toBe(copied.size());
+      // biome-ignore lint/complexity/noForEach: <explanation>
       address.forEach((v: MockValueObject<number>) => {
         expect(copied.contains(v)).toBe(true);
       });
@@ -41,18 +37,9 @@ describe('MutableAddress', () => {
 
   describe('ofSet', () => {
     it('returns instance', () => {
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([
-          new MockValueObject(1),
-          new MockValueObject(3)
-        ])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([new MockValueObject(1), new MockValueObject(3)]));
       const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([
-          new MockValueObject(2),
-          new MockValueObject(4),
-          new MockValueObject(5)
-        ])
+        new Set([new MockValueObject(2), new MockValueObject(4), new MockValueObject(5)])
       );
 
       expect(address1.size()).toBe(2);
@@ -86,9 +73,7 @@ describe('MutableAddress', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2]));
       const address2: MutableAddress<MockValueObject<number>> = address1.add(value1);
 
       expect(address1).toBe(address2);
@@ -100,9 +85,7 @@ describe('MutableAddress', () => {
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(1);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2]));
       const address2: MutableAddress<MockValueObject<number>> = address1.add(value3);
 
       expect(address1).toBe(address2);
@@ -118,14 +101,13 @@ describe('MutableAddress', () => {
       const value4: MockValueObject<number> = new MockValueObject(4);
       const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2, value3, value4])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2, value3, value4]));
       const address2: MutableAddress<MockValueObject<number>> = address1.duplicate();
 
       expect(address1.size()).toBe(address2.size());
       expect(address1).not.toBe(address2);
       expect(address2).toBe(address2.add(value5));
+      // biome-ignore lint/complexity/noForEach: <explanation>
       address1.forEach((v: MockValueObject<number>) => {
         expect(address2.contains(v)).toBe(true);
       });
@@ -140,9 +122,7 @@ describe('MutableAddress', () => {
       const value4: MockValueObject<number> = new MockValueObject(4);
       const value5: MockValueObject<number> = new MockValueObject(5);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2, value3, value4])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2, value3, value4]));
       const filtered1: MutableAddress<MockValueObject<number>> = address1.filter((v: MockValueObject<number>) => {
         return v.get() % 2 === 0;
       });
@@ -162,9 +142,7 @@ describe('MutableAddress', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1]));
       const hashCode1: string = address1.hashCode();
       const address2: MutableAddress<MockValueObject<number>> = address1.add(value2);
       const hashCode2: string = address2.hashCode();
@@ -178,12 +156,8 @@ describe('MutableAddress', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2])
-      );
-      const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2]));
+      const address2: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([]));
 
       expect(address1.isEmpty()).toBe(false);
       expect(address2.isEmpty()).toBe(true);
@@ -197,15 +171,14 @@ describe('MutableAddress', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2, value3, value4])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2, value3, value4]));
       const address2: MutableAddress<MockValueObject<number>> = address1.map((v: MockValueObject<number>) => {
         return new MockValueObject(v.get() * 2);
       });
 
       expect(address1.size()).toBe(address2.size());
       expect(address1).not.toBe(address2);
+      // biome-ignore lint/complexity/noForEach: <explanation>
       address2.forEach((v: MockValueObject<number>) => {
         expect(v.get() % 2).toBe(0);
       });
@@ -217,9 +190,7 @@ describe('MutableAddress', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1, value2])
-      );
+      const address1: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1, value2]));
       const address2: MutableAddress<MockValueObject<number>> = address1.remove(value1);
 
       expect(address1).toBe(address2);
@@ -230,9 +201,7 @@ describe('MutableAddress', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
 
-      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(
-        new Set([value1])
-      );
+      const address: MutableAddress<MockValueObject<number>> = MutableAddress.ofSet(new Set([value1]));
       const beforeLength: number = address.size();
 
       expect(address.remove(value2)).toBe(address);
