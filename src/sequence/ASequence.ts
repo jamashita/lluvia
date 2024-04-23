@@ -12,6 +12,7 @@ import {
 import { Random } from '@jamashita/steckdose/random';
 import { type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import type { Sequence } from './Sequence.js';
+import { SequenceError } from './SequenceError.js';
 
 export abstract class ASequence<out V> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
@@ -43,10 +44,10 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   protected chunkInternal(size: number): Array<Array<V>> {
     if (size <= 0) {
-      return [];
+      throw new SequenceError(`CHUNK SIZE MUST BE GREATER THAN 0. GIVEN: ${size}`);
     }
     if (!Kind.isInteger(size)) {
-      return [];
+      throw new SequenceError(`CHUNK SIZE MUST BE INTEGER. GIVEN: ${size}`);
     }
 
     const arr: Array<Array<V>> = [];
@@ -166,10 +167,10 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   protected removeInternal(key: number): Array<V> {
     if (!Kind.isInteger(key)) {
-      return this.sequence;
+      throw new SequenceError(`REMOVE KEY MUST BE INTEGER. GIVEN: ${key}`);
     }
     if (key < 0 || this.sequence.length <= key) {
-      return this.sequence;
+      throw new SequenceError(`REMOVE KEY IS OUT OF BOUND. GIVEN: ${key}`);
     }
 
     return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
@@ -185,10 +186,10 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   protected setInternal(key: number, value: V): Array<V> {
     if (!Kind.isInteger(key)) {
-      return this.sequence;
+      throw new SequenceError(`SET KEY MUST BE INTEGER. GIVEN: ${key}`);
     }
     if (key < 0 || this.sequence.length <= key) {
-      return this.sequence;
+      throw new SequenceError(`SET KEY IS OUT OF BOUND. GIVEN: ${key}`);
     }
 
     return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
