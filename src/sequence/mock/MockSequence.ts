@@ -10,6 +10,10 @@ export class MockSequence<out V> extends ASequence<V> {
     throw new UnimplementedError();
   }
 
+  public chunk(): MockSequence<MockSequence<V>> {
+    throw new UnimplementedError();
+  }
+
   public duplicate(): MockSequence<V> {
     throw new UnimplementedError();
   }
@@ -27,6 +31,10 @@ export class MockSequence<out V> extends ASequence<V> {
   }
 
   public set(): MockSequence<V> {
+    throw new UnimplementedError();
+  }
+
+  public shuffle(): MockSequence<V> {
     throw new UnimplementedError();
   }
 
