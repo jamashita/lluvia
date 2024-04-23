@@ -1,6 +1,7 @@
 import { MockValueObject } from '@jamashita/anden/object';
 import type { Nullable } from '@jamashita/anden/type';
 import { MutableSequence } from '../MutableSequence.js';
+import { SequenceError } from '../SequenceError.js';
 
 describe('MutableSequence', () => {
   describe('await', () => {
@@ -228,15 +229,16 @@ describe('MutableSequence', () => {
       expect(sequence2.get(1)).toBe(value2);
     });
 
-    it('returns itself when give key is greater than sequence length', () => {
+    it('throws SequenceError when given key is out of bound', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(3);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.remove(3);
+      }).toThrow(SequenceError);
     });
 
     it('returns itself when give key is less than 0', () => {
@@ -245,20 +247,22 @@ describe('MutableSequence', () => {
       const value3: MockValueObject<number> = new MockValueObject(3);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(-1);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.remove(-1);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when give key is not integer', () => {
+    it('throws SequenceError when given key is not integer', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.remove(0.9);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.remove(0.9);
+      }).toThrow(SequenceError);
     });
   });
 
@@ -311,40 +315,34 @@ describe('MutableSequence', () => {
       expect(sequence2.get(2)).toBe(value4);
     });
 
-    it('returns itself when given key is less than 0', () => {
+    it('throws SequenceError when given key is less than 0', () => {
       const value: MockValueObject<number> = new MockValueObject(1);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-      const beforeLength: number = sequence1.size();
 
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(-1, value);
-
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(beforeLength);
+      expect(() => {
+        sequence1.set(-1, value);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when given key is greater than sequence length', () => {
+    it('throws SequenceError when given key is out of bound', () => {
       const value: MockValueObject<number> = new MockValueObject(1);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-      const beforeLength: number = sequence1.size();
 
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(300, value);
-
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(beforeLength);
+      expect(() => {
+        sequence1.set(300, value);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when given key is not integer', () => {
+    it('throws SequenceError when given key is not integer', () => {
       const value: MockValueObject<number> = new MockValueObject(1);
 
       const sequence1: MutableSequence<MockValueObject<number>> = MutableSequence.ofArray([]);
-      const beforeLength: number = sequence1.size();
 
-      const sequence2: MutableSequence<MockValueObject<number>> = sequence1.set(0.9, value);
-
-      expect(sequence1).toBe(sequence2);
-      expect(sequence1.size()).toBe(beforeLength);
+      expect(() => {
+        sequence1.set(0.9, value);
+      }).toThrow(SequenceError);
     });
   });
 

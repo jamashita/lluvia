@@ -37,12 +37,22 @@ export class MutableSequence<out V> extends ASequence<V> {
     return this;
   }
 
+  public chunk(size: number): ASequence<ASequence<V>> {
+    const sequences: Array<MutableSequence<V>> = this.chunkInternal(size).map((arr: Array<V>) => {
+      return MutableSequence.ofArray(arr);
+    });
+
+    return MutableSequence.ofArray(sequences);
+  }
+
   public duplicate(): MutableSequence<V> {
     return MutableSequence.ofArray([...this.sequence]);
   }
 
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W>;
+
   public filter(predicate: BinaryPredicate<V, number>): MutableSequence<V>;
+
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): MutableSequence<W> {
     return MutableSequence.ofArray(this.filterInternal(predicate));
   }
@@ -61,6 +71,10 @@ export class MutableSequence<out V> extends ASequence<V> {
     this.sequence = this.setInternal(key, value);
 
     return this;
+  }
+
+  public shuffle(): ASequence<V> {
+    return MutableSequence.ofArray(this.shuffleInternal());
   }
 
   public sort(comparator: BinaryFunction<V, V, number>): MutableSequence<V> {

@@ -70,7 +70,8 @@
     "update:upgrade": "ncu --packageManager yarn --deep --upgrade"
   },
   "dependencies": {
-    "@jamashita/anden": "2.7.0"
+    "@jamashita/anden": "2.7.0",
+    "@jamashita/steckdose": "1.32.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
