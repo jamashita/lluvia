@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/jamashita/lluvia/compare/v1.21.0...v1.22.0) (2024-04-23)
+
+
+### Features
+
+* 🎸 packages updated ([f9cf656](https://github.com/jamashita/lluvia/commit/f9cf6569bd7ffab92c173f3985b67b5357dcba19))
+
 # [1.21.0](https://github.com/jamashita/lluvia/compare/v1.20.0...v1.21.0) (2024-04-23)
 
 
