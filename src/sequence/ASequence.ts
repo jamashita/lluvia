@@ -9,8 +9,10 @@ import {
   type Nullable,
   type Undefinable
 } from '@jamashita/anden/type';
+import { Random } from '@jamashita/steckdose/random';
 import { type NarrowingBinaryPredicate, Quantity } from '../collection/index.js';
 import type { Sequence } from './Sequence.js';
+import { SequenceError } from './SequenceError.js';
 
 export abstract class ASequence<out V> extends Quantity<number, V> implements Sequence<V> {
   protected sequence: Array<V>;
@@ -22,10 +24,13 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   public abstract add(value: V): ASequence<V>;
 
+  public abstract chunk(size: number): ASequence<ASequence<V>>;
+
   public abstract duplicate(): ASequence<V>;
 
-  public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ASequence<W>;
   public abstract override filter(predicate: BinaryPredicate<V, number>): ASequence<V>;
+
+  public abstract override filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ASequence<W>;
 
   public abstract override map<W>(mapping: Mapping<V, W>): ASequence<W>;
 
@@ -33,7 +38,34 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   public abstract set(key: number, value: V): ASequence<V>;
 
+  public abstract shuffle(): ASequence<V>;
+
   public abstract sort(comparator: BinaryFunction<V, V, number>): ASequence<V>;
+
+  protected chunkInternal(size: number): Array<Array<V>> {
+    if (size <= 0) {
+      throw new SequenceError(`CHUNK SIZE MUST BE GREATER THAN 0. GIVEN: ${size}`);
+    }
+    if (!Kind.isInteger(size)) {
+      throw new SequenceError(`CHUNK SIZE MUST BE INTEGER. GIVEN: ${size}`);
+    }
+
+    const arr: Array<Array<V>> = [];
+    let chunk: Array<V> = [];
+
+    this.sequence.forEach((v: V, i: number) => {
+      if (i % size === 0 && i !== 0) {
+        arr.push(chunk);
+        chunk = [];
+      }
+
+      chunk.push(v);
+    });
+
+    arr.push(chunk);
+
+    return arr;
+  }
 
   public contains(value: V): boolean {
     const found: Undefinable<V> = this.sequence.find((v: V) => {
@@ -135,10 +167,10 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   protected removeInternal(key: number): Array<V> {
     if (!Kind.isInteger(key)) {
-      return this.sequence;
+      throw new SequenceError(`REMOVE KEY MUST BE INTEGER. GIVEN: ${key}`);
     }
     if (key < 0 || this.sequence.length <= key) {
-      return this.sequence;
+      throw new SequenceError(`REMOVE KEY IS OUT OF BOUND. GIVEN: ${key}`);
     }
 
     return [...this.sequence.slice(0, key), ...this.sequence.slice(key + 1)];
@@ -154,13 +186,25 @@ export abstract class ASequence<out V> extends Quantity<number, V> implements Se
 
   protected setInternal(key: number, value: V): Array<V> {
     if (!Kind.isInteger(key)) {
-      return this.sequence;
+      throw new SequenceError(`SET KEY MUST BE INTEGER. GIVEN: ${key}`);
     }
     if (key < 0 || this.sequence.length <= key) {
-      return this.sequence;
+      throw new SequenceError(`SET KEY IS OUT OF BOUND. GIVEN: ${key}`);
     }
 
     return [...this.sequence.slice(0, key), value, ...this.sequence.slice(key + 1)];
+  }
+
+  protected shuffleInternal(): Array<V> {
+    const arr: Array<V> = [...this.sequence];
+
+    for (let i: number = arr.length - 1; i >= 0; i--) {
+      const j: number = Random.integer(0, i);
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+    }
+
+    return arr;
   }
 
   public size(): number {

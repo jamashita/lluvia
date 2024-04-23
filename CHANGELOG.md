@@ -1,3 +1,16 @@
+# [1.20.0](https://github.com/jamashita/lluvia/compare/v1.19.0...v1.20.0) (2024-04-17)
+
+
+### Bug Fixes
+
+* 🐛 unused import ([d0e4682](https://github.com/jamashita/lluvia/commit/d0e46821c1def43d8fabc5d5d5e3293d0accc828))
+
+
+### Features
+
+* 🎸 biome applied ([4f43c78](https://github.com/jamashita/lluvia/commit/4f43c78e672f86a3144336de0f2a71b12747b871))
+* 🎸 biome settings ([bc3026e](https://github.com/jamashita/lluvia/commit/bc3026ebccc37b5936e57afaf32638d8d4a034da))
+
 # [1.19.0](https://github.com/jamashita/lluvia/compare/v1.18.0...v1.19.0) (2024-01-17)
 
 

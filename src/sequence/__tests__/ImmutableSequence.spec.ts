@@ -1,6 +1,7 @@
 import { MockValueObject } from '@jamashita/anden/object';
 import type { Nullable } from '@jamashita/anden/type';
 import { ImmutableSequence } from '../ImmutableSequence.js';
+import { SequenceError } from '../SequenceError.js';
 
 describe('ImmutableSequence', () => {
   describe('await', () => {
@@ -250,37 +251,40 @@ describe('ImmutableSequence', () => {
       expect(sequence2.get(1)).toBe(value2);
     });
 
-    it('returns itself when given key is greater than sequence length', () => {
+    it('throws SequenceError when given key is greater than sequence length', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
       const sequence1: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: ImmutableSequence<MockValueObject<number>> = sequence1.remove(3);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.remove(3);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when given key is less than 0', () => {
+    it('throws SequenceError when given key is less than 0', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
       const sequence1: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: ImmutableSequence<MockValueObject<number>> = sequence1.remove(-1);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.remove(-1);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when given key is not integer', () => {
+    it('throws SequenceError when given key is not integer', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
 
       const sequence1: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: ImmutableSequence<MockValueObject<number>> = sequence1.remove(0.8);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.remove(0.8);
+      }).toThrow(SequenceError);
     });
   });
 
@@ -336,19 +340,20 @@ describe('ImmutableSequence', () => {
       expect(sequence2.get(2)).toBe(value4);
     });
 
-    it('returns itself when given key is less than 0', () => {
+    it('throws SequenceError when given key is less than 0', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
       const value4: MockValueObject<number> = new MockValueObject(4);
 
       const sequence1: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray([value1, value2, value3]);
-      const sequence2: ImmutableSequence<MockValueObject<number>> = sequence1.set(-1, value4);
 
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.set(-1, value4);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when given key is greater than sequence length', () => {
+    it('throws SequenceError when given key is greater than sequence length', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
@@ -356,12 +361,12 @@ describe('ImmutableSequence', () => {
 
       const sequence1: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray([value1, value2, value3]);
 
-      const sequence2: ImmutableSequence<MockValueObject<number>> = sequence1.set(sequence1.size(), value4);
-
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.set(sequence1.size(), value4);
+      }).toThrow(SequenceError);
     });
 
-    it('returns itself when given key is not integer', () => {
+    it('throws SequenceError when given key is not integer', () => {
       const value1: MockValueObject<number> = new MockValueObject(1);
       const value2: MockValueObject<number> = new MockValueObject(2);
       const value3: MockValueObject<number> = new MockValueObject(3);
@@ -369,9 +374,9 @@ describe('ImmutableSequence', () => {
 
       const sequence1: ImmutableSequence<MockValueObject<number>> = ImmutableSequence.ofArray([value1, value2, value3]);
 
-      const sequence2: ImmutableSequence<MockValueObject<number>> = sequence1.set(2.2, value4);
-
-      expect(sequence1).toBe(sequence2);
+      expect(() => {
+        sequence1.set(2.2, value4);
+      }).toThrow(SequenceError);
     });
   });
 
