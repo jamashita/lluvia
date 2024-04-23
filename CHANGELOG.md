@@ -1,3 +1,18 @@
+# [1.22.0](https://github.com/jamashita/lluvia/compare/v1.21.0...v1.22.0) (2024-04-23)
+
+
+### Features
+
+* 🎸 packages updated ([f9cf656](https://github.com/jamashita/lluvia/commit/f9cf6569bd7ffab92c173f3985b67b5357dcba19))
+
+# [1.21.0](https://github.com/jamashita/lluvia/compare/v1.20.0...v1.21.0) (2024-04-23)
+
+
+### Features
+
+* 🎸 chunk(), shuffle() ([84c7bf5](https://github.com/jamashita/lluvia/commit/84c7bf59e78f8c07b0905d1b682c84376414bcf9))
+* 🎸 errors ([039a6b6](https://github.com/jamashita/lluvia/commit/039a6b69e4ae4ce1e2f2eeaa9fbf6cb29c249274))
+
 # [1.20.0](https://github.com/jamashita/lluvia/compare/v1.19.0...v1.20.0) (2024-04-17)
 
 

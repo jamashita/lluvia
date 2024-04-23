@@ -41,6 +41,14 @@ export class ImmutableSequence<out V> extends ASequence<V> {
     return ImmutableSequence.ofArray([...this.sequence, value]);
   }
 
+  public chunk(size: number): ImmutableSequence<ImmutableSequence<V>> {
+    const sequences: Array<ImmutableSequence<V>> = this.chunkInternal(size).map((arr: Array<V>) => {
+      return ImmutableSequence.ofArray(arr);
+    });
+
+    return ImmutableSequence.ofArray(sequences);
+  }
+
   public duplicate(): ImmutableSequence<V> {
     if (this.isEmpty()) {
       return ImmutableSequence.empty();
@@ -50,7 +58,9 @@ export class ImmutableSequence<out V> extends ASequence<V> {
   }
 
   public filter<W extends V>(predicate: NarrowingBinaryPredicate<V, W, number>): ImmutableSequence<W>;
+
   public filter(predicate: BinaryPredicate<V, number>): ImmutableSequence<V>;
+
   public filter<W extends V = V>(predicate: NarrowingBinaryPredicate<V, W, number>): ImmutableSequence<W> {
     return ImmutableSequence.ofArray(this.filterInternal(predicate));
   }
@@ -85,6 +95,10 @@ export class ImmutableSequence<out V> extends ASequence<V> {
     }
 
     return ImmutableSequence.ofArray(sequence);
+  }
+
+  public shuffle(): ImmutableSequence<V> {
+    return ImmutableSequence.ofArray(this.shuffleInternal());
   }
 
   public sort(comparator: BinaryFunction<V, V, number>): ImmutableSequence<V> {
